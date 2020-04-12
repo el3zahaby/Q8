@@ -1,0 +1,142 @@
+@font-face {
+    font-family: titles_font;
+    src: url(../fonts/ArefRuqaa-Regular.ttf);
+}
+
+@font-face {
+    font-family: regular_font;
+    src: url(../fonts/Mirza-Regular.ttf);
+}
+
+*:lang(ar)
+{
+    direction: rtl;
+}
+*:lang(en)
+{
+    direction: ltr;
+}
+
+.locale-changer:lang(ar)::before
+{
+    left: 0 !important;
+    right: auto !important;
+}
+
+html
+{
+    background-color: #FFFFFF;
+}
+
+body
+{
+    background: rgb(204, 204, 204);
+    font-family: 'Roboto', sans-serif;
+}
+
+button,
+input {
+    outline: medium none;
+    color: #686868;
+}
+
+input {
+    background: #eceff8;
+    border: 2px solid #eceff8;
+    height: 45px;
+    box-shadow: none;
+    padding-left: 10px;
+    font-size: 14px;
+    color: #626262;
+    width: 100%;
+}
+select {
+    width: 100%;
+    background: #eceff8;
+    border: 2px solid #eceff8;
+    height: 45px;
+    padding-left: 10px;
+    box-shadow: none;
+    font-size: 14px;
+    color: #626262;
+}
+option {
+    background: #fff;
+    border: 0px solid #626262;
+    padding-left: 10px;
+    font-size: 14px;
+}
+input:focus {
+    background: transparent;
+    border: 2px solid #4fc1f0;
+}
+textarea {
+    resize: vertical;
+    background: #eceff8;
+    border: 2px solid #eceff8;
+    padding: 10px;
+    width: 100%;
+    font-size: 14px;
+}
+textarea:focus {
+    background: transparent;
+    border: 2px solid #4fc1f0;
+    outline: none;
+}
+::-moz-placeholder {
+    color: #444;
+}
+.input-group.divcenter.input-group .form-control {
+    padding-left: 0px;
+}
+
+a.button-border span,
+a.button-border-white span,
+input,
+select,
+textarea {
+    -webkit-transition: all 0.5s ease-out 0s;
+    -moz-transition: all 0.5s ease-out 0s;
+    -ms-transition: all 0.5s ease-out 0s;
+    -o-transition: all 0.5s ease-out 0s;
+    transition: all 0.5s ease-out 0s;
+}
+
+
+.btn-style {
+    background-color: #3a5ea8;
+    border-radius: 0;
+    color: #ffffff;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    line-height: 18px;
+    padding: 14px 33px 12px;
+    position: relative;
+    text-transform: uppercase;
+    transition: all 0.4s ease-in-out 0s;
+    overflow: hidden;
+    z-index: 99;
+}
+.btn-style:hover {
+    border: 0 solid #4571a8;
+    color: #ffffff;
+    background-color: #4571a8;
+}
+
+.main_bg_color
+{
+    background-color: #3a5ea8;
+}
+
+.bg-top
+{
+    position: absolute;
+    top: 0;
+    height: 500px;
+    width: 100%;
+    z-index: 0;
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+}

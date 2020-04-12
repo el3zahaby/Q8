@@ -1,0 +1,86 @@
+[
+    [
+        {
+            "title": "Shirt Front",
+            "thumbnail": "images/yellow_shirt/front/preview.png",
+            "elements": [
+
+                {
+                    "type": "image",
+                    "source": "images/yellow_shirt/front/base.png",
+                    "title": "Base",
+                    "parameters": {
+                        "autoCenter": true,
+                        "colors": "#d59211",
+                        "price": 20,
+                        "colorLinkGroup": "Base",
+                        "fill": false
+                    }
+                },
+                {
+                    "type": "image",
+                    "source": "images/yellow_shirt/front/shadows.png",
+                    "title": "Shadow",
+                    "parameters": {
+                        "autoCenter": true,
+                        "fill": false
+                    }
+                },
+                {
+                    "type": "image",
+                    "source": "images/designs/converse.png",
+                    "title": "Image Title",
+                    "parameters": {
+                        "autoCenter": true
+                    }
+                },
+                {
+                    "type": "image",
+                    "source": "images/yellow_shirt/front/body.png",
+                    "title": "Hightlights",
+                    "parameters": {
+                        "left": 447,
+                        "top": 108,
+                        "fill": false
+                    }
+                }
+            ]
+        },
+        {
+            "title": "Shirt Back",
+            "thumbnail": "images/yellow_shirt/back/preview.png",
+            "elements": [
+                {
+                    "type": "image",
+                    "source": "images/yellow_shirt/back/base.png",
+                    "title": "Base",
+                    "parameters": {
+                        "autoCenter": true,
+                        "colorLinkGroup": "Base",
+                        "price": 20,
+                        "fill": false
+                    }
+                },
+                {
+                    "type": "image",
+                    "source": "images/yellow_shirt/back/body.png",
+                    "title": "Hightlights",
+                    "parameters": {
+                        "left": 467,
+                        "top": 90,
+                        "fill": false
+                    }
+                },
+                {
+                    "type": "image",
+                    "source": "images/yellow_shirt/back/shadows.png",
+                    "title": "Shadow",
+                    "parameters": {
+                        "autoCenter": true,
+                        "fill": false
+                    }
+                }
+            ]
+        }
+    ]
+]

@@ -1,0 +1,427 @@
+[
+  {
+    "category": "Product Category One",
+    "products": [
+      [
+        {
+          "title": "Shirt Front",
+          "thumbnail": "images/yellow_shirt/front/preview.png",
+          "elements": [
+            {
+              "type": "image",
+              "source": "images/yellow_shirt/front/base.png",
+              "title": "Base",
+              "parameters": {
+                "left": 325,
+                "top": 329,
+                "colors": "#d59211",
+                "price": 20,
+                "colorLinkGroup": "Base",
+                "fill": false
+              }
+            },
+            {
+              "type": "image",
+              "source": "images/yellow_shirt/front/shadows.png",
+              "title": "Shadow",
+              "parameters": {
+                "left": 325,
+                "top": 329,
+                "fill": false
+              }
+            },
+            {
+              "type": "image",
+              "source": "images/yellow_shirt/front/body.png",
+              "title": "Hightlights",
+              "parameters": {
+                "left": 322,
+                "top": 137,
+                "fill": false
+              }
+            },
+            {
+              "type": "text",
+              "source": "Default Text",
+              "title": "Any Text",
+              "parameters": {
+                "boundingBox": "Base",
+                "left": 326,
+                "top": 232,
+                "zChangeable": true,
+                "removable": true,
+                "draggable": true,
+                "rotatable": true,
+                "resizable": true,
+                "colors": "#000000",
+                "fill": false
+              }
+            }
+          ]
+        },
+        {
+          "title": "Shirt Back",
+          "thumbnail": "images/yellow_shirt/back/preview.png",
+          "elements": [
+            {
+              "type": "image",
+              "source": "images/yellow_shirt/back/base.png",
+              "title": "Base",
+              "parameters": {
+                "left": 317,
+                "top": 329,
+                "colorLinkGroup": "Base",
+                "price": 20,
+                "fill": false
+              }
+            },
+            {
+              "type": "image",
+              "source": "images/yellow_shirt/back/body.png",
+              "title": "Hightlights",
+              "parameters": {
+                "left": 333,
+                "top": 119,
+                "fill": false
+              }
+            },
+            {
+              "type": "image",
+              "source": "images/yellow_shirt/back/shadows.png",
+              "title": "Shadow",
+              "parameters": {
+                "left": 318,
+                "top": 329,
+                "fill": false
+              }
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "title": "Sweater",
+          "thumbnail": "images/sweater/preview.png",
+          "elements": [
+            {
+              "type": "image",
+              "source": "images/sweater/basic.png",
+              "title": "Base",
+              "parameters": {
+                "left": 332,
+                "top": 311,
+                "colors": "#D5D5D5,#990000,#cccccc",
+                "price": 20
+              }
+            },
+            {
+              "type": "image",
+              "source": "images/sweater/highlights.png",
+              "title": "Hightlights",
+              "parameters": {
+                "left": 332,
+                "top": 311
+              }
+            },
+            {
+              "type": "image",
+              "source": "images/sweater/shadow.png",
+              "title": "Shadow",
+              "parameters": {
+                "left": 332,
+                "top": 309
+              }
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "title": "Scoop Tee",
+          "thumbnail": "images/scoop_tee/preview.png",
+          "elements": [
+            {
+              "type": "image",
+              "source": "images/scoop_tee/basic.png",
+              "title": "Base",
+              "parameters": {
+                "left": 314,
+                "top": 323,
+                "colors": "#98937f, #000000, #ffffff",
+                "price": 15
+              }
+            },
+            {
+              "type": "image",
+              "source": "images/scoop_tee/highlights.png",
+              "title": "Hightlights",
+              "parameters": {
+                "left": 308,
+                "top": 316
+              }
+            },
+            {
+              "type": "image",
+              "source": "images/scoop_tee/shadows.png",
+              "title": "Shadow",
+              "parameters": {
+                "left": 308,
+                "top": 316
+              }
+            },
+            {
+              "type": "image",
+              "source": "images/scoop_tee/label.png",
+              "title": "Label",
+              "parameters": {
+                "left": 314,
+                "top": 140
+              }
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "title": "Hoodie",
+          "thumbnail": "images/hoodie/preview.png",
+          "elements": [
+            {
+              "type": "image",
+              "source": "images/hoodie/basic.png",
+              "title": "Base",
+              "parameters": {
+                "left": 313,
+                "top": 322,
+                "colors": "#850b0b",
+                "price": 40
+              }
+            },
+            {
+              "type": "image",
+              "source": "images/hoodie/highlights.png",
+              "title": "Hightlights",
+              "parameters": {
+                "left": 311,
+                "top": 318
+              }
+            },
+            {
+              "type": "image",
+              "source": "images/hoodie/shadows.png",
+              "title": "Shadow",
+              "parameters": {
+                "left": 311,
+                "top": 321
+              }
+            },
+            {
+              "type": "image",
+              "source": "images/hoodie/zip.png",
+              "title": "Zip",
+              "parameters": {
+                "left": 303,
+                "top": 216
+              }
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "title": "Shirt",
+          "thumbnail": "images/shirt/preview.png",
+          "elements": [
+            {
+              "type": "image",
+              "source": "images/shirt/basic.png",
+              "title": "Base",
+              "parameters": {
+                "left": 327,
+                "top": 313,
+                "colors": "#6ebed5",
+                "price": 10
+              }
+            },
+            {
+              "type": "image",
+              "source": "images/shirt/collar_arms.png",
+              "title": "Collars & Arms",
+              "parameters": {
+                "left": 326,
+                "top": 217,
+                "colors": "#000000"
+              }
+            },
+            {
+              "type": "image",
+              "source": "images/shirt/highlights.png",
+              "title": "Hightlights",
+              "parameters": {
+                "left": 330,
+                "top": 313
+              }
+            },
+            {
+              "type": "image",
+              "source": "images/shirt/shadow.png",
+              "title": "Shadow",
+              "parameters": {
+                "left": 327,
+                "top": 312
+              }
+            },
+            {
+              "type": "text",
+              "source": "Default Text",
+              "title": "Any Text",
+              "parameters": {
+                "boundingBox": "Base",
+                "removable": true,
+                "draggable": true,
+                "rotatable": true,
+                "resizable": true,
+                "colors": "#000000"
+              }
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "title": "Short",
+          "thumbnail": "images/shorts/preview.png",
+          "elements": [
+            {
+              "type": "image",
+              "source": "images/shorts/basic.png",
+              "title": "Base",
+              "parameters": {
+                "left": 317,
+                "top": 332,
+                "colors": "#81b5eb",
+                "price": 15
+              }
+            },
+            {
+              "type": "image",
+              "source": "images/shorts/highlights.png",
+              "title": "Hightlights",
+              "parameters": {
+                "left": 318,
+                "top": 331
+              }
+            },
+            {
+              "type": "image",
+              "source": "images/shorts/pullstrings.png",
+              "title": "Pullstrings",
+              "parameters": {
+                "left": 307,
+                "top": 195,
+                "colors": "#ffffff"
+              }
+            },
+            {
+              "type": "image",
+              "source": "images/shorts/midtones.png",
+              "title": "Midtones",
+              "parameters": {
+                "left": 317,
+                "top": 332
+              }
+            },
+            {
+              "type": "image",
+              "source": "images/shorts/shadows.png",
+              "title": "Shadow",
+              "parameters": {
+                "left": 320,
+                "top": 331
+              }
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "title": "Basecap",
+          "thumbnail": "images/cap/preview.png",
+          "elements": [
+            {
+              "type": "image",
+              "source": "images/cap/basic.png",
+              "title": "Base",
+              "parameters": {
+                "left": 318,
+                "top": 311,
+                "colors": "#ededed",
+                "price": 5
+              }
+            },
+            {
+              "type": "image",
+              "source": "images/cap/highlights.png",
+              "title": "Hightlights",
+              "parameters": {
+                "left": 309,
+                "top": 300
+              }
+            },
+            {
+              "type": "image",
+              "source": "images/cap/shadows.png",
+              "title": "Shadows",
+              "parameters": {
+                "left": 306,
+                "top": 299
+              }
+            }
+          ]
+        }
+      ]
+    ]
+  },
+  {
+    "category": "Product Category Two",
+    "products": [
+      [
+        {
+          "title": "Basecap",
+          "thumbnail": "images/cap/preview.png",
+          "elements": [
+            {
+              "type": "image",
+              "source": "images/cap/basic.png",
+              "title": "Base",
+              "parameters": {
+                "left": 318,
+                "top": 311,
+                "colors": "#ededed",
+                "price": 5
+              }
+            },
+            {
+              "type": "image",
+              "source": "images/cap/highlights.png",
+              "title": "Hightlights",
+              "parameters": {
+                "left": 309,
+                "top": 300
+              }
+            },
+            {
+              "type": "image",
+              "source": "images/cap/shadows.png",
+              "title": "Shadows",
+              "parameters": {
+                "left": 306,
+                "top": 299
+              }
+            }
+          ]
+        }
+      ]
+    ]
+  }
+]
