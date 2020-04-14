@@ -6,10 +6,10 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
+
   <!-- CSRF Token -->
   <meta name="_token" content="{{ csrf_token() }}">
-  
+
   <link rel="shortcut icon" href="{{ url('assets/images/favicon.ico') }}">
 
     <link rel="stylesheet"
@@ -51,7 +51,51 @@
     <script src="{{ url('dash/assets/js/misc.js') }}"></script>
     <script src="{{ url('dash/assets/js/settings.js') }}"></script>
     <script src="{{ url('dash/assets/js/todolist.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            }
+        });
+        $('.mdi-delete').parent().click(function (event) {
+            var _this = $(this);
+            event.preventDefault();
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.value) {
+                    $.ajax({
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {
+                            _method: 'DELETE',
+                            _token: "{{ csrf_token() }}",
+                        },
+                        url: _this.attr('href'),
+                        success: function (data) {
+                            Swal.fire(
+                                'Deleted!',
+                                'Your file has been deleted.',
+                                'success'
+                            ).then((result) => {
+                                // Reload the Page
+                                location.reload();
+                            });
+                        }
+                    });
+
+                }
+            })
+        });
+    </script>
     @stack('custom-scripts')
 
 </body>

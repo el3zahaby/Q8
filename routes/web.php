@@ -104,6 +104,7 @@ Route::group(['prefix' => 'admin','as'=>'admin.'], function () {
 
     Route::group(['middleware'=>['admin']], function () {
         Route::get('/', 'Admin\HomeController@index');
+        Route::resource('users', 'Admin\UserController');
 
     });
 });

@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.dash')
 
 @push('plugin-styles')
   <!-- {!! Html::style('/dash/assets/plugins/plugin.css') !!} -->

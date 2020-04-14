@@ -20,10 +20,10 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
-    // protected $guarded=[];
+//    protected $fillable = [
+//        'name', 'email', 'password',
+//    ];
+     protected $guarded=[];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -43,6 +43,20 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function isAdmin(){
+        return $this->hasAnyRole(['super-admin', 'admin']);
+    }
+
+    public function isDesigner($string = false){
+        $cond = $this->hasAnyRole(['designer']);
+
+        if ($string){
+            $cond= ($cond) ?'YES':"NO";
+        }
+
+        return $cond;
+    }
+
     public function locations()
     {
         return $this->belongsTo('App\Location');
@@ -53,6 +67,6 @@ class User extends Authenticatable
     }
     public function getRoleAttribute(){
 //        return $this->first_name . ' ' . $this->last_name;
-        return $this->getRoleNames()[0];
+        return $this->getRoleNames()[0] ?? null;
     }
 }
