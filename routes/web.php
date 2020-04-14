@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 
 //----------Use To Save Session For Cart----------//
@@ -94,6 +95,10 @@ Route::group(['prefix' => '/api'], function () {
 Route::get('/get-bill/{id}', 'OrderController@getBill')->name('get-bill');
 
 
+
+
+// start admin dashboard
+
 Route::group(['prefix' => 'admin','as'=>'admin.'], function () {
     Route::get('/login', 'Admin\HomeController@login')->name('login');
 
@@ -102,6 +107,15 @@ Route::group(['prefix' => 'admin','as'=>'admin.'], function () {
 
     });
 });
+
+Route::get('test',function(){
+    return view('dash.sample');
+});
+
+// end admin dashboard
+
+
+
 
 Route::get('/dashboard{any}', function () {
     return view('dashboard');
@@ -112,5 +126,3 @@ Route::get('logout',  'Auth\LoginController@logout');
 Auth::routes();
 
 Route::get('/{any}', 'HomeController@index')->where('any', '.*')->name('home');
-
-

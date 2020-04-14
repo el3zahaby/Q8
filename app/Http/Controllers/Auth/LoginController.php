@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Symfony\Component\HttpFoundation\Request;
 
 class LoginController extends Controller
 {
@@ -20,12 +21,22 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
+    protected function authenticated(\Illuminate\Http\Request $request, $user)
+    {
+        if($user->getRoleAttribute() == 'admin')
+        {
+            return redirect('/admin');
+        }
+        return redirect('/');
+    }
+
+
     /**
      * Where to redirect users after login.
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    // protected $redirectTo = '/logging';
 
     /**
      * Create a new controller instance.
