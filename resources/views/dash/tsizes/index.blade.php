@@ -62,7 +62,7 @@
         <div class="modal-dialog modal-lg p-5" role="document">
             <form method="post" action="{{ route('admin.tsizes.store') }}"  class="modal-content form-store">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"><b>Edit:</b> {{ $item->full_name }}</h5>
+                    <h5 class="modal-title" id="exampleModalLabel"><b>Edit:</b> {{ $item->id }}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

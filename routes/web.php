@@ -108,13 +108,8 @@ Route::group(['prefix' => 'admin','as'=>'admin.'], function () {
         Route::resource('dsizes', 'Admin\DsizeController');
         Route::resource('colors', 'Admin\ColorController');
         Route::resource('tsizes', 'Admin\TsizeController');
-
     });
 });
-
-// Route::get('test',function(){
-//     return view('dash.sample');
-// });
 
 // end admin dashboard
 

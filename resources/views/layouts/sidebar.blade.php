@@ -39,7 +39,7 @@
         </button>
       </div>
     </li>
-    <li class="nav-item {{ active_class(['/']) }}">
+    <li class="nav-item {{ active_class(['admin/*']) }}">
       <a class="nav-link" href="{{ url('admin') }}">
         <i class="menu-icon mdi mdi-television"></i>
         <span class="menu-title">Dashboard</span>

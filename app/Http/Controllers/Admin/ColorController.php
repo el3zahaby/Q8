@@ -122,28 +122,11 @@ class ColorController extends Controller
      */
     public function destroy($id)
     {
-        //
-            $i = $this->model::find($id);
+            $i = $this->model::findOrFail($id);
             $i->delete();
             return response()->json([
                 'status'=>'ok',
                 'msg'=>'deleted'.$id
             ],200);
-
-        //
-
-        // $item = $this->model::findOrFail($id);
-        // if ($item->isAdmin()) {
-        //     return response()->json([
-        //         'status'=>'no',
-        //         'msg'=>'Not Deleted'.$id
-        //     ],400);
-        // }
-
-        // $item->delete();
-        // return response()->json([
-        //     'status'=>'ok',
-        //     'msg'=>'deleted'.$id
-        // ],200);
     }
 }
