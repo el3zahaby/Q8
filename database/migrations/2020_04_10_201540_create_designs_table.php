@@ -14,17 +14,15 @@ class CreateDesignsTable extends Migration {
 	{
 		Schema::create('designs', function(Blueprint $table)
 		{
-			$table->increments('id');
-			$table->string('random_name')->nullable();
-			$table->integer('designer_id')->nullable();
-			$table->string('img')->nullable();
-			$table->integer('price')->nullable();
-			$table->boolean('accepting')->nullable()->default(0);
+			$table->bigIncrements('id');
+            $table->string('name')->nullable();
+            $table->float('discount', 10, 0)->unsigned()->default(0);
+            $table->longText('des')->nullable();
+            $table->integer('user_id')->nullable();
+			$table->text('img');
+            $table->float('price', 10, 0)->unsigned()->default(0);
+            $table->boolean('accepting')->nullable()->default(0);
 			$table->timestamps();
-			$table->text('des', 65535)->nullable();
-			$table->float('discount', 10, 0)->unsigned()->default(0);
-			$table->boolean('removed')->default(0);
-			$table->string('name')->nullable();
 		});
 	}
 
