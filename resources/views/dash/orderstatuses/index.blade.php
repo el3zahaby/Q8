@@ -8,7 +8,7 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Tsizes</h4>
+                    <h4 class="card-title">Order Statuses</h4>
                     <p class="card-description">
                         <button class="btn btn-success" data-toggle="modal" data-target="#store"><I CLASS="mdi mdi-plus-box"></I>Add new</button>
                     </p>
@@ -18,7 +18,8 @@
                             <thead>
                             <tr>
                                 <th> ID</th>
-                                <th> Name</th>
+                                <th> Status</th>
+                                <th> Color</th>
                                 <th> Created at</th>
 
                                 <th> Action</th>
@@ -28,21 +29,24 @@
                             @foreach($items as $key=> $item)
                                 <tr>
                                     <td> {{ $item->id }} </td>
-                                    <td> {{ $item->name }} </td>
+                                    <td> {{ $item->status }} </td>
+                                    <td>
+                                        <div style="width:15px;height:15px;background-color:{{ $item->color }};"></div>
+                                    </td>
 
                                     <td> {{ $item->created_at->diffForHumans() }} </td>
 
 
                                     <td>
                                         <!-- delete -->
-                                        <a href="{{ route('admin.tsizes.show',$item->id) }}"  data-id="{{ $item->id }}" title="DELETE" class="btn btn-danger"><i class="mdi mdi-delete"></i></a>
+                                        <a href="{{ route('admin.orderstatus.show',$item->id) }}"  data-id="{{ $item->id }}" title="DELETE" class="btn btn-danger"><i class="mdi mdi-delete"></i></a>
 
                                         <!-- edit -->
-                                        <a href="{{ route('admin.tsizes.edit',$item->id) }}" data-id="{{ $item->id }}" title="EDIT" class="btn btn-success"><i class="mdi mdi-file-edit"></i></a>
+                                        <a href="{{ route('admin.orderstatus.edit',$item->id) }}" data-id="{{ $item->id }}" title="EDIT" class="btn btn-success"><i class="mdi mdi-file-edit"></i></a>
 
 
                                         <!-- view -->
-                                        <a href="{{ route('admin.tsizes.show',$item->id) }}" data-id="{{ $item->id }}"  title="VIEW" class="btn btn-info"><i class="mdi mdi-eye"></i></a>
+                                        <a href="{{ route('admin.orderstatus.show',$item->id) }}" data-id="{{ $item->id }}"  title="VIEW" class="btn btn-info"><i class="mdi mdi-eye"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -58,7 +62,7 @@
     <!-- Modal Item {{ 'store' }} -->
     <div class="modal fade " id="store" tabindex="-1" role="dialog"  aria-hidden="true">
         <div class="modal-dialog modal-lg p-5" role="document">
-            <form method="post" action="{{ route('admin.tsizes.store') }}"  class="modal-content form-store">
+            <form method="post" action="{{ route('admin.orderstatus.store') }}"  class="modal-content form-store">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel"><b>Add:</b> </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -68,10 +72,12 @@
                 <div class="modal-body">
                     <div>
                         <div class="form-group">
-                            <label >Name</label>
-                            <input name="name" type="text" class="form-control" required>
+                            <label >Status</label>
+                            <input name="status" type="text" class="form-control p-0" required >
                         </div>
                         <div class="form-group">
+                            <label >Color</label>
+                            <input name="color" type="color" class="form-control p-0" required >
                         </div>
 
                     </div>
@@ -89,7 +95,7 @@
         <!-- Modal Item {{ $item->id }} -->
         <div class="modal fade " id="edit-{{$item->id}}" tabindex="-1" role="dialog"  aria-hidden="true">
             <div class="modal-dialog modal-lg p-5" role="document">
-                <form method="PUT" action="{{ route('admin.tsizes.update',$item->id) }}" id="form-edit-{{$item->id}}" class="modal-content form-edit">
+                <form method="PUT" action="{{ route('admin.orderstatus.update',$item->id) }}" id="form-edit-{{$item->id}}" class="modal-content form-edit">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel"><b>Edit:</b> {{ $item->name }}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -99,10 +105,12 @@
                     <div class="modal-body">
                         <div>
                             <div class="form-group">
-                                <label>Name</label>
-                                <input name="name" type="text" class="form-control" required value="{{ $item->name }}">
+                                <label >Status</label>
+                            <input name="status" type="text" class="form-control p-0" value="{{$item->status}}" required >
                             </div>
                             <div class="form-group">
+                                <label >Color</label>
+                            <input name="color" type="color" class="form-control p-0" value="{{ $item->color }}" required >
                             </div>
 
                         </div>

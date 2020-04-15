@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Dsize;
+use App\Tshirt;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -10,10 +10,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
-class DsizeController extends Controller
+class TshirtController extends Controller
 {
-    protected $view  = 'dash.dsizes.';
-    protected $model = 'App\Dsize';
+    protected $view  = 'dash.tshirts.';
+    protected $model = 'App\Tshirt';
 
     public function __construct(){
 //        $this->view = ;
@@ -27,7 +27,9 @@ class DsizeController extends Controller
     public function index()
     {
         $items = $this->model::orderBy('id','desc')->get();
-        return view($this->view.'index',compact('items'));
+        $colors = \App\Color::get();
+        $tsizes = \App\Tsize::get();
+        return view($this->view.'index',compact('items','colors','tsizes'));
     }
 
     /**
@@ -50,15 +52,27 @@ class DsizeController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'length' => 'required|max:255',
-            'width' => 'required|max:255',
-            'print_price' => 'required|max:60',
+            'color_id' => 'required',
+            'tsize_id' => 'required',
+            'price' => 'required',
+            'qty' => 'required',
         ]);
 
+        
+        
+        // $store = $this->model::create(
+        //     $request->all()
+        // );
 
-        $store = $this->model::create(
-            $request->all()
-        );
+        $store = new $this->model;
+        $store->color_id = $request->color_id;
+        $store->tsize_id = $request->tsize_id;
+        $store->price = $request->price;
+        $store->qty = $request->qty;
+
+        $store->save();
+
+
 
         if ($store) return response()->json([
             'status'=>'ok',
@@ -103,13 +117,23 @@ class DsizeController extends Controller
         $item = $this->model::find($id);
 
         $this->validate($request, [
-            'length' => 'required|max:255',
-            'width' => 'required|max:255',
-            'print_price' => 'required|max:60',
+            'color_id' => 'required',
+            'tsize_id' => 'required',
+            'price' => 'required',
+            'qty' => 'required',
         ]);
 
 //        dd($request->all());
-        $updated = $item->update($request->all());
+        // $updated = $item->update($request->all());
+
+
+        $updated = $this->model::findOrFail($id);
+        $updated->color_id = $request->color_id;
+        $updated->tsize_id = $request->tsize_id;
+        $updated->price = $request->price;
+        $updated->qty = $request->qty;
+
+        $updated->save();
 
         if ($updated) return response()->json([
             'status'=>'ok',

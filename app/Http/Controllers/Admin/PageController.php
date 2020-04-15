@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Dsize;
+use App\Page;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -10,10 +10,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
-class DsizeController extends Controller
+class PageController extends Controller
 {
-    protected $view  = 'dash.dsizes.';
-    protected $model = 'App\Dsize';
+    protected $view  = 'dash.pages.';
+    protected $model = 'App\Page';
 
     public function __construct(){
 //        $this->view = ;
@@ -37,7 +37,7 @@ class DsizeController extends Controller
      */
     public function create()
     {
-        //
+        return view($this->view.'create');
     }
 
     /**
@@ -50,9 +50,7 @@ class DsizeController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'length' => 'required|max:255',
-            'width' => 'required|max:255',
-            'print_price' => 'required|max:60',
+            'name' => 'required|max:255',
         ]);
 
 
@@ -103,9 +101,7 @@ class DsizeController extends Controller
         $item = $this->model::find($id);
 
         $this->validate($request, [
-            'length' => 'required|max:255',
-            'width' => 'required|max:255',
-            'print_price' => 'required|max:60',
+            'name' => 'required|max:255',
         ]);
 
 //        dd($request->all());

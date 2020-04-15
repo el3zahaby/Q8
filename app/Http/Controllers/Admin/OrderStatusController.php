@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Dsize;
+use App\OrderStatus;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -10,10 +10,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
-class DsizeController extends Controller
+class OrderStatusController extends Controller
 {
-    protected $view  = 'dash.dsizes.';
-    protected $model = 'App\Dsize';
+    protected $view  = 'dash.orderstatuses.';
+    protected $model = 'App\OrderStatus';
 
     public function __construct(){
 //        $this->view = ;
@@ -50,15 +50,21 @@ class DsizeController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'length' => 'required|max:255',
-            'width' => 'required|max:255',
-            'print_price' => 'required|max:60',
+            'status' => 'required',
+            'color' => 'required',
         ]);
 
 
-        $store = $this->model::create(
-            $request->all()
-        );
+        // $store = $this->model::create(
+        //     $request->all()
+        // );
+
+        $store = new $this->model;
+        $store->status = $request->status;
+        $store->color = $request->color;
+        
+        $store->save();
+
 
         if ($store) return response()->json([
             'status'=>'ok',
@@ -103,13 +109,17 @@ class DsizeController extends Controller
         $item = $this->model::find($id);
 
         $this->validate($request, [
-            'length' => 'required|max:255',
-            'width' => 'required|max:255',
-            'print_price' => 'required|max:60',
+            'status' => 'required',
+            'color' => 'required',
         ]);
 
 //        dd($request->all());
-        $updated = $item->update($request->all());
+        // $updated = $item->update($request->all());
+
+        $updated = \App\OrderStatus::findOrFail($id);
+        $updated->status = $request->status;
+        $updated->color = $request->color;
+        $updated->save();
 
         if ($updated) return response()->json([
             'status'=>'ok',

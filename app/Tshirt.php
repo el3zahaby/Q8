@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Tshirt extends Model
 {
     public function color(){
-        return $this->hasOne(Color::class);
+        return $this->belongsTo(Color::class);
     }
 
     public function tsize(){
-        return $this->hasOne(Tsize::class);
+        return $this->belongsTo(Tsize::class);
     }
 
 }

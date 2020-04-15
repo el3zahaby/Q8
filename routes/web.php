@@ -108,6 +108,9 @@ Route::group(['prefix' => 'admin','as'=>'admin.'], function () {
         Route::resource('dsizes', 'Admin\DsizeController');
         Route::resource('colors', 'Admin\ColorController');
         Route::resource('tsizes', 'Admin\TsizeController');
+        Route::resource('tshirts', 'Admin\TshirtController');
+        Route::resource('orderstatus', 'Admin\OrderStatusController');
+        Route::resource('pages', 'Admin\PageController');
     });
 });
 

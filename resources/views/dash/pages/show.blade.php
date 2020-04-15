@@ -13,9 +13,9 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Tsize View</h4>
+                    <h4 class="card-title">Color View</h4>
                     {{-- <p class="card-description"> View <code>{{ $item->full_name }}</code> --}}
-                    <a class="btn btn-success" href="{{ route('admin.tsizes.index') }}"><I CLASS="mdi mdi-page-previous"></I>BACK</a>
+                    <a class="btn btn-success" href="{{ route('admin.orderstatus.index') }}"><I CLASS="mdi mdi-page-previous"></I>BACK</a>
                     </p>
                     <div class="col-md-12">
 
@@ -31,18 +31,20 @@
                             <!-- panel-body -->
                             <hr style="margin:0;">
                             <div class="panel-heading" style="border-bottom:0;">
-                                <h5 class="panel-title">Name</h5>
+                                <h5 class="panel-title">Status</h5>
                             </div>
 
                             <div class="panel-body" style="padding-top:0;">
-                                <p>{{ $item->name }}</p>
+                                <p>{{ $item->status }}</p>
                             </div>
                             <!-- panel-body -->
                             <hr style="margin:0;">
                             <div class="panel-heading" style="border-bottom:0;">
+                                <h5 class="panel-title">color</h5>
                             </div>
 
                             <div class="panel-body" style="padding-top:0;">
+                                <div style="background-color: {{ $item->color }};width:20px;height:20px;" class="pb-3"></div>
                             </div>
                             <!-- panel-body -->
                             <hr style="margin:0;">
