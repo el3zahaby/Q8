@@ -17,7 +17,6 @@ class CreateTsizesTable extends Migration {
 			$table->increments('id');
 			$table->string('name')->nullable();
 			$table->timestamps();
-			$table->float('price', 10, 0)->unsigned()->default(0);
 		});
 	}
 

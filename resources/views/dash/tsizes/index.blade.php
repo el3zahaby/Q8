@@ -71,11 +71,11 @@
                     <div>
                         <div class="form-group">
                             <label >Name</label>
-                            <input name="name" type="text" class="form-control" required >
+                            <input name="name" type="text" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label >Price</label>
-                            <input name="price" type="text" class="form-control" required >
+                            <input name="price" type="text" class="form-control" required>
                         </div>
 
                     </div>
