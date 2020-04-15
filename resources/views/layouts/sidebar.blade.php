@@ -47,8 +47,26 @@
     </li>
     <li class="nav-item {{ active_class(['admin/users/*']) }}">
       <a class="nav-link" href="{{ route('admin.users.index') }}">
-        <i class="menu-icon mdi mdi-chart-line"></i>
+        <i class="menu-icon mdi mdi-account-group "></i>
         <span class="menu-title">Users</span>
+      </a>
+    </li>
+    <li class="nav-item {{ active_class(['admin/dsizes/*']) }}">
+      <a class="nav-link" href="{{ route('admin.dsizes.index') }}">
+        <i class="menu-icon mdi mdi-material-design "></i>
+        <span class="menu-title">Dsizes</span>
+      </a>
+    </li>
+    <li class="nav-item {{ active_class(['admin/colors/*']) }}">
+      <a class="nav-link" href="{{ route('admin.colors.index') }}">
+        <i class="menu-icon mdi mdi-invert-colors "></i>
+        <span class="menu-title">colors</span>
+      </a>
+    </li>
+    <li class="nav-item {{ active_class(['admin/tsizes/*']) }}">
+      <a class="nav-link" href="{{ route('admin.tsizes.index') }}">
+        <i class="menu-icon mdi mdi-tshirt-v "></i>
+        <span class="menu-title">Tsizes</span>
       </a>
     </li>
 

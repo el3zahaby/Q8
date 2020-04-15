@@ -8,7 +8,7 @@ use TCG\Voyager\Traits\Translatable;
 
 class Color extends Model
 {
-    use Translatable;
+    // use Translatable;
     protected $translatable = ['name'];
     protected $guarded = [];
 

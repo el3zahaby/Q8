@@ -105,18 +105,18 @@ Route::group(['prefix' => 'admin','as'=>'admin.'], function () {
     Route::group(['middleware'=>['admin']], function () {
         Route::get('/', 'Admin\HomeController@index');
         Route::resource('users', 'Admin\UserController');
+        Route::resource('dsizes', 'Admin\DsizeController');
+        Route::resource('colors', 'Admin\ColorController');
+        Route::resource('tsizes', 'Admin\TsizeController');
 
     });
 });
 
-Route::get('test',function(){
-    return view('dash.sample');
-});
+// Route::get('test',function(){
+//     return view('dash.sample');
+// });
 
 // end admin dashboard
-
-
-
 
 Route::get('/dashboard{any}', function () {
     return view('dashboard');
