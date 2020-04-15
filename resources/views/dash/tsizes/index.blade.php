@@ -6,7 +6,7 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12 grid-margin stretch-card">
-            <div class="card"> 
+            <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Tsizes</h4>
                     <p class="card-description">
@@ -62,7 +62,7 @@
         <div class="modal-dialog modal-lg p-5" role="document">
             <form method="post" action="{{ route('admin.tsizes.store') }}"  class="modal-content form-store">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"><b>Edit:</b> {{ $item->id }}</h5>
+                    <h5 class="modal-title" id="exampleModalLabel"><b>Add:</b> </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -71,11 +71,11 @@
                     <div>
                         <div class="form-group">
                             <label >Name</label>
-                            <input name="name" type="text" class="form-control" required >
+                            <input name="name" type="text" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label >Price</label>
-                            <input name="price" type="text" class="form-control" required >
+                            <input name="price" type="text" class="form-control" required>
                         </div>
 
                     </div>

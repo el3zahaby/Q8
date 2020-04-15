@@ -16,7 +16,6 @@ class TsizeController extends Controller
     protected $model = 'App\Tsize';
 
     public function __construct(){
-//        $this->view = ;
     }
 
     /**
