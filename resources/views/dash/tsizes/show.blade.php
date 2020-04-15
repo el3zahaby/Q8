@@ -13,7 +13,7 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Tsizes</h4>
+                    <h4 class="card-title">Tsize View</h4>
                     {{-- <p class="card-description"> View <code>{{ $item->full_name }}</code> --}}
                     <a class="btn btn-success" href="{{ route('admin.tsizes.index') }}"><I CLASS="mdi mdi-page-previous"></I>BACK</a>
                     </p>

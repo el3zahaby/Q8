@@ -40,7 +40,7 @@
       </div>
     </li>
     <li class="nav-item {{ active_class(['/']) }}">
-      <a class="nav-link" href="{{ url('/') }}">
+      <a class="nav-link" href="{{ url('admin') }}">
         <i class="menu-icon mdi mdi-television"></i>
         <span class="menu-title">Dashboard</span>
       </a>
