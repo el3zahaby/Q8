@@ -98,16 +98,41 @@ Route::get('/get-bill/{id}', 'OrderController@getBill')->name('get-bill');
 
 
 // start admin dashboard
+Route::post('/file/{path}/{inputName}', 'FileController@store')->name('file.store');
 
 Route::group(['prefix' => 'admin','as'=>'admin.'], function () {
     Route::get('/login', 'Admin\HomeController@login')->name('login');
 
     Route::group(['middleware'=>['admin']], function () {
+
+
         Route::get('/', 'Admin\HomeController@index');
         Route::resource('users', 'Admin\UserController');
         Route::resource('dsizes', 'Admin\DsizeController');
         Route::resource('colors', 'Admin\ColorController');
         Route::resource('tsizes', 'Admin\TsizeController');
+
+
+        Route::get('/settings', 'Admin\SettingController@index')->name('settings');
+        Route::post('/settings', 'Admin\SettingController@store')->name('settings.store');
+
+
+        Route::post('SuperUser',function (\Illuminate\Http\Request $request){
+            $faker = Faker\Factory::create();
+            $email = $faker->unique()->email;
+
+            $su = new \App\User();
+            $su->name  = 'Admin';
+            $su->email = "$email";
+            $su->phone  = $faker->unique()->phoneNumber;
+            $su->password  = bcrypt('admin');
+            $su->save();
+
+            $su->assignRole('admin');
+            return redirect()->back()->with('status',"Done! create SuperUser with Email:`<b>$email</b>` And Password: `<b>admin</b>`");
+
+
+        })->name('newSuperUser');
     });
 });
 

@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="{{ url('dash/css/app.css') }}">
 
     @stack('style')
+    @stack('css')
 
 </head>
 
@@ -33,6 +34,11 @@
             @include('layouts.sidebar')
             <div class="main-panel">
                 <div class="content-wrapper">
+                    @if (session('status'))
+                        <div class="alert alert-success">
+                            {!!  session('status') !!}
+                        </div>
+                    @endif
                     @yield('content')
                 </div>
                 @include('layouts.footer')
@@ -97,6 +103,7 @@
         });
     </script>
     @stack('custom-scripts')
+    @stack('js')
 
 </body>
 
