@@ -65,7 +65,6 @@
                             <label>Page Image</label>
                             <input type="file" name="image" class="form-control p-2">
                         </div>
-
                     </form>
                     </div>
                 </div>

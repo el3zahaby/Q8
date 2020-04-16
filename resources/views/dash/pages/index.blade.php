@@ -1,8 +1,9 @@
 @extends('layouts.dash')
 
 @push('plugin-styles')
-    <script src="{{ url('dash/js/ckeditor-5.js') }}"></script>
+    {{-- <script src="{{ url('dash/js/ckeditor-5.js') }}"></script> --}}
 
+    <script src="//cdn.ckeditor.com/4.5.4/full/ckeditor.js"></script>
 @endpush
 
 @section('content')
@@ -32,7 +33,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($items as $key=> $item)
+                            @foreach($table as $key=> $item)
                                 <tr>
                                     <td> {{ $item->id }} </td>
                                     <td> {{ $item->title }} </td>
@@ -44,18 +45,18 @@
 
                                     <td>
                                         <!-- delete -->
-                                        <a href="{{ route('admin.orderstatus.show',$item->id) }}"
+                                        <a href="{{ route('admin.pages.show',$item->id) }}"
                                             data-id="{{ $item->id }}" title="DELETE" class="btn btn-danger"><i
                                                 class="mdi mdi-delete"></i></a>
 
                                         <!-- edit -->
-                                        <a href="{{ route('admin.orderstatus.edit',$item->id) }}"
+                                        <a href="{{ route('admin.pages.edit',$item->id) }}"
                                             data-id="{{ $item->id }}" title="EDIT" class="btn btn-success"><i
                                                 class="mdi mdi-file-edit"></i></a>
 
 
                                         <!-- view -->
-                                        <a href="{{ route('admin.orderstatus.show',$item->id) }}"
+                                        <a href="{{ route('admin.pages.show',$item->id) }}"
                                             data-id="{{ $item->id }}" title="VIEW" class="btn btn-info"><i
                                                 class="mdi mdi-eye"></i></a>
                                     </td>
@@ -73,8 +74,8 @@
 <!-- Modal Item {{ 'store' }} -->
 <div class="modal fade " id="store" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg p-5" role="document">
-        <form method="post" action="{{ route('admin.orderstatus.store') }}"
-            class="modal-content form-store">
+        <form method="post" action="{{ route('admin.pages.store') }}"
+            class="modal-content form-store" enctype="multipart/form-data" >
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel"><b>Add:</b> </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -83,25 +84,30 @@
             </div>
             <div class="modal-body">
                 <div>
-                    <div class="form-group">
-                        <label>Title EN: </label>
-                        <input type="text" name="title_en" id="" class="form-control EN">
+                    <div class="btn-group my-3" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-primary" id="EN">EN</button>
+                        <button type="button" class="btn btn-primary" id="AR">AR</button>
                     </div>
-                    <div class="form-group">
+
+                    <div class="form-group EN">
+                        <label>Title EN: </label>
+                        <input type="text" name="title_en" id="" class="form-control">
+                    </div>
+                    <div class="form-group AR">
                         <label>Title AR: </label>
-                        <input type="text" name="title_ar" id="" class="form-control AR">
+                        <input type="text" name="title_ar" id="" class="form-control">
                     </div>
                     <div class="form-group">
                         <label>Excerpt : </label>
                         <textarea name="excerpt" id="" cols="30" rows="10" class="form-control"></textarea>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group EN">
                         <label>Body EN :</label>
-                        <textarea name="" id="editor" style="height: 200px;"></textarea>
+                        <textarea name="body_en" id="ed-1" class="editor" style="height: 200px;"></textarea>
                     </div>
-                    <div class="form-group">
-                        <label>slug</label>
-                        <input type="text" name="slug" id="" class="form-control">
+                    <div class="form-group AR">
+                        <label>Body AR :</label>
+                        <textarea name="body_ar" id=ed-2 class="editor" style="height: 200px;"></textarea>
                     </div>
                     <div class="form-group">
                         <label>Meta Description</label>
@@ -114,8 +120,8 @@
                     <div class="form-group">
                         <label>Status</label>
                         <select name="status" id="" class="form-control p-0">
-                            <option value="0">INACTIVE</option>
-                            <option value="1">ACTIVE</option>
+                            <option value="INACTIVE">INACTIVE</option>
+                            <option value="ACTIVE">ACTIVE</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -138,7 +144,7 @@
     <!-- Modal Item {{ $item->id }} -->
     <div class="modal fade " id="edit-{{ $item->id }}" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg p-5" role="document">
-            <form method="PUT" action="{{ route('admin.orderstatus.update',$item->id) }}"
+            <form method="PUT" action="{{ route('admin.pages.update',$item->id) }}"
                 id="form-edit-{{ $item->id }}" class="modal-content form-edit">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel"><b>Edit:</b> {{ $item->name }}</h5>
@@ -162,7 +168,11 @@
                         </div>
                         <div class="form-group">
                             <label>Body EN :</label>
-                            <textarea name="" id="editor_edit" style="height: 200px;"></textarea>
+                            <textarea name="body_en" id="editor_edit_en" style="height: 200px;" class="EN"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Body AR :</label>
+                            <textarea name="body_ar" id="editor_edit_ar" style="height: 200px;" class="AR"></textarea>
                         </div>
                         <div class="form-group">
                             <label>slug</label>
@@ -183,10 +193,7 @@
                                 <option value="1">ACTIVE</option>
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label>Page Image</label>
-                            <input type="file" name="image" class="form-control p-2">
-                        </div>
+                        <input type="text" name="textfile" id="">
                     </div>
 
                 </div>
@@ -220,10 +227,16 @@
             event.preventDefault();
             console.log(_this);
 
+            let data =  new FormData( this );
+            console.log(data);
+            /*
+
             $.ajax({
                 type: _this.attr('method'),
                 url: _this.attr('action'),
-                data: _this.serialize(),
+                data: new FormData( this ),
+                processData: false,
+                contentType: false,
                 success: function (data) {
                     console.log(data);
                     Swal.fire(
@@ -249,22 +262,49 @@
                     }
                 }
             });
+
+            */
         });
 
-        ClassicEditor
-            .create(document.querySelector('.editor'), {
-                initialData: '<h1>Add Your Page Content Here ... </h1>'
-            })
-            .catch(error => {
-                console.error(error);
+        // ClassicEditor
+        //     .create(document.querySelector('.ed-1'), {
+        //         initialData: '<h1>Add Your Page Content Here ... </h1>'
+        //     })
+        //     .catch(error => {
+        //         console.error(error);
+        //     });
+
+
+
+
+            $('.editor').each(function () {
+                CKEDITOR.replace($(this).attr('id'), {
+                    filebrowserImageBrowseUrl: '/filemanager?type=Images',
+                    filebrowserImageUploadUrl: '/filemanager/upload?type=Images&_token={{csrf_token()}}',
+                    filebrowserBrowseUrl: '/filemanager?type=Files',
+                    filebrowserUploadUrl: '/filemanager/upload?type=Files&_token={{csrf_token()}}',
+
+                });
             });
-        ClassicEditor
-            .create(document.querySelector('.editor_edit'), {
-                initialData: '<h1>Add Your Page Content Here ... </h1>'
-            })
-            .catch(error => {
-                console.error(error);
-            });
+
+        
+        
+        
+        
+        
+        
+        
+        $('.AR').css('display', 'none');
+
+        $('#AR').on('click', function () {
+            $('.AR').css('display', 'block');
+            $('.EN').css('display', 'none');
+        });
+
+        $('#EN').on('click', function () {
+            $('.AR').css('display', 'none');
+            $('.EN').css('display', 'block');
+        });
 
     </script>
 
