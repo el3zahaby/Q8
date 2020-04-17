@@ -76,7 +76,7 @@ class PageController extends Controller
 
         $page_ar = new $this->model;
         $page_ar->author_id = auth()->user()->id;
-        $page_ar->title = $request->title_ar;
+        $page_ar->title = $request->title_ar ?? '';
         $page_ar->body = $request->body_ar;
         $page_ar->excerpt = $request->excerpt;
         $page_ar->meta_keywords = $request->meta_keywords;
@@ -94,8 +94,8 @@ class PageController extends Controller
             $page_ar->image = $filename;
         }
 
-        $page_en->save();
         $page_ar->save();
+        $page_en->save();
         
         // return $page_en;
 
@@ -228,7 +228,13 @@ class PageController extends Controller
     public function destroy($id)
     {
             $i = $this->model::findOrFail($id);
+            $ar_page = $this->model::findOrFail( $i->get_ar_page( $i->slug ) );
+            if($i->image != '')
+            {
+                unlink( public_path('uploads/pages' , $i->image) );
+            }
             $i->delete();
+            $ar_page->delete();
             return response()->json([
                 'status'=>'ok',
                 'msg'=>'deleted'.$id
