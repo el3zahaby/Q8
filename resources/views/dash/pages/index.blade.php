@@ -74,8 +74,8 @@
 <!-- Modal Item {{ 'store' }} -->
 <div class="modal fade " id="store" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg p-5" role="document">
-        <form method="post" action="{{ route('admin.pages.store') }}"
-            class="modal-content form-store" enctype="multipart/form-data" >
+        <form method="post" action="{{ route('admin.pages.store') }}" class="modal-content form-store"
+            enctype="multipart/form-data">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel"><b>Add:</b> </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -145,7 +145,7 @@
     <div class="modal fade " id="edit-{{ $item->id }}" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg p-5" role="document">
             <form method="PUT" action="{{ route('admin.pages.update',$item->id) }}"
-                id="form-edit-{{ $item->id }}" class="modal-content form-edit">
+                id="form-edit-{{ $item->id }}" class="modal-content form-edit" enctype="multipart/form-data">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel"><b>Edit:</b> {{ $item->name }}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -153,47 +153,72 @@
                     </button>
                 </div>
                 <div class="modal-body">
+                    <?php
+                        $ar_slug = rtrim( $item->slug , '-en' );
+                        $ar_page = \App\Page::where( 'slug' , 'like' , $ar_slug.'-ar' )->get();
+                        $ar_title = "";
+                        $ar_body = "";
+                        foreach ($ar_page as $pg) {
+                            $ar_title = $pg->title;
+                            $ar_body = $pg->body;
+                        }
+                        // print("<pre>".print_r($ar_page[0]['id'] , true)."</pre>");
+                        
+                        ?>
                     <div>
-                        <div class="form-group">
-                            <label>Title EN: </label>
-                            <input type="text" name="title_en" id="" class="form-control EN">
+                        <div class="btn-group my-3" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-primary" id="edit_EN">EN</button>
+                            <button type="button" class="btn btn-primary" id="edit_AR">AR</button>
                         </div>
-                        <div class="form-group">
-                            <label>Title AR: </label>
-                            <input type="text" name="title_ar" id="" class="form-control AR">
+                        
+                        <div class="form-group EN">
+                            <label>Title EN :</label>
+                        <input type="text" value="{{ $item->title }}" name="title_en" class="form-control">
+                        </div>
+                        <div class="form-group AR">
+                            <label>Title AR :</label>
+                        <input type="text" name="title_ar" class="form-control" value="{{ $ar_title }}">
                         </div>
                         <div class="form-group">
                             <label>Excerpt : </label>
-                            <textarea name="excerpt" id="" cols="30" rows="10" class="form-control"></textarea>
+                            <textarea name="excerpt" id="" cols="30" rows="10" class="form-control">{{ $item->excerpt }}</textarea>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group EN">
                             <label>Body EN :</label>
-                            <textarea name="body_en" id="editor_edit_en" style="height: 200px;" class="EN"></textarea>
+                            <textarea name="body_en" id="" class="" style="height: 200px;">{{ $item->body }}</textarea>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group AR">
                             <label>Body AR :</label>
-                            <textarea name="body_ar" id="editor_edit_ar" style="height: 200px;" class="AR"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label>slug</label>
-                            <input type="text" name="slug" id="" class="form-control">
+                            <textarea name="body_ar" id="" class="" style="height: 200px;">{{ $ar_body }}</textarea>
                         </div>
                         <div class="form-group">
                             <label>Meta Description</label>
-                            <input type="text" name="meta_desc" id="" class="form-control">
+                            <input type="text" name="meta_desc" id="" class="form-control" value="{{ $item->meta_description }}">
                         </div>
                         <div class="form-group">
                             <label>Meta Keywords</label>
-                            <input type="text" name="meta_keywords" id="" class="form-control">
+                            <input type="text" name="meta_keywords" id="" class="form-control" value="{{ $item->meta_keywords }}">
                         </div>
                         <div class="form-group">
                             <label>Status</label>
                             <select name="status" id="" class="form-control p-0">
-                                <option value="0">INACTIVE</option>
-                                <option value="1">ACTIVE</option>
+                                <option value="INACTIVE" {{ $item->status == 'INACTIVE' ? 'selected' : '' }} >INACTIVE</option>
+                                <option value="ACTIVE" {{ $item->status == 'ACTIVE' ? 'selected' : '' }}>ACTIVE</option>
                             </select>
                         </div>
-                        <input type="text" name="textfile" id="">
+                        <div class="form-group">
+                            <label>Page Image</label>
+                            <br>
+                            @if($item->image != '')
+                                <img src="{{ url('uploads/pages/'.$item->image) }}" alt="">
+                            @else 
+                                <img src="{{ url('images/no-image.png') }}" alt="">
+                            @endif
+                            <input type="file" name="image" class="form-control p-2">
+                        </div>
+                        
+                    
+
                     </div>
 
                 </div>
@@ -227,14 +252,11 @@
             event.preventDefault();
             console.log(_this);
 
-            let data =  new FormData( this );
-            console.log(data);
-            /*
 
             $.ajax({
                 type: _this.attr('method'),
                 url: _this.attr('action'),
-                data: new FormData( this ),
+                data: new FormData(this),
                 processData: false,
                 contentType: false,
                 success: function (data) {
@@ -263,45 +285,37 @@
                 }
             });
 
-            */
         });
 
-        // ClassicEditor
-        //     .create(document.querySelector('.ed-1'), {
-        //         initialData: '<h1>Add Your Page Content Here ... </h1>'
-        //     })
-        //     .catch(error => {
-        //         console.error(error);
-        //     });
 
 
+        $('.editor').each(function () {
+            
+            CKEDITOR.replace($(this).attr('id'), {
+                filebrowserImageBrowseUrl: '/filemanager?type=Images',
+                filebrowserImageUploadUrl: '/filemanager/upload?type=Images&_token={{ csrf_token() }}',
+                filebrowserBrowseUrl: '/filemanager?type=Files',
+                filebrowserUploadUrl: '/filemanager/upload?type=Files&_token={{ csrf_token() }}',
 
-
-            $('.editor').each(function () {
-                CKEDITOR.replace($(this).attr('id'), {
-                    filebrowserImageBrowseUrl: '/filemanager?type=Images',
-                    filebrowserImageUploadUrl: '/filemanager/upload?type=Images&_token={{csrf_token()}}',
-                    filebrowserBrowseUrl: '/filemanager?type=Files',
-                    filebrowserUploadUrl: '/filemanager/upload?type=Files&_token={{csrf_token()}}',
-
-                });
             });
+            console.log(this);
+        });
 
-        
-        
-        
-        
-        
-        
-        
-        $('.AR').css('display', 'none');
 
-        $('#AR').on('click', function () {
+
+
+
+
+
+
+        $('.AR').css('display','none');
+
+        $('#AR , #edit_AR').on('click', function () {
             $('.AR').css('display', 'block');
             $('.EN').css('display', 'none');
         });
 
-        $('#EN').on('click', function () {
+        $('#EN , #edit_EN').on('click', function () {
             $('.AR').css('display', 'none');
             $('.EN').css('display', 'block');
         });

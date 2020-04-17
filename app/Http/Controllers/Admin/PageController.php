@@ -55,7 +55,6 @@ class PageController extends Controller
 
         $this->validate($request, [
             'title_en' => 'required',
-            'title_ar' => 'required',
             'excerpt' => 'required',
             'meta_keywords' => 'required',
             'meta_desc' => 'required',
@@ -83,7 +82,7 @@ class PageController extends Controller
         $page_ar->meta_keywords = $request->meta_keywords;
         $page_ar->status = $request->status;
         $page_ar->meta_description = $request->meta_desc;
-        $page_ar->slug = Str::slug($request->title_ar).'-ar' ;
+        $page_ar->slug = Str::slug($request->title_en).'-ar' ;
         
 
 
@@ -141,19 +140,82 @@ class PageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $item = $this->model::find($id);
+        // $item = $this->model::find($id);
 
+        /*
         $this->validate($request, [
-            'name' => 'required|max:255',
+            'title_en' => 'required',
+            'excerpt' => 'required',
+            'meta_keywords' => 'required',
+            'meta_desc' => 'required',
+            'status' => 'required',
         ]);
 
-//        dd($request->all());
-        $updated = $item->update($request->all());
+        */
+        // dd($request->all());
 
-        if ($updated) return response()->json([
+        
+        return $request->all();
+
+
+        $page_en = $this->model::find($id);
+        $page_en->author_id = auth()->user()->id;
+        $page_en->title = $request->title_en;
+        // $page_en->body = $request->body_en;
+        // $page_en->excerpt = $request->excerpt;
+        // $page_en->meta_keywords = $request->meta_keywords;
+        // $page_en->status = $request->status;
+        // $page_en->meta_description = $request->meta_desc;
+
+        $page_en->save();
+
+        return;
+
+        if($request->hasFile('image'))
+        {
+            $filename = time().'.'.$request->image->getClientOriginalExtension();
+            $request->image->move(public_path('uploads/pages',$filename));
+            $page_en->image = $filename;
+        }
+
+        
+
+        $ar_slug = rtrim( $page_en->slug , '-en' );
+        $ar_page = \App\Page::where( 'slug' , 'like' , $ar_slug.'-ar' )->get();
+        $ar_id = 0;
+        foreach ($ar_page as $pg) {
+            $ar_id = $pg->id;
+        }
+
+        $page_ar = $this->model::find($ar_id);
+        $page_ar->author_id = auth()->user()->id;
+        $page_ar->title = $request->title_ar;
+        $page_ar->body = $request->body_ar;
+        $page_ar->excerpt = $request->excerpt;
+        $page_ar->meta_keywords = $request->meta_keywords;
+        $page_ar->status = $request->status;
+        $page_ar->meta_description = $request->meta_desc;
+
+        $page_ar->save();
+        return;
+
+        if($request->hasFile('image'))
+        {
+            $filename = time().'.'.$request->image->getClientOriginalExtension();
+            $request->image->move(public_path('uploads/pages',$filename));
+            $page_ar->image = $filename;
+        }
+
+        $page_ar->save();
+
+        // return $page_en;
+
+
+        if ( $page_en && $page_ar) return response()->json([
             'status'=>'ok',
-            'msg'=>'Updated'.$id
+            'msg'=>'Added'
         ],200);
+
 
     }
 
