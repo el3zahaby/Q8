@@ -154,16 +154,9 @@
                 </div>
                 <div class="modal-body">
                     <?php
-                        $ar_slug = rtrim( $item->slug , '-en' );
-                        $ar_page = \App\Page::where( 'slug' , 'like' , $ar_slug.'-ar' )->get();
-                        $ar_title = "";
-                        $ar_body = "";
-                        foreach ($ar_page as $pg) {
-                            $ar_title = $pg->title;
-                            $ar_body = $pg->body;
-                        }
-                        // print("<pre>".print_r($ar_page[0]['id'] , true)."</pre>");
                         
+                        $ar_page = \App\Page::findOrFail( $item->get_ar_page($item->slug) );
+
                         ?>
                     <div>
                         <div class="btn-group my-3" role="group" aria-label="Basic example">
@@ -177,9 +170,9 @@
                         </div>
                         <div class="form-group AR">
                             <label>Title AR :</label>
-                        <input type="text" name="title_ar" class="form-control" value="{{ $ar_title }}">
+                        <input type="text" name="title_ar" class="form-control" value="{{ $ar_page->title }}">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group">get_ar_page
                             <label>Excerpt : </label>
                             <textarea name="excerpt" id="" cols="30" rows="10" class="form-control">{{ $item->excerpt }}</textarea>
                         </div>
@@ -189,7 +182,7 @@
                         </div>
                         <div class="form-group AR">
                             <label>Body AR :</label>
-                            <textarea name="body_ar" id="" class="" style="height: 200px;">{{ $ar_body }}</textarea>
+                        <textarea name="body_ar" id="" class="" style="height: 200px;">{{ $ar_page->body }}</textarea>
                         </div>
                         <div class="form-group">
                             <label>Meta Description</label>
