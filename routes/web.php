@@ -108,6 +108,7 @@ Route::group(['prefix' => 'admin','as'=>'admin.'], function () {
 
         Route::get('/', 'Admin\HomeController@index');
         Route::resource('users', 'Admin\UserController');
+        Route::get('designers', 'Admin\UserController@designers')->name('designers');
         Route::resource('dsizes', 'Admin\DsizeController');
         Route::resource('colors', 'Admin\ColorController');
         Route::resource('tsizes', 'Admin\TsizeController');
@@ -119,6 +120,8 @@ Route::group(['prefix' => 'admin','as'=>'admin.'], function () {
 
         Route::get('/settings', 'Admin\SettingController@index')->name('settings');
         Route::post('/settings', 'Admin\SettingController@store')->name('settings.store');
+
+        Route::get('/filemanger', 'Admin\HomeController@lfm')->name('lfm');
 
 
         Route::post('SuperUser',function (\Illuminate\Http\Request $request){

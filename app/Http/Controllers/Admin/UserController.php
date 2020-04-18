@@ -29,6 +29,10 @@ class UserController extends Controller
         $items = $this->model::orderBy('id','desc')->get();
         return view($this->view.'index',compact('items'));
     }
+    public function designers(){
+        $items = $this->model::whereHas("roles", function($q){ $q->where("name", "designer"); })->orderBy('id','desc')->get();
+        return view($this->view.'index',compact('items'));
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -53,12 +57,24 @@ class UserController extends Controller
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
             'age' => 'max:60',
+            'avatar' => 'required|image',
             'email' => 'required|email|unique:users,email',
+            'phone' => 'required|unique:users,phone',
         ]);
 
 
+        $avatar = null;
+        if($request->hasFile('avatar')) {
+            $file =  $request->avatar;
+            $filename = time().'.'.$file->getClientOriginalExtension();
+            $directory = storage_path('app/public/uploads/users');
+
+            $file->move($directory, $filename);
+            $avatar = '/storage/uploads/users/'.$filename;
+        }
+
         $store = $this->model::create(
-            $request->except(['is_designer'])+ ['password'=> bcrypt('password')]
+            $request->except(['is_designer','avatar'])+ ['password'=> bcrypt('password'),'avatar'=>$avatar]
         );
         if (isset($request->is_designer)){
             $store->assignRole('designer');
@@ -112,11 +128,20 @@ class UserController extends Controller
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
             'age' => 'max:60',
-            'email' => 'required|email|unique:users,email,'.$item->id.',id'
+            'email' => 'required|email|unique:users,email,'.$item->id.',id',
+            'phone' => 'required|unique:users,phone,'.$item->id.',id',
         ]);
 
-//        dd($request->all());
-        $updated = $item->update($request->except(['is_designer']));
+        $avatar = null;
+        if($request->hasFile('avatar')) {
+            $file =  $request->avatar;
+            $filename = time().'.'.$file->getClientOriginalExtension();
+            $directory = storage_path('app/public/uploads/users');
+
+            $file->move($directory, $filename);
+            $avatar = '/storage/uploads/users/'.$filename;
+        }
+        $updated = $item->update($request->except(['is_designer','avatar'])+ ['avatar'=>$avatar]);
 
         if (isset($request->is_designer)){
             $item->assignRole('designer');

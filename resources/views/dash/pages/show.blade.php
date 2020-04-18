@@ -20,10 +20,9 @@
                     <div class="col-md-12">
 
                         <?php
-                            
-                            $ar_page = \App\Page::findOrFail( $item->get_ar_page( $item->slug ) );
-                            // print_r($ar_page);
 
+                            $ar_page = $item->ar()
+                            // print_r($ar_page);
                         ?>
                         <div class="btn-group my-3" role="group" aria-label="Basic example">
                             <button type="button" class="btn btn-primary" id="EN">EN</button>

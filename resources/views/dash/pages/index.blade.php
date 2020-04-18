@@ -11,7 +11,7 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Order Statuses</h4>
+                <h4 class="card-title">Pages</h4>
                 <p class="card-description">
                     <button class="btn btn-success" data-toggle="modal" data-target="#store"><I
                             CLASS="mdi mdi-plus-box"></I>Add new</button>
@@ -38,7 +38,7 @@
                                     <td> {{ $item->id }} </td>
                                     <td> {{ $item->title }} </td>
                                     <td> {{ $item->status }} </td>
-                                    <td> {{ $item->image }} </td>
+                                    <td> <img onerror="this.src='{{ asset('images/no-image.png') }}'" src="{{  ($item->image) }}" width="190"/></td>
 
                                     <td> {{ $item->created_at->diffForHumans() }} </td>
 
@@ -77,7 +77,7 @@
         <form method="post" action="{{ route('admin.pages.store') }}" class="modal-content form-store"
             enctype="multipart/form-data">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"><b>Add:</b> </h5>
+                <h5 class="modal-title" id="exampleModalLabel"><b>Add</b> </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -97,7 +97,7 @@
                         <label>Title AR: </label>
                         <input type="text" name="title_ar" id="" class="form-control">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group EN">
                         <label>Excerpt : </label>
                         <textarea name="excerpt" id="" cols="30" rows="10" class="form-control"></textarea>
                     </div>
@@ -107,24 +107,24 @@
                     </div>
                     <div class="form-group AR">
                         <label>Body AR :</label>
-                        <textarea name="body_ar" id=ed-2 class="editor" style="height: 200px;"></textarea>
+                        <textarea name="body_ar" id="ed-2" class="editor" style="height: 200px;"></textarea>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group EN">
                         <label>Meta Description</label>
                         <input type="text" name="meta_desc" id="" class="form-control">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group EN">
                         <label>Meta Keywords</label>
                         <input type="text" name="meta_keywords" id="" class="form-control">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group EN">
                         <label>Status</label>
-                        <select name="status" id="" class="form-control p-0">
+                        <select name="status" id="" class="form-control">
                             <option value="INACTIVE">INACTIVE</option>
-                            <option value="ACTIVE">ACTIVE</option>
+                            <option selected value="ACTIVE">ACTIVE</option>
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group EN">
                         <label>Page Image</label>
                         <input type="file" name="image" class="form-control p-2">
                     </div>
@@ -144,8 +144,9 @@
     <!-- Modal Item {{ $item->id }} -->
     <div class="modal fade " id="edit-{{ $item->id }}" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg p-5" role="document">
-            <form method="PUT" action="{{ route('admin.pages.update',$item->id) }}"
+            <form method="POST" action="{{ route('admin.pages.update',$item->id) }}"
                 id="form-edit-{{ $item->id }}" class="modal-content form-edit" enctype="multipart/form-data">
+                @method('PUT')
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel"><b>Edit:</b> {{ $item->name }}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -153,64 +154,52 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <?php
-                        
-                        $ar_page = \App\Page::findOrFail( $item->get_ar_page($item->slug) );
-
-                        ?>
                     <div>
                         <div class="btn-group my-3" role="group" aria-label="Basic example">
-                            <button type="button" class="btn btn-primary" id="edit_EN">EN</button>
-                            <button type="button" class="btn btn-primary" id="edit_AR">AR</button>
+                            <button type="button" class="btn btn-primary" id="EN">EN</button>
+                            <button type="button" class="btn btn-primary" id="AR">AR</button>
                         </div>
-                        
+
                         <div class="form-group EN">
-                            <label>Title EN :</label>
-                        <input type="text" value="{{ $item->title }}" name="title_en" class="form-control">
+                            <label>Title EN: </label>
+                            <input type="text" name="title_en" id="" class="form-control" value="{{ $item->title }}">
                         </div>
                         <div class="form-group AR">
-                            <label>Title AR :</label>
-                        <input type="text" name="title_ar" class="form-control" value="{{ $ar_page->title }}">
+                            <label>Title AR: </label>
+                            <input type="text" name="title_ar" id="" class="form-control" value="{{ $item->ar()->title }}">
                         </div>
-                        <div class="form-group">get_ar_page
+                        <div class="form-group EN">
                             <label>Excerpt : </label>
                             <textarea name="excerpt" id="" cols="30" rows="10" class="form-control">{{ $item->excerpt }}</textarea>
                         </div>
                         <div class="form-group EN">
                             <label>Body EN :</label>
-                            <textarea name="body_en" id="" class="" style="height: 200px;">{{ $item->body }}</textarea>
+                            <textarea name="body_en" id="ed-1{{ $item->id }}" class="editor" style="height: 200px;">{{ $item->body }}</textarea>
                         </div>
                         <div class="form-group AR">
                             <label>Body AR :</label>
-                        <textarea name="body_ar" id="" class="" style="height: 200px;">{{ $ar_page->body }}</textarea>
+                            <textarea name="body_ar" id="ed-2{{ $item->id }}" class="editor" style="height: 200px;">{{ $item->ar()->body }}</textarea>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group EN">
                             <label>Meta Description</label>
                             <input type="text" name="meta_desc" id="" class="form-control" value="{{ $item->meta_description }}">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group EN">
                             <label>Meta Keywords</label>
                             <input type="text" name="meta_keywords" id="" class="form-control" value="{{ $item->meta_keywords }}">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group EN">
                             <label>Status</label>
-                            <select name="status" id="" class="form-control p-0">
-                                <option value="INACTIVE" {{ $item->status == 'INACTIVE' ? 'selected' : '' }} >INACTIVE</option>
-                                <option value="ACTIVE" {{ $item->status == 'ACTIVE' ? 'selected' : '' }}>ACTIVE</option>
+                            <select name="status" id="" class="form-control">
+                                <option @if($item->status == "INACTIVE") selected @endif value="INACTIVE">INACTIVE</option>
+                                <option @if($item->status == "ACTIVE") selected @endif value="ACTIVE">ACTIVE</option>
                             </select>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group EN">
                             <label>Page Image</label>
-                            <br>
-                            @if($item->image != '')
-                                <img src="{{ url('uploads/pages/'.$item->image) }}" alt="">
-                            @else 
-                                <img src="{{ url('images/no-image.png') }}" alt="">
-                            @endif
                             <input type="file" name="image" class="form-control p-2">
+                            <img onerror="this.src='{{ asset('images/no-image.png') }}'" src="{{  ($item->image) }}" width="90"/>
                         </div>
-                        
-                    
 
                     </div>
 
@@ -243,11 +232,11 @@
         $('.form-edit,.form-store').submit(function (event) {
             var _this = $(this);
             event.preventDefault();
-            console.log(_this);
-
+            console.log(_this.serialize());
+            var formData = new FormData(this);
 
             $.ajax({
-                type: _this.attr('method'),
+                type: "POST",
                 url: _this.attr('action'),
                 data: new FormData(this),
                 processData: false,
@@ -268,7 +257,7 @@
                         var i = 0
                         $.each(data.responseJSON.errors, function (key, value) {
                             i = i++;
-                            $('[name="' + key + '"]').addClass('invalid error');
+                            $('[name="' + key + '"]').show().addClass('invalid error');
                             $('[name="' + key + '"]').after(
                                 "<small class='helper-text text-danger'>" + value +
                                 "</small>")
@@ -283,15 +272,14 @@
 
 
         $('.editor').each(function () {
-            
+
             CKEDITOR.replace($(this).attr('id'), {
-                filebrowserImageBrowseUrl: '/filemanager?type=Images',
-                filebrowserImageUploadUrl: '/filemanager/upload?type=Images&_token={{ csrf_token() }}',
-                filebrowserBrowseUrl: '/filemanager?type=Files',
-                filebrowserUploadUrl: '/filemanager/upload?type=Files&_token={{ csrf_token() }}',
+                filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
+                filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token={{ csrf_token() }}',
+                filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
+                filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token={{ csrf_token() }}',
 
             });
-            console.log(this);
         });
 
 

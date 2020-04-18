@@ -8,7 +8,7 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Order Statuses</h4>
+                    <h4 class="card-title">Order Status</h4>
                     <p class="card-description">
                         <button class="btn btn-success" data-toggle="modal" data-target="#store"><I CLASS="mdi mdi-plus-box"></I>Add new</button>
                     </p>
@@ -29,13 +29,16 @@
                             @foreach($items as $key=> $item)
                                 <tr>
                                     <td> {{ $item->id }} </td>
-                                    <td> {{ $item->status }} </td>
                                     <td>
-                                        <div style="width:15px;height:15px;background-color:{{ $item->color }};"></div>
+                                        <div class="badge" style="background-color:{{ $item->color }};">
+                                            <span style="color: #f00; -webkit-filter: invert(100%); filter: invert(100%);">{{ $item->status }} </span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="p-2 rounded" style="width:100%;background-color:{{ $item->color }};"></div>
                                     </td>
 
                                     <td> {{ $item->created_at->diffForHumans() }} </td>
-
 
                                     <td>
                                         <!-- delete -->
@@ -64,7 +67,7 @@
         <div class="modal-dialog modal-lg p-5" role="document">
             <form method="post" action="{{ route('admin.orderstatus.store') }}"  class="modal-content form-store">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"><b>Add:</b> </h5>
+                    <h5 class="modal-title" id="exampleModalLabel"><b>Add</b> </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -72,12 +75,12 @@
                 <div class="modal-body">
                     <div>
                         <div class="form-group">
-                            <label >Status</label>
-                            <input name="status" type="text" class="form-control p-0" required >
+                            <label >Status Name</label>
+                            <input name="status" type="text" class="form-control" required >
                         </div>
                         <div class="form-group">
                             <label >Color</label>
-                            <input name="color" type="color" class="form-control p-0" required >
+                            <input name="color" type="color" class="form-control py-0 px-1" required >
                         </div>
 
                     </div>
@@ -106,11 +109,11 @@
                         <div>
                             <div class="form-group">
                                 <label >Status</label>
-                            <input name="status" type="text" class="form-control p-0" value="{{$item->status}}" required >
+                            <input name="status" type="text" class="form-control" value="{{$item->status}}" required >
                             </div>
                             <div class="form-group">
                                 <label >Color</label>
-                            <input name="color" type="color" class="form-control p-0" value="{{ $item->color }}" required >
+                            <input name="color" type="color" class="form-control" value="{{ $item->color }}" required >
                             </div>
 
                         </div>
@@ -162,13 +165,12 @@
                     });
                 },
                 error: function(data) {
-                    if(data.status = 422){
+                    if(data.status == 422){
                         var i = 0
                         $.each( data.responseJSON.errors, function( key, value ) {
                             i = i++;
                             $('[name="' + key + '"]').addClass('invalid error');
                             $('[name="' + key + '"]').after("<small class='helper-text text-danger'>"+value+"</small>")
-
                         });
                     }
                 }

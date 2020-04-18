@@ -4,17 +4,28 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property mixed slug
+ */
 class Page extends Model
 {
-    public function get_ar_page($slug)
-    {
-        $slug = substr( $slug , 0 , -3);
-        $page = \App\Page::where('slug',$slug.'-ar')->get();
-        $result = '';
-        foreach($page as $p)
-        {
-            $result = $p->id;
-        }
-        return $result;
+//    protected $fillable = ['body'];
+    protected $guarded = ['body'];
+
+    public function getBaseSlugAttribute(){
+        return explode('-', $this->slug)[0];
     }
+
+    public function ar($slug = null)
+    {
+        if ($slug != null) {
+            $slug = explode('-', $slug)[0];
+        }else{
+            $slug = explode('-', $this->slug)[0];
+        }
+        $page = \App\Page::where('slug',$slug.'-ar')->first();
+
+        return $page ?? [];
+    }
+
 }

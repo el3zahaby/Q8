@@ -47,7 +47,7 @@
 
                         <div class="row m-b-md">
                             <div class="col-md-12">
-                                <button class="btn-primary btn">
+                                <button class="btn-primary btn" type="submit">
                                     Save Settings
                                 </button>
                             </div>
@@ -64,6 +64,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.js"></script>
 
     <script>
+
         var $logoPath = "{{ asset('storage/uploads/logo/') }}/";
         $("div.logo").dropzone({
             url: "/file/logo/" + $('div.logo').data('name'),
@@ -92,6 +93,9 @@
             url: "/file/slider/" + $('div.slider').data('name'),
             renameFilename: function (filename) {
                 return $('div.slider').data('filename') + '_' + filename;
+            },
+            sending: function(file, xhr, formData) {
+                formData.append("_token", "{{ csrf_token() }}");
             },
             init: function () {
                 this.on('addedfile', function (file) {

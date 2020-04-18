@@ -74,7 +74,7 @@
         <form method="post" action="{{ route('admin.tshirts.store') }}"
             class="modal-content form-store">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"><b>Add:</b> </h5>
+                <h5 class="modal-title" id="exampleModalLabel"><b>Add</b> </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -83,7 +83,7 @@
                 <div>
                     <div class="form-group">
                         <label>color</label>
-                        <select name="color_id" id="" class="form-control p-0" style="color:#000 !important;">
+                        <select name="color_id" id="" class="form-control" style="color:#000 !important;">
                             @foreach($colors as $color)
                                 <option value="{{ $color->id }}">{{ $color->name }}</option>
                             @endforeach
@@ -91,7 +91,7 @@
                     </div>
                     <div class="form-group">
                         <label>size</label>
-                        <select name="tsize_id" id="" class="form-control p-0" style="color:#000 !important;">
+                        <select name="tsize_id" id="" class="form-control" style="color:#000 !important;">
                             @foreach($tsizes as $tsize)
                                 <option value="{{ $tsize->id }}">{{ $tsize->name }}</option>
                             @endforeach
@@ -135,7 +135,7 @@
                     <div>
                         <div class="form-group">
                             <label>color</label>
-                            <select name="color_id" id="" class="form-control p-0" style="color:#000 !important;">
+                            <select name="color_id" id="" class="form-control" style="color:#000 !important;">
                                 @foreach($colors as $color)
                                     <option {{ $item->color->id == $color->id ? 'selected' : '' }}  value="{{ $color->id }}">{{ $color->name }}</option>
                                 @endforeach
@@ -143,18 +143,18 @@
                         </div>
                         <div class="form-group">
                             <label>size</label>
-                            <select name="tsize_id" id="" class="form-control p-0" style="color:#000 !important;">
+                            <select name="tsize_id" id="" class="form-control" style="color:#000 !important;">
                                 @foreach($tsizes as $tsize)
                                     <option {{ $item->tsize->id == $tsize->id ? 'selected' : '' }} value="{{ $tsize->id }}">{{ $tsize->name }}</option>
                                 @endforeach
                             </select>
                         </div>
-    
+
                         <div class="form-group">
                             <label>price</label>
                         <input name="price" value="{{ $item->price }}" type="number" min="0" class="form-control" required>
                         </div>
-    
+
                         <div class="form-group">
                             <label>quantity</label>
                             <input name="qty" value="{{ $item->qty }}" type="number" min="0" class="form-control" required>

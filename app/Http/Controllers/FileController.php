@@ -28,7 +28,6 @@ class FileController extends Controller{
         $upload_success = $file->move($directory, $file->getClientOriginalName());
 
 
-        dd($upload_success);
         if( $upload_success ) {
             return response()->json('success',200);
          } else {

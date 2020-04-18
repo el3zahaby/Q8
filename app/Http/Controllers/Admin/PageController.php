@@ -52,16 +52,14 @@ class PageController extends Controller
      */
     public function store(Request $request)
     {
-
         $this->validate($request, [
             'title_en' => 'required',
+//            'title_ar' => 'required',
             'excerpt' => 'required',
             'meta_keywords' => 'required',
             'meta_desc' => 'required',
             'status' => 'required',
         ]);
-
-        // return $request;
 
         $page_en = new $this->model;
         $page_en->author_id = auth()->user()->id;
@@ -83,21 +81,24 @@ class PageController extends Controller
         $page_ar->status = $request->status;
         $page_ar->meta_description = $request->meta_desc;
         $page_ar->slug = Str::slug($request->title_en).'-ar' ;
-        
+
 
 
         if($request->hasFile('image'))
         {
-            $filename = time().'.'.$request->image->getClientOriginalExtension();
-            $request->image->move(public_path('uploads/pages',$filename));
-            $page_en->image = $filename;
-            $page_ar->image = $filename;
+            $file =  $request->image;
+            $filename = time().'.'.$file->getClientOriginalExtension();
+            $directory = storage_path('app/public/uploads/pages');
+
+            $request->image->move($directory, $filename);
+
+            $page_en->image = '/storage/uploads/pages/'.$filename;
+            $page_ar->image = '/storage/uploads/pages/'.$filename;
         }
 
         $page_ar->save();
         $page_en->save();
-        
-        // return $page_en;
+
 
 
         if ( $page_en && $page_ar) return response()->json([
@@ -140,9 +141,6 @@ class PageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $item = $this->model::find($id);
-
-        /*
         $this->validate($request, [
             'title_en' => 'required',
             'excerpt' => 'required',
@@ -151,69 +149,45 @@ class PageController extends Controller
             'status' => 'required',
         ]);
 
-        */
-        // dd($request->all());
-
-        
-        return $request->all();
-
-
         $page_en = $this->model::find($id);
         $page_en->author_id = auth()->user()->id;
         $page_en->title = $request->title_en;
-        // $page_en->body = $request->body_en;
-        // $page_en->excerpt = $request->excerpt;
-        // $page_en->meta_keywords = $request->meta_keywords;
-        // $page_en->status = $request->status;
-        // $page_en->meta_description = $request->meta_desc;
+        $page_en->body = $request->body_en;
+        $page_en->excerpt = $request->excerpt;
+        $page_en->meta_keywords = $request->meta_keywords;
+        $page_en->status = $request->status;
+        $page_en->meta_description = $request->meta_desc;
+        $page_en->slug = Str::slug($request->title_en).'-en' ;
 
-        $page_en->save();
 
-        return;
-
-        if($request->hasFile('image'))
-        {
-            $filename = time().'.'.$request->image->getClientOriginalExtension();
-            $request->image->move(public_path('uploads/pages',$filename));
-            $page_en->image = $filename;
-        }
-
-        
-
-        $ar_slug = rtrim( $page_en->slug , '-en' );
-        $ar_page = \App\Page::where( 'slug' , 'like' , $ar_slug.'-ar' )->get();
-        $ar_id = 0;
-        foreach ($ar_page as $pg) {
-            $ar_id = $pg->id;
-        }
-
-        $page_ar = $this->model::find($ar_id);
+        $page_ar = $this->model::find($id)->ar();
         $page_ar->author_id = auth()->user()->id;
-        $page_ar->title = $request->title_ar;
+        $page_ar->title = $request->title_ar ?? '';
         $page_ar->body = $request->body_ar;
         $page_ar->excerpt = $request->excerpt;
         $page_ar->meta_keywords = $request->meta_keywords;
         $page_ar->status = $request->status;
         $page_ar->meta_description = $request->meta_desc;
+        $page_ar->slug = Str::slug($request->title_en).'-ar' ;
 
-        $page_ar->save();
-        return;
 
-        if($request->hasFile('image'))
-        {
-            $filename = time().'.'.$request->image->getClientOriginalExtension();
-            $request->image->move(public_path('uploads/pages',$filename));
-            $page_ar->image = $filename;
+
+        if($request->hasFile('image')) {
+            $file =  $request->image;
+            $filename = time().'.'.$file->getClientOriginalExtension();
+            $directory = storage_path('app/public/uploads/pages');
+
+            $request->image->move($directory, $filename);
+
+            $page_en->image = '/storage/uploads/pages/'.$filename;
+            $page_ar->image = '/storage/uploads/pages/'.$filename;
         }
 
         $page_ar->save();
-
-        // return $page_en;
-
-
+        $page_en->save();
         if ( $page_en && $page_ar) return response()->json([
             'status'=>'ok',
-            'msg'=>'Added'
+            'msg'=>'Updated'
         ],200);
 
 
@@ -225,13 +199,11 @@ class PageController extends Controller
      * @param int $id
      * @return JsonResponse
      */
-    public function destroy($id)
-    {
+    public function destroy($id){
             $i = $this->model::findOrFail($id);
-            $ar_page = $this->model::findOrFail( $i->get_ar_page( $i->slug ) );
-            if($i->image != '')
-            {
-                unlink( public_path('uploads/pages' , $i->image) );
+            $ar_page = $i->ar();
+            if($i->image != '') {
+                if (file_exists($i->image)) unlink( public_path($i->image));
             }
             $i->delete();
             $ar_page->delete();

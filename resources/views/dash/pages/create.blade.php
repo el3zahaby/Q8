@@ -56,7 +56,7 @@
                         </div>
                         <div class="form-group">
                             <label>Status</label>
-                            <select name="status" id="" class="form-control p-0">
+                            <select name="status" id="" class="form-control">
                                 <option value="0">INACTIVE</option>
                                 <option value="1">ACTIVE</option>
                             </select>

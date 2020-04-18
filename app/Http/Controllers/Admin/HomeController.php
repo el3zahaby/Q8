@@ -18,4 +18,9 @@ class HomeController extends Controller{
         return view('dash.user-pages.login');
         // return view('admin.pages.user-pages.login');
     }
+
+    public function lfm(){
+        return view('dash.user-pages.lfm');
+        // return view('admin.pages.user-pages.login');
+    }
 }
