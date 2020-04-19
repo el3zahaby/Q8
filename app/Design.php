@@ -38,6 +38,10 @@ class Design extends Model
         return $this->belongsTo('App\User');
     }
 
+    public function design_sizes(){
+        return $this->hasMany(DesignSize::class);
+    }
+
     public static function boot(){
         parent::boot();
 

@@ -23,7 +23,6 @@
                                 <th> Last Name</th>
                                 <th> age</th>
                                 <th> E-mail</th>
-                                <th> Phone</th>
                                 <th> Role</th>
                                 <th> Created at</th>
 
@@ -39,7 +38,6 @@
                                     <td> {{ $item->last_name }} </td>
                                     <td> {{ (int)$item->age }} </td>
                                     <td> {{ $item->email }} </td>
-                                    <td> {{ $item->phone }} </td>
                                     <td> {{ $item->role }} </td>
 
                                     <td> {{ $item->created_at->diffForHumans() }} </td>

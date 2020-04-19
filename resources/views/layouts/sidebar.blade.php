@@ -56,7 +56,7 @@
         <li class="nav-item {{ active_class(['admin/filemanger']) }}">
             <a class="nav-link" href="{{ route('admin.lfm') }}">
                 <i class="menu-icon mdi mdi-file"></i>
-                <span class="menu-title">file manager</span>
+                <span class="menu-title">File Manager</span>
             </a>
         </li>
         <li><hr></li>
