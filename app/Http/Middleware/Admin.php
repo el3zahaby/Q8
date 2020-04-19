@@ -8,12 +8,12 @@ class Admin
 {
     public function handle($request, Closure $next, $guard = null)
     {
-        $user = $request->user();
-        dd($user);
-        if (isset($user) && $user->hasAnyRole(['super-admin', 'admin']) ) {
+//        $user = $request->user();
+//        dd($user);
+//        if (isset($user) && $user->hasAnyRole(['super-admin', 'admin']) ) {
             return $next($request);
-        }
+//        }
 
-        return redirect(route('admin.login'));
+//        return redirect(route('admin.login'));
     }
 }
