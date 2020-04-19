@@ -78,7 +78,7 @@ class User extends Authenticatable
 
         static::creating(function($table)
         {
-            $table->id = time()+mt_rand(0,2);
+            $table->id = rand(1000,9999999);
         });
     }
 
