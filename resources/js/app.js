@@ -82,8 +82,8 @@ const routes = [
             .default
     },
     {
-        path: "/terms_and_conditions",
-        component: require("./components/termsConditions.vue").default
+        path: "/:slug",
+        component: require("./components/pages.vue").default
     },
     {
         path: "*",
@@ -176,8 +176,8 @@ Vue.component(
     require("./components/dashboard/ProfileComponent.vue").default
 );
 Vue.component(
-    "terms-conditions",
-    require("./components/termsConditions.vue").default
+    "pages",
+    require("./components/pages.vue").default
 );
 Vue.component(
     "not-found",

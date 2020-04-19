@@ -53,6 +53,12 @@
                 <span class="menu-title">Sittings</span>
             </a>
         </li>
+        <li class="nav-item {{ active_class(['admin/slider']) }}">
+            <a class="nav-link" href="{{ route('admin.slider.index') }}">
+                <i class="menu-icon mdi mdi-settings"></i>
+                <span class="menu-title">Slider</span>
+            </a>
+        </li>
         <li class="nav-item {{ active_class(['admin/filemanger']) }}">
             <a class="nav-link" href="{{ route('admin.lfm') }}">
                 <i class="menu-icon mdi mdi-file"></i>

@@ -58,6 +58,7 @@ class PageController extends Controller
             'excerpt' => 'required',
             'meta_keywords' => 'required',
             'meta_desc' => 'required',
+            'slug' => 'required',
             'status' => 'required',
         ]);
 
@@ -96,8 +97,8 @@ class PageController extends Controller
             $page_ar->image = '/storage/uploads/pages/'.$filename;
         }
 
-        $page_ar->save();
         $page_en->save();
+        $page_ar->save();
 
 
 

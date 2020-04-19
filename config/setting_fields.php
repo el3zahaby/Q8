@@ -175,24 +175,24 @@ return [
 //
 //        ]
 //    ],
-    'slider' => [
-
-        'title' => 'Slider ',
-        'desc' => 'add image slider',
-        'icon' => 'fa fa-file',
-
-        'elements' => [
-            [
-                'type' => 'file', // input fields type
-                'data' => 'json', // data type, string, int, boolean,json
-                'name' => 'slider', // unique name for field
-                'label' => 'Slider', // you know what label it is
-                'rules' => '', // validation rule of laravel
-                'class' => 'slider', // any class for input
-                'value' => [] // default value if you want
-            ],
-
-
-        ]
-    ],
+//    'slider' => [
+//
+//        'title' => 'Slider ',
+//        'desc' => 'add image slider',
+//        'icon' => 'fa fa-file',
+//
+//        'elements' => [
+//            [
+//                'type' => 'file', // input fields type
+//                'data' => 'json', // data type, string, int, boolean,json
+//                'name' => 'slider', // unique name for field
+//                'label' => 'Slider', // you know what label it is
+//                'rules' => '', // validation rule of laravel
+//                'class' => 'slider', // any class for input
+//                'value' => [] // default value if you want
+//            ],
+//
+//
+//        ]
+//    ],
 ];

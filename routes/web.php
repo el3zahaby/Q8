@@ -61,6 +61,8 @@ Route::group(['prefix' => '/api'], function () {
     Route::get('/v1/delete-order/{id}', 'OrderController@delete');
     Route::post('/v1/updateorder/{id}', 'OrderController@update');
 
+    Route::resource('/v1/page', 'PageController');
+
 
     //Slider_Route
     Route::get('/v1/slider', 'SliderController@show');
@@ -114,7 +116,7 @@ Route::group(['prefix' => 'admin','as'=>'admin.'], function () {
             Route::get('designers', 'Admin\UserController@designers')->name('designers');
             Route::get('admins', 'Admin\UserController@admins')->name('admins');
         });
-        Route::resource('/users', 'Admin\UserController');
+        Route::resource('users', 'Admin\UserController');
 
 
         // designs
@@ -128,11 +130,16 @@ Route::group(['prefix' => 'admin','as'=>'admin.'], function () {
 
         //order
         Route::resource('orderstatus', 'Admin\OrderStatusController');
+
+        //page
         Route::resource('pages', 'Admin\PageController');
 
 
+        //site
         Route::get('/settings', 'Admin\SettingController@index')->name('settings');
         Route::post('/settings', 'Admin\SettingController@store')->name('settings.store');
+        Route::resource('slider', 'Admin\SliderController');
+
 
         Route::get('/filemanger', 'Admin\HomeController@lfm')->name('lfm');
 

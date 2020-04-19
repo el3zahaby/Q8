@@ -16,9 +16,7 @@
                         <div class="row">
                             <div class="col helpful">
                                 <ul class="list-unstyled">
-                                    <li>
-                                        <slot></slot>
-                                    </li>
+                                    <slot></slot>
                                 </ul>
                             </div>
                         </div>
@@ -45,7 +43,7 @@
         data() {
             return {
                 logo_src: "/images/w_logo.png",
-                about_us: about_us_desc
+                about_us: 'about_us_desc'
             }
         },
     }
