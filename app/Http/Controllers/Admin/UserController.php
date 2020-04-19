@@ -12,12 +12,9 @@ use Illuminate\View\View;
 
 class UserController extends Controller
 {
-    protected $view  = 'dash.user-pages.users.';
+    protected $view  = 'dash.user-pages.';
     protected $model = 'App\User';
 
-    public function __construct(){
-//        $this->view = ;
-    }
 
     /**
      * Display a listing of the resource.
@@ -26,12 +23,18 @@ class UserController extends Controller
      */
     public function index()
     {
-        $items = $this->model::orderBy('id','desc')->get();
-        return view($this->view.'index',compact('items'));
+        $items = $this->model::whereHas("roles", function($q){ $q->where("name", '<>', "admin")->where('name','<>','designer'); })->orderBy('id','desc')->get();
+        return view($this->view.'users.index',compact('items'));
     }
+
     public function designers(){
         $items = $this->model::whereHas("roles", function($q){ $q->where("name", "designer"); })->orderBy('id','desc')->get();
-        return view($this->view.'index',compact('items'));
+        return view($this->view.'designers.index',compact('items'));
+    }
+
+    public function admins(){
+        $items = $this->model::whereHas("roles", function($q){ $q->where("name", "admin"); })->orderBy('id','desc')->get();
+        return view($this->view.'admins.index',compact('items'));
     }
 
     /**
@@ -98,7 +101,7 @@ class UserController extends Controller
     public function show($id)
     {
         $item =  $this->model::findOrFail($id);
-        return view($this->view.'show',compact('item'));
+        return view($this->view.'users.show',compact('item'));
     }
 
 //    /**

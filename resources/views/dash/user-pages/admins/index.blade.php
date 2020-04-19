@@ -8,7 +8,7 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Users</h4>
+                    <h4 class="card-title">Admins</h4>
                     <p class="card-description">
                         <button class="btn btn-success" data-toggle="modal" data-target="#store"><I CLASS="mdi mdi-plus-box"></I>Add new</button>
                     </p>
@@ -24,11 +24,7 @@
                                 <th> age</th>
                                 <th> E-mail</th>
                                 <th> Phone</th>
-                                <th> Address</th>
                                 <th> Role</th>
-                                <th> Bank Name</th>
-                                <th> IBAN Bank</th>
-                                <th> Name On Bank Card</th>
                                 <th> Created at</th>
 
                                 <th> Action</th>
@@ -44,11 +40,7 @@
                                     <td> {{ (int)$item->age }} </td>
                                     <td> {{ $item->email }} </td>
                                     <td> {{ $item->phone }} </td>
-                                    <td> {{ $item->address }} </td>
                                     <td> {{ $item->role }} </td>
-                                    <td> {{ $item->Bank_Name }} </td>
-                                    <td> {{ $item->IBAN_Bank }} </td>
-                                    <td> {{ $item->name_on_BankCard }} </td>
 
                                     <td> {{ $item->created_at->diffForHumans() }} </td>
 

@@ -107,13 +107,26 @@ Route::group(['prefix' => 'admin','as'=>'admin.'], function () {
 
 
         Route::get('/', 'Admin\HomeController@index');
-        Route::resource('users', 'Admin\UserController');
-        Route::get('designers', 'Admin\UserController@designers')->name('designers');
+
+
+        //users
+        Route::group(['prefix' => 'users','as'=>'users.'], function () {
+            Route::get('designers', 'Admin\UserController@designers')->name('designers');
+            Route::get('admins', 'Admin\UserController@admins')->name('admins');
+        });
+        Route::resource('/users', 'Admin\UserController');
+
+
+        // designs
+        Route::resource('designs', 'Admin\DesignController');
+
+        // T-shirt
         Route::resource('dsizes', 'Admin\DsizeController');
         Route::resource('colors', 'Admin\ColorController');
         Route::resource('tsizes', 'Admin\TsizeController');
-
         Route::resource('tshirts', 'Admin\TshirtController');
+
+        //order
         Route::resource('orderstatus', 'Admin\OrderStatusController');
         Route::resource('pages', 'Admin\PageController');
 

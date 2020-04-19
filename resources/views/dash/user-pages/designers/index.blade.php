@@ -8,7 +8,7 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Users</h4>
+                    <h4 class="card-title">Designers</h4>
                     <p class="card-description">
                         <button class="btn btn-success" data-toggle="modal" data-target="#store"><I CLASS="mdi mdi-plus-box"></I>Add new</button>
                     </p>

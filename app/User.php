@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 use Spatie\Permission\Traits\HasRoles;
 
 /**
@@ -69,4 +70,16 @@ class User extends Authenticatable
 //        return $this->first_name . ' ' . $this->last_name;
         return $this->getRoleNames()[0] ?? null;
     }
+
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function($table)
+        {
+            $table->id = rand(1000,9999999);
+        });
+    }
+
 }

@@ -7,6 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Design extends Model
 {
+    protected $guarded = [];
+
+    public function isAccepted($string = false){
+        $cond = (boolean)$this->accepting;
+
+        if ($string){
+            $cond= ($cond) ?'YES':"NO";
+        }
+
+        return $cond;
+    }
     public function dsizes()
     {
         return $this->belongsToMany('App\Dsize');
@@ -22,7 +33,7 @@ class Design extends Model
         return $this->belongsToMany('App\Color');
     }
 
-    public function users()
+    public function user()
     {
         return $this->belongsTo('App\User');
     }

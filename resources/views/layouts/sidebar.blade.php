@@ -60,16 +60,45 @@
             </a>
         </li>
         <li><hr></li>
-        <li class="nav-item {{ active_class(['admin/users*']) }}">
-            <a class="nav-link" href="{{ route('admin.users.index') }}">
-                <i class="menu-icon mdi mdi-account-group "></i>
+        <li class="nav-item {{ active_class(['admin/users*','admin/users*']) }}">
+            <a class="nav-link" data-toggle="collapse" href="#user-pages" aria-expanded="false" aria-controls="user-pages">
+                <i class="menu-icon mdi mdi-account-group"></i>
                 <span class="menu-title">Users</span>
+                <i class="menu-arrow"></i>
             </a>
+            <div class="collapse " id="user-pages">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{ route('admin.users.admins') }}">Admin</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{ route('admin.users.designers') }}">Designers</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{ route('admin.users.index') }}">Normal Users</a>
+                    </li>
+
+
+                </ul>
+            </div>
         </li>
-        <li class="nav-item {{ active_class(['admin/designers']) }}">
-            <a class="nav-link" href="{{ route('admin.designers') }}">
+{{--        <li class="nav-item {{ active_class(['admin/users*']) }}">--}}
+{{--            <a class="nav-link" href="{{ route('admin.users.index') }}">--}}
+{{--                <i class="menu-icon mdi mdi-account-group "></i>--}}
+{{--                <span class="menu-title">Users</span>--}}
+{{--            </a>--}}
+{{--        </li>--}}
+{{--        <li class="nav-item {{ active_class(['admin/designers']) }}">--}}
+{{--            <a class="nav-link" href="{{ route('admin.designers') }}">--}}
+{{--                <i class="menu-icon mdi mdi-account-group "></i>--}}
+{{--                <span class="menu-title">Designers</span>--}}
+{{--            </a>--}}
+{{--        </li>--}}
+        <li><hr></li>
+        <li class="nav-item {{ active_class(['admin/designs*']) }}">
+            <a class="nav-link" href="{{ route('admin.designs.index') }}">
                 <i class="menu-icon mdi mdi-account-group "></i>
-                <span class="menu-title">Designers</span>
+                <span class="menu-title">Designs</span>
             </a>
         </li>
         <li><hr></li>
