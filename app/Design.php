@@ -37,4 +37,16 @@ class Design extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public static function boot(){
+        parent::boot();
+
+        static::creating(function($table)
+        {
+            $first =  Design::first();
+            if(!$first){
+                $table->id = config('app.firstId');
+            }
+        });
+    }
 }

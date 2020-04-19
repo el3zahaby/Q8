@@ -28,6 +28,8 @@ return [
 
     'env' => env('APP_ENV', 'production'),
 
+    'firstId'=>278823,
+
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode
