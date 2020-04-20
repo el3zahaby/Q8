@@ -18,12 +18,15 @@ class Page extends Model
 
     public function ar($slug = null)
     {
+        // return $slug;
         if ($slug != null) {
-            $slug = explode('-', $slug)[0];
+            // $slug = explode('-', $slug)[0];
+            $slug = substr($slug, 0, -3);;
         }else{
-            $slug = explode('-', $this->slug)[0];
+            $slug = substr($this->slug, 0, -3);
         }
         $page = \App\Page::where('slug',$slug.'-ar')->first();
+
 
         return $page ?? [];
     }
