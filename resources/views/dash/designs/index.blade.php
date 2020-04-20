@@ -142,10 +142,9 @@
                                     <div class="col-3">{{ $size->width }} x {{ $size->length }}</div>
                                     <div class="col-3 print_{{ $size->id }} ">{{ $size->print_price }}</div>
                                     <div class="col-3 form-group">
-                                        <input type="text" name="price[{{ $size->id }}]"
-                                            class="form-control price_{{ $size->id }}" >
+                                        <input type="text" data-id="{{ $size->id }}" readonly name="price[{{ $size->id }}]" class="form-control designerPrice price_{{ $size->id }}" >
                                     </div>
-                                    <div class="col-2" id="total_{{ $size->id }}">total</div>
+                                    <div class="col-2" id="total_{{ $size->id }}">{{ $size->print_price }}</div>
                                 </div>
                             @endforeach
                         </div>
@@ -240,12 +239,12 @@
                                             <input type="checkbox" name="{{ $size->id }}" class="size_check" {{ $item->has_dsize($size->id) ? 'checked' : '' }}>
                                         </div>
                                         <div class="col-3">{{ $size->width }} x {{ $size->length }}</div>
-                                        <div class="col-3 print_{{ $size->id }} ">{{ $size->print_price }}</div>
+                                        <div class="col-3 print_{{ $size->id }}{{ $item->id }}">{{ $size->print_price }}</div>
                                         <div class="col-3 form-group">
-                                            <input type="text" name="price[{{ $size->id }}]"
-                                                class="form-control price_{{ $size->id }}" value="{{ $item->has_dsize($size->id) ? $item->dsize_price($size->id) : '' }}">
+                                            <input type="text" data-id="{{ $size->id }}{{ $item->id }}"  name="price[{{ $size->id }}]" class="form-control designerPrice price_{{ $size->id }}" value="{{ $item->has_dsize($size->id) ? $item->dsize_price($size->id) : 0 }}">
                                         </div>
-                                        <div class="col-2" id="total_{{ $size->id }}">total</div>
+
+                                        <div class="col-2" id="total_{{ $size->id }}{{ $item->id }}">{{ $item->total($size) }}</div>
                                     </div>
                                 @endforeach
                             </div>
@@ -344,11 +343,24 @@
             if ($(this).is(':checked')) {
                 // console.log( "price_" + $(this).attr('name') );
                 $(".price_" + $(this).attr('name')).attr('required', '');
+                $(".price_" + $(this).attr('name')).removeAttr('readonly');
             } else {
                 $('.price_' + $(this).attr('name')).val('');
                 $(".price_" + $(this).attr('name')).removeAttr('required');
+                $(".price_" + $(this).attr('name')).attr('readonly','');
+
             }
         });
 
+        $('.designerPrice').on('keyup',function () {
+            var $id = $(this).data('id')
+            var $dp = parseFloat($(this).val());
+            console.log($dp)
+            if(Number.isNaN($dp)){
+                $dp = 0;
+            }
+            var $op = $('.print_'+$id).html();
+            $('#total_'+$id).html(parseFloat($op)+$dp);
+        })
     </script>
 @endpush

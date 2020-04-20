@@ -76,11 +76,11 @@ class DesignController extends Controller
         $store->accepting = $request->accepting;
         $store->img = $img;
         $store->save();
-        
+
 
         foreach($request->price as $key => $price)
         {
-            if($price != null)
+            if($price != null and $price != 0 )
             {
                 $dsignsize = new DesignSize;
                 $dsignsize->design_id = $store->id;
@@ -89,7 +89,7 @@ class DesignController extends Controller
                 $dsignsize->save();
             }
         }
-        
+
 
         if ($store && $dsignsize) return response()->json([
             'status'=>'ok',
@@ -132,7 +132,7 @@ class DesignController extends Controller
     public function update(Request $request, $id)
     {
         $item = $this->model::find($id);
-        
+
         $this->validate($request, [
             'name_en' => 'required|max:255',
             'name_ar' => 'required|max:255',
@@ -151,7 +151,7 @@ class DesignController extends Controller
             $img = '/storage/uploads/designs/'.$filename;
         }
 
-        
+
         $item->name_en = $request->name_en;
         $item->name_ar = $request->name_ar;
         $item->desc_en = $request->desc_en;
@@ -169,7 +169,7 @@ class DesignController extends Controller
 
         foreach($request->price as $key => $price)
         {
-            if($price != null)
+            if($price != null and $price != 0)
             {
                 $designsize = new DesignSize;
                 $designsize->design_id = $item->id;
@@ -205,7 +205,7 @@ class DesignController extends Controller
         {
             $ds->delete();
         }
-        
+
         $item->delete();
         return response()->json([
             'status'=>'ok',
