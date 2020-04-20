@@ -29,6 +29,6 @@ class CreateDesignSizesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('design_sizes');
+        Schema::dropIfExists('design_dsize');
     }
 }
