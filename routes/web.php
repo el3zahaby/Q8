@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 
-//----------Use To Save Session For Cart----------//
+//----------Use To Save 1Session For Cart----------//
 
 use Illuminate\Http\Request;
 
@@ -105,7 +105,7 @@ Route::post('/file/{path}/{inputName}', 'FileController@store')->name('file.stor
 Route::group(['prefix' => 'admin','as'=>'admin.'], function () {
     Route::get('/login', 'Admin\HomeController@login')->name('login');
 
-    Route::group(['middleware'=>['admin']], function () {
+    Route::group(['middleware'=>['admin','trackV']], function () {
 
 
         Route::get('/', 'Admin\HomeController@index');
@@ -173,4 +173,4 @@ Route::get('/dashboard{any}', function () {
 Route::get('logout',  'Auth\LoginController@logout');
 Auth::routes();
 
-Route::get('/{any}', 'HomeController@index')->where('any', '.*')->name('home');
+Route::get('/{any}', 'HomeController@index')->middleware(['trackV'])->where('any', '.*')->name('home');
