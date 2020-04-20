@@ -13,7 +13,7 @@ class CreateDesignSizesTable extends Migration
      */
     public function up()
     {
-        Schema::create('design_sizes', function (Blueprint $table) {
+        Schema::create('design_dsize', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('design_id');
             $table->integer('dsize_id');

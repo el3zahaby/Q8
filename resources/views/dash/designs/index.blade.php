@@ -38,9 +38,10 @@
                                     <td>{{ $item->name_en }}</td>
                                     <td><a href="{{ route('admin.users.show',$item->user->id) }}"
                                             target="_blank">{{ $item->user->full_name }}</a> </td>
-                                    <td> {{ $item->des_en }} </td>
+                                    <td> {{ $item->desc_en }} </td>
                                     <td><img src="{{ $item->img }}" alt=""> </td>
-                                    <td> {{ $item->price }} </td>
+                                    <td> {{ $item->design_sizes[0]->dsize->print_price + $item->design_sizes[0]->designer_price }}
+                                    </td>
                                     <td> {{ $item->discount }} </td>
                                     <td> {{ $item->isAccepted(true) }} </td>
 
@@ -89,8 +90,8 @@
             </div>
             <div class="modal-body">
                 <div class="btn-group mb-3" role="group">
-                    <button class="btn btn-primary AR_btn">AR</button>
                     <button class="btn btn-primary EN_btn">EN</button>
+                    <button class="btn btn-primary AR_btn">AR</button>
                 </div>
                 <div>
                     <div class="form-group EN">
@@ -132,18 +133,19 @@
                                 <div class="col-2">total</div>
                             </div>
                             <hr>
-                            
+
                             @foreach($sizes as $size)
                                 <div class="row">
                                     <div class="col-1">
-                                    <input type="checkbox" name="{{ $size->id }}" class="size_check">
+                                        <input type="checkbox" name="{{ $size->id }}" class="size_check">
                                     </div>
                                     <div class="col-3">{{ $size->width }} x {{ $size->length }}</div>
-                                    <div class="col-3 print_{{$size->id}} ">{{ $size->print_price }}</div>
+                                    <div class="col-3 print_{{ $size->id }} ">{{ $size->print_price }}</div>
                                     <div class="col-3 form-group">
-                                    <input type="text" name="price[{{$size->id}}]"  class="form-control price_{{$size->id}}">
+                                        <input type="text" name="price[{{ $size->id }}]"
+                                            class="form-control price_{{ $size->id }}" >
                                     </div>
-                                <div class="col-2" id="total_{{ $size->id }}">total</div>
+                                    <div class="col-2" id="total_{{ $size->id }}">total</div>
                                 </div>
                             @endforeach
                         </div>
@@ -184,15 +186,30 @@
                     </button>
                 </div>
                 <div class="modal-body">
+                    <div class="btn-group mb-3" role="group">
+                        <button class="btn btn-primary EN_btn">EN</button>
+                        <button class="btn btn-primary AR_btn">AR</button>
+                    </div>
                     <div>
-                        <div class="form-group">
-                            <label>Name</label>
-                            <input name="name" type="text" class="form-control" required value="{{ $item->name }}">
+                        <div class="form-group EN">
+                            <label>Name EN :</label>
+                            <input name="name_en" type="text" class="form-control" required
+                                value="{{ $item->name_en }}">
                         </div>
-                        <div class="form-group ">
-                            <label>Description</label>
-                            <textarea name="des" class="form-control" autocapitalize="on"
-                                required>{{ $item->des }}</textarea>
+                        <div class="form-group AR">
+                            <label>Name AR :</label>
+                            <input name="name_ar" type="text" class="form-control" required
+                                value="{{ $item->name_ar }}">
+                        </div>
+                        <div class="form-group EN">
+                            <label>Description EN :</label>
+                            <textarea name="desc_en" class="form-control" autocapitalize="on"
+                                >{{ $item->desc_en }}</textarea>
+                        </div>
+                        <div class="form-group AR">
+                            <label>Description AR :</label>
+                            <textarea name="desc_ar" class="form-control" autocapitalize="on"
+                                >{{ $item->desc_ar }}</textarea>
                         </div>
 
                         <div class="form-group ">
@@ -203,34 +220,60 @@
 
                         </div>
 
-                        {!! Form::select('user_id', DB::table('users')->pluck('email', 'id'), null,['class' =>
-                        'form-control']) !!}
+                        {!! Form::select('user_id', DB::table('users')->pluck('email', 'id'), null,['class'
+                        =>'form-control']) !!}
+                        <div class="form-group ">
+                            <label>Sizes</label>
+                            <hr>
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-1">choose</div>
+                                    <div class="col-3">size</div>
+                                    <div class="col-3">print price</div>
+                                    <div class="col-3">enter your price to add</div>
+                                    <div class="col-2">total</div>
+                                </div>
+                                <hr>
+                                @foreach($sizes as $size)
+                                    <div class="row">
+                                        <div class="col-1">
+                                            <input type="checkbox" name="{{ $size->id }}" class="size_check" {{ $item->has_dsize($size->id) ? 'checked' : '' }}>
+                                        </div>
+                                        <div class="col-3">{{ $size->width }} x {{ $size->length }}</div>
+                                        <div class="col-3 print_{{ $size->id }} ">{{ $size->print_price }}</div>
+                                        <div class="col-3 form-group">
+                                            <input type="text" name="price[{{ $size->id }}]"
+                                                class="form-control price_{{ $size->id }}" value="{{ $item->has_dsize($size->id) ? $item->dsize_price($size->id) : '' }}">
+                                        </div>
+                                        <div class="col-2" id="total_{{ $size->id }}">total</div>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <hr>
+                        </div>
 
-<div class="form-group ">
-    <label>Price</label>
-    <input name="price" type="text" class="form-control" value="{{ $item->price ?? 0 }}" required>
-</div>
-<div class="form-group ">
-    <label>Discount</label>
-    <input name="discount" type="text" class="form-control" value="{{ $item->discount ?? 0 }}">
-</div>
+                        <div class="form-group ">
+                            <label>Discount</label>
+                            <input name="discount" type="text" class="form-control"
+                                value="{{ $item->discount ?? 0 }}">
+                        </div>
 
-<div class="form-group ">
-    <label>Accepting?</label>
-    <input name="accepting" value="1" type="checkbox" @if($item->isAccepted()) checked @endif
-    class="" >
-</div>
+                        <div class="form-group ">
+                            <label>Accepting?</label>
+                            <input name="accepting" value="1" type="checkbox" @if($item->isAccepted()) checked @endif
+                            class="" >
+                        </div>
 
-</div>
+                    </div>
 
-</div>
-<div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-    <button type="submit" class="btn btn-primary">Save changes</button>
-</div>
-</form>
-</div>
-</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
 @endforeach
 @endsection
 
@@ -287,7 +330,7 @@
 
         $('.AR').css('display', 'none');
 
-        $('.AR_btn').on('click', function () {
+        $('.AR_btn ').on('click', function () {
             $('.AR').css('display', 'block');
             $('.EN').css('display', 'none');
         });
@@ -297,13 +340,13 @@
             $('.AR').css('display', 'none');
         });
 
-        $('.size_check').on('change',function(){
-            if( $(this).is(':checked') )
-            {
+        $('.size_check').on('change', function () {
+            if ($(this).is(':checked')) {
                 // console.log( "price_" + $(this).attr('name') );
-                $( ".price_" + $(this).attr('name') ).attr('required' , '') ;
-            }else{
-                console.log('un checked');
+                $(".price_" + $(this).attr('name')).attr('required', '');
+            } else {
+                $('.price_' + $(this).attr('name')).val('');
+                $(".price_" + $(this).attr('name')).removeAttr('required');
             }
         });
 

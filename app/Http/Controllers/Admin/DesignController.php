@@ -49,11 +49,13 @@ class DesignController extends Controller
      */
     public function store(Request $request)
     {
+        // return $request->all();
         $this->validate($request, [
             'name_en' => 'required|max:255',
             'name_ar' => 'required|max:255',
             'img' => 'required|image',
             'user_id' => 'required',
+            'price' => 'check_array:1' // the array required and min 1 item
         ]);
 
         if($request->hasFile('img')) {
@@ -128,16 +130,17 @@ class DesignController extends Controller
     public function update(Request $request, $id)
     {
         $item = $this->model::find($id);
-
+        
         $this->validate($request, [
-            'name' => 'required|max:255',
-            'price' => 'required',
-            'img' => 'image',
+            'name_en' => 'required|max:255',
+            'name_ar' => 'required|max:255',
             'user_id' => 'required',
+            'price' => 'check_array:1' // the array required and min 1 item
         ]);
 
         $img = $item->img;
         if($request->hasFile('img')) {
+            unlink(public_path() . $img);
             $file =  $request->img;
             $filename = time().'.'.$file->getClientOriginalExtension();
             $directory = storage_path('app/public/uploads/designs');
@@ -146,10 +149,39 @@ class DesignController extends Controller
             $img = '/storage/uploads/designs/'.$filename;
         }
 
-        $updated = $item->update($request->except(['img'])+ ['img'=>$img]);
+        
+        $item->name_en = $request->name_en;
+        $item->name_ar = $request->name_ar;
+        $item->desc_en = $request->desc_en;
+        $item->desc_ar = $request->desc_ar;
+        $item->user_id = $request->user_id;
+        $item->accepting = $request->accepting ?? $item->accepting;
+        $item->img = $img;
+        $item->save();
+
+        $oldsizes = $item->design_sizes;
+        foreach($oldsizes as $oldsize)
+        {
+            $oldsize->delete();
+        }
+
+        foreach($request->price as $key => $price)
+        {
+            if($price != null)
+            {
+                $designsize = new DesignSize;
+                $designsize->design_id = $item->id;
+                $designsize->dsize_id = $key;
+                $designsize->designer_price = $price ;
+                $designsize->save();
+            }
+        }
 
 
-        if ($updated) return response()->json([
+        // $updated = $item->update($request->except(['img'])+ ['img'=>$img]);
+
+
+        if ($item && $designsize) return response()->json([
             'status'=>'ok',
             'msg'=>'Updated'.$id
         ],200);
@@ -165,6 +197,13 @@ class DesignController extends Controller
     public function destroy($id)
     {
         $item = $this->model::findOrFail($id);
+        unlink( public_path('/') . $item->img);
+        $design_sizes = DesignSize::where('design_id',$item->id)->get();
+        foreach($design_sizes as $ds)
+        {
+            $ds->delete();
+        }
+        
         $item->delete();
         return response()->json([
             'status'=>'ok',

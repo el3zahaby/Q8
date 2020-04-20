@@ -20,7 +20,7 @@ class Design extends Model
     }
     public function dsizes()
     {
-        return $this->belongsToMany('App\Dsize');
+        return $this->belongsToMany('App\Dsize' );
     }
 
     public function sizes()
@@ -39,7 +39,36 @@ class Design extends Model
     }
 
     public function design_sizes(){
-        return $this->hasMany(DesignSize::class);
+        return $this->hasMany(DesignSize::class );
+    }
+
+    public function has_dsize($dsize_id)
+    {
+        $result = false;
+        $dsizes = $this->design_sizes;
+
+        foreach($dsizes as $dsize)
+        {
+            if($dsize->dsize->id == $dsize_id)
+            {
+                $result = true;
+                break;
+            }
+        }
+        return $result;
+    }
+    public function dsize_price($dsize_id)
+    {
+        $result = false;
+        $dsizes = $this->design_sizes;
+        foreach($dsizes as $dsize)
+        {
+            if($dsize->dsize->id == $dsize_id)
+            {
+                return $dsize->designer_price;
+            }
+        }
+        return $result;
     }
 
     public static function boot(){
