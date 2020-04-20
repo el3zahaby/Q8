@@ -76,6 +76,7 @@ class DesignController extends Controller
         $store->accepting = $request->accepting;
         $store->img = $img;
         $store->save();
+        
 
         foreach($request->price as $key => $price)
         {
@@ -88,8 +89,9 @@ class DesignController extends Controller
                 $dsignsize->save();
             }
         }
+        
 
-        if ($store) return response()->json([
+        if ($store && $dsignsize) return response()->json([
             'status'=>'ok',
             'msg'=>'Added'.$store->id
         ],200);

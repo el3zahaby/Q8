@@ -104,11 +104,11 @@
                     </div>
                     <div class="form-group EN">
                         <label>Description EN :</label>
-                        <textarea name="desc_en" class="form-control" autocapitalize="on" required></textarea>
+                        <textarea name="desc_en" class="form-control" autocapitalize="on" ></textarea>
                     </div>
                     <div class="form-group AR">
                         <label>Description AR :</label>
-                        <textarea name="desc_ar" class="form-control" autocapitalize="on" required></textarea>
+                        <textarea name="desc_ar" class="form-control" autocapitalize="on"></textarea>
                     </div>
 
                     <div class="form-group ">
