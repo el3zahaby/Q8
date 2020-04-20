@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\User;
+use App\Design;
+use App\Dsize;
+use App\DesignSize;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -24,7 +26,8 @@ class DesignController extends Controller
     public function index()
     {
         $items = $this->model::orderBy('id','desc')->get();
-        return view($this->view.'index',compact('items'));
+        $sizes = Dsize::get();
+        return view($this->view.'index',compact('items','sizes'));
     }
 
     /**
@@ -47,12 +50,11 @@ class DesignController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|max:255',
-            'price' => 'required',
+            'name_en' => 'required|max:255',
+            'name_ar' => 'required|max:255',
             'img' => 'required|image',
             'user_id' => 'required',
         ]);
-
 
         if($request->hasFile('img')) {
             $file =  $request->img;
@@ -63,9 +65,27 @@ class DesignController extends Controller
             $img = '/storage/uploads/designs/'.$filename;
         }
 
-        $store = $this->model::create(
-            $request->except(['img'])+ ['img'=>$img]
-        );
+        $store = new $this->model;
+        $store->name_en = $request->name_en;
+        $store->name_ar = $request->name_ar;
+        $store->desc_en = $request->desc_en;
+        $store->desc_ar = $request->desc_ar;
+        $store->user_id = $request->user_id;
+        $store->accepting = $request->accepting;
+        $store->img = $img;
+        $store->save();
+
+        foreach($request->price as $key => $price)
+        {
+            if($price != null)
+            {
+                $dsignsize = new DesignSize;
+                $dsignsize->design_id = $store->id;
+                $dsignsize->dsize_id = $key;
+                $dsignsize->designer_price = $price ;
+                $dsignsize->save();
+            }
+        }
 
         if ($store) return response()->json([
             'status'=>'ok',
