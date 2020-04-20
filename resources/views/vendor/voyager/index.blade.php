@@ -50,7 +50,7 @@
                         $total_data = StatisticController::calcTotalOfCartItemsForAllUsers($all_cart_items);
                         $total = $total_data['total'];
                         $count = $total_data['count'];
-                        $designs_count = Design::where('accepting', 1)->where('removed', false)->count()
+                        $designs_count = Design::where('accepting', 1)->count()
                     @endphp
                     <div class="overview-body">
                         <div class="row mx-auto p-3">

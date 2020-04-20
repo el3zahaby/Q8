@@ -8,18 +8,17 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Slider;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 use Illuminate\Support\Str;
+use function GuzzleHttp\Promise\all;
 
 class PageController extends Controller
 {
     protected $view  = 'dash.pages.';
     protected $model = 'App\Page';
-
-    public function __construct(){
-//        $this->view = ;
-    }
 
     /**
      * Display a listing of the resource.
@@ -28,6 +27,7 @@ class PageController extends Controller
      */
     public function index()
     {
+
         $items = $this->model::orderBy('id','desc')->get();
         $table = $this->model::where('slug', 'not like', "%-ar%")->orderBy('id','desc')->get();
         return view($this->view.'index',compact('items','table'));
@@ -52,13 +52,17 @@ class PageController extends Controller
      */
     public function store(Request $request)
     {
+//        dd($request->all());
+
         $this->validate($request, [
             'title_en' => 'required',
-//            'title_ar' => 'required',
+            'title_ar' => 'required',
             'excerpt' => 'required',
+            'body_ar' => 'required',
+            'body_en' => 'required',
             'meta_keywords' => 'required',
             'meta_desc' => 'required',
-            'slug' => 'required',
+//            'slug' => 'required',
             'status' => 'required',
         ]);
 

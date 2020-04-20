@@ -10,29 +10,29 @@ class DesignController extends Controller
 {
     public function show()
     {
-        return Design::where('accepting', 1)->where('removed', false)->inRandomOrder()->paginate(8);
+        return Design::where('accepting', 1)->inRandomOrder()->paginate(8);
     }
 
     public function showBestSaller()
     {
-        return Design::where('accepting', 1)->where('removed', false)->orderBy('created_at', 'desc')->take(4)->get();
+        return Design::where('accepting', 1)->orderBy('created_at', 'desc')->take(4)->get();
     }
 
     public function showWithId($id)
     {
-        return Design::where('accepting', 1)->where('removed', false)->where('id', $id)->with('colors')->with('dsizes')->first();
+        return Design::where('accepting', 1)->where('id', $id)->with('colors')->with('dsizes')->first();
     }
 
     public function showByDesignerid()
     {
         $designer_id = auth()->id();
-        return Design::where('designer_id', $designer_id)->where('removed', false)->get();
+        return Design::where('user_id', $designer_id)->get();
     }
 
     public function latestDesignsByDesignerid()
     {
         $designer_id = auth()->id();
-        return Design::where('designer_id', $designer_id)->where('removed', false)->orderBy('created_at', 'desc')->take(4)->get();
+        return Design::where('user_id', $designer_id)->orderBy('created_at', 'desc')->take(4)->get();
     }
 
     public function getByRandId($id)

@@ -230,8 +230,13 @@
         });
 
         $('.form-edit,.form-store').submit(function (event) {
-            var _this = $(this);
             event.preventDefault();
+
+            for ( instance in CKEDITOR.instances ) {
+                CKEDITOR.instances[instance].updateElement();
+            }
+
+            var _this = $(this);
             console.log(_this.serialize());
             var formData = new FormData(this);
 
@@ -255,9 +260,12 @@
                 error: function (data) {
                     if (data.status = 422) {
                         var i = 0
+                        $('.helper-text').remove();
+                        $('.modal').animate({ scrollTop: 0 }, 'slow');
+
                         $.each(data.responseJSON.errors, function (key, value) {
                             i = i++;
-                            $('[name="' + key + '"]').show().addClass('invalid error');
+                            $('[name="' + key + '"]').addClass('invalid error').parent().show();
                             $('[name="' + key + '"]').after(
                                 "<small class='helper-text text-danger'>" + value +
                                 "</small>")

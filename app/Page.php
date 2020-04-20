@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class Page extends Model
 {
 //    protected $fillable = ['body'];
-    protected $guarded = ['body'];
+    protected $guarded = [];
 
     public function getBaseSlugAttribute(){
         return explode('-', $this->slug)[0];

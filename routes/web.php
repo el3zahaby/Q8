@@ -13,9 +13,13 @@ use Illuminate\Http\Request;
 //----------End Tests----------//
 Route::group(['prefix' => '/api'], function () {
 
-//    Route::get('/user', function (Request $request) {
-//        return $request->user();
-//    });
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
+
+
+    Route::post('/v1/lang/{lang}', 'HomeController@setLang');
+
 
     Route::post('/v1/login', 'Auth\LoginController@login');
     Route::post('/v1/logout', 'Auth\LoginController@logout');

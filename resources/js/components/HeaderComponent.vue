@@ -138,7 +138,9 @@
                 this.$i18n.locale = this.selectedLang;
                 Cookies.set('locale', this.selectedLang, { expires: 3651 });
                 document.getElementsByTagName("html")[0].lang = this.selectedLang.toLowerCase();
-                location.reload()
+                axios.post('/api/v1/lang/' + this.selectedLang).then(function (response) {
+                    location.reload();
+                });
             },
             search: function () {
                 let query = $('#search-component').val();

@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Slider;
+use Illuminate\Support\Facades\App;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 use Illuminate\Support\Str;
@@ -104,6 +105,12 @@ class PageController extends Controller
      */
     public function show($slug)
     {
-        return ($this->model::where('status','ACTIVE')->where('slug', $slug.'-en')->firstOrFail());
+
+        $page =  ($this->model::where('status','ACTIVE')->where('slug', $slug.'-en')->firstOrFail());
+
+        if (App::isLocale('ar')) {
+            return $page->ar();
+        }
+        return $page;
     }
 }
