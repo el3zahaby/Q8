@@ -33,7 +33,7 @@
 
 <body>
 
-    <div class="container-scroller" id="app">
+    <div class="container-scroller" id="ap/images/logo.svgp">
         @include('layouts.header')
         <div class="container-fluid page-body-wrapper">
             @include('layouts.sidebar')
