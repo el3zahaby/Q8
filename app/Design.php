@@ -71,6 +71,12 @@ class Design extends Model
         return $result;
     }
 
+
+    public function total($size){
+        return ($this->has_dsize($size->id) ? $this->dsize_price($size->id) : 0) + $size->print_price;
+    }
+
+
     public static function boot(){
         parent::boot();
 
