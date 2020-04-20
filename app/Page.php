@@ -13,7 +13,7 @@ class Page extends Model
     protected $guarded = [];
 
     public function getBaseSlugAttribute(){
-        return explode('-', $this->slug)[0];
+        return substr($this->slug, 0, -3);
     }
 
     public function ar($slug = null)
@@ -21,7 +21,7 @@ class Page extends Model
         // return $slug;
         if ($slug != null) {
             // $slug = explode('-', $slug)[0];
-            $slug = substr($slug, 0, -3);;
+            $slug = substr($slug, 0, -3);
         }else{
             $slug = substr($this->slug, 0, -3);
         }
