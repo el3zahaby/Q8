@@ -97,7 +97,7 @@
                             <h5 class="panel-title">Sizes :</h5>
                         </div>
 
-                        <div class="panel-body AR" style="padding-top:0;">
+                        <div class="panel-body" style="padding-top:0;">
                             <table class="table">
                                 <thead>
                                     <th>size :</th>

@@ -342,13 +342,12 @@
 
         $('.size_check').on('change', function () {
             if ($(this).is(':checked')) {
-                // console.log( "price_" + $(this).attr('name') );
                 $(".price_" + $(this).attr('name')).attr('required', '');
             } else {
                 $('.price_' + $(this).attr('name')).val('');
                 $(".price_" + $(this).attr('name')).removeAttr('required');
             }
         });
-
+        
     </script>
 @endpush

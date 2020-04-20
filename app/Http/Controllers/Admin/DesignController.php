@@ -55,7 +55,8 @@ class DesignController extends Controller
             'name_ar' => 'required|max:255',
             'img' => 'required|image',
             'user_id' => 'required',
-            'price' => 'check_array:1' // the array required and min 1 item
+            'price' => 'check_array:1', // the array required and min 1 item
+            'price.*' => 'min:1'
         ]);
 
         if($request->hasFile('img')) {
@@ -137,7 +138,8 @@ class DesignController extends Controller
             'name_en' => 'required|max:255',
             'name_ar' => 'required|max:255',
             'user_id' => 'required',
-            'price' => 'check_array:1' // the array required and min 1 item
+            'price' => 'check_array:1', // the array required and min 1 item
+            'price.*' => 'min:1'
         ]);
 
         $img = $item->img;
