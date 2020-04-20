@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 
-//----------Use To Save 1Session For Cart----------//
+//----------Use To Save Session For Cart----------//
 
 use Illuminate\Http\Request;
 

@@ -6,7 +6,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Default 1Session Driver
+    | Default Session Driver
     |--------------------------------------------------------------------------
     |
     | This option controls the default session "driver" that will be used on
@@ -22,7 +22,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | 1Session Lifetime
+    | Session Lifetime
     |--------------------------------------------------------------------------
     |
     | Here you may specify the number of minutes that you wish the session
@@ -37,12 +37,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | 1Session Encryption
+    | Session Encryption
     |--------------------------------------------------------------------------
     |
     | This option allows you to easily specify that all of your session data
     | should be encrypted before it is stored. All encryption will be run
-    | automatically by Laravel and you can use the 1Session like normal.
+    | automatically by Laravel and you can use the Session like normal.
     |
     */
 
@@ -50,7 +50,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | 1Session File Location
+    | Session File Location
     |--------------------------------------------------------------------------
     |
     | When using the native session driver, we need a location where session
@@ -63,7 +63,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | 1Session Database Connection
+    | Session Database Connection
     |--------------------------------------------------------------------------
     |
     | When using the "database" or "redis" session drivers, you may specify a
@@ -76,7 +76,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | 1Session Database Table
+    | Session Database Table
     |--------------------------------------------------------------------------
     |
     | When using the "database" session driver, you may specify the table we
@@ -89,7 +89,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | 1Session Cache Store
+    | Session Cache Store
     |--------------------------------------------------------------------------
     |
     | When using the "apc", "memcached", or "dynamodb" session drivers you may
@@ -102,7 +102,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | 1Session Sweeping Lottery
+    | Session Sweeping Lottery
     |--------------------------------------------------------------------------
     |
     | Some session drivers must manually sweep their storage location to get
@@ -115,7 +115,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | 1Session Cookie Name
+    | Session Cookie Name
     |--------------------------------------------------------------------------
     |
     | Here you may change the name of the cookie used to identify a session
@@ -131,7 +131,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | 1Session Cookie Path
+    | Session Cookie Path
     |--------------------------------------------------------------------------
     |
     | The session cookie path determines the path for which the cookie will
@@ -144,7 +144,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | 1Session Cookie Domain
+    | Session Cookie Domain
     |--------------------------------------------------------------------------
     |
     | Here you may change the domain of the cookie used to identify a session
