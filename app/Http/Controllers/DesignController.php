@@ -29,6 +29,12 @@ class DesignController extends Controller
         return Design::where('user_id', $designer_id)->get();
     }
 
+    public function designSizes()
+    {
+        $sizes = \App\Dsize::get()->toArray();
+        return $sizes;
+    }
+
     public function latestDesignsByDesignerid()
     {
         $designer_id = auth()->id();
@@ -42,15 +48,34 @@ class DesignController extends Controller
 
     public function creat(Request $request)
     {
+
+        // dd($request->all());
         $designer_id = auth()->id();
         $design = new Design();
-        $design->random_name = Str::random(10);
-        $design->designer_id = $designer_id;
+        $design->user_id = auth()->user()->id;
         $design->img = $request->img;
-        $design->price = $request->price;
-        $design->name = $request->name;
+        // $design->price = $request->price;
+        $design->name_en = $request->name_en;
+        $design->name_ar = $request->name_ar;
+        $design->desc_en = $request->desc_en;
+        $design->desc_ar = $request->desc_ar;
+        $design->accepting = 0;
 
         $design->save();
+
+        foreach($request->dsizes as $key=>$dsize)
+        {
+            if($dsize != null)
+            {
+                $size = new \App\DesignSize;
+                $size->design_id = $design->id;
+                $size->dsize_id = $key;
+                $size->designer_price = $dsize;
+                $size->save();
+            }
+        }
+
+        
 
         return $this->show();
 

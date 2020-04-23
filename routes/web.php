@@ -30,6 +30,7 @@ Route::group(['prefix' => '/api'], function () {
 
     //Design_Route in site
     Route::get('/v1/design', 'DesignController@show');
+    Route::get('/v1/dsizes', 'DesignController@designSizes');
     Route::get('/v1/design-bestSaller', 'DesignController@showBestSaller');
     Route::get('/v1/design/{id}', 'DesignController@showWithId');
     Route::get('/v1/get-by-rand-id/{id}', 'DesignController@getByRandId');
