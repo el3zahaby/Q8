@@ -270,7 +270,6 @@
         created() {
             axios.get("/api/v1/designer-designs").then(response => {
                 this.allDesigns = response.data;
-                console.log( "all designs => " + this.allDesigns);
             }).catch(function (error) {
                 console.log(error);
             });

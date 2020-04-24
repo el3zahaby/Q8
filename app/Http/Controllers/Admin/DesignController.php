@@ -56,7 +56,6 @@ class DesignController extends Controller
             'img' => 'required|image',
             'user_id' => 'required',
             'price' => 'check_array:1', // the array required and min 1 item
-            'price.*' => 'min:1'
         ]);
 
         if($request->hasFile('img')) {
@@ -131,6 +130,7 @@ class DesignController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // return $request->all();
         $item = $this->model::find($id);
 
         $this->validate($request, [
@@ -158,7 +158,7 @@ class DesignController extends Controller
         $item->desc_en = $request->desc_en;
         $item->desc_ar = $request->desc_ar;
         $item->user_id = $request->user_id;
-        $item->accepting = $request->accepting ?? $item->accepting;
+        $item->accepting = $request->accepting ?? 0 ;
         $item->img = $img;
         $item->save();
 

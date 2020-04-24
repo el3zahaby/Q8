@@ -219,7 +219,7 @@
 
                         </div>
 
-                        {!! Form::select('user_id', DB::table('users')->pluck('email', 'id'), null,['class'
+                        {!! Form::select('user_id', DB::table('users')->pluck('email', 'id'), $item->user->id ,['class'
                         =>'form-control']) !!}
                         <div class="form-group ">
                             <label>Sizes</label>
@@ -312,6 +312,7 @@
                     });
                 },
                 error: function (data) {
+                    console.log(data.responseJSON.errors);
                     if (data.status = 422) {
                         var i = 0
                         $.each(data.responseJSON.errors, function (key, value) {

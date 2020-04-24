@@ -26,7 +26,7 @@ class DesignController extends Controller
     public function showByDesignerid()
     {
         $designer_id = auth()->id();
-        return Design::where('user_id', $designer_id)->with('design_sizes','dsizes')->get();
+        return Design::where('user_id' , $designer_id)->with('design_sizes','dsizes')->get();
     }
 
     public function designSizes()
@@ -38,7 +38,7 @@ class DesignController extends Controller
     public function latestDesignsByDesignerid()
     {
         $designer_id = auth()->id();
-        return Design::where('user_id', $designer_id)->orderBy('created_at', 'desc')->take(4)->get();
+        return Design::where('user_id', $designer_id)->orderBy('created_at', 'desc')->take(4)->with('design_sizes','dsizes')->get();
     }
 
     public function getByRandId($id)

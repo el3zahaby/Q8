@@ -49,15 +49,21 @@
                         <tbody>
                         <tr v-for="design in  this.$root.latestDesigns" :key="design.id">
                             <td class="product-thumbnail">
-                                <a href="#"><img class="img-fluid" :src="'storage/'+design.img" alt="product thumbnail"></a>
+                                <a href="#"><img class="img-fluid" :src="design.img" alt="product thumbnail"></a>
                             </td>
                             <td class="product-name">
-                                <a href="#" class="text-decoration-none">{{design.name}}</a>
+                                <a href="#" class="text-decoration-none">{{design.name_en}}</a>
                             </td>
                             <td class="product-name">
-                                <a href="#" class="text-decoration-none">{{design.random_name}}</a>
+                                <a href="#" class="text-decoration-none">{{design.id}}</a>
                             </td>
-                            <td class="product-price"><span class="amount">${{ design.price }}</span></td>
+                            <td class="product-price">
+                                <ul >
+                                        <li v-for="index in design.dsizes.length " >
+                                            {{ design.dsizes[index-1].width }} x {{ design.dsizes[index-1].length }} => {{ design.design_sizes[index-1].designer_price + design.dsizes[index-1].print_price }}
+                                        </li>
+                                    </ul>
+                            </td>
                             <!-- <td class="product-id">
                                 {{design.id}}
                             </td> -->
@@ -95,4 +101,9 @@
 </script>
 
 <style lang="scss" scoped>
+    ul{
+        list-style: none;
+        padding: 0px;
+    }
+
 </style>
