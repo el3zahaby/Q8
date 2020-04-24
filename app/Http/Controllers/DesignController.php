@@ -26,7 +26,7 @@ class DesignController extends Controller
     public function showByDesignerid()
     {
         $designer_id = auth()->id();
-        return Design::where('user_id', $designer_id)->get();
+        return Design::where('user_id', $designer_id)->with('design_sizes','dsizes')->get();
     }
 
     public function designSizes()
@@ -48,6 +48,11 @@ class DesignController extends Controller
 
     public function creat(Request $request)
     {
+        $this->validate($request,[
+            'img' => 'required',
+            'name_en' => 'required',
+            'dsizes' => 'check_array:1',
+        ]);
 
         // dd($request->all());
         $designer_id = auth()->id();
@@ -87,8 +92,9 @@ class DesignController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         $imageName = time() . '.' . request()->image->getClientOriginalExtension();
-        $url = request()->image->move(storage_path('app\public\designs'), $imageName);
-        return 'designs\\' . $imageName;
+        $directory = storage_path('app/public/uploads/designs');
+        $url = request()->image->move($directory, $imageName);
+        return '/storage/uploads/designs/' . $imageName;
     }
 
     public function delete($id)

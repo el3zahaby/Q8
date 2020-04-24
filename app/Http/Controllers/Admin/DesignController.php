@@ -63,7 +63,6 @@ class DesignController extends Controller
             $file =  $request->img;
             $filename = time().'.'.$file->getClientOriginalExtension();
             $directory = storage_path('app/public/uploads/designs');
-
             $file->move($directory, $filename);
             $img = '/storage/uploads/designs/'.$filename;
         }

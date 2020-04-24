@@ -4467,6 +4467,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4517,6 +4526,8 @@ __webpack_require__.r(__webpack_exports__);
           _this.imagePath = null;
 
           _root.updateDesigns();
+
+          $('.modal').modal('toggle');
         });
       });
     },
@@ -4571,11 +4582,12 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this4 = this;
 
-    // axios.get("/api/v1/designer-designs").then(response => {
-    //     this.allDesigns = response.data;
-    // }).catch(function (error) {
-    //     console.log(error);
-    // });
+    axios.get("/api/v1/designer-designs").then(function (response) {
+      _this4.allDesigns = response.data;
+      console.log("all designs => " + _this4.allDesigns);
+    })["catch"](function (error) {
+      console.log(error);
+    });
     axios.get("/api/v1/dsizes").then(function (res) {
       // console.log("after allsizes => " + this.allSizes);
       _this4.allSizes = res.data; // console.log("before allsizes => " + this.allSizes[0].length);
@@ -9851,7 +9863,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".modal .row > *[data-v-1fa8114e] {\n  margin: 0px;\n  padding: 0px;\n}\n@media (min-width: 576px) {\n.modal-dialog[data-v-1fa8114e] {\n    max-width: 800px;\n}\n}", ""]);
+exports.push([module.i, ".modal .row > *[data-v-1fa8114e] {\n  margin: 0px;\n  padding: 0px;\n}\n@media (min-width: 576px) {\n.modal-dialog[data-v-1fa8114e] {\n    max-width: 800px;\n}\n}\nul[data-v-1fa8114e] {\n  list-style: none;\n  padding: 0px;\n}", ""]);
 
 // exports
 
@@ -50616,16 +50628,13 @@ var render = function() {
             _vm._v(" "),
             _c(
               "tbody",
-              _vm._l(this.$root.allDesigns, function(design) {
+              _vm._l(_vm.allDesigns, function(design) {
                 return _c("tr", { key: design.id }, [
                   _c("td", { staticClass: "product-thumbnail" }, [
                     _c("a", { attrs: { href: "#" } }, [
                       _c("img", {
                         staticClass: "img-fluid",
-                        attrs: {
-                          src: "/storage/" + design.img,
-                          alt: "product thumbnail"
-                        }
+                        attrs: { src: design.img, alt: "product thumbnail" }
                       })
                     ])
                   ]),
@@ -50637,7 +50646,7 @@ var render = function() {
                         staticClass: "text-decoration-none",
                         attrs: { href: "#" }
                       },
-                      [_vm._v(_vm._s(design.name))]
+                      [_vm._v(_vm._s(design.name_en))]
                     )
                   ]),
                   _vm._v(" "),
@@ -50648,14 +50657,31 @@ var render = function() {
                         staticClass: "text-decoration-none",
                         attrs: { href: "#" }
                       },
-                      [_vm._v(_vm._s(design.random_name))]
+                      [_vm._v(_vm._s(design.id))]
                     )
                   ]),
                   _vm._v(" "),
                   _c("td", { staticClass: "product-price" }, [
-                    _c("span", { staticClass: "amount" }, [
-                      _vm._v("$" + _vm._s(design.price))
-                    ])
+                    _c(
+                      "ul",
+                      _vm._l(design.dsizes.length, function(index) {
+                        return _c("li", [
+                          _vm._v(
+                            "\n                                        " +
+                              _vm._s(design.dsizes[index - 1].width) +
+                              " x " +
+                              _vm._s(design.dsizes[index - 1].length) +
+                              " => " +
+                              _vm._s(
+                                design.design_sizes[index - 1].designer_price +
+                                  design.dsizes[index - 1].print_price
+                              ) +
+                              "\n                                    "
+                          )
+                        ])
+                      }),
+                      0
+                    )
                   ]),
                   _vm._v(" "),
                   _c(
@@ -50891,71 +50917,75 @@ var render = function() {
                             _vm._m(2),
                             _vm._v(" "),
                             _vm._l(_vm.allSizes, function(size) {
-                              return _c("div", { staticClass: "row" }, [
-                                _c("div", { staticClass: "col-2" }, [
-                                  _c("input", {
-                                    attrs: { type: "checkbox" },
-                                    on: {
-                                      change: function($event) {
-                                        return _vm.makeRequired(size.id)
-                                      }
-                                    }
-                                  })
-                                ]),
-                                _vm._v(" "),
-                                _c("div", { staticClass: "col-3" }, [
-                                  _vm._v(
-                                    " " +
-                                      _vm._s(size.width) +
-                                      " x " +
-                                      _vm._s(size.length) +
-                                      " "
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("div", { staticClass: "col-2" }, [
-                                  _vm._v(" " + _vm._s(size.print_price))
-                                ]),
-                                _vm._v(" "),
-                                _c("div", { staticClass: "col-3" }, [
-                                  _c("input", {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.sizesPrice[size.id],
-                                        expression: "sizesPrice[size.id]"
-                                      }
-                                    ],
-                                    staticClass: "form-control",
-                                    class: "size_" + size.id,
-                                    attrs: { type: "number", min: "0" },
-                                    domProps: {
-                                      value: _vm.sizesPrice[size.id]
-                                    },
-                                    on: {
-                                      input: function($event) {
-                                        if ($event.target.composing) {
-                                          return
+                              return _c(
+                                "div",
+                                { key: size.id, staticClass: "row" },
+                                [
+                                  _c("div", { staticClass: "col-2" }, [
+                                    _c("input", {
+                                      attrs: { type: "checkbox" },
+                                      on: {
+                                        change: function($event) {
+                                          return _vm.makeRequired(size.id)
                                         }
-                                        _vm.$set(
-                                          _vm.sizesPrice,
-                                          size.id,
-                                          $event.target.value
-                                        )
                                       }
-                                    }
-                                  })
-                                ]),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  { staticClass: "col-2 text-center" },
-                                  [_vm._v(_vm._s(size.print_price))]
-                                ),
-                                _vm._v(" "),
-                                _vm._m(3, true)
-                              ])
+                                    })
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "col-3" }, [
+                                    _vm._v(
+                                      " " +
+                                        _vm._s(size.width) +
+                                        " x " +
+                                        _vm._s(size.length) +
+                                        " "
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "col-2" }, [
+                                    _vm._v(" " + _vm._s(size.print_price))
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "col-3" }, [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.sizesPrice[size.id],
+                                          expression: "sizesPrice[size.id]"
+                                        }
+                                      ],
+                                      staticClass: "form-control",
+                                      class: "size_" + size.id,
+                                      attrs: { type: "number", min: "0" },
+                                      domProps: {
+                                        value: _vm.sizesPrice[size.id]
+                                      },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            _vm.sizesPrice,
+                                            size.id,
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    })
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "col-2 text-center" },
+                                    [_vm._v(_vm._s(size.print_price))]
+                                  ),
+                                  _vm._v(" "),
+                                  _vm._m(3, true)
+                                ]
+                              )
                             })
                           ],
                           2

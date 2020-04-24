@@ -23,18 +23,27 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="design in this.$root.allDesigns" :key="design.id">
+                            <tr v-for="design in allDesigns" :key="design.id">
                                 <td class="product-thumbnail">
-                                    <a href="#"><img class="img-fluid" :src="'/storage/'+design.img"
+                                    <a href="#"><img class="img-fluid" :src="design.img"
                                             alt="product thumbnail"></a>
                                 </td>
                                 <td class="product-name">
-                                    <a href="#" class="text-decoration-none">{{ design.name }}</a>
+                                    <a href="#" class="text-decoration-none">{{ design.name_en }}</a>
                                 </td>
                                 <td class="product-name">
-                                    <a href="#" class="text-decoration-none">{{ design.random_name }}</a>
+                                    <a href="#" class="text-decoration-none">{{ design.id }}</a>
                                 </td>
-                                <td class="product-price"><span class="amount">${{ design.price }}</span></td>
+                                <td class="product-price">
+                                    <!-- <span class="amount">$</span> -->
+                                    <!-- {{ design }} -->
+                                    <ul >
+                                        <!-- <li v-for="size in design.dsizes" >{{ size.width }} x {{size.length}} => </li> -->
+                                        <li v-for="index in design.dsizes.length " >
+                                            {{ design.dsizes[index-1].width }} x {{ design.dsizes[index-1].length }} => {{ design.design_sizes[index-1].designer_price + design.dsizes[index-1].print_price }}
+                                        </li>
+                                    </ul>
+                                    </td>
                                 <!-- <td class="product-id">
                                 {{ design.id }}
                             </td> -->
@@ -108,7 +117,7 @@
                                             <div class="col-2 text-center">total :</div>
                                             <div class="col-12"><hr></div>
                                         </div>
-                                        <div class="row" v-for="size in allSizes">
+                                        <div class="row" v-for="size in allSizes" :key="size.id" >
                                             <div class="col-2" >
                                                 <input type="checkbox" v-on:change="makeRequired(size.id)" />
                                             </div>
@@ -201,6 +210,8 @@
                             _this.designDesc = null;
                             _this.imagePath = null;
                             _root.updateDesigns();
+
+                            $('.modal').modal('toggle');
                         });
                     });
             },
@@ -257,11 +268,13 @@
 
         },
         created() {
-            // axios.get("/api/v1/designer-designs").then(response => {
-            //     this.allDesigns = response.data;
-            // }).catch(function (error) {
-            //     console.log(error);
-            // });
+            axios.get("/api/v1/designer-designs").then(response => {
+                this.allDesigns = response.data;
+                console.log( "all designs => " + this.allDesigns);
+            }).catch(function (error) {
+                console.log(error);
+            });
+
             axios.get("/api/v1/dsizes")
             .then(res => {
                 // console.log("after allsizes => " + this.allSizes);
@@ -269,6 +282,8 @@
                 // console.log("before allsizes => " + this.allSizes[0].length);
             })
             .catch(err => console.log(err));
+
+            
         }
     };
 
@@ -285,5 +300,9 @@
         {
             max-width: 800px;
         }
+    }
+    ul{
+        list-style: none;
+        padding: 0px;
     }
 </style>
