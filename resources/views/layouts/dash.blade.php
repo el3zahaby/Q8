@@ -21,6 +21,11 @@
 
     <link rel="stylesheet" href="{{ url('dash/css/app.css') }}">
 
+    <style>
+        select.form-control {
+            padding: 1px 1px 1px 7px;
+        }
+    </style>
     @stack('style')
     @stack('css')
 
@@ -28,7 +33,7 @@
 
 <body>
 
-    <div class="container-scroller" id="app">
+    <div class="container-scroller" id="ap/images/logo.svgp">
         @include('layouts.header')
         <div class="container-fluid page-body-wrapper">
             @include('layouts.sidebar')
@@ -39,6 +44,9 @@
                             {!!  session('status') !!}
                         </div>
                     @endif
+                        @if($errors->any())
+                            {!!  implode('', $errors->all('<div  class="alert alert-danger">:message</div>')) !!}
+                        @endif
                     @yield('content')
                 </div>
                 @include('layouts.footer')

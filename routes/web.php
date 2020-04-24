@@ -13,9 +13,13 @@ use Illuminate\Http\Request;
 //----------End Tests----------//
 Route::group(['prefix' => '/api'], function () {
 
-//    Route::get('/user', function (Request $request) {
-//        return $request->user();
-//    });
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
+
+
+    Route::post('/v1/lang/{lang}', 'HomeController@setLang');
+
 
     Route::post('/v1/login', 'Auth\LoginController@login');
     Route::post('/v1/logout', 'Auth\LoginController@logout');
@@ -26,6 +30,7 @@ Route::group(['prefix' => '/api'], function () {
 
     //Design_Route in site
     Route::get('/v1/design', 'DesignController@show');
+    Route::get('/v1/dsizes', 'DesignController@designSizes');
     Route::get('/v1/design-bestSaller', 'DesignController@showBestSaller');
     Route::get('/v1/design/{id}', 'DesignController@showWithId');
     Route::get('/v1/get-by-rand-id/{id}', 'DesignController@getByRandId');
@@ -60,6 +65,8 @@ Route::group(['prefix' => '/api'], function () {
     Route::post('/v1/add-to-order', 'OrderController@submitOrder');
     Route::get('/v1/delete-order/{id}', 'OrderController@delete');
     Route::post('/v1/updateorder/{id}', 'OrderController@update');
+
+    Route::resource('/v1/page', 'PageController');
 
 
     //Slider_Route
@@ -103,18 +110,43 @@ Route::post('/file/{path}/{inputName}', 'FileController@store')->name('file.stor
 Route::group(['prefix' => 'admin','as'=>'admin.'], function () {
     Route::get('/login', 'Admin\HomeController@login')->name('login');
 
-    Route::group(['middleware'=>['admin']], function () {
+    Route::group(['middleware'=>['admin','trackV']], function () {
 
 
         Route::get('/', 'Admin\HomeController@index');
+
+
+        //users
+        Route::group(['prefix' => 'users','as'=>'users.'], function () {
+            Route::get('designers', 'Admin\UserController@designers')->name('designers');
+            Route::get('admins', 'Admin\UserController@admins')->name('admins');
+        });
         Route::resource('users', 'Admin\UserController');
+
+
+        // designs
+        Route::resource('designs', 'Admin\DesignController');
+
+        // T-shirt
         Route::resource('dsizes', 'Admin\DsizeController');
         Route::resource('colors', 'Admin\ColorController');
         Route::resource('tsizes', 'Admin\TsizeController');
+        Route::resource('tshirts', 'Admin\TshirtController');
+
+        //order
+        Route::resource('orderstatus', 'Admin\OrderStatusController');
+
+        //page
+        Route::resource('pages', 'Admin\PageController');
 
 
+        //site
         Route::get('/settings', 'Admin\SettingController@index')->name('settings');
         Route::post('/settings', 'Admin\SettingController@store')->name('settings.store');
+        Route::resource('slider', 'Admin\SliderController');
+
+
+        Route::get('/filemanger', 'Admin\HomeController@lfm')->name('lfm');
 
 
         Route::post('SuperUser',function (\Illuminate\Http\Request $request){
@@ -146,4 +178,4 @@ Route::get('/dashboard{any}', function () {
 Route::get('logout',  'Auth\LoginController@logout');
 Auth::routes();
 
-Route::get('/{any}', 'HomeController@index')->where('any', '.*')->name('home');
+Route::get('/{any}', 'HomeController@index')->middleware(['trackV'])->where('any', '.*')->name('home');

@@ -26,7 +26,14 @@
         </div>
 
         <footer-component>
-            <router-link to="/terms_and_conditions" class="text-decoration-none">Privacy Policy</router-link>
+            
+            @foreach(\App\Page::where('status','ACTIVE')->where('slug', 'not like', "%-ar%")->orderBy('id','desc')->get() as $page)
+                @if($_COOKIE['locale'] =='ar' or $_COOKIE['locale'] =='AR') @php($page = $page->ar()) @endif
+            <li>
+
+                <router-link to="{{ $page->base_slug }}" class="text-decoration-none">{{$page->title}}</router-link>
+            </li>
+            @endforeach
         </footer-component>
     </div>
 @endsection

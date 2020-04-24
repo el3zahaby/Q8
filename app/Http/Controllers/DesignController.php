@@ -10,29 +10,35 @@ class DesignController extends Controller
 {
     public function show()
     {
-        return Design::where('accepting', 1)->where('removed', false)->inRandomOrder()->paginate(8);
+        return Design::where('accepting', 1)->inRandomOrder()->paginate(8);
     }
 
     public function showBestSaller()
     {
-        return Design::where('accepting', 1)->where('removed', false)->orderBy('created_at', 'desc')->take(4)->get();
+        return Design::where('accepting', 1)->orderBy('created_at', 'desc')->take(4)->get();
     }
 
     public function showWithId($id)
     {
-        return Design::where('accepting', 1)->where('removed', false)->where('id', $id)->with('colors')->with('dsizes')->first();
+        return Design::where('accepting', 1)->where('id', $id)->with('colors')->with('dsizes')->first();
     }
 
     public function showByDesignerid()
     {
         $designer_id = auth()->id();
-        return Design::where('designer_id', $designer_id)->where('removed', false)->get();
+        return Design::where('user_id' , $designer_id)->with('design_sizes','dsizes')->get();
+    }
+
+    public function designSizes()
+    {
+        $sizes = \App\Dsize::get()->toArray();
+        return $sizes;
     }
 
     public function latestDesignsByDesignerid()
     {
         $designer_id = auth()->id();
-        return Design::where('designer_id', $designer_id)->where('removed', false)->orderBy('created_at', 'desc')->take(4)->get();
+        return Design::where('user_id', $designer_id)->orderBy('created_at', 'desc')->take(4)->with('design_sizes','dsizes')->get();
     }
 
     public function getByRandId($id)
@@ -42,15 +48,39 @@ class DesignController extends Controller
 
     public function creat(Request $request)
     {
+        $this->validate($request,[
+            'img' => 'required',
+            'name_en' => 'required',
+            'dsizes' => 'check_array:1',
+        ]);
+
+        // dd($request->all());
         $designer_id = auth()->id();
         $design = new Design();
-        $design->random_name = Str::random(10);
-        $design->designer_id = $designer_id;
+        $design->user_id = auth()->user()->id;
         $design->img = $request->img;
-        $design->price = $request->price;
-        $design->name = $request->name;
+        // $design->price = $request->price;
+        $design->name_en = $request->name_en;
+        $design->name_ar = $request->name_ar;
+        $design->desc_en = $request->desc_en;
+        $design->desc_ar = $request->desc_ar;
+        $design->accepting = 0;
 
         $design->save();
+
+        foreach($request->dsizes as $key=>$dsize)
+        {
+            if($dsize != null)
+            {
+                $size = new \App\DesignSize;
+                $size->design_id = $design->id;
+                $size->dsize_id = $key;
+                $size->designer_price = $dsize;
+                $size->save();
+            }
+        }
+
+        
 
         return $this->show();
 
@@ -62,8 +92,9 @@ class DesignController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         $imageName = time() . '.' . request()->image->getClientOriginalExtension();
-        $url = request()->image->move(storage_path('app\public\designs'), $imageName);
-        return 'designs\\' . $imageName;
+        $directory = storage_path('app/public/uploads/designs');
+        $url = request()->image->move($directory, $imageName);
+        return '/storage/uploads/designs/' . $imageName;
     }
 
     public function delete($id)

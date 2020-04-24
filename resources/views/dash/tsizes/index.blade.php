@@ -19,7 +19,6 @@
                             <tr>
                                 <th> ID</th>
                                 <th> Name</th>
-                                <th> Price</th>
                                 <th> Created at</th>
 
                                 <th> Action</th>
@@ -30,7 +29,6 @@
                                 <tr>
                                     <td> {{ $item->id }} </td>
                                     <td> {{ $item->name }} </td>
-                                    <td> {{ $item->price }} </td>
 
                                     <td> {{ $item->created_at->diffForHumans() }} </td>
 
@@ -62,7 +60,7 @@
         <div class="modal-dialog modal-lg p-5" role="document">
             <form method="post" action="{{ route('admin.tsizes.store') }}"  class="modal-content form-store">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"><b>Add:</b> </h5>
+                    <h5 class="modal-title" id="exampleModalLabel"><b>Add</b> </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -74,8 +72,6 @@
                             <input name="name" type="text" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <label >Price</label>
-                            <input name="price" type="text" class="form-control" required>
                         </div>
 
                     </div>
@@ -107,8 +103,6 @@
                                 <input name="name" type="text" class="form-control" required value="{{ $item->name }}">
                             </div>
                             <div class="form-group">
-                                <label>Price</label>
-                                <input name="price" type="text" class="form-control" required value="{{ $item->price }}">
                             </div>
 
                         </div>

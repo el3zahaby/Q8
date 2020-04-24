@@ -12,7 +12,7 @@ class StatisticController extends Controller
     public function designerStatistic()
     {
         $designer_id = auth()->id();
-        $designs_num = Design::where('designer_id', $designer_id)->where('removed', false)->count();
+        $designs_num = Design::where('user_id', $designer_id)->where('accepting', 1)->count();
         $sells = $this->getCartSellingForDesigner($designer_id);
         $totalData = self::calcTotalOfCartItems($sells);
         $sales_num = $totalData['count'];
@@ -107,7 +107,7 @@ class StatisticController extends Controller
     public function getMostSells()
     {
         $cartItemsCollections = self::getCartSellingGeneral();
-        $designs = Design::where('accepting', 1)->where('removed', false)->get();
+        $designs = Design::where('accepting', 1)->get();
         foreach ($designs as $design) {
             $design['counter'] += $this->getDesignSelling($cartItemsCollections, $design);
         }

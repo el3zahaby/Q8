@@ -8,8 +8,8 @@
             style="cursor:default;position:relative;top:0px;left:0px;width:980px;height:380px;overflow:hidden;"
         >
             <div v-for="slideshow in slidesshow" :key="slideshow.id">
-                <a :href="slideshow.url">
-                    <img data-u="image" :src="'storage/' + slideshow.img"/>
+                <a :href="slideshow.url" target="_blank">
+                    <img data-u="image" :src="slideshow.img"/>
                 </a>
             </div>
         </div>
@@ -94,13 +94,14 @@
     export default {
         data() {
             return {
-                slidesshow: [{id: 1}, {id: 2}, {id: 3}]
+                slidesshow: []
             };
         },
         mounted() {
             let _this = this;
             axios.get("api/v1/slider").then(response => {
                 _this.slidesshow = response.data;
+               // console.log(_this.slidesshow)
             });
         }
     };

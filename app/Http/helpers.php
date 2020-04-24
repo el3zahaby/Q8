@@ -1,5 +1,6 @@
 <?php
 
+
 if (! function_exists('setting')) {
 
     function setting($key, $default = null){
@@ -27,6 +28,14 @@ function upayments($key= 'username'){
         return config("upayments.$key.1");
     }
 
+}
+function model_count($model,$where = null){
+    if ($model) {
+        if ($where != null){
+            return $model::where($where)->get()->count();
+        }
+        return $model::all()->count();
+    }
 }
 
 

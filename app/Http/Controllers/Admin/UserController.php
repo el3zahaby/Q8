@@ -12,12 +12,9 @@ use Illuminate\View\View;
 
 class UserController extends Controller
 {
-    protected $view  = 'dash.user-pages.users.';
+    protected $view  = 'dash.user-pages.';
     protected $model = 'App\User';
 
-    public function __construct(){
-//        $this->view = ;
-    }
 
     /**
      * Display a listing of the resource.
@@ -26,8 +23,18 @@ class UserController extends Controller
      */
     public function index()
     {
-        $items = $this->model::orderBy('id','desc')->get();
-        return view($this->view.'index',compact('items'));
+        $items = $this->model::whereHas("roles", function($q){ $q->where("name", '<>', "admin")->where('name','<>','designer'); })->orderBy('id','desc')->get();
+        return view($this->view.'users.index',compact('items'));
+    }
+
+    public function designers(){
+        $items = $this->model::whereHas("roles", function($q){ $q->where("name", "designer"); })->orderBy('id','desc')->get();
+        return view($this->view.'designers.index',compact('items'));
+    }
+
+    public function admins(){
+        $items = $this->model::whereHas("roles", function($q){ $q->where("name", "admin"); })->orderBy('id','desc')->get();
+        return view($this->view.'admins.index',compact('items'));
     }
 
     /**
@@ -53,12 +60,24 @@ class UserController extends Controller
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
             'age' => 'max:60',
+            'avatar' => 'required|image',
             'email' => 'required|email|unique:users,email',
+            'phone' => 'required|unique:users,phone',
         ]);
 
 
+        $avatar = null;
+        if($request->hasFile('avatar')) {
+            $file =  $request->avatar;
+            $filename = time().'.'.$file->getClientOriginalExtension();
+            $directory = storage_path('app/public/uploads/users');
+
+            $file->move($directory, $filename);
+            $avatar = '/storage/uploads/users/'.$filename;
+        }
+
         $store = $this->model::create(
-            $request->except(['is_designer'])+ ['password'=> bcrypt('password')]
+            $request->except(['is_designer','avatar'])+ ['password'=> bcrypt('password'),'avatar'=>$avatar]
         );
         if (isset($request->is_designer)){
             $store->assignRole('designer');
@@ -82,7 +101,7 @@ class UserController extends Controller
     public function show($id)
     {
         $item =  $this->model::findOrFail($id);
-        return view($this->view.'show',compact('item'));
+        return view($this->view.'users.show',compact('item'));
     }
 
 //    /**
@@ -112,11 +131,20 @@ class UserController extends Controller
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
             'age' => 'max:60',
-            'email' => 'required|email|unique:users,email,'.$item->id.',id'
+            'email' => 'required|email|unique:users,email,'.$item->id.',id',
+            'phone' => 'required|unique:users,phone,'.$item->id.',id',
         ]);
 
-//        dd($request->all());
-        $updated = $item->update($request->except(['is_designer']));
+        $avatar = null;
+        if($request->hasFile('avatar')) {
+            $file =  $request->avatar;
+            $filename = time().'.'.$file->getClientOriginalExtension();
+            $directory = storage_path('app/public/uploads/users');
+
+            $file->move($directory, $filename);
+            $avatar = '/storage/uploads/users/'.$filename;
+        }
+        $updated = $item->update($request->except(['is_designer','avatar'])+ ['avatar'=>$avatar]);
 
         if (isset($request->is_designer)){
             $item->assignRole('designer');

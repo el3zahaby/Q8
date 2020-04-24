@@ -13,7 +13,7 @@ return [
                 'label' => 'App Name', // you know what label it is
                 'rules' => 'required|min:2|max:100', // validation rule of laravel
                 'class' => 'form-control', // any class for input
-                'value' => 'Elzahaby Educations' // default value if you want
+                'value' => 'Q8' // default value if you want
             ], [
                 'type' => 'file', // input fields type
                 'data' => 'string', // data type, string, int, boolean
@@ -175,24 +175,24 @@ return [
 //
 //        ]
 //    ],
-    'slider' => [
-
-        'title' => 'Slider ',
-        'desc' => 'add image slider',
-        'icon' => 'fa fa-file',
-
-        'elements' => [
-            [
-                'type' => 'file', // input fields type
-                'data' => 'json', // data type, string, int, boolean,json
-                'name' => 'slider', // unique name for field
-                'label' => 'Slider', // you know what label it is
-                'rules' => '', // validation rule of laravel
-                'class' => 'slider', // any class for input
-                'value' => [] // default value if you want
-            ],
-
-
-        ]
-    ],
+//    'slider' => [
+//
+//        'title' => 'Slider ',
+//        'desc' => 'add image slider',
+//        'icon' => 'fa fa-file',
+//
+//        'elements' => [
+//            [
+//                'type' => 'file', // input fields type
+//                'data' => 'json', // data type, string, int, boolean,json
+//                'name' => 'slider', // unique name for field
+//                'label' => 'Slider', // you know what label it is
+//                'rules' => '', // validation rule of laravel
+//                'class' => 'slider', // any class for input
+//                'value' => [] // default value if you want
+//            ],
+//
+//
+//        ]
+//    ],
 ];

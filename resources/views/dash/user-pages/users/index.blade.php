@@ -18,6 +18,7 @@
                             <thead>
                             <tr>
                                 <th> ID</th>
+                                <th> Avatar</th>
                                 <th> First Name</th>
                                 <th> Last Name</th>
                                 <th> age</th>
@@ -37,6 +38,7 @@
                             @foreach($items as $key=> $item)
                                 <tr>
                                     <td> {{ $item->id }} </td>
+                                    <td> <img src="{{ $item->avatar }}" alt=""> </td>
                                     <td> {{ $item->first_name }} </td>
                                     <td> {{ $item->last_name }} </td>
                                     <td> {{ (int)$item->age }} </td>
@@ -76,9 +78,10 @@
     <!-- Modal Item {{ 'store' }} -->
     <div class="modal fade " id="store" tabindex="-1" role="dialog"  aria-hidden="true">
         <div class="modal-dialog modal-lg p-5" role="document">
-            <form method="post" action="{{ route('admin.users.store') }}"  class="modal-content form-store">
+            <form method="post" action="{{ route('admin.users.store') }}"  class="modal-content form-store" enctype="multipart/form-data">
+
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"><b>Edit:</b> {{ $item->full_name }}</h5>
+                    <h5 class="modal-title" id="exampleModalLabel"><b>Add</b></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -97,6 +100,11 @@
                         <div class="form-group ">
                             <label>Age</label>
                             <input name="age" type="number" class="form-control" required>
+                        </div>
+
+                        <div class="form-group ">
+                            <label>Avatar</label>
+                            <input name="avatar" type="file" class="form-control-file" required>
                         </div>
 
                         <div class="form-group ">
@@ -145,7 +153,8 @@
         <!-- Modal Item {{ $item->id }} -->
         <div class="modal fade " id="edit-{{$item->id}}" tabindex="-1" role="dialog"  aria-hidden="true">
             <div class="modal-dialog modal-lg p-5" role="document">
-                <form method="PUT" action="{{ route('admin.users.update',$item->id) }}" id="form-edit-{{$item->id}}" class="modal-content form-edit">
+                <form method="post" action="{{ route('admin.users.update',$item->id) }}" id="form-edit-{{$item->id}}" class="modal-content form-edit" enctype="multipart/form-data">
+                    @method('PUT')
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel"><b>Edit:</b> {{ $item->full_name }}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -162,7 +171,11 @@
                                 <label>Last Name</label>
                                 <input  name="last_name" type="text" class="form-control" value="{{ $item->last_name }}" required>
                             </div>
-
+                            <div class="form-group ">
+                                <label>Avatar</label>
+                                <input name="avatar" type="file" class="form-control-file" >
+                                <img onerror="this.src='{{ asset('images/no-image.png') }}'" src="{{  ($item->avatar) }}" width="90"/>
+                            </div>
                             <div class="form-group ">
                                 <label>Age</label>
                                 <input name="age" type="number" class="form-control" value="{{ $item->age }}" required>
@@ -231,9 +244,11 @@
             console.log(_this);
 
             $.ajax({
-                type: _this.attr('method'),
+                type: "POST",
                 url: _this.attr('action'),
-                data: _this.serialize(),
+                data: new FormData(this),
+                processData: false,
+                contentType: false,
                 success: function(data) {
                     console.log(data);
                     Swal.fire(

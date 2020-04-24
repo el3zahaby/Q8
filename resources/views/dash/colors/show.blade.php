@@ -22,7 +22,7 @@
                         <div class="panel panel-bordered" style="padding-bottom:5px;">
                             <!-- form start -->
                             <div class="panel-heading" style="border-bottom:0;">
-                                <h5 class="panel-title">Id</h5>
+                                <h5 class="panel-title">ID</h5>
                             </div>
 
                             <div class="panel-body" style="padding-top:0;">
