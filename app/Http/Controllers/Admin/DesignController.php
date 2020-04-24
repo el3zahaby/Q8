@@ -138,7 +138,6 @@ class DesignController extends Controller
             'name_ar' => 'required|max:255',
             'user_id' => 'required',
             'price' => 'check_array:1', // the array required and min 1 item
-            'price.*' => 'min:1'
         ]);
 
         $img = $item->img;

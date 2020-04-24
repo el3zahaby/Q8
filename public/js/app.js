@@ -4482,6 +4482,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -50688,6 +50692,10 @@ var render = function() {
                   _vm._v(_vm._s(_vm.$t("Design_Price")))
                 ]),
                 _vm._v(" "),
+                _c("th", { staticClass: "product-name" }, [
+                  _vm._v(_vm._s(_vm.$t("Accepted")))
+                ]),
+                _vm._v(" "),
                 _c("th", { staticClass: "product-subtotal" }, [
                   _vm._v(_vm._s(_vm.$t("delete")))
                 ])
@@ -50749,6 +50757,14 @@ var render = function() {
                         ])
                       }),
                       0
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(design.accepting) +
+                        "\n                        "
                     )
                   ]),
                   _vm._v(" "),

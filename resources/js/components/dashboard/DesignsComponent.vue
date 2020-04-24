@@ -18,6 +18,7 @@
                                 <th class="product-name">{{ $t('Design_Name') }}</th>
                                 <th class="product-name">{{ $t('Design_Rondom_ID') }}</th>
                                 <th class="product-name">{{ $t('Design_Price') }}</th>
+                                <th class="product-name">{{ $t('Accepted') }}</th>
                                 <!-- <th class="product-id">Design Id</th> -->
                                 <th class="product-subtotal">{{ $t('delete') }}</th>
                             </tr>
@@ -47,6 +48,9 @@
                                 <!-- <td class="product-id">
                                 {{ design.id }}
                             </td> -->
+                            <td>
+                                {{ design.accepting}}
+                            </td>
                                 <td class="product-cart-icon product-subtotal">
                                     <a href="#" @click.prevent="$root.deleteDesign(design.id)"><i
                                             class="delete far fa-trash-alt"></i></a>
@@ -265,7 +269,6 @@
                 $(".EN").css('display','none');
                 $(".AR").css('display','block');
             })
-
         },
         created() {
             axios.get("/api/v1/designer-designs").then(response => {
