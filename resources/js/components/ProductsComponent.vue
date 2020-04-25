@@ -1,6 +1,5 @@
 <template>
     <div class="body_content_div py-5">
-
         <div class="most_sell_title text-center mb-4">
             <h2>{{ $t('MostSells')}}</h2>
         </div>
@@ -14,9 +13,7 @@
                     <div class="t-shirt_data mb-2">
                         <span>ID : {{product.random_name}}</span>
                         <div class="t-shirt_image_div position-relative">
-
                             <product-designer :design="product" :type="'view-most'"></product-designer>
-
                             <ul
                                 class="cart_ul_btn list-icon list-unstyled product_btn_div d-flex align-items-center text-center mb-0">
                                 <li>
@@ -30,7 +27,6 @@
                                         <img src="/images/eye.png" alt=""/>
                                     </a>
                                 </li>
-
                                 <li>
                                     <a href="#" @click.prevent="addToCart(product)" class="add-to-cart quickview_btn">
                                         <img
@@ -49,13 +45,13 @@
                                 v-if="product.favourite"
                                 src="/images/like.png"
                                 alt=""
-                            />
-                            <img
+                                />
+                                <img
                                 @click="product.favourite = !product.favourite"
                                 v-else
                                 src="/images/like_solid.png"
                                 alt=""
-                            /> -->
+                                /> -->
                         </div>
                         <div class="t-shirt_inner_price px-1 my-2">
                             <span
@@ -76,11 +72,11 @@
                                 v-for="n in 5"
                                 :key="n"
                                 class="t-shirt_review_stars">
-                                <i
-                                    v-if="product.review === true"
-                                    class="fas fa-star"
-                                ></i>
-                                <i v-else class="far fa-star"></i>
+                            <i
+                                v-if="product.review === true"
+                                class="fas fa-star"
+                            ></i>
+                            <i v-else class="far fa-star"></i>
                             </span>
                             <span
                                 v-if="product.review === false"
@@ -121,7 +117,7 @@
                             </div>
                             <div class="col-md-6">
                                 <h3 class="productName">{{product.name}}</h3>
-                                <h5>ID: <span>{{product.random_name}}</span></h5>
+                                <h5>ID: <span>{{product.id}}</span></h5>
                                 <span
                                     class="productPrice">{{priceDefault(product.price,product.discount)|currency}}</span>
                                 <p class="ProductDetails pt-3">
@@ -155,7 +151,6 @@
                                             </div>
                                         </div>
                                         <div class="mb-2">
-
                                             <div v-if="printOptions.includes('front')">
                                                 <label
                                                     class="my-1 mr-2 font-weight-bold text-capitalize"
@@ -169,12 +164,12 @@
                                                     :id="'frontSizeInputFiled'+product.id"
                                                 >
                                                     <option :value="null" selected>- {{$t('Please_Select')}} -</option>
-                                                    <option v-for="dsize in dsizes" :key="dsize.id" :value="dsize.id">
+                                                    <option v-for="dsize in product.design.dsizes" :key="dsize.id"
+                                                            :value="dsize.id">
                                                         {{dsize.length}}<span> X </span>{{dsize.width}}
                                                     </option>
                                                 </select>
                                             </div>
-
                                             <div v-if="printOptions.includes('back')">
                                                 <label
                                                     class="my-1 mr-2 font-weight-bold text-capitalize"
@@ -188,12 +183,12 @@
                                                     :id="'backSizeInputFiled'+product.id"
                                                 >
                                                     <option :value="null" selected>- {{$t('Please_Select')}} -</option>
-                                                    <option v-for="dsize in dsizes" :key="dsize.id" :value="dsize.id">
+                                                    <option v-for="dsize in product.design.dsizes" :key="dsize.id"
+                                                            :value="dsize.id">
                                                         {{dsize.length}}<span> X </span>{{dsize.width}}
                                                     </option>
                                                 </select>
                                             </div>
-
                                         </div>
                                         <div class="mb-2">
                                             <label
@@ -219,8 +214,6 @@
                                             >{{$t('TShirt_Size')}}*</label
                                             >
                                             <select
-                                                @click.prevent="tsizePrice(tsize)"
-                                                v-model="tsize"
                                                 class="custom-select my-1 mr-sm-2"
                                                 :id="'sizeInput'+product.id"
                                             >
@@ -252,7 +245,6 @@
                                                     ></i>
                                                     {{$t('Add_to_cart')}}
                                                 </button>
-
                                             </div>
                                             <h5 class="productPrice" style="margin-top:10px">{{$t('total')}} :
                                                 <span class="productPrice">{{count*(tsizes_price+frontprintprice+backprintprice+priceDis(product.price,product.discount))|currency}}</span>
@@ -266,7 +258,6 @@
                 </div>
             </div>
         </div>
-
         <div class="most_sell_title text-center mb-4">
             <h2>{{ $t('Designs')}}</h2>
         </div>
@@ -279,11 +270,9 @@
                     class="col-xl-3 col-lg-4 col-md-6"
                 >
                     <div class="t-shirt_data mb-2">
-                        <span>ID : {{product.random_name}}</span>
+                        <span>ID : {{product.id}}</span>
                         <div class="t-shirt_image_div position-relative">
-
                             <product-designer :design="product" :type="'view'"></product-designer>
-
                             <ul
                                 class="cart_ul_btn list-icon list-unstyled product_btn_div d-flex align-items-center text-center mb-0"
                             >
@@ -299,7 +288,6 @@
                                         <img src="/images/eye.png" alt=""/>
                                     </a>
                                 </li>
-
                                 <li>
                                     <a href="#" @click.prevent="addToCart(product)" class="add-to-cart quickview_btn">
                                         <img
@@ -319,13 +307,13 @@
                                 v-if="product.favourite"
                                 src="/images/like.png"
                                 alt=""
-                            />
-                            <img
+                                />
+                                <img
                                 @click="product.favourite = !product.favourite"
                                 v-else
                                 src="/images/like_solid.png"
                                 alt=""
-                            /> -->
+                                /> -->
                         </div>
                         <div class="t-shirt_inner_price px-1 my-2">
                             <span
@@ -345,13 +333,12 @@
                             <span
                                 v-for="n in 5"
                                 :key="n"
-                                class="t-shirt_review_stars"
-                            >
-                                <i
-                                    v-if="product.review === true"
-                                    class="fas fa-star"
-                                ></i>
-                                <i v-else class="far fa-star"></i>
+                                class="t-shirt_review_stars">
+                            <i
+                                v-if="product.review === true"
+                                class="fas fa-star"
+                            ></i>
+                            <i v-else class="far fa-star"></i>
                             </span>
                             <span
                                 v-if="product.review === false"
@@ -363,7 +350,6 @@
                 </div>
             </div>
         </div>
-
         <div v-if="pagination.next_page_url !== null && products.length"
              class="mt-3 get-more d-flex justify-content-center">
             <span @click="fetchProducts(pagination.next_page_url)" style="cursor: pointer"
@@ -373,7 +359,6 @@
              class="mt-3 get-more d-flex justify-content-center">
             <span class="font-weight-bold text-capitalize text-muted">No More Data</span>
         </div>
-
         <div
             v-for="product in products"
             v-bind:key="product.id"
@@ -382,12 +367,10 @@
             tabindex="-1"
             role="dialog"
             aria-labelledby="myExtraLargeModalLabel"
-            aria-hidden="true"
-        >
+            aria-hidden="true">
             <div
                 class="modal-dialog modal-dialog-centered modal-lg"
-                role="document"
-            >
+                role="document">
                 <div class="modal-content bg-white">
                     <button
                         type="button"
@@ -409,7 +392,7 @@
                             </div>
                             <div class="col-md-6">
                                 <h3 class="productName">{{product.name}}</h3>
-                                <h5>ID: <span>{{product.random_name}}</span></h5>
+                                <h5>ID: <span>{{product.id}}</span></h5>
                                 <span
                                     class="productPrice">{{priceDefault(product.price,product.discount)|currency}}</span>
                                 <p class="ProductDetails pt-3">
@@ -443,7 +426,6 @@
                                             </div>
                                         </div>
                                         <div class="mb-2">
-
                                             <div v-if="printOptions.includes('front')">
                                                 <label
                                                     class="my-1 mr-2 font-weight-bold text-capitalize"
@@ -457,12 +439,11 @@
                                                     :id="'frontSizeInputFiled'+product.id"
                                                 >
                                                     <option :value="null" selected>- {{$t('Please_Select')}} -</option>
-                                                    <option v-for="dsize in dsizes" :key="dsize.id" :value="dsize.id">
-                                                        {{dsize.length}}<span> X </span>{{dsize.width}}
+                                                    <option v-for="dsize in product.design.dsizes" :key="dsize.id"
+                                                            :value="dsize.id">{{dsize.length}}<span> X </span>{{dsize.width}}
                                                     </option>
                                                 </select>
                                             </div>
-
                                             <div v-if="printOptions.includes('back')">
                                                 <label
                                                     class="my-1 mr-2 font-weight-bold text-capitalize"
@@ -476,18 +457,17 @@
                                                     :id="'backSizeInputFiled'+product.id"
                                                 >
                                                     <option :value="null" selected>- {{$t('Please_Select')}} -</option>
-                                                    <option v-for="dsize in dsizes" :key="dsize.id" :value="dsize.id">
+                                                    <option v-for="dsize in product.design.dsizes" :key="dsize.id"
+                                                            :value="dsize.id">
                                                         {{dsize.length}}<span> X </span>{{dsize.width}}
                                                     </option>
                                                 </select>
                                             </div>
-
                                         </div>
                                         <div class="mb-2">
                                             <label
                                                 class="my-1 mr-2 font-weight-bold"
-                                                :for="'colorInput'+product.id"
-                                            >{{$t('TShirt_Color')}}*</label
+                                                :for="'colorInput'+product.id">{{$t('TShirt_Color')}}*</label
                                             >
                                             <select
                                                 v-model="tcolor"
@@ -495,8 +475,8 @@
                                                 :id="'colorInput'+product.id"
                                             >
                                                 <option :value="null" selected>- {{$t('Please_Select')}} -</option>
-                                                <option v-for="color in tcolors" :key="color.id" :value="color.id">
-                                                    {{color.name}}
+                                                <option v-for="tshirt in product.tshirts" :key="tshirt.color.id" :value="tshirt.color.id">
+                                                    {{tshirt.color.name}}
                                                 </option>
                                             </select>
                                         </div>
@@ -507,14 +487,12 @@
                                             >{{$t('TShirt_Size')}}*</label
                                             >
                                             <select
-                                                @click.prevent="tsizePrice(tsize)"
-                                                v-model="tsize"
                                                 class="custom-select my-1 mr-sm-2"
                                                 :id="'sizeInput'+product.id"
                                             >
                                                 <option :value="null" selected>- {{$t('Please_Select')}} -</option>
-                                                <option v-for="tsize in tsizes" :key="tsize.id" :value="tsize.id">
-                                                    {{tsize.name}}
+                                                <option v-for="tshirt in product.tshirts" :key="tshirt.tsize.id" :value="tshirt.tsize.id">
+                                                    {{tshirt.tsize.name}}
                                                 </option>
                                             </select>
                                         </div>
@@ -540,7 +518,6 @@
                                                     ></i>
                                                     {{$t('Add_to_cart')}}
                                                 </button>
-
                                             </div>
                                             <h5 class="productPrice" style="margin-top:10px">{{$t('total')}} :
                                                 <span class="productPrice">{{count*(tsizes_price+frontprintprice+backprintprice+priceDis(product.price,product.discount))|currency}}</span>
@@ -556,7 +533,6 @@
         </div>
     </div>
 </template>
-
 <script>
     export default {
         data() {
@@ -625,13 +601,6 @@
                 });
 
             },
-            tsizePrice: function (tsize_id) {
-                axios.get(`api/v1/tsize/${tsize_id}`).then(response => {
-                    this.tsizeprice = response.data;
-                    this.tsizes_price = 0 | this.tsizeprice.price;
-                    console.log(this.tsizeprice);
-                });
-            },
             fetchProducts(page_url) {
                 let vm = this;
                 page_url = page_url || 'api/v1/design';
@@ -672,16 +641,13 @@
             axios.get('api/v1/color').then(response => {
                 this.tcolors = response.data;
             });
-            axios.get('api/v1/dsize').then(response => {
-                this.dsizes = response.data;
-            });
+            // axios.get('api/v1/dsize').then(response => {
+            //     this.dsizes = response.data;
+            // });
             axios.get('api/v1/tsize').then(response => {
                 this.tsizes = response.data;
             });
-            axios.get("api/v1/default-tsizeprice").then(response => {
-                this.default_tsize = response.data;
-                this.tsize = response.data.id;
-            });
+
             axios.get("api/v1/default-printprice").then(response => {
                 this.default_frontprint = response.data;
                 this.frontprint = response.data.id;
@@ -695,21 +661,17 @@
         filters: {}
     };
 </script>
-
 <style lang="scss">
     .body_content_div {
         padding: 25px 15px;
     }
-
     .most_sell_title {
         color: #7a7a7a;
         font-family: "titles_font", sans-serif;
     }
-
     .t-shirt_data {
         border: 1px solid #eeeeee;
         padding: 10px;
-
         .t-shirt_image_div {
             .product-img {
                 min-height: 250px;
@@ -717,40 +679,31 @@
                 border-bottom: 1px solid #eeeeee;
             }
         }
-
     }
-
     .t-shirt_inner_data img {
         width: 16px;
         height: 16px;
         cursor: pointer;
     }
-
-
     .t-shirt_name {
         font-size: 22px;
     }
-
     .t-shirt_review_stars {
         color: gold;
         cursor: pointer;
     }
-
     .t-shirt_no_review_text {
         font-size: 18px;
         color: #999;
     }
-
     .t-shirt_price_sale,
     .t-shirt_price_nosale {
         font-size: 18px;
     }
-
     .t-shirt_price_nosale {
         text-decoration: line-through;
         color: #909090;
     }
-
     .product_btn_div {
         padding: 0;
         position: absolute;
@@ -764,13 +717,11 @@
         box-shadow: 0 15px 25px rgba(0, 0, 0, 0.08);
         border-radius: 15px;
     }
-
     .t-shirt_image_div:hover .product_btn_div {
         opacity: 1;
         visibility: visible;
         bottom: 10px;
     }
-
     .product_btn_div li a,
     .product_btn_div li button {
         display: inline-block;
@@ -778,26 +729,20 @@
         width: 65px;
         height: 50px;
     }
-
     .add_to_cart_btn img {
         height: 23px;
     }
-
     .product_btn_div .add_to_cart_btn {
         background-color: transparent;
         border: 0;
     }
-
     .quickview_btn img {
         height: 25px;
     }
-
     .cart_ul_btn li:first-child {
         border-left: 1px solid #ccc;
     }
-
     /*    product modal*/
-
     .modal {
         .modal-content {
             .close {
@@ -808,7 +753,6 @@
                 top: -5px;
                 right: 15px;
             }
-
             .productPrice {
                 color: #227dc7;
                 font-weight: bold;
@@ -816,18 +760,15 @@
             }
         }
     }
-
     #main-container {
         margin: 40px auto;
         width: 1200px;
         max-width: 100%;
     }
-
     .api-buttons > a {
         margin: 0 5px 0 0 !important;
         text-decoration: none !important;
     }
-
     .price {
         font-size: 24px !important;
         line-height: 26px !important;

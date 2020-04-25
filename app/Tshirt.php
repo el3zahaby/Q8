@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tshirt extends Model
 {
+    protected $with = ['color', 'tsize'];
     public function color(){
         return $this->belongsTo(Color::class);
     }

@@ -196,7 +196,7 @@ Vue.component(
 // });
 //
 Vue.filter('currency', function (price) {
-    return "$".concat(price.toFixed(2));
+    // return "$".concat(price.toFixed(2));
 });
 
 const app = new Vue({

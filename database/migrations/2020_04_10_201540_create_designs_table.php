@@ -25,7 +25,8 @@ class CreateDesignsTable extends Migration {
 			$table->text('img');
 //            $table->float('price', 10, 0)->unsigned()->default(0);
             $table->boolean('accepting')->nullable()->default(0);
-			$table->timestamps();
+            $table->softDeletes();
+            $table->timestamps();
 		});
 	}
 

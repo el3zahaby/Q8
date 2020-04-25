@@ -100,7 +100,7 @@
                     </div>
                     <div class="form-group AR">
                         <label>Name AR :</label>
-                        <input name="name_ar" type="text" class="form-control" required>
+                        <input name="name_ar" type="text" class="form-control" >
                     </div>
                     <div class="form-group EN">
                         <label>Description EN :</label>
@@ -197,7 +197,7 @@
                         </div>
                         <div class="form-group AR">
                             <label>Name AR :</label>
-                            <input name="name_ar" type="text" class="form-control" required
+                            <input name="name_ar" type="text" class="form-control"
                                 value="{{ $item->name_ar }}">
                         </div>
                         <div class="form-group EN">
@@ -317,7 +317,7 @@
                         var i = 0
                         $.each(data.responseJSON.errors, function (key, value) {
                             i = i++;
-                            $('[name="' + key + '"]').addClass('invalid error');
+                            $('[name="' + key + '"]').addClass('invalid error').parent().show();
                             $('[name="' + key + '"]').after(
                                 "<small class='helper-text text-danger'>" + value +
                                 "</small>")

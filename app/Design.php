@@ -3,11 +3,15 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 class Design extends Model
 {
+//    use SoftDeletes;
+
     protected $guarded = [];
+    protected $with = ['dsizes'];
 
     public function isAccepted($string = false){
         $cond = (boolean)$this->accepting;
@@ -74,6 +78,10 @@ class Design extends Model
 
     public function total($size){
         return ($this->has_dsize($size->id) ? $this->dsize_price($size->id) : 0) + $size->print_price;
+    }
+
+    public function dcollections(){
+        return $this->hasOne(DesignsCollections::class);
     }
 
 

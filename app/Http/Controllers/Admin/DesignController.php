@@ -74,9 +74,8 @@ class DesignController extends Controller
         $store->user_id = $request->user_id;
         $store->accepting = $request->accepting;
         $store->img = $img;
+
         $store->save();
-
-
         foreach($request->price as $key => $price)
         {
             if($price != null and $price != 0 )
@@ -86,11 +85,13 @@ class DesignController extends Controller
                 $dsignsize->dsize_id = $key;
                 $dsignsize->designer_price = $price ;
                 $dsignsize->save();
+            }else{
+                $store->remove();
             }
         }
 
 
-        if ($store && $dsignsize) return response()->json([
+        if ($dsignsize)  return response()->json([
             'status'=>'ok',
             'msg'=>'Added'.$store->id
         ],200);
@@ -199,13 +200,18 @@ class DesignController extends Controller
     public function destroy($id)
     {
         $item = $this->model::findOrFail($id);
-        unlink( public_path('/') . $item->img);
+        if (file_exists(public_path('/') . $item->img)) {
+            unlink(public_path('/') . $item->img);
+        }
         $design_sizes = DesignSize::where('design_id',$item->id)->get();
+
         foreach($design_sizes as $ds)
         {
             $ds->delete();
         }
-
+        if ($item->dcollections) {
+            $item->dcollections->delete();
+        }
         $item->delete();
         return response()->json([
             'status'=>'ok',

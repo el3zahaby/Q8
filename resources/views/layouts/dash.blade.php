@@ -26,6 +26,12 @@
             padding: 1px 1px 1px 7px;
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/css/select2.min.css" />
+    <style>
+        .select2-container {
+            width: 100%!important;
+        }
+    </style>
     @stack('style')
     @stack('css')
 
@@ -67,6 +73,13 @@
     <script src="{{ url('dash/assets/js/todolist.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/js/select2.full.min.js"></script>
+    <script>
+        // In your Javascript (external .js resource or <script> tag)
+        $(document).ready(function() {
+            $('select').select2();
+        });
+    </script>
     <script>
         $.ajaxSetup({
             headers: {
@@ -111,6 +124,7 @@
         });
     </script>
     @stack('custom-scripts')
+
     @stack('js')
 
 </body>

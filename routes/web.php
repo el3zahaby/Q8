@@ -127,6 +127,8 @@ Route::group(['prefix' => 'admin','as'=>'admin.'], function () {
         // designs
         Route::resource('designs', 'Admin\DesignController');
 
+        Route::resource('dcollections', 'Admin\DCollectionsController');
+
         // T-shirt
         Route::resource('dsizes', 'Admin\DsizeController');
         Route::resource('colors', 'Admin\ColorController');

@@ -8,7 +8,7 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Tshirts</h4>
+                <h4 class="card-title">Designs Collections</h4>
                 <p class="card-description">
                     <button class="btn btn-success" data-toggle="modal" data-target="#store"><I
                             CLASS="mdi mdi-plus-box"></I>Add new</button>
@@ -19,10 +19,9 @@
                         <thead>
                             <tr>
                                 <th> ID</th>
-                                <th> color</th>
-                                <th> size</th>
-                                <th> price</th>
-                                <th> quantity</th>
+                                <th> Design</th>
+                                <th> Colors</th>
+                                <th> Sizes</th>
                                 <th> Created at</th>
 
                                 <th> Action</th>
@@ -32,30 +31,28 @@
                             @foreach($items as $key=> $item)
                                 <tr>
                                     <td> {{ $item->id }} </td>
-                                    <td> {{ $item->color->name }} </td>
-                                    <td> {{ $item->tsize->name }} </td>
-                                    <td> {{ $item->price }} </td>
-                                    <td> {{ $item->qty }} </td>
-
+                                    <td><a href="{{ route('admin.designs.show',$item->design->id) }}" title="{{ $item->design->name_en }}"><img src="{{ $item->design->img }}" alt=""> </a></td>
+                                    <td> @foreach($item->tshirts as $t) <span class="badge" style="background: {{$t->color->name}};color: #eeeeee">{{$t->color->name}}</span> @endforeach </td>
+                                    <td> @foreach($item->tshirts as $t) <span class="badge" style="background: {{$t->color->name}};color: #eeeeee">{{$t->tsize->name}}</span> @endforeach </td>
                                     <td> {{ $item->created_at->diffForHumans() }} </td>
 
 
                                     <td>
                                         <!-- delete -->
-                                        <a href="{{ route('admin.tshirts.show',$item->id) }}"
+                                        <a href="{{ route('admin.dcollections.show',$item->id) }}"
                                             data-id="{{ $item->id }}" title="DELETE" class="btn btn-danger"><i
                                                 class="mdi mdi-delete"></i></a>
 
                                         <!-- edit -->
-                                        <a href="{{ route('admin.tshirts.edit',$item->id) }}"
+                                        <a href="{{ route('admin.dcollections.edit',$item->id) }}"
                                             data-id="{{ $item->id }}" title="EDIT" class="btn btn-success"><i
                                                 class="mdi mdi-file-edit"></i></a>
 
 
-                                        <!-- view -->
-                                        <a href="{{ route('admin.tshirts.show',$item->id) }}"
-                                            data-id="{{ $item->id }}" title="VIEW" class="btn btn-info"><i
-                                                class="mdi mdi-eye"></i></a>
+{{--                                        <!-- view -->--}}
+{{--                                        <a href="{{ route('admin.dcollections.show',$item->id) }}"--}}
+{{--                                            data-id="{{ $item->id }}" title="VIEW" class="btn btn-info"><i--}}
+{{--                                                class="mdi mdi-eye"></i></a>--}}
                                     </td>
                                 </tr>
                             @endforeach
@@ -71,7 +68,7 @@
 <!-- Modal Item {{ 'store' }} -->
 <div class="modal fade " id="store" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg p-5" role="document">
-        <form method="post" action="{{ route('admin.tshirts.store') }}"
+        <form method="post" action="{{ route('admin.dcollections.store') }}"
             class="modal-content form-store">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel"><b>Add</b> </h5>
@@ -82,32 +79,21 @@
             <div class="modal-body">
                 <div>
                     <div class="form-group">
-                        <label>color</label>
-                        <select name="color_id" id="" class="form-control" style="color:#000 !important;">
-                            @foreach($colors as $color)
-                                <option value="{{ $color->id }}">{{ $color->name }}</option>
+                        <label>Tshirt</label>
+                        <select multiple name="tshirts[]" id="" class="form-control w-100" style="color:#000 !important;">
+                            @foreach($tshirts as $tshirt)
+                                <option value="{{ $tshirt->id }}">Color:{{ $tshirt->color->name }} - Size:{{ $tshirt->tsize->name }} - Price:{{ $tshirt->price }} - QTY:{{ $tshirt->qty }} </option>
                             @endforeach
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>size</label>
-                        <select name="tsize_id" id="" class="form-control" style="color:#000 !important;">
-                            @foreach($tsizes as $tsize)
-                                <option value="{{ $tsize->id }}">{{ $tsize->name }}</option>
+                        <label>Design</label>
+                        <select name="design_id" id="" class="form-control select2" style="color:#000 !important;">
+                            @foreach($designs as $design)
+                                <option value="{{ $design->id }}">{{ $design->name_en }}</option>
                             @endforeach
                         </select>
                     </div>
-
-                    <div class="form-group">
-                        <label>price</label>
-                        <input name="price" type="number" min="0" class="form-control" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label>quantity</label>
-                        <input name="qty" type="number" min="0" class="form-control" required>
-                    </div>
-
                 </div>
 
             </div>
@@ -123,7 +109,7 @@
     <!-- Modal Item {{ $item->id }} -->
     <div class="modal fade " id="edit-{{ $item->id }}" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg p-5" role="document">
-            <form method="PUT" action="{{ route('admin.tshirts.update',$item->id) }}"
+            <form method="PUT" action="{{ route('admin.dcollections.update',$item->id) }}"
                 id="form-edit-{{ $item->id }}" class="modal-content form-edit">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel"><b>Edit:</b></h5>
@@ -134,30 +120,21 @@
                 <div class="modal-body">
                     <div>
                         <div class="form-group">
-                            <label>color</label>
-                            <select name="color_id" id="" class="form-control" style="color:#000 !important;">
-                                @foreach($colors as $color)
-                                    <option {{ $item->color->id == $color->id ? 'selected' : '' }}  value="{{ $color->id }}">{{ $color->name }}</option>
+                            <label>Tshirt</label>
+
+                            <select multiple name="tshirts[]" id="" class="form-control w-100" style="color:#000 !important;">
+                                @foreach($tshirts as $tshirt)
+                                    <option @if(in_array($tshirt->id,$item->tshirts->pluck('id')->toArray())) selected @endif value="{{ $tshirt->id }}">Color:{{ $tshirt->color->name }} - Size:{{ $tshirt->tsize->name }} - Price:{{ $tshirt->price }} - QTY:{{ $tshirt->qty }} </option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>size</label>
-                            <select name="tsize_id" id="" class="form-control" style="color:#000 !important;">
-                                @foreach($tsizes as $tsize)
-                                    <option {{ $item->tsize->id == $tsize->id ? 'selected' : '' }} value="{{ $tsize->id }}">{{ $tsize->name }}</option>
+                            <label>Design</label>
+                            <select name="design_id" id="" class="form-control select2" style="color:#000 !important;">
+                                @foreach($designs as $design)
+                                    <option @if($item->design_id == $design->id) selected @endif value="{{ $design->id }}">{{ $design->name_en }}</option>
                                 @endforeach
                             </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label>price</label>
-                        <input name="price" value="{{ $item->price }}" type="number" min="0" class="form-control" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label>quantity</label>
-                            <input name="qty" value="{{ $item->qty }}" type="number" min="0" class="form-control" required>
                         </div>
 
                     </div>
@@ -171,8 +148,6 @@
         </div>
     </div>
 @endforeach
-
-{{-- {{ print_r($items) }} --}}
 @endsection
 
 @push('plugin-scripts')

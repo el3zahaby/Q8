@@ -3358,30 +3358,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3449,24 +3425,15 @@ __webpack_require__.r(__webpack_exports__);
         _this3.backprintprice = 0 | _this3.printprice.print_price;
       });
     },
-    tsizePrice: function tsizePrice(tsize_id) {
-      var _this4 = this;
-
-      axios.get("api/v1/tsize/".concat(tsize_id)).then(function (response) {
-        _this4.tsizeprice = response.data;
-        _this4.tsizes_price = 0 | _this4.tsizeprice.price;
-        console.log(_this4.tsizeprice);
-      });
-    },
     fetchProducts: function fetchProducts(page_url) {
-      var _this5 = this;
+      var _this4 = this;
 
       var vm = this;
       page_url = page_url || 'api/v1/design';
       fetch(page_url).then(function (res) {
         return res.json();
       }).then(function (res) {
-        _this5.products = _this5.products.concat(res.data);
+        _this4.products = _this4.products.concat(res.data);
         vm.makePagination(res.next_page_url);
       })["catch"](function (err) {
         return console.log(err);
@@ -3498,27 +3465,23 @@ __webpack_require__.r(__webpack_exports__);
     this.feachMostSells();
   },
   mounted: function mounted() {
-    var _this6 = this;
+    var _this5 = this;
 
     axios.get('api/v1/color').then(function (response) {
-      _this6.tcolors = response.data;
-    });
-    axios.get('api/v1/dsize').then(function (response) {
-      _this6.dsizes = response.data;
-    });
+      _this5.tcolors = response.data;
+    }); // axios.get('api/v1/dsize').then(response => {
+    //     this.dsizes = response.data;
+    // });
+
     axios.get('api/v1/tsize').then(function (response) {
-      _this6.tsizes = response.data;
-    });
-    axios.get("api/v1/default-tsizeprice").then(function (response) {
-      _this6.default_tsize = response.data;
-      _this6.tsize = response.data.id;
+      _this5.tsizes = response.data;
     });
     axios.get("api/v1/default-printprice").then(function (response) {
-      _this6.default_frontprint = response.data;
-      _this6.frontprint = response.data.id;
+      _this5.default_frontprint = response.data;
+      _this5.frontprint = response.data.id;
     });
     axios.get("api/v1/default-tcolor").then(function (response) {
-      _this6.tcolor = response.data.id;
+      _this5.tcolor = response.data.id;
     });
   },
   computed: {},
@@ -9948,7 +9911,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nimg[data-v-dec272ee]{\n    max-width: 100%;\n}\n", ""]);
+exports.push([module.i, "\nimg[data-v-dec272ee]{\r\n    max-width: 100%;\n}\r\n", ""]);
 
 // exports
 
@@ -47399,7 +47362,7 @@ var render = function() {
                         _vm._v(" "),
                         _c("h5", [
                           _vm._v("ID: "),
-                          _c("span", [_vm._v(_vm._s(product.random_name))])
+                          _c("span", [_vm._v(_vm._s(product.id))])
                         ]),
                         _vm._v(" "),
                         _c("span", { staticClass: "productPrice" }, [
@@ -47667,26 +47630,29 @@ var render = function() {
                                             ]
                                           ),
                                           _vm._v(" "),
-                                          _vm._l(_vm.dsizes, function(dsize) {
-                                            return _c(
-                                              "option",
-                                              {
-                                                key: dsize.id,
-                                                domProps: { value: dsize.id }
-                                              },
-                                              [
-                                                _vm._v(
-                                                  "\n                                                    " +
-                                                    _vm._s(dsize.length)
-                                                ),
-                                                _c("span", [_vm._v(" X ")]),
-                                                _vm._v(
-                                                  _vm._s(dsize.width) +
-                                                    "\n                                                "
-                                                )
-                                              ]
-                                            )
-                                          })
+                                          _vm._l(
+                                            product.design.dsizes,
+                                            function(dsize) {
+                                              return _c(
+                                                "option",
+                                                {
+                                                  key: dsize.id,
+                                                  domProps: { value: dsize.id }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                                                    " +
+                                                      _vm._s(dsize.length)
+                                                  ),
+                                                  _c("span", [_vm._v(" X ")]),
+                                                  _vm._v(
+                                                    _vm._s(dsize.width) +
+                                                      "\n                                                "
+                                                  )
+                                                ]
+                                              )
+                                            }
+                                          )
                                         ],
                                         2
                                       )
@@ -47776,26 +47742,29 @@ var render = function() {
                                             ]
                                           ),
                                           _vm._v(" "),
-                                          _vm._l(_vm.dsizes, function(dsize) {
-                                            return _c(
-                                              "option",
-                                              {
-                                                key: dsize.id,
-                                                domProps: { value: dsize.id }
-                                              },
-                                              [
-                                                _vm._v(
-                                                  "\n                                                    " +
-                                                    _vm._s(dsize.length)
-                                                ),
-                                                _c("span", [_vm._v(" X ")]),
-                                                _vm._v(
-                                                  _vm._s(dsize.width) +
-                                                    "\n                                                "
-                                                )
-                                              ]
-                                            )
-                                          })
+                                          _vm._l(
+                                            product.design.dsizes,
+                                            function(dsize) {
+                                              return _c(
+                                                "option",
+                                                {
+                                                  key: dsize.id,
+                                                  domProps: { value: dsize.id }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                                                    " +
+                                                      _vm._s(dsize.length)
+                                                  ),
+                                                  _c("span", [_vm._v(" X ")]),
+                                                  _vm._v(
+                                                    _vm._s(dsize.width) +
+                                                      "\n                                                "
+                                                  )
+                                                ]
+                                              )
+                                            }
+                                          )
                                         ],
                                         2
                                       )
@@ -47895,38 +47864,8 @@ var render = function() {
                                 _c(
                                   "select",
                                   {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.tsize,
-                                        expression: "tsize"
-                                      }
-                                    ],
                                     staticClass: "custom-select my-1 mr-sm-2",
-                                    attrs: { id: "sizeInput" + product.id },
-                                    on: {
-                                      click: function($event) {
-                                        $event.preventDefault()
-                                        return _vm.tsizePrice(_vm.tsize)
-                                      },
-                                      change: function($event) {
-                                        var $$selectedVal = Array.prototype.filter
-                                          .call($event.target.options, function(
-                                            o
-                                          ) {
-                                            return o.selected
-                                          })
-                                          .map(function(o) {
-                                            var val =
-                                              "_value" in o ? o._value : o.value
-                                            return val
-                                          })
-                                        _vm.tsize = $event.target.multiple
-                                          ? $$selectedVal
-                                          : $$selectedVal[0]
-                                      }
-                                    }
+                                    attrs: { id: "sizeInput" + product.id }
                                   },
                                   [
                                     _c(
@@ -48080,7 +48019,7 @@ var render = function() {
               { key: product.id, staticClass: "col-xl-3 col-lg-4 col-md-6" },
               [
                 _c("div", { staticClass: "t-shirt_data mb-2" }, [
-                  _c("span", [_vm._v("ID : " + _vm._s(product.random_name))]),
+                  _c("span", [_vm._v("ID : " + _vm._s(product.id))]),
                   _vm._v(" "),
                   _c(
                     "div",
@@ -48294,7 +48233,7 @@ var render = function() {
                         _vm._v(" "),
                         _c("h5", [
                           _vm._v("ID: "),
-                          _c("span", [_vm._v(_vm._s(product.random_name))])
+                          _c("span", [_vm._v(_vm._s(product.id))])
                         ]),
                         _vm._v(" "),
                         _c("span", { staticClass: "productPrice" }, [
@@ -48562,26 +48501,26 @@ var render = function() {
                                             ]
                                           ),
                                           _vm._v(" "),
-                                          _vm._l(_vm.dsizes, function(dsize) {
-                                            return _c(
-                                              "option",
-                                              {
-                                                key: dsize.id,
-                                                domProps: { value: dsize.id }
-                                              },
-                                              [
-                                                _vm._v(
-                                                  "\n                                                    " +
-                                                    _vm._s(dsize.length)
-                                                ),
-                                                _c("span", [_vm._v(" X ")]),
-                                                _vm._v(
-                                                  _vm._s(dsize.width) +
-                                                    "\n                                                "
-                                                )
-                                              ]
-                                            )
-                                          })
+                                          _vm._l(
+                                            product.design.dsizes,
+                                            function(dsize) {
+                                              return _c(
+                                                "option",
+                                                {
+                                                  key: dsize.id,
+                                                  domProps: { value: dsize.id }
+                                                },
+                                                [
+                                                  _vm._v(_vm._s(dsize.length)),
+                                                  _c("span", [_vm._v(" X ")]),
+                                                  _vm._v(
+                                                    _vm._s(dsize.width) +
+                                                      "\n                                                "
+                                                  )
+                                                ]
+                                              )
+                                            }
+                                          )
                                         ],
                                         2
                                       )
@@ -48671,26 +48610,29 @@ var render = function() {
                                             ]
                                           ),
                                           _vm._v(" "),
-                                          _vm._l(_vm.dsizes, function(dsize) {
-                                            return _c(
-                                              "option",
-                                              {
-                                                key: dsize.id,
-                                                domProps: { value: dsize.id }
-                                              },
-                                              [
-                                                _vm._v(
-                                                  "\n                                                    " +
-                                                    _vm._s(dsize.length)
-                                                ),
-                                                _c("span", [_vm._v(" X ")]),
-                                                _vm._v(
-                                                  _vm._s(dsize.width) +
-                                                    "\n                                                "
-                                                )
-                                              ]
-                                            )
-                                          })
+                                          _vm._l(
+                                            product.design.dsizes,
+                                            function(dsize) {
+                                              return _c(
+                                                "option",
+                                                {
+                                                  key: dsize.id,
+                                                  domProps: { value: dsize.id }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                                                    " +
+                                                      _vm._s(dsize.length)
+                                                  ),
+                                                  _c("span", [_vm._v(" X ")]),
+                                                  _vm._v(
+                                                    _vm._s(dsize.width) +
+                                                      "\n                                                "
+                                                  )
+                                                ]
+                                              )
+                                            }
+                                          )
                                         ],
                                         2
                                       )
@@ -48756,17 +48698,17 @@ var render = function() {
                                       ]
                                     ),
                                     _vm._v(" "),
-                                    _vm._l(_vm.tcolors, function(color) {
+                                    _vm._l(product.tshirts, function(tshirt) {
                                       return _c(
                                         "option",
                                         {
-                                          key: color.id,
-                                          domProps: { value: color.id }
+                                          key: tshirt.color.id,
+                                          domProps: { value: tshirt.color.id }
                                         },
                                         [
                                           _vm._v(
                                             "\n                                                " +
-                                              _vm._s(color.name) +
+                                              _vm._s(tshirt.color.name) +
                                               "\n                                            "
                                           )
                                         ]
@@ -48790,38 +48732,8 @@ var render = function() {
                                 _c(
                                   "select",
                                   {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.tsize,
-                                        expression: "tsize"
-                                      }
-                                    ],
                                     staticClass: "custom-select my-1 mr-sm-2",
-                                    attrs: { id: "sizeInput" + product.id },
-                                    on: {
-                                      click: function($event) {
-                                        $event.preventDefault()
-                                        return _vm.tsizePrice(_vm.tsize)
-                                      },
-                                      change: function($event) {
-                                        var $$selectedVal = Array.prototype.filter
-                                          .call($event.target.options, function(
-                                            o
-                                          ) {
-                                            return o.selected
-                                          })
-                                          .map(function(o) {
-                                            var val =
-                                              "_value" in o ? o._value : o.value
-                                            return val
-                                          })
-                                        _vm.tsize = $event.target.multiple
-                                          ? $$selectedVal
-                                          : $$selectedVal[0]
-                                      }
-                                    }
+                                    attrs: { id: "sizeInput" + product.id }
                                   },
                                   [
                                     _c(
@@ -48839,17 +48751,17 @@ var render = function() {
                                       ]
                                     ),
                                     _vm._v(" "),
-                                    _vm._l(_vm.tsizes, function(tsize) {
+                                    _vm._l(product.tshirts, function(tshirt) {
                                       return _c(
                                         "option",
                                         {
-                                          key: tsize.id,
-                                          domProps: { value: tsize.id }
+                                          key: tshirt.tsize.id,
+                                          domProps: { value: tshirt.tsize.id }
                                         },
                                         [
                                           _vm._v(
                                             "\n                                                " +
-                                              _vm._s(tsize.name) +
+                                              _vm._s(tshirt.tsize.name) +
                                               "\n                                            "
                                           )
                                         ]
@@ -67555,8 +67467,7 @@ Vue.component("not-found", __webpack_require__(/*! ./components/NotFound.vue */ 
 // });
 //
 
-Vue.filter('currency', function (price) {
-  return "$".concat(price.toFixed(2));
+Vue.filter('currency', function (price) {// return "$".concat(price.toFixed(2));
 });
 var app = new Vue({
   el: "#app",
@@ -69539,8 +69450,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/html/work/Q8/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /var/www/html/work/Q8/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\laravel\Q8\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\laravel\Q8\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

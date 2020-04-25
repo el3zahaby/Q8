@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Design;
+use App\DesignsCollections;
+use App\Http\Controllers\Admin\DCollectionsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -10,7 +12,7 @@ class DesignController extends Controller
 {
     public function show()
     {
-        return Design::where('accepting', 1)->inRandomOrder()->paginate(8);
+        return DesignsCollections::inRandomOrder()->paginate(8);
     }
 
     public function showBestSaller()
@@ -80,7 +82,7 @@ class DesignController extends Controller
             }
         }
 
-        
+
 
         return $this->show();
 

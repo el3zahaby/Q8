@@ -126,10 +126,18 @@
                 <span class="menu-title">Tsizes</span>
             </a>
         </li>
+        <li><hr></li>
+
         <li class="nav-item {{ active_class(['admin/tshirts']) }}">
             <a class="nav-link" href="{{ route('admin.tshirts.index') }}">
                 <i class="menu-icon mdi mdi-tshirt-v "></i>
                 <span class="menu-title">Tshirts</span>
+            </a>
+        </li>
+        <li class="nav-item {{ active_class(['admin/dcollections']) }}">
+            <a class="nav-link" href="{{ route('admin.dcollections.index') }}">
+                <i class="menu-icon mdi mdi-tshirt-v "></i>
+                <span class="menu-title">Designs Collections</span>
             </a>
         </li>
         <li><hr></li>
