@@ -86,7 +86,7 @@ class DesignController extends Controller
                 $dsignsize->designer_price = $price ;
                 $dsignsize->save();
             }else{
-                $store->remove();
+                $store->delete();
             }
         }
 
