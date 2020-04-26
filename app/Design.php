@@ -24,7 +24,7 @@ class Design extends Model
     }
     public function dsizes()
     {
-        return $this->belongsToMany('App\Dsize' );
+        return $this->belongsToMany('App\Dsize' )->withTrashed();
     }
 
     public function sizes()

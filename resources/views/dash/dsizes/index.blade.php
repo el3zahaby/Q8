@@ -73,11 +73,11 @@
                     <div>
                         <div class="form-group">
                             <label >Length</label>
-                            <input name="length" type="text" class="form-control" required >
+                            <input name="length" type="number" class="form-control" required >
                         </div>
                         <div class="form-group ">
                             <label>Width</label>
-                            <input  name="width" type="text" class="form-control"  required>
+                            <input  name="width" type="number" class="form-control"  required>
                         </div>
 
                         <div class="form-group ">
@@ -111,11 +111,11 @@
                         <div>
                             <div class="form-group">
                                 <label>Length</label>
-                                <input name="length" type="text" class="form-control" required value="{{ $item->length }}">
+                                <input name="length" type="number" class="form-control" required value="{{ $item->length }}">
                             </div>
                             <div class="form-group ">
                                 <label>Width</label>
-                                <input  name="width" type="text" class="form-control" value="{{ $item->width }}" required>
+                                <input  name="width" type="number" class="form-control" value="{{ $item->width }}" required>
                             </div>
 
                             <div class="form-group ">

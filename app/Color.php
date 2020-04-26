@@ -20,7 +20,7 @@ class Color extends Model
 
     public function sizes()
     {
-        return $this->belongsToMany('App\Tsize');
+        return $this->belongsToMany('App\Tsize')->withTrashed();
     }
 
 }

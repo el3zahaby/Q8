@@ -11,11 +11,11 @@ class Tshirt extends Model
 
     protected $with = ['color', 'tsize'];
     public function color(){
-        return $this->belongsTo(Color::class);
+        return $this->belongsTo(Color::class)->withTrashed();
     }
 
     public function tsize(){
-        return $this->belongsTo(Tsize::class);
+        return $this->belongsTo(Tsize::class)->withTrashed();
     }
 
 }

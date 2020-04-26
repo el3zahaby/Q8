@@ -24,6 +24,6 @@ class DesignsCollections extends Model
     }
 
     public function design(){
-        return $this->belongsTo(Design::class);
+        return $this->belongsTo(Design::class)->withTrashed();
     }
 }
