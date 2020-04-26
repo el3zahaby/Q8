@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateOrdersTable extends Migration {
 
@@ -16,7 +17,8 @@ class CreateOrdersTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('user_id')->unsigned()->nullable();
-			$table->integer('order_status')->unsigned()->nullable();
+			$table->integer('orderstatuses_id')->unsigned()->nullable();
+            $table->integer('designs_collections_id')->unsigned()->nullable();
 			$table->timestamps();
 			$table->longText('shipping_info');
 		});

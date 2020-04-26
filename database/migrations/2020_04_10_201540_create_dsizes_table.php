@@ -18,7 +18,8 @@ class CreateDsizesTable extends Migration {
 			$table->integer('length')->nullable();
 			$table->integer('width')->nullable();
 			$table->integer('print_price')->nullable();
-			$table->timestamps();
+            $table->softDeletes();
+            $table->timestamps();
 		});
 	}
 

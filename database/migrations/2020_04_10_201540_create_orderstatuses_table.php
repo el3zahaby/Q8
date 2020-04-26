@@ -18,7 +18,9 @@ class CreateOrderstatusesTable extends Migration {
 			$table->string('status')->nullable();
 			$table->string('color')->nullable();
 			$table->timestamps();
-		});
+            $table->softDeletes();
+
+        });
 	}
 
 

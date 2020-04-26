@@ -17,7 +17,9 @@ class CreateTsizesTable extends Migration {
 			$table->increments('id');
 			$table->string('name')->nullable();
 			$table->timestamps();
-		});
+            $table->softDeletes();
+
+        });
 	}
 
 

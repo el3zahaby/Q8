@@ -25,7 +25,9 @@ class CreatePagesTable extends Migration {
 			$table->text('meta_keywords')->nullable();
 			$table->enum('status', array('ACTIVE','INACTIVE'))->default('INACTIVE');
 			$table->timestamps();
-		});
+            $table->softDeletes();
+
+        });
 	}
 
 

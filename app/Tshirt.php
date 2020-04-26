@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Tshirt extends Model
 {
+    use SoftDeletes;
+
     protected $with = ['color', 'tsize'];
     public function color(){
         return $this->belongsTo(Color::class);
