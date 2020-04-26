@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Design extends Model
 {
-//    use SoftDeletes;
+    use SoftDeletes;
 
     protected $guarded = [];
     protected $with = ['dsizes'];
@@ -24,7 +24,7 @@ class Design extends Model
     }
     public function dsizes()
     {
-        return $this->belongsToMany('App\Dsize' );
+        return $this->belongsToMany('App\Dsize' )->withTrashed();
     }
 
     public function sizes()
@@ -90,7 +90,7 @@ class Design extends Model
 
         static::creating(function($table)
         {
-            $first =  Design::first();
+            $first =  Design::withTrashed()->first();
             if(!$first){
                 $table->id = config('app.firstId');
             }

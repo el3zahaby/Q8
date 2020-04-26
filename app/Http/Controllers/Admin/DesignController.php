@@ -26,7 +26,7 @@ class DesignController extends Controller
     public function index()
     {
         $items = $this->model::orderBy('id','desc')->get();
-        $sizes = Dsize::get();
+        $sizes = Dsize::withTrashed()->get();
         return view($this->view.'index',compact('items','sizes'));
     }
 
@@ -86,7 +86,7 @@ class DesignController extends Controller
                 $dsignsize->designer_price = $price ;
                 $dsignsize->save();
             }else{
-                $store->remove();
+                $store->delete();
             }
         }
 
@@ -203,7 +203,7 @@ class DesignController extends Controller
         if (file_exists(public_path('/') . $item->img)) {
             unlink(public_path('/') . $item->img);
         }
-        $design_sizes = DesignSize::where('design_id',$item->id)->get();
+        $design_sizes = DesignSize::withTrashed()->where('design_id',$item->id)->get();
 
         foreach($design_sizes as $ds)
         {

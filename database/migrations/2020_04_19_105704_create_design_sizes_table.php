@@ -19,6 +19,8 @@ class CreateDesignSizesTable extends Migration
             $table->integer('dsize_id');
             $table->integer('designer_price');
             $table->timestamps();
+            $table->softDeletes();
+
         });
     }
 

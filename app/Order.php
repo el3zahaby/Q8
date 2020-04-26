@@ -11,7 +11,7 @@ class Order extends Model
 
     public function status()
     {
-        return $this->belongsTo(Orderstatus::class, 'order_status');
+        return $this->belongsTo(Orderstatus::class)->withTrashed();
     }
 
     public function user()

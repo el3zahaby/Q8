@@ -1,16 +1,16 @@
 <template>
     <div>
         <div v-if="type==='view'||type==='view-most'" class="w-100" style="height: 200px">
-            <img :id="'img-'+this.design.id+(type==='view'?'-view':type)"
+            <img :id="'img-'+this.design.design.id+(type==='view'?'-view':type)"
                  class="position-absolute"
                  style="clip: rect(0px, auto, 200px, 0px);width: 200%;margin-left: -50%;"
                  src="">
         </div>
 
-        <img v-else :id="'img-'+this.design.id+(type==='view'?'-view':type)" class="w-100 h-100" src="">
+        <img v-else :id="'img-'+this.design.design.id+(type==='view'?'-view':type)" class="w-100 h-100" src="">
 
         <div id="main-container" class="px-3 d-none">
-            <div :id="'clothing-designer-'+this.design.id+(type==='view'?'-view':type)"></div>
+            <div :id="'clothing-designer-'+this.design.design.id+(type==='view'?'-view':type)"></div>
             <br/>
         </div>
     </div>
@@ -27,10 +27,11 @@
         methods: {},
         mounted() {
             let _this = this;
-            let $yourDesigner = $("#clothing-designer-" + _this.design.id + (_this.type === 'view' ? '-view' : _this.type)),
+            let design =_this.design.design;
+            let $yourDesigner = $("#clothing-designer-" + design.id + (_this.type === 'view' ? '-view' : _this.type)),
                 pluginOpts = {
                     mainBarModules: [],
-                    productsJSON: getProductJson(_this.design), //see JSON folder for products sorted in categories
+                    productsJSON: getProductJson(design), //see JSON folder for products sorted in categories
                     customImageParameters: {
 
                     },
@@ -45,11 +46,11 @@
                     $yourDesigner,
                     pluginOpts
                 );
-
+            // console.log( "#clothing-designer-" + design.id + (_this.type === 'view' ? '-view' : _this.type))
             //you can listen to events
             $yourDesigner.on('productCreate', async function () {
                 yourDesigner.getProductDataURL(function (dataURL) {
-                    $('#img-' + _this.design.id + (_this.type === 'view' ? '-view' : _this.type)).attr('src', dataURL);
+                    $('#img-' + design.id + (_this.type === 'view' ? '-view' : _this.type)).attr('src', dataURL);
                 });
             });
         }
@@ -59,12 +60,12 @@
         return [[
             {
                 "title": "Shirt Front",
-                "thumbnail": "images/yellow_shirt/front/preview.png",
+                "thumbnail": "images/color_shirt/yellow/front/preview.png",
                 "elements": [
 
                     {
                         "type": "image",
-                        "source": "images/yellow_shirt/front/base.png",
+                        "source": "images/color_shirt/yellow/front/base.png",
                         "title": "Base",
                         "parameters": {
                             "autoCenter": true,
@@ -76,7 +77,7 @@
                     },
                     {
                         "type": "image",
-                        "source": "images/yellow_shirt/front/shadows.png",
+                        "source": "images/color_shirt/yellow/front/shadows.png",
                         "title": "Shadow",
                         "parameters": {
                             "autoCenter": true,
@@ -85,13 +86,13 @@
                     },
                     {
                         "type": "image",
-                        "source": "/storage/" + pdesign.img,
+                        "source": pdesign.img,
                         "title": "Image Title",
                         "parameters": {
                             "boundingBox": {
                                 "x": 350,
                                 "y": 160,
-                                "width": 200,
+                                "width": 100,
                                 "height": 200
                             },
                             "boundingBoxMode": "clipping",
@@ -103,7 +104,7 @@
                     },
                     {
                         "type": "image",
-                        "source": "images/yellow_shirt/front/body.png",
+                        "source": "images/color_shirt/yellow/front/body.png",
                         "title": "Hightlights",
                         "parameters": {
                             "left": 447,
@@ -115,11 +116,11 @@
             },
             {
                 "title": "Shirt Back",
-                "thumbnail": "images/yellow_shirt/back/preview.png",
+                "thumbnail": "images/color_shirt/yellow/back/preview.png",
                 "elements": [
                     {
                         "type": "image",
-                        "source": "images/yellow_shirt/back/base.png",
+                        "source": "images/color_shirt/yellow/back/base.png",
                         "title": "Base",
                         "parameters": {
                             "autoCenter": true,
@@ -130,7 +131,7 @@
                     },
                     {
                         "type": "image",
-                        "source": "images/yellow_shirt/back/body.png",
+                        "source": "images/color_shirt/yellow/back/body.png",
                         "title": "Hightlights",
                         "parameters": {
                             "left": 467,
@@ -140,7 +141,7 @@
                     },
                     {
                         "type": "image",
-                        "source": "images/yellow_shirt/back/shadows.png",
+                        "source": "images/color_shirt/yellow/back/shadows.png",
                         "title": "Shadow",
                         "parameters": {
                             "autoCenter": true,

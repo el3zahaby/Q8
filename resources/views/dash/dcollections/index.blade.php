@@ -32,8 +32,8 @@
                                 <tr>
                                     <td> {{ $item->id }} </td>
                                     <td><a href="{{ route('admin.designs.show',$item->design->id) }}" title="{{ $item->design->name_en }}"><img src="{{ $item->design->img }}" alt=""> </a></td>
-                                    <td> @foreach($item->tshirts as $t) <span class="badge" style="background: {{$t->color->name}};color: #eeeeee">{{$t->color->name}}</span> @endforeach </td>
-                                    <td> @foreach($item->tshirts as $t) <span class="badge" style="background: {{$t->color->name}};color: #eeeeee">{{$t->tsize->name}}</span> @endforeach </td>
+                                    <td> @foreach($item->tshirts as $t) <span class="badge badge-bg" style="background: {{$t->color->name}};">{{$t->color->name}}</span> @endforeach </td>
+                                    <td> @foreach($item->tshirts as $t) <span class="badge badge-bg" style="background: {{$t->color->name}};">{{$t->tsize->name}}</span> @endforeach </td>
                                     <td> {{ $item->created_at->diffForHumans() }} </td>
 
 
@@ -198,6 +198,7 @@
                 }
             });
         });
+
 
     </script>
 @endpush

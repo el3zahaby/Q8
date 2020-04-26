@@ -2498,10 +2498,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   mounted: function mounted() {
     var _this = this;
 
-    var $yourDesigner = $("#clothing-designer-" + _this.design.id + (_this.type === 'view' ? '-view' : _this.type)),
+    var design = _this.design.design;
+    var $yourDesigner = $("#clothing-designer-" + design.id + (_this.type === 'view' ? '-view' : _this.type)),
         pluginOpts = {
       mainBarModules: [],
-      productsJSON: getProductJson(_this.design),
+      productsJSON: getProductJson(design),
       //see JSON folder for products sorted in categories
       customImageParameters: {},
       actions: {
@@ -2511,7 +2512,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         left: []
       }
     },
-        yourDesigner = new FancyProductDesigner($yourDesigner, pluginOpts); //you can listen to events
+        yourDesigner = new FancyProductDesigner($yourDesigner, pluginOpts); // console.log( "#clothing-designer-" + design.id + (_this.type === 'view' ? '-view' : _this.type))
+    //you can listen to events
 
     $yourDesigner.on('productCreate', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
@@ -2519,7 +2521,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           switch (_context.prev = _context.next) {
             case 0:
               yourDesigner.getProductDataURL(function (dataURL) {
-                $('#img-' + _this.design.id + (_this.type === 'view' ? '-view' : _this.type)).attr('src', dataURL);
+                $('#img-' + design.id + (_this.type === 'view' ? '-view' : _this.type)).attr('src', dataURL);
               });
 
             case 1:
@@ -2534,10 +2536,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 function getProductJson(pdesign) {
   return [[{
     "title": "Shirt Front",
-    "thumbnail": "images/yellow_shirt/front/preview.png",
+    "thumbnail": "images/color_shirt/yellow/front/preview.png",
     "elements": [{
       "type": "image",
-      "source": "images/yellow_shirt/front/base.png",
+      "source": "images/color_shirt/yellow/front/base.png",
       "title": "Base",
       "parameters": {
         "autoCenter": true,
@@ -2548,7 +2550,7 @@ function getProductJson(pdesign) {
       }
     }, {
       "type": "image",
-      "source": "images/yellow_shirt/front/shadows.png",
+      "source": "images/color_shirt/yellow/front/shadows.png",
       "title": "Shadow",
       "parameters": {
         "autoCenter": true,
@@ -2556,13 +2558,13 @@ function getProductJson(pdesign) {
       }
     }, {
       "type": "image",
-      "source": "/storage/" + pdesign.img,
+      "source": pdesign.img,
       "title": "Image Title",
       "parameters": {
         "boundingBox": {
           "x": 350,
           "y": 160,
-          "width": 200,
+          "width": 100,
           "height": 200
         },
         "boundingBoxMode": "clipping",
@@ -2573,7 +2575,7 @@ function getProductJson(pdesign) {
       }
     }, {
       "type": "image",
-      "source": "images/yellow_shirt/front/body.png",
+      "source": "images/color_shirt/yellow/front/body.png",
       "title": "Hightlights",
       "parameters": {
         "left": 447,
@@ -2583,10 +2585,10 @@ function getProductJson(pdesign) {
     }]
   }, {
     "title": "Shirt Back",
-    "thumbnail": "images/yellow_shirt/back/preview.png",
+    "thumbnail": "images/color_shirt/yellow/back/preview.png",
     "elements": [{
       "type": "image",
-      "source": "images/yellow_shirt/back/base.png",
+      "source": "images/color_shirt/yellow/back/base.png",
       "title": "Base",
       "parameters": {
         "autoCenter": true,
@@ -2596,7 +2598,7 @@ function getProductJson(pdesign) {
       }
     }, {
       "type": "image",
-      "source": "images/yellow_shirt/back/body.png",
+      "source": "images/color_shirt/yellow/back/body.png",
       "title": "Hightlights",
       "parameters": {
         "left": 467,
@@ -2605,7 +2607,7 @@ function getProductJson(pdesign) {
       }
     }, {
       "type": "image",
-      "source": "images/yellow_shirt/back/shadows.png",
+      "source": "images/color_shirt/yellow/back/shadows.png",
       "title": "Shadow",
       "parameters": {
         "autoCenter": true,
@@ -3355,9 +3357,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3395,8 +3394,8 @@ __webpack_require__.r(__webpack_exports__);
     },
     addToCart: function addToCart(product) {
       var root = this.$root;
-      axios.post("api/v1/add-to-cart/".concat(product.id), {
-        id: product.id,
+      axios.post("api/v1/add-to-cart/".concat(product.design.id), {
+        id: product.design.id,
         frontprint: this.frontprint,
         backprint: this.backprint,
         tcolor: this.tcolor,
@@ -46728,7 +46727,7 @@ var render = function() {
             attrs: {
               id:
                 "img-" +
-                this.design.id +
+                this.design.design.id +
                 (_vm.type === "view" ? "-view" : _vm.type),
               src: ""
             }
@@ -46739,7 +46738,7 @@ var render = function() {
           attrs: {
             id:
               "img-" +
-              this.design.id +
+              this.design.design.id +
               (_vm.type === "view" ? "-view" : _vm.type),
             src: ""
           }
@@ -46750,7 +46749,7 @@ var render = function() {
         attrs: {
           id:
             "clothing-designer-" +
-            this.design.id +
+            this.design.design.id +
             (_vm.type === "view" ? "-view" : _vm.type)
         }
       }),
@@ -47203,7 +47202,10 @@ var render = function() {
           _vm._l(_vm.mostSells, function(product) {
             return _c(
               "div",
-              { key: product.id, staticClass: "col-xl-3 col-lg-4 col-md-6" },
+              {
+                key: product.design.id,
+                staticClass: "col-xl-3 col-lg-4 col-md-6"
+              },
               [
                 _c("div", { staticClass: "t-shirt_data mb-2" }, [
                   _c("span", [_vm._v("ID : " + _vm._s(product.random_name))]),
@@ -47233,7 +47235,7 @@ var render = function() {
                                   "data-id": "hidden-denim-shirt",
                                   title: "Product Details",
                                   "data-toggle": "modal",
-                                  "data-target": "#d" + product.id
+                                  "data-target": "#d" + product.design.id
                                 }
                               },
                               [
@@ -47334,10 +47336,10 @@ var render = function() {
         return _c(
           "div",
           {
-            key: product.id,
+            key: product.design.id,
             staticClass: "modal fade",
             attrs: {
-              id: "d" + product.id,
+              id: "d" + product.design.id,
               tabindex: "-1",
               role: "dialog",
               "aria-labelledby": "myExtraLargeModalLabel",
@@ -47381,7 +47383,7 @@ var render = function() {
                         _vm._v(" "),
                         _c("h5", [
                           _vm._v("ID: "),
-                          _c("span", [_vm._v(_vm._s(product.id))])
+                          _c("span", [_vm._v(_vm._s(product.design.id))])
                         ]),
                         _vm._v(" "),
                         _c("span", { staticClass: "productPrice" }, [
@@ -47449,7 +47451,7 @@ var render = function() {
                                       staticClass: "printOpt",
                                       attrs: {
                                         type: "radio",
-                                        id: "front" + product.id,
+                                        id: "front" + product.design.id,
                                         value: "front"
                                       },
                                       domProps: {
@@ -47469,7 +47471,9 @@ var render = function() {
                                       "label",
                                       {
                                         staticClass: "printOpt",
-                                        attrs: { for: "front" + product.id }
+                                        attrs: {
+                                          for: "front" + product.design.id
+                                        }
                                       },
                                       [_vm._v(_vm._s(_vm.$t("Front")))]
                                     )
@@ -47492,7 +47496,7 @@ var render = function() {
                                       staticClass: "printOpt",
                                       attrs: {
                                         type: "radio",
-                                        id: "back" + product.id,
+                                        id: "back" + product.design.id,
                                         value: "back"
                                       },
                                       domProps: {
@@ -47512,7 +47516,9 @@ var render = function() {
                                       "label",
                                       {
                                         staticClass: "printOpt",
-                                        attrs: { for: "back" + product.id }
+                                        attrs: {
+                                          for: "back" + product.design.id
+                                        }
                                       },
                                       [_vm._v(_vm._s(_vm.$t("Back")))]
                                     )
@@ -47535,7 +47541,7 @@ var render = function() {
                                       staticClass: "printOpt",
                                       attrs: {
                                         type: "radio",
-                                        id: "front_back" + product.id,
+                                        id: "front_back" + product.design.id,
                                         value: "front_back"
                                       },
                                       domProps: {
@@ -47556,7 +47562,7 @@ var render = function() {
                                       {
                                         staticClass: "printOpt",
                                         attrs: {
-                                          for: "front_back" + product.id
+                                          for: "front_back" + product.design.id
                                         }
                                       },
                                       [_vm._v(_vm._s(_vm.$t("Front_and_Back")))]
@@ -47575,7 +47581,8 @@ var render = function() {
                                             "my-1 mr-2 font-weight-bold text-capitalize",
                                           attrs: {
                                             for:
-                                              "frontSizeInputFiled" + product.id
+                                              "frontSizeInputFiled" +
+                                              product.design.id
                                           }
                                         },
                                         [
@@ -47600,7 +47607,8 @@ var render = function() {
                                             "custom-select my-1 mr-sm-2",
                                           attrs: {
                                             id:
-                                              "frontSizeInputFiled" + product.id
+                                              "frontSizeInputFiled" +
+                                              product.design.id
                                           },
                                           on: {
                                             click: function($event) {
@@ -47687,7 +47695,8 @@ var render = function() {
                                             "my-1 mr-2 font-weight-bold text-capitalize",
                                           attrs: {
                                             for:
-                                              "backSizeInputFiled" + product.id
+                                              "backSizeInputFiled" +
+                                              product.design.id
                                           }
                                         },
                                         [
@@ -47712,7 +47721,8 @@ var render = function() {
                                             "custom-select my-1 mr-sm-2",
                                           attrs: {
                                             id:
-                                              "backSizeInputFiled" + product.id
+                                              "backSizeInputFiled" +
+                                              product.design.id
                                           },
                                           on: {
                                             click: function($event) {
@@ -47796,7 +47806,9 @@ var render = function() {
                                   "label",
                                   {
                                     staticClass: "my-1 mr-2 font-weight-bold",
-                                    attrs: { for: "colorInput" + product.id }
+                                    attrs: {
+                                      for: "colorInput" + product.design.id
+                                    }
                                   },
                                   [_vm._v(_vm._s(_vm.$t("TShirt_Color")) + "*")]
                                 ),
@@ -47813,7 +47825,9 @@ var render = function() {
                                       }
                                     ],
                                     staticClass: "custom-select my-1 mr-sm-2",
-                                    attrs: { id: "colorInput" + product.id },
+                                    attrs: {
+                                      id: "colorInput" + product.design.id
+                                    },
                                     on: {
                                       change: function($event) {
                                         var $$selectedVal = Array.prototype.filter
@@ -47875,7 +47889,9 @@ var render = function() {
                                   "label",
                                   {
                                     staticClass: "my-1 mr-2 font-weight-bold",
-                                    attrs: { for: "sizeInput" + product.id }
+                                    attrs: {
+                                      for: "sizeInput" + product.design.id
+                                    }
                                   },
                                   [_vm._v(_vm._s(_vm.$t("TShirt_Size")) + "*")]
                                 ),
@@ -47884,7 +47900,9 @@ var render = function() {
                                   "select",
                                   {
                                     staticClass: "custom-select my-1 mr-sm-2",
-                                    attrs: { id: "sizeInput" + product.id }
+                                    attrs: {
+                                      id: "sizeInput" + product.design.id
+                                    }
                                   },
                                   [
                                     _c(
@@ -48035,10 +48053,13 @@ var render = function() {
           _vm._l(_vm.products, function(product) {
             return _c(
               "div",
-              { key: product.id, staticClass: "col-xl-3 col-lg-4 col-md-6" },
+              {
+                key: product.design.id,
+                staticClass: "col-xl-3 col-lg-4 col-md-6"
+              },
               [
                 _c("div", { staticClass: "t-shirt_data mb-2" }, [
-                  _c("span", [_vm._v("ID : " + _vm._s(product.id))]),
+                  _c("span", [_vm._v("ID : " + _vm._s(product.design.id))]),
                   _vm._v(" "),
                   _c(
                     "div",
@@ -48065,7 +48086,7 @@ var render = function() {
                                   "data-id": "hidden-denim-shirt",
                                   title: "Product Details",
                                   "data-toggle": "modal",
-                                  "data-target": "#d" + product.id
+                                  "data-target": "#d" + product.design.id
                                 }
                               },
                               [
@@ -48205,10 +48226,10 @@ var render = function() {
         return _c(
           "div",
           {
-            key: product.id,
+            key: product.design.id,
             staticClass: "modal fade",
             attrs: {
-              id: "d" + product.id,
+              id: "d" + product.design.id,
               tabindex: "-1",
               role: "dialog",
               "aria-labelledby": "myExtraLargeModalLabel",
@@ -48252,7 +48273,7 @@ var render = function() {
                         _vm._v(" "),
                         _c("h5", [
                           _vm._v("ID: "),
-                          _c("span", [_vm._v(_vm._s(product.id))])
+                          _c("span", [_vm._v(_vm._s(product.design.id))])
                         ]),
                         _vm._v(" "),
                         _c("span", { staticClass: "productPrice" }, [
@@ -48320,7 +48341,7 @@ var render = function() {
                                       staticClass: "printOpt",
                                       attrs: {
                                         type: "radio",
-                                        id: "front" + product.id,
+                                        id: "front" + product.design.id,
                                         value: "front"
                                       },
                                       domProps: {
@@ -48340,7 +48361,9 @@ var render = function() {
                                       "label",
                                       {
                                         staticClass: "printOpt",
-                                        attrs: { for: "front" + product.id }
+                                        attrs: {
+                                          for: "front" + product.design.id
+                                        }
                                       },
                                       [_vm._v(_vm._s(_vm.$t("Front")))]
                                     )
@@ -48363,7 +48386,7 @@ var render = function() {
                                       staticClass: "printOpt",
                                       attrs: {
                                         type: "radio",
-                                        id: "back" + product.id,
+                                        id: "back" + product.design.id,
                                         value: "back"
                                       },
                                       domProps: {
@@ -48383,7 +48406,9 @@ var render = function() {
                                       "label",
                                       {
                                         staticClass: "printOpt",
-                                        attrs: { for: "back" + product.id }
+                                        attrs: {
+                                          for: "back" + product.design.id
+                                        }
                                       },
                                       [_vm._v(_vm._s(_vm.$t("Back")))]
                                     )
@@ -48406,7 +48431,7 @@ var render = function() {
                                       staticClass: "printOpt",
                                       attrs: {
                                         type: "radio",
-                                        id: "front_back" + product.id,
+                                        id: "front_back" + product.design.id,
                                         value: "front_back"
                                       },
                                       domProps: {
@@ -48427,7 +48452,7 @@ var render = function() {
                                       {
                                         staticClass: "printOpt",
                                         attrs: {
-                                          for: "front_back" + product.id
+                                          for: "front_back" + product.design.id
                                         }
                                       },
                                       [_vm._v(_vm._s(_vm.$t("Front_and_Back")))]
@@ -48446,7 +48471,8 @@ var render = function() {
                                             "my-1 mr-2 font-weight-bold text-capitalize",
                                           attrs: {
                                             for:
-                                              "frontSizeInputFiled" + product.id
+                                              "frontSizeInputFiled" +
+                                              product.design.id
                                           }
                                         },
                                         [
@@ -48471,7 +48497,8 @@ var render = function() {
                                             "custom-select my-1 mr-sm-2",
                                           attrs: {
                                             id:
-                                              "frontSizeInputFiled" + product.id
+                                              "frontSizeInputFiled" +
+                                              product.design.id
                                           },
                                           on: {
                                             click: function($event) {
@@ -48555,7 +48582,8 @@ var render = function() {
                                             "my-1 mr-2 font-weight-bold text-capitalize",
                                           attrs: {
                                             for:
-                                              "backSizeInputFiled" + product.id
+                                              "backSizeInputFiled" +
+                                              product.design.id
                                           }
                                         },
                                         [
@@ -48580,7 +48608,8 @@ var render = function() {
                                             "custom-select my-1 mr-sm-2",
                                           attrs: {
                                             id:
-                                              "backSizeInputFiled" + product.id
+                                              "backSizeInputFiled" +
+                                              product.design.id
                                           },
                                           on: {
                                             click: function($event) {
@@ -48664,7 +48693,9 @@ var render = function() {
                                   "label",
                                   {
                                     staticClass: "my-1 mr-2 font-weight-bold",
-                                    attrs: { for: "colorInput" + product.id }
+                                    attrs: {
+                                      for: "colorInput" + product.design.id
+                                    }
                                   },
                                   [_vm._v(_vm._s(_vm.$t("TShirt_Color")) + "*")]
                                 ),
@@ -48681,7 +48712,9 @@ var render = function() {
                                       }
                                     ],
                                     staticClass: "custom-select my-1 mr-sm-2",
-                                    attrs: { id: "colorInput" + product.id },
+                                    attrs: {
+                                      id: "colorInput" + product.design.id
+                                    },
                                     on: {
                                       change: function($event) {
                                         var $$selectedVal = Array.prototype.filter
@@ -48743,7 +48776,9 @@ var render = function() {
                                   "label",
                                   {
                                     staticClass: "my-1 mr-2 font-weight-bold",
-                                    attrs: { for: "sizeInput" + product.id }
+                                    attrs: {
+                                      for: "sizeInput" + product.design.id
+                                    }
                                   },
                                   [_vm._v(_vm._s(_vm.$t("TShirt_Size")) + "*")]
                                 ),
@@ -48752,7 +48787,9 @@ var render = function() {
                                   "select",
                                   {
                                     staticClass: "custom-select my-1 mr-sm-2",
-                                    attrs: { id: "sizeInput" + product.id }
+                                    attrs: {
+                                      id: "sizeInput" + product.design.id
+                                    }
                                   },
                                   [
                                     _c(

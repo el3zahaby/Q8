@@ -8,7 +8,7 @@
             <div class="row">
                 <div
                     v-for="product in mostSells"
-                    v-bind:key="product.id"
+                    v-bind:key="product.design.id"
                     class="col-xl-3 col-lg-4 col-md-6">
                     <div class="t-shirt_data mb-2">
                         <span>ID : {{product.random_name}}</span>
@@ -23,7 +23,7 @@
                                         class="quickview_btn"
                                         title="Product Details"
                                         data-toggle="modal"
-                                        :data-target="'#d'+product.id">
+                                        :data-target="'#d'+product.design.id">
                                         <img src="/images/eye.png" alt=""/>
                                     </a>
                                 </li>
@@ -88,9 +88,9 @@
         </div>
         <div
             v-for="product in mostSells"
-            v-bind:key="product.id"
+            v-bind:key="product.design.id"
             class="modal fade"
-            :id="'d'+product.id"
+            :id="'d'+product.design.id"
             tabindex="-1"
             role="dialog"
             aria-labelledby="myExtraLargeModalLabel"
@@ -109,15 +109,14 @@
                         <div class="row p-3">
                             <div class="col-md-6 h-100">
                                 <div
-                                    class="product-img d-flex justify-content-center"
-                                >
+                                    class="product-img d-flex justify-content-center">
                                     <product-designer :design="product" :type="'popup'"
                                                       class="col-12"></product-designer>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <h3 class="productName">{{product.name}}</h3>
-                                <h5>ID: <span>{{product.id}}</span></h5>
+                                <h5>ID: <span>{{product.design.id}}</span></h5>
                                 <span
                                     class="productPrice">{{priceDefault(product.price,product.discount)|currency}}</span>
                                 <p class="ProductDetails pt-3">
@@ -131,37 +130,37 @@
                                             >{{$t('print_options')}}* : </label
                                             >
                                             <div class="d-inline-block mx-2">
-                                                <input class="printOpt" type="radio" :id="'front'+product.id"
+                                                <input class="printOpt" type="radio" :id="'front'+product.design.id"
                                                        value="front"
                                                        v-model="printOptions">
                                                 <label class="printOpt"
-                                                       :for="'front'+product.id">{{$t('Front')}}</label>
+                                                       :for="'front'+product.design.id">{{$t('Front')}}</label>
                                             </div>
                                             <div class="d-inline-block mx-2">
-                                                <input class="printOpt" type="radio" :id="'back'+product.id"
+                                                <input class="printOpt" type="radio" :id="'back'+product.design.id"
                                                        value="back"
                                                        v-model="printOptions">
-                                                <label class="printOpt" :for="'back'+product.id">{{$t('Back')}}</label>
+                                                <label class="printOpt" :for="'back'+product.design.id">{{$t('Back')}}</label>
                                             </div>
                                             <div class="d-inline-block mx-2">
-                                                <input class="printOpt" type="radio" :id="'front_back'+product.id"
+                                                <input class="printOpt" type="radio" :id="'front_back'+product.design.id"
                                                        value="front_back"
                                                        v-model="printOptions">
-                                                <label class="printOpt" :for="'front_back'+product.id">{{$t('Front_and_Back')}}</label>
+                                                <label class="printOpt" :for="'front_back'+product.design.id">{{$t('Front_and_Back')}}</label>
                                             </div>
                                         </div>
                                         <div class="mb-2">
                                             <div v-if="printOptions.includes('front')">
                                                 <label
                                                     class="my-1 mr-2 font-weight-bold text-capitalize"
-                                                    :for="'frontSizeInputFiled'+product.id"
+                                                    :for="'frontSizeInputFiled'+product.design.id"
                                                 >{{$t('front_size')}}*</label
                                                 >
                                                 <select
                                                     @click.prevent="frontprintPrice(frontprint)"
                                                     v-model="frontprint"
                                                     class="custom-select my-1 mr-sm-2"
-                                                    :id="'frontSizeInputFiled'+product.id"
+                                                    :id="'frontSizeInputFiled'+product.design.id"
                                                 >
                                                     <option :value="null" selected>- {{$t('Please_Select')}} -</option>
                                                     <option v-for="dsize in product.design.dsizes" :key="dsize.id"
@@ -173,14 +172,14 @@
                                             <div v-if="printOptions.includes('back')">
                                                 <label
                                                     class="my-1 mr-2 font-weight-bold text-capitalize"
-                                                    :for="'backSizeInputFiled'+product.id"
+                                                    :for="'backSizeInputFiled'+product.design.id"
                                                 >{{$t('back_size')}}*</label
                                                 >
                                                 <select
                                                     @click.prevent="backprintPrice(backprint)"
                                                     v-model="backprint"
                                                     class="custom-select my-1 mr-sm-2"
-                                                    :id="'backSizeInputFiled'+product.id"
+                                                    :id="'backSizeInputFiled'+product.design.id"
                                                 >
                                                     <option :value="null" selected>- {{$t('Please_Select')}} -</option>
                                                     <option v-for="dsize in product.design.dsizes" :key="dsize.id"
@@ -193,13 +192,13 @@
                                         <div class="mb-2">
                                             <label
                                                 class="my-1 mr-2 font-weight-bold"
-                                                :for="'colorInput'+product.id"
+                                                :for="'colorInput'+product.design.id"
                                             >{{$t('TShirt_Color')}}*</label
                                             >
                                             <select
                                                 v-model="tcolor"
                                                 class="custom-select my-1 mr-sm-2"
-                                                :id="'colorInput'+product.id"
+                                                :id="'colorInput'+product.design.id"
                                             >
                                                 <option :value="null" selected>- {{$t('Please_Select')}} -</option>
                                                 <option v-for="color in tcolors" :key="color.id" :value="color.id">
@@ -210,12 +209,12 @@
                                         <div class="mb-2">
                                             <label
                                                 class="my-1 mr-2 font-weight-bold"
-                                                :for="'sizeInput'+product.id"
+                                                :for="'sizeInput'+product.design.id"
                                             >{{$t('TShirt_Size')}}*</label
                                             >
                                             <select
                                                 class="custom-select my-1 mr-sm-2"
-                                                :id="'sizeInput'+product.id"
+                                                :id="'sizeInput'+product.design.id"
                                             >
                                                 <option :value="null" selected>- {{$t('Please_Select')}} -</option>
                                                 <option v-for="tsize in tsizes" :key="tsize.id" :value="tsize.id">
@@ -266,11 +265,11 @@
             <div class="row">
                 <div
                     v-for="product in products"
-                    v-bind:key="product.id"
+                    v-bind:key="product.design.id"
                     class="col-xl-3 col-lg-4 col-md-6"
                 >
                     <div class="t-shirt_data mb-2">
-                        <span>ID : {{product.id}}</span>
+                        <span>ID : {{product.design.id}}</span>
                         <div class="t-shirt_image_div position-relative">
                             <product-designer :design="product" :type="'view'"></product-designer>
                             <ul
@@ -283,7 +282,7 @@
                                         class="quickview_btn"
                                         title="Product Details"
                                         data-toggle="modal"
-                                        :data-target="'#d'+product.id"
+                                        :data-target="'#d'+product.design.id"
                                     >
                                         <img src="/images/eye.png" alt=""/>
                                     </a>
@@ -361,9 +360,9 @@
         </div>
         <div
             v-for="product in products"
-            v-bind:key="product.id"
+            v-bind:key="product.design.id"
             class="modal fade"
-            :id="'d'+product.id"
+            :id="'d'+product.design.id"
             tabindex="-1"
             role="dialog"
             aria-labelledby="myExtraLargeModalLabel"
@@ -383,16 +382,14 @@
                     <div class="content">
                         <div class="row p-3">
                             <div class="col-md-6 h-100">
-                                <div
-                                    class="product-img d-flex justify-content-center"
-                                >
+                                <div class="product-img d-flex justify-content-center">
                                     <product-designer :design="product" :type="'popup'"
                                                       class="col-12"></product-designer>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <h3 class="productName">{{product.name}}</h3>
-                                <h5>ID: <span>{{product.id}}</span></h5>
+                                <h5>ID: <span>{{product.design.id}}</span></h5>
                                 <span
                                     class="productPrice">{{priceDefault(product.price,product.discount)|currency}}</span>
                                 <p class="ProductDetails pt-3">
@@ -406,37 +403,37 @@
                                             >{{$t('print_options')}}* : </label
                                             >
                                             <div class="d-inline-block mx-2">
-                                                <input class="printOpt" type="radio" :id="'front'+product.id"
+                                                <input class="printOpt" type="radio" :id="'front'+product.design.id"
                                                        value="front"
                                                        v-model="printOptions">
                                                 <label class="printOpt"
-                                                       :for="'front'+product.id">{{$t('Front')}}</label>
+                                                       :for="'front'+product.design.id">{{$t('Front')}}</label>
                                             </div>
                                             <div class="d-inline-block mx-2">
-                                                <input class="printOpt" type="radio" :id="'back'+product.id"
+                                                <input class="printOpt" type="radio" :id="'back'+product.design.id"
                                                        value="back"
                                                        v-model="printOptions">
-                                                <label class="printOpt" :for="'back'+product.id">{{$t('Back')}}</label>
+                                                <label class="printOpt" :for="'back'+product.design.id">{{$t('Back')}}</label>
                                             </div>
                                             <div class="d-inline-block mx-2">
-                                                <input class="printOpt" type="radio" :id="'front_back'+product.id"
+                                                <input class="printOpt" type="radio" :id="'front_back'+product.design.id"
                                                        value="front_back"
                                                        v-model="printOptions">
-                                                <label class="printOpt" :for="'front_back'+product.id">{{$t('Front_and_Back')}}</label>
+                                                <label class="printOpt" :for="'front_back'+product.design.id">{{$t('Front_and_Back')}}</label>
                                             </div>
                                         </div>
                                         <div class="mb-2">
                                             <div v-if="printOptions.includes('front')">
                                                 <label
                                                     class="my-1 mr-2 font-weight-bold text-capitalize"
-                                                    :for="'frontSizeInputFiled'+product.id"
+                                                    :for="'frontSizeInputFiled'+product.design.id"
                                                 >{{$t('front_size')}}*</label
                                                 >
                                                 <select
                                                     @click.prevent="frontprintPrice(frontprint)"
                                                     v-model="frontprint"
                                                     class="custom-select my-1 mr-sm-2"
-                                                    :id="'frontSizeInputFiled'+product.id"
+                                                    :id="'frontSizeInputFiled'+product.design.id"
                                                 >
                                                     <option :value="null" selected>- {{$t('Please_Select')}} -</option>
                                                     <option v-for="dsize in product.design.dsizes" :key="dsize.id"
@@ -447,14 +444,14 @@
                                             <div v-if="printOptions.includes('back')">
                                                 <label
                                                     class="my-1 mr-2 font-weight-bold text-capitalize"
-                                                    :for="'backSizeInputFiled'+product.id"
+                                                    :for="'backSizeInputFiled'+product.design.id"
                                                 >{{$t('back_size')}}*</label
                                                 >
                                                 <select
                                                     @click.prevent="backprintPrice(backprint)"
                                                     v-model="backprint"
                                                     class="custom-select my-1 mr-sm-2"
-                                                    :id="'backSizeInputFiled'+product.id"
+                                                    :id="'backSizeInputFiled'+product.design.id"
                                                 >
                                                     <option :value="null" selected>- {{$t('Please_Select')}} -</option>
                                                     <option v-for="dsize in product.design.dsizes" :key="dsize.id"
@@ -467,12 +464,12 @@
                                         <div class="mb-2">
                                             <label
                                                 class="my-1 mr-2 font-weight-bold"
-                                                :for="'colorInput'+product.id">{{$t('TShirt_Color')}}*</label
+                                                :for="'colorInput'+product.design.id">{{$t('TShirt_Color')}}*</label
                                             >
                                             <select
                                                 v-model="tcolor"
                                                 class="custom-select my-1 mr-sm-2"
-                                                :id="'colorInput'+product.id"
+                                                :id="'colorInput'+product.design.id"
                                             >
                                                 <option :value="null" selected>- {{$t('Please_Select')}} -</option>
                                                 <option v-for="tshirt in product.tshirts" :key="tshirt.color.id" :value="tshirt.color.id">
@@ -483,12 +480,12 @@
                                         <div class="mb-2">
                                             <label
                                                 class="my-1 mr-2 font-weight-bold"
-                                                :for="'sizeInput'+product.id"
+                                                :for="'sizeInput'+product.design.id"
                                             >{{$t('TShirt_Size')}}*</label
                                             >
                                             <select
                                                 class="custom-select my-1 mr-sm-2"
-                                                :id="'sizeInput'+product.id"
+                                                :id="'sizeInput'+product.design.id"
                                             >
                                                 <option :value="null" selected>- {{$t('Please_Select')}} -</option>
                                                 <option v-for="tshirt in product.tshirts" :key="tshirt.tsize.id" :value="tshirt.tsize.id">
@@ -573,8 +570,8 @@
             },
             addToCart: function (product) {
                 let root = this.$root;
-                axios.post(`api/v1/add-to-cart/${product.id}`, {
-                    id: product.id,
+                axios.post(`api/v1/add-to-cart/${product.design.id}`, {
+                    id: product.design.id,
                     frontprint: this.frontprint,
                     backprint: this.backprint,
                     tcolor: this.tcolor,

@@ -3,13 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use TCG\Voyager\Traits\Translatable;
 
 
 class Color extends Model
 {
-    // use Translatable;
-    protected $translatable = ['name'];
+    use SoftDeletes;
     protected $guarded = [];
 
     public static function getNameById($id)
@@ -20,7 +20,7 @@ class Color extends Model
 
     public function sizes()
     {
-        return $this->belongsToMany('App\Tsize');
+        return $this->belongsToMany('App\Tsize')->withTrashed();
     }
 
 }

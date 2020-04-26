@@ -21,6 +21,8 @@ class CreateTshirtsTable extends Migration
 
             $table->float('price', 10, 0)->unsigned()->default(0);
             $table->timestamps();
+            $table->softDeletes();
+
         });
     }
 
