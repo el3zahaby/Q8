@@ -90,7 +90,7 @@ class Design extends Model
 
         static::creating(function($table)
         {
-            $first =  Design::first();
+            $first =  Design::withTrashed()->first();
             if(!$first){
                 $table->id = config('app.firstId');
             }

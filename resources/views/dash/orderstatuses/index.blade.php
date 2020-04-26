@@ -30,9 +30,7 @@
                                 <tr>
                                     <td> {{ $item->id }} </td>
                                     <td>
-                                        <div class="badge" style="background-color:{{ $item->color }};">
-                                            <span style="color: #f00; -webkit-filter: invert(100%); filter: invert(100%);">{{ $item->status }} </span>
-                                        </div>
+                                        <div class="badge badge-bg" style="background-color:{{ $item->color }};">{{ $item->status }}</div>
                                     </td>
                                     <td>
                                         <div class="p-2 rounded" style="width:100%;background-color:{{ $item->color }};"></div>
