@@ -18,6 +18,7 @@ class CreateDesignsCollectionsTable extends Migration
             $table->text('tshirt_id');
             $table->integer('design_id');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

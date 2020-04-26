@@ -3,9 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class DesignsCollections extends Model
 {
+    use SoftDeletes;
 
     protected $with = ['design'];
     protected $appends = ['tshirts'];
