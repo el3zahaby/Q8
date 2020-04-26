@@ -87,7 +87,7 @@
             </div>
         </div>
         <div
-            v-for="product in mostSells"
+            v-for="protduct in mostSells"
             v-bind:key="product.design.id"
             class="modal fade"
             :id="'d'+product.design.id"
@@ -264,7 +264,7 @@
         <div class="most_sell_content">
             <div class="row">
                 <div
-                    v-for="product in products"
+                    v-for="product in getproducts"
                     v-bind:key="product.design.id"
                     class="col-xl-3 col-lg-4 col-md-6"
                 >
@@ -273,8 +273,7 @@
                         <div class="t-shirt_image_div position-relative">
                             <product-designer :design="product" :type="'view'"></product-designer>
                             <ul
-                                class="cart_ul_btn list-icon list-unstyled product_btn_div d-flex align-items-center text-center mb-0"
-                            >
+                                class="cart_ul_btn list-icon list-unstyled product_btn_div d-flex align-items-center text-center mb-0">
                                 <li>
                                     <a
                                         href="#"
@@ -282,8 +281,7 @@
                                         class="quickview_btn"
                                         title="Product Details"
                                         data-toggle="modal"
-                                        :data-target="'#d'+product.design.id"
-                                    >
+                                        :data-target="'#d'+product.design.id">
                                         <img src="/images/eye.png" alt=""/>
                                     </a>
                                 </li>
@@ -341,9 +339,7 @@
                             </span>
                             <span
                                 v-if="product.review === false"
-                                class="t-shirt_no_review_text my-5"
-                            >No rating</span
-                            >
+                                class="t-shirt_no_review_text my-5">No rating</span>
                         </div>
                     </div>
                 </div>
@@ -654,7 +650,11 @@
             });
 
         },
-        computed: {},
+        computed: {
+            getproducts: function () {
+                return this.products;
+            }
+        },
         filters: {}
     };
 </script>

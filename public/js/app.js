@@ -3353,10 +3353,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3483,7 +3479,11 @@ __webpack_require__.r(__webpack_exports__);
       _this5.tcolor = response.data.id;
     });
   },
-  computed: {},
+  computed: {
+    getproducts: function getproducts() {
+      return this.products;
+    }
+  },
   filters: {}
 });
 
@@ -47313,14 +47313,14 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _vm._l(_vm.mostSells, function(product) {
+      _vm._l(_vm.mostSells, function(protduct) {
         return _c(
           "div",
           {
-            key: product.design.id,
+            key: _vm.product.design.id,
             staticClass: "modal fade",
             attrs: {
-              id: "d" + product.design.id,
+              id: "d" + _vm.product.design.id,
               tabindex: "-1",
               role: "dialog",
               "aria-labelledby": "myExtraLargeModalLabel",
@@ -47350,7 +47350,7 @@ var render = function() {
                           [
                             _c("product-designer", {
                               staticClass: "col-12",
-                              attrs: { design: product, type: "popup" }
+                              attrs: { design: _vm.product, type: "popup" }
                             })
                           ],
                           1
@@ -47359,12 +47359,12 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-6" }, [
                         _c("h3", { staticClass: "productName" }, [
-                          _vm._v(_vm._s(product.name))
+                          _vm._v(_vm._s(_vm.product.name))
                         ]),
                         _vm._v(" "),
                         _c("h5", [
                           _vm._v("ID: "),
-                          _c("span", [_vm._v(_vm._s(product.design.id))])
+                          _c("span", [_vm._v(_vm._s(_vm.product.design.id))])
                         ]),
                         _vm._v(" "),
                         _c("span", { staticClass: "productPrice" }, [
@@ -47372,8 +47372,8 @@ var render = function() {
                             _vm._s(
                               _vm._f("currency")(
                                 _vm.priceDefault(
-                                  product.price,
-                                  product.discount
+                                  _vm.product.price,
+                                  _vm.product.discount
                                 )
                               )
                             )
@@ -47383,7 +47383,7 @@ var render = function() {
                         _c("p", { staticClass: "ProductDetails pt-3" }, [
                           _vm._v(
                             "\n                                " +
-                              _vm._s(product.des) +
+                              _vm._s(_vm.product.des) +
                               "\n                            "
                           )
                         ]),
@@ -47397,7 +47397,7 @@ var render = function() {
                               on: {
                                 submit: function($event) {
                                   $event.preventDefault()
-                                  return _vm.addToCart(product)
+                                  return _vm.addToCart(_vm.product)
                                 }
                               }
                             },
@@ -47432,7 +47432,7 @@ var render = function() {
                                       staticClass: "printOpt",
                                       attrs: {
                                         type: "radio",
-                                        id: "front" + product.design.id,
+                                        id: "front" + _vm.product.design.id,
                                         value: "front"
                                       },
                                       domProps: {
@@ -47453,7 +47453,7 @@ var render = function() {
                                       {
                                         staticClass: "printOpt",
                                         attrs: {
-                                          for: "front" + product.design.id
+                                          for: "front" + _vm.product.design.id
                                         }
                                       },
                                       [_vm._v(_vm._s(_vm.$t("Front")))]
@@ -47477,7 +47477,7 @@ var render = function() {
                                       staticClass: "printOpt",
                                       attrs: {
                                         type: "radio",
-                                        id: "back" + product.design.id,
+                                        id: "back" + _vm.product.design.id,
                                         value: "back"
                                       },
                                       domProps: {
@@ -47498,7 +47498,7 @@ var render = function() {
                                       {
                                         staticClass: "printOpt",
                                         attrs: {
-                                          for: "back" + product.design.id
+                                          for: "back" + _vm.product.design.id
                                         }
                                       },
                                       [_vm._v(_vm._s(_vm.$t("Back")))]
@@ -47522,7 +47522,8 @@ var render = function() {
                                       staticClass: "printOpt",
                                       attrs: {
                                         type: "radio",
-                                        id: "front_back" + product.design.id,
+                                        id:
+                                          "front_back" + _vm.product.design.id,
                                         value: "front_back"
                                       },
                                       domProps: {
@@ -47543,7 +47544,8 @@ var render = function() {
                                       {
                                         staticClass: "printOpt",
                                         attrs: {
-                                          for: "front_back" + product.design.id
+                                          for:
+                                            "front_back" + _vm.product.design.id
                                         }
                                       },
                                       [_vm._v(_vm._s(_vm.$t("Front_and_Back")))]
@@ -47563,7 +47565,7 @@ var render = function() {
                                           attrs: {
                                             for:
                                               "frontSizeInputFiled" +
-                                              product.design.id
+                                              _vm.product.design.id
                                           }
                                         },
                                         [
@@ -47589,7 +47591,7 @@ var render = function() {
                                           attrs: {
                                             id:
                                               "frontSizeInputFiled" +
-                                              product.design.id
+                                              _vm.product.design.id
                                           },
                                           on: {
                                             click: function($event) {
@@ -47639,7 +47641,7 @@ var render = function() {
                                           ),
                                           _vm._v(" "),
                                           _vm._l(
-                                            product.design.dsizes,
+                                            _vm.product.design.dsizes,
                                             function(dsize) {
                                               return _c(
                                                 "option",
@@ -47677,7 +47679,7 @@ var render = function() {
                                           attrs: {
                                             for:
                                               "backSizeInputFiled" +
-                                              product.design.id
+                                              _vm.product.design.id
                                           }
                                         },
                                         [
@@ -47703,7 +47705,7 @@ var render = function() {
                                           attrs: {
                                             id:
                                               "backSizeInputFiled" +
-                                              product.design.id
+                                              _vm.product.design.id
                                           },
                                           on: {
                                             click: function($event) {
@@ -47753,7 +47755,7 @@ var render = function() {
                                           ),
                                           _vm._v(" "),
                                           _vm._l(
-                                            product.design.dsizes,
+                                            _vm.product.design.dsizes,
                                             function(dsize) {
                                               return _c(
                                                 "option",
@@ -47788,7 +47790,7 @@ var render = function() {
                                   {
                                     staticClass: "my-1 mr-2 font-weight-bold",
                                     attrs: {
-                                      for: "colorInput" + product.design.id
+                                      for: "colorInput" + _vm.product.design.id
                                     }
                                   },
                                   [_vm._v(_vm._s(_vm.$t("TShirt_Color")) + "*")]
@@ -47807,7 +47809,7 @@ var render = function() {
                                     ],
                                     staticClass: "custom-select my-1 mr-sm-2",
                                     attrs: {
-                                      id: "colorInput" + product.design.id
+                                      id: "colorInput" + _vm.product.design.id
                                     },
                                     on: {
                                       change: function($event) {
@@ -47871,7 +47873,7 @@ var render = function() {
                                   {
                                     staticClass: "my-1 mr-2 font-weight-bold",
                                     attrs: {
-                                      for: "sizeInput" + product.design.id
+                                      for: "sizeInput" + _vm.product.design.id
                                     }
                                   },
                                   [_vm._v(_vm._s(_vm.$t("TShirt_Size")) + "*")]
@@ -47882,7 +47884,7 @@ var render = function() {
                                   {
                                     staticClass: "custom-select my-1 mr-sm-2",
                                     attrs: {
-                                      id: "sizeInput" + product.design.id
+                                      id: "sizeInput" + _vm.product.design.id
                                     }
                                   },
                                   [
@@ -47999,8 +48001,8 @@ var render = function() {
                                                   _vm.frontprintprice +
                                                   _vm.backprintprice +
                                                   _vm.priceDis(
-                                                    product.price,
-                                                    product.discount
+                                                    _vm.product.price,
+                                                    _vm.product.discount
                                                   ))
                                             )
                                           )
@@ -48031,7 +48033,7 @@ var render = function() {
         _c(
           "div",
           { staticClass: "row" },
-          _vm._l(_vm.products, function(product) {
+          _vm._l(_vm.getproducts, function(product) {
             return _c(
               "div",
               {
