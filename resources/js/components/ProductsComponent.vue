@@ -265,7 +265,7 @@
         <div class="most_sell_content">
             <div class="row">
                 <div
-                    v-for="product in products"
+                    v-for="product in getproducts"
                     v-bind:key="product.design.id"
                     class="col-xl-3 col-lg-4 col-md-6"
                 >
@@ -667,7 +667,11 @@
                     */
 
         },
-        computed: {},
+        computed: {
+            getproducts: function () {
+                return this.products;
+            }
+        },
         filters: {}
     };
 </script>

@@ -3492,7 +3492,11 @@ __webpack_require__.r(__webpack_exports__);
             .catch(err => console.log(err));
              */
   },
-  computed: {},
+  computed: {
+    getproducts: function getproducts() {
+      return this.products;
+    }
+  },
   filters: {}
 });
 
@@ -48061,7 +48065,7 @@ var render = function() {
         _c(
           "div",
           { staticClass: "row" },
-          _vm._l(_vm.products, function(product) {
+          _vm._l(_vm.getproducts, function(product) {
             return _c(
               "div",
               {
