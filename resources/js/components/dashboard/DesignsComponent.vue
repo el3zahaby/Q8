@@ -67,7 +67,7 @@
             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <form @submit.prevent="submit" method="post">
+                    <form @submit.prevent="submit" method="post" name="add_design">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">{{ $t('New_Design') }}
                             </h5>
@@ -79,6 +79,7 @@
                             <button type="button" class="btn btn-secondary EN_btn">EN</button>
                             <button type="button" class="btn btn-secondary AR_btn">AR</button>
                         </div>
+                        <div class="alert alert-danger error "></div>
                         <div class="modal-body">
                             <div class="custom-file">
                                 <div class="form-group">
@@ -92,7 +93,7 @@
 
 
                                 <div class="form-group AR">
-                                    <input style="background-color: transparent" type="text" name="designNameAr"
+                                    <input style="background-color: transparent" class="name_ar" type="text" name="designNameAr"
                                         :placeholder="$t('Design_Name_Ar')" v-model="designNameAr" required />
                                 </div>
 
@@ -123,14 +124,15 @@
                                         </div>
                                         <div class="row" v-for="size in allSizes" :key="size.id" >
                                             <div class="col-2" >
+/*
                                                 <input type="checkbox" v-on:change="makeRequired(size.id)" />
                                             </div>
                                             <div class="col-3" > {{ size.width }} x {{ size.length }} </div>
                                             <div class="col-2" > {{ size.print_price }}</div>
                                             <div class="col-3" >
-                                                <input type="number" class="form-control" v-bind:class="'size_'+size.id" min="0" v-model="sizesPrice[size.id]" />
+                                                <input type="text" class="form-control"  v-bind:class="'size_'+size.id" min="0" v-model="sizesPrice[size.id]" />
                                             </div>
-                                            <div class="col-2 text-center">{{size.print_price}}</div>
+                                            <div class="col-2 text-center" v-bind:class=" 'total-'+size.id " >{{size.print_price}}</div>
                                             <div class="col-12">
                                                 <hr>
                                             </div>
@@ -189,6 +191,7 @@
                 let _this = this;
                 console.log(this);
                 // return ;
+                this.validateForm();
                 let fd = new FormData();
 
                 fd.append('image', this.image);
@@ -216,6 +219,14 @@
                             _root.updateDesigns();
 
                             $('.modal').modal('toggle');
+                        }).catch(err => {
+                            console.log( JSON.stringify(err.response.data.errors));
+                            // $('.error').text();
+                            let errors = err.response.data.errors;
+                            // $('.error').text( JSON.stringify(err.response.data.errors) );
+                            errors.forEach(function(item) {
+                                document.getElementsByClassName("error").innerHTML += item + "<br>"; 
+                            });
                         });
                     });
             },
@@ -249,7 +260,14 @@
                 }else{
                     $('.size_'+size_id).attr('required','required');
                 }
-            }
+            },
+            validateForm() {
+                var x = $('.name_ar').val();
+                if (x == "" | x == null) {
+                    alert("Name must be filled out");
+                    return false;
+                }
+            },
 
 
         },
@@ -258,6 +276,8 @@
                 var fileName = $(this).val().split("\\").pop();
                 $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
             });
+
+
 
             $(".AR").css('display','none');
 
@@ -269,6 +289,8 @@
                 $(".EN").css('display','none');
                 $(".AR").css('display','block');
             })
+
+
         },
         created() {
             axios.get("/api/v1/designer-designs").then(response => {
