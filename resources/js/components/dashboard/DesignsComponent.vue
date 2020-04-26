@@ -40,7 +40,7 @@
                                     <!-- {{ design }} -->
                                     <ul >
                                         <!-- <li v-for="size in design.dsizes" >{{ size.width }} x {{size.length}} => </li> -->
-                                        <li v-for="index in design.dsizes.length " >
+                                        <li v-for="index in design.dsizes.length " :key="index" >
                                             {{ design.dsizes[index-1].width }} x {{ design.dsizes[index-1].length }} => {{ design.design_sizes[index-1].designer_price + design.dsizes[index-1].print_price }}
                                         </li>
                                     </ul>
