@@ -53,3 +53,8 @@ function is_active_route($path) {
 function show_class($path) {
     return call_user_func_array('Request::is', (array)$path) ? 'show' : '';
 }
+
+
+function priceDefault($price, $discount){
+    return ($price - ($price * $discount));
+}
