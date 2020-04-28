@@ -86,6 +86,7 @@
                 </div>
             </div>
         </div>
+        {{ products }}
         <div
             v-for="protduct in mostSells"
             v-bind:key="product.design.id"
@@ -609,6 +610,7 @@
             }
         },
         created() {
+        
             this.fetchProducts();
             this.feachMostSells();
         },
@@ -630,6 +632,21 @@
             axios.get("api/v1/default-tcolor").then(response => {
                 this.tcolor = response.data.id;
             });
+
+            this.products = ['dfas','fsad'];
+
+            /*
+                let vm = this;
+                page_url = page_url || 'api/v1/design';
+                fetch(page_url)
+                    .then(res => res.json())
+                    .then(res => {
+                        this.products = this.products.concat(res.data);
+                        vm.makePagination(res.next_page_url);
+                    })
+                    .catch(err => console.log(err));
+
+                    */
 
         },
         computed: {

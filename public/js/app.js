@@ -3257,6 +3257,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3382,6 +3383,18 @@ __webpack_require__.r(__webpack_exports__);
     axios.get("api/v1/default-tcolor").then(function (response) {
       _this5.tcolor = response.data.id;
     });
+    this.products = ['dfas', 'fsad'];
+    /*
+        let vm = this;
+        page_url = page_url || 'api/v1/design';
+        fetch(page_url)
+            .then(res => res.json())
+            .then(res => {
+                this.products = this.products.concat(res.data);
+                vm.makePagination(res.next_page_url);
+            })
+            .catch(err => console.log(err));
+             */
   },
   computed: {
     getproducts: function getproducts() {
@@ -4352,6 +4365,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4380,6 +4395,7 @@ __webpack_require__.r(__webpack_exports__);
 
       console.log(this); // return ;
 
+      this.validateForm();
       var fd = new FormData();
       fd.append('image', this.image);
       axios.post('/api/v1/upload-image', fd).then(function (resp) {
@@ -4404,6 +4420,14 @@ __webpack_require__.r(__webpack_exports__);
           _root.updateDesigns();
 
           $('.modal').modal('toggle');
+        })["catch"](function (err) {
+          console.log(JSON.stringify(err.response.data.errors)); // $('.error').text();
+
+          var errors = err.response.data.errors; // $('.error').text( JSON.stringify(err.response.data.errors) );
+
+          errors.forEach(function (item) {
+            document.getElementsByClassName("error").innerHTML += item + "<br>";
+          });
         });
       });
     },
@@ -4437,6 +4461,14 @@ __webpack_require__.r(__webpack_exports__);
         $('.size_' + size_id).removeAttr('required');
       } else {
         $('.size_' + size_id).attr('required', 'required');
+      }
+    },
+    validateForm: function validateForm() {
+      var x = $('.name_ar').val();
+
+      if (x == "" | x == null) {
+        alert("Name must be filled out");
+        return false;
       }
     }
   },
@@ -47216,7 +47248,7 @@ var render = function() {
           0
         )
       ]),
-      _vm._v(" "),
+      _vm._v("\n    " + _vm._s(_vm.products) + "\n    "),
       _vm._l(_vm.mostSells, function(protduct) {
         return _c(
           "div",
@@ -50518,7 +50550,9 @@ var render = function() {
             },
             [
               _vm._v(
-                "\n                " + _vm._s(_vm.$t("Add_New_Design")) + " "
+                "\n                    " +
+                  _vm._s(_vm.$t("Add_New_Design")) +
+                  " "
               ),
               _c("i", { staticClass: "fas fa-plus" })
             ]
@@ -50596,9 +50630,9 @@ var render = function() {
                     _c(
                       "ul",
                       _vm._l(design.dsizes.length, function(index) {
-                        return _c("li", [
+                        return _c("li", { key: index }, [
                           _vm._v(
-                            "\n                                        " +
+                            "\n                                            " +
                               _vm._s(design.dsizes[index - 1].width) +
                               " x " +
                               _vm._s(design.dsizes[index - 1].length) +
@@ -50607,7 +50641,7 @@ var render = function() {
                                 design.design_sizes[index - 1].designer_price +
                                   design.dsizes[index - 1].print_price
                               ) +
-                              "\n                                    "
+                              "\n                                        "
                           )
                         ])
                       }),
@@ -50617,9 +50651,9 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [
                     _vm._v(
-                      "\n                            " +
+                      "\n                                " +
                         _vm._s(design.accepting) +
-                        "\n                        "
+                        "\n                            "
                     )
                   ]),
                   _vm._v(" "),
@@ -50672,7 +50706,7 @@ var render = function() {
               _c(
                 "form",
                 {
-                  attrs: { method: "post" },
+                  attrs: { method: "post", name: "add_design" },
                   on: {
                     submit: function($event) {
                       $event.preventDefault()
@@ -50691,7 +50725,7 @@ var render = function() {
                       [
                         _vm._v(
                           _vm._s(_vm.$t("New_Design")) +
-                            "\n                        "
+                            "\n                            "
                         )
                       ]
                     ),
@@ -50700,6 +50734,8 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _vm._m(1),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "alert alert-danger error " }),
                   _vm._v(" "),
                   _c("div", { staticClass: "modal-body" }, [
                     _c("div", { staticClass: "custom-file" }, [
@@ -50771,6 +50807,7 @@ var render = function() {
                               expression: "designNameAr"
                             }
                           ],
+                          staticClass: "name_ar",
                           staticStyle: { "background-color": "transparent" },
                           attrs: {
                             type: "text",
@@ -50861,6 +50898,9 @@ var render = function() {
                                 { key: size.id, staticClass: "row" },
                                 [
                                   _c("div", { staticClass: "col-2" }, [
+                                    _vm._v(
+                                      "\n/*\n                                                "
+                                    ),
                                     _c("input", {
                                       attrs: { type: "checkbox" },
                                       on: {
@@ -50897,7 +50937,7 @@ var render = function() {
                                       ],
                                       staticClass: "form-control",
                                       class: "size_" + size.id,
-                                      attrs: { type: "number", min: "0" },
+                                      attrs: { type: "text", min: "0" },
                                       domProps: {
                                         value: _vm.sizesPrice[size.id]
                                       },
@@ -50918,7 +50958,10 @@ var render = function() {
                                   _vm._v(" "),
                                   _c(
                                     "div",
-                                    { staticClass: "col-2 text-center" },
+                                    {
+                                      staticClass: "col-2 text-center",
+                                      class: "total-" + size.id
+                                    },
                                     [_vm._v(_vm._s(size.print_price))]
                                   ),
                                   _vm._v(" "),
@@ -50976,7 +51019,8 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          _vm._s(_vm.$t("Close")) + "\n                        "
+                          _vm._s(_vm.$t("Close")) +
+                            "\n                            "
                         )
                       ]
                     ),
