@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DesignsCollections;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
@@ -27,6 +28,12 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    public function home(){
+        $products =  DesignsCollections::inRandomOrder()->paginate(8);
+
+        return view('home.index',compact('products'));
     }
 
     public function setLang($lang){

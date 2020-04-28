@@ -180,4 +180,6 @@ Route::get('/dashboard{any}', function () {
 Route::get('logout',  'Auth\LoginController@logout');
 Auth::routes();
 
+Route::get('/home', 'HomeController@home')->middleware(['trackV']);
+
 Route::get('/{any}', 'HomeController@index')->middleware(['trackV'])->where('any', '.*')->name('home');

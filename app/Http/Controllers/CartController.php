@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Color;
 use App\Design;
+use App\DesignsCollections;
 use App\Dsize;
 use App\Tsize;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -30,14 +31,15 @@ class CartController extends Controller
         $tsize = $request->tsize ? $request->tsize : self::getDefaultTsizePrice()->id;
         $count = $request->count ? $request->count : 1;
 
-        $pro = Design::find($productId);
+        $collection = DesignsCollections::find($productId);
+        $pro = $collection->design;
         $pro_price = self::getProductPrice($request, $pro->price);
         $pro_price -= $pro->discount*$pro->price;
-        Cart::add($productId, $pro->name, $count, $pro_price
+        Cart::add($productId, $pro->name_en, $count, $pro_price
             , 0 //Weight
             , [
-                'random_name' => $pro->random_name,
-                'img' => '/storage/'.$pro->img,
+                'ID' => $pro->id,
+                'img' => $pro->img,
                 'frontprint' => $frontprint,
                 'backprint' => $request->backprint,
                 'tcolor' => $tcolor,

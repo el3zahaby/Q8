@@ -198,8 +198,7 @@
                                             <select
                                                 v-model="tcolor"
                                                 class="custom-select my-1 mr-sm-2"
-                                                :id="'colorInput'+product.design.id"
-                                            >
+                                                :id="'colorInput'+product.design.id">
                                                 <option :value="null" selected>- {{$t('Please_Select')}} -</option>
                                                 <option v-for="color in tcolors" :key="color.id" :value="color.id">
                                                     {{color.name}}
@@ -350,7 +349,7 @@
             <span @click="fetchProducts(pagination.next_page_url)" style="cursor: pointer"
                   class="font-weight-bold text-capitalize">Load More <i class="fas fa-arrow-down"></i></span>
         </div>
-        <div v-if=" pagination.next_page_url === null && products.length"
+        <div v-if="pagination.next_page_url === null && products.length"
              class="mt-3 get-more d-flex justify-content-center">
             <span class="font-weight-bold text-capitalize text-muted">No More Data</span>
         </div>
@@ -363,16 +362,13 @@
             role="dialog"
             aria-labelledby="myExtraLargeModalLabel"
             aria-hidden="true">
-            <div
-                class="modal-dialog modal-dialog-centered modal-lg"
-                role="document">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content bg-white">
                     <button
                         type="button"
                         class="close"
                         data-dismiss="modal"
-                        aria-label="Close"
-                    >
+                        aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                     <div class="content">
@@ -394,16 +390,10 @@
                                 <div class="form-action">
                                     <form method="post" class="form-group" @submit.prevent="addToCart(product)">
                                         <div class="mb-2">
-                                            <label
-                                                class="my-1 mr-2 font-weight-bold text-capitalize"
-                                            >{{$t('print_options')}}* : </label
-                                            >
+                                            <label class="my-1 mr-2 font-weight-bold text-capitalize">{{$t('print_options')}}* : </label>
                                             <div class="d-inline-block mx-2">
-                                                <input class="printOpt" type="radio" :id="'front'+product.design.id"
-                                                       value="front"
-                                                       v-model="printOptions">
-                                                <label class="printOpt"
-                                                       :for="'front'+product.design.id">{{$t('Front')}}</label>
+                                                <input class="printOpt" type="radio" :id="'front'+product.design.id" value="front" v-model="printOptions">
+                                                <label class="printOpt" :for="'front'+product.design.id">{{$t('Front')}}</label>
                                             </div>
                                             <div class="d-inline-block mx-2">
                                                 <input class="printOpt" type="radio" :id="'back'+product.design.id"
@@ -474,10 +464,7 @@
                                             </select>
                                         </div>
                                         <div class="mb-2">
-                                            <label
-                                                class="my-1 mr-2 font-weight-bold"
-                                                :for="'sizeInput'+product.design.id"
-                                            >{{$t('TShirt_Size')}}*</label
+                                            <label class="my-1 mr-2 font-weight-bold" :for="'sizeInput'+product.design.id">{{$t('TShirt_Size')}}*</label
                                             >
                                             <select
                                                 class="custom-select my-1 mr-sm-2"
@@ -504,11 +491,8 @@
                                                 <button
                                                     type="submit"
                                                     class="btn btn-primary my-1"
-                                                    style="outline: none;"
-                                                >
-                                                    <i
-                                                        class="fas fa-shopping-cart"
-                                                    ></i>
+                                                    style="outline: none;">
+                                                    <i class="fas fa-shopping-cart"></i>
                                                     {{$t('Add_to_cart')}}
                                                 </button>
                                             </div>
@@ -551,8 +535,6 @@
                 tsizes_price: 0,
                 default_frontprint: null,
                 default_tsize: null
-
-
             };
         },
         props: [],
