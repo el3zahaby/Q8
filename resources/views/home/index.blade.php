@@ -46,10 +46,7 @@
                                     </li>
                                     <li>
                                         <a href="#" onclick="addToCart({{ $product->id }})" class="add-to-cart quickview_btn">
-                                            <img
-                                                src="images/add-cart.png"
-                                                alt=""
-                                            />
+                                            <img src="images/add-cart.png" alt=""/>
                                         </a>
                                     </li>
                                 </ul>
