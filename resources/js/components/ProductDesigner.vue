@@ -62,7 +62,6 @@
                 "title": "Shirt Front",
                 "thumbnail": "images/color_shirt/yellow/front/preview.png",
                 "elements": [
-
                     {
                         "type": "image",
                         "source": "images/color_shirt/yellow/front/base.png",

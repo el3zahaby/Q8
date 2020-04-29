@@ -12,7 +12,7 @@ class Design extends Model
 
     protected $guarded = [];
     protected $with = ['dsizes'];
-
+    protected $appends = ['thump'];
     public function isAccepted($string = false){
         $cond = (boolean)$this->accepting;
 
@@ -22,6 +22,12 @@ class Design extends Model
 
         return $cond;
     }
+
+    public function getThumpAttribute(){
+        $img = pathinfo($this->attributes['img']);
+       return $img['dirname'].'/thump/'.$img['basename'];
+    }
+
     public function dsizes()
     {
         return $this->belongsToMany('App\Dsize' )->withTrashed();

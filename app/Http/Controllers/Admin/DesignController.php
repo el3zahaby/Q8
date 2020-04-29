@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
+use Intervention\Image\Facades\Image;
 
 class DesignController extends Controller
 {
@@ -49,6 +50,7 @@ class DesignController extends Controller
      */
     public function store(Request $request)
     {
+
         // return $request->all();
         $this->validate($request, [
             'name_en' => 'required|max:255',
@@ -60,9 +62,20 @@ class DesignController extends Controller
 
         if($request->hasFile('img')) {
             $file =  $request->img;
+            $Image = Image::make($file);
+
+
+            $Image->resize(200, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+
             $filename = time().'.'.$file->getClientOriginalExtension();
-            $directory = storage_path('app/public/uploads/designs');
-            $file->move($directory, $filename);
+            $directory = ('app/public/uploads/designs/');
+
+            $file->move(storage_path($directory), $filename);
+            if (!is_dir(storage_path($directory.'/thump/'))) mkdir(storage_path($directory.'/thump/'));
+            $Image->save(storage_path($directory.'/thump/'.$filename));
+
             $img = '/storage/uploads/designs/'.$filename;
         }
 
@@ -144,11 +157,21 @@ class DesignController extends Controller
         $img = $item->img;
         if($request->hasFile('img')) {
             unlink(public_path() . $img);
-            $file =  $request->img;
-            $filename = time().'.'.$file->getClientOriginalExtension();
-            $directory = storage_path('app/public/uploads/designs');
 
-            $file->move($directory, $filename);
+            $file =  $request->img;
+            $Image = Image::make($file);
+
+            $Image->resize(200, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+
+            $filename = time().'.'.$file->getClientOriginalExtension();
+            $directory = ('app/public/uploads/designs/');
+
+            $file->move(storage_path($directory), $filename);
+            if (!is_dir(storage_path($directory.'/thump/'))) mkdir(storage_path($directory.'/thump/'));
+            $Image->save(storage_path($directory.'/thump/'.$filename));
+
             $img = '/storage/uploads/designs/'.$filename;
         }
 
