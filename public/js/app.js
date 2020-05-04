@@ -2456,11 +2456,12 @@ __webpack_require__.r(__webpack_exports__);
 /*!**************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ProductDesigner.vue?vue&type=script&lang=js& ***!
   \**************************************************************************************************************************************************************************/
-/*! exports provided: default, getProductJson */
+/*! exports provided: default, _get_color, getProductJson */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_get_color", function() { return _get_color; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getProductJson", function() { return getProductJson; });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
@@ -2493,16 +2494,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {};
   },
-  props: ['type', 'design'],
+  props: ['type', 'design', 'ccolor'],
   methods: {},
   mounted: function mounted() {
+    var colorMap = {
+      1: 'red',
+      2: "blue"
+    };
+
     var _this = this;
 
-    var design = _this.design.design;
+    var design = _this.design;
     var $yourDesigner = $("#clothing-designer-" + design.id + (_this.type === 'view' ? '-view' : _this.type)),
         pluginOpts = {
       mainBarModules: [],
-      productsJSON: getProductJson(design),
+      productsJSON: getProductJson(design.img, colorMap[_this.ccolor]),
       //see JSON folder for products sorted in categories
       customImageParameters: {},
       actions: {
@@ -2533,88 +2539,1051 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     })));
   }
 });
-function getProductJson(pdesign, printOpt) {
-  return [[{
-    "title": "Shirt Front",
-    "thumbnail": "images/color_shirt/yellow/front/preview.png",
+function _get_color() {
+  // var colors = ['#0dd4ad', '#ff5050', '#ff80ff', '#ffff1b', '#00b3e6','#FFFFFF'];
+  var colors = ['#efda1a'];
+  return colors[Math.floor(Math.random() * colors.length)];
+}
+function getProductJson(img, viewType, color, backprint) {
+  console.log(color);
+  var $tcolor = color ? color : _get_color();
+  console.log($tcolor);
+  var $front = {
+    "title": "Front",
+    "thumbnail": "/images/color_shirt/color/front/base.png",
     "elements": [{
-      "type": "image",
-      "source": "images/color_shirt/yellow/front/base.png",
-      "title": "Base",
-      "parameters": {
-        "autoCenter": true,
-        "colors": "#d59211",
-        "price": 20,
-        "colorLinkGroup": "Base",
-        "fill": false
-      }
-    }, {
-      "type": "image",
-      "source": "images/color_shirt/yellow/front/shadows.png",
       "title": "Shadow",
+      "source": "/images/color_shirt/Shadow3.png",
       "parameters": {
-        "autoCenter": true,
-        "fill": false
-      }
-    }, {
-      "type": "image",
-      "source": pdesign.img,
-      "title": "Image Title",
-      "parameters": {
-        "boundingBox": {
-          "x": 350,
-          "y": 160,
-          "width": 100,
-          "height": 200
+        "advancedEditing": false,
+        "angle": 0,
+        "autoCenter": false,
+        "autoSelect": false,
+        "boundingBox": "",
+        "boundingBoxMode": "inside",
+        "colorLinkGroup": false,
+        "colorPrices": {},
+        "colors": "",
+        "copyable": false,
+        "cornerSize": 24,
+        "draggable": false,
+        "evented": false,
+        "excludeFromExport": false,
+        "fill": false,
+        "filter": null,
+        "flipX": false,
+        "flipY": false,
+        "height": 633,
+        "left": 400,
+        "lockUniScaling": true,
+        "locked": false,
+        "minScaleLimit": 0.01,
+        "objectCaching": false,
+        "opacity": 1,
+        "originParams": {
+          "objectCaching": false,
+          "z": 0,
+          "price": 0,
+          "colors": "",
+          "removable": false,
+          "draggable": false,
+          "rotatable": false,
+          "resizable": false,
+          "copyable": false,
+          "zChangeable": false,
+          "boundingBox": "",
+          "boundingBoxMode": "inside",
+          "autoCenter": false,
+          "replace": "",
+          "replaceInAllViews": false,
+          "autoSelect": false,
+          "topped": false,
+          "colorPrices": {},
+          "colorLinkGroup": false,
+          "patterns": [],
+          "sku": "",
+          "excludeFromExport": false,
+          "showInColorSelection": false,
+          "locked": false,
+          "uniScalingUnlockable": false,
+          "originX": "center",
+          "originY": "center",
+          "cornerSize": 24,
+          "fill": false,
+          "lockUniScaling": true,
+          "pattern": false,
+          "top": 300,
+          "left": 400,
+          "angle": 0,
+          "flipX": false,
+          "flipY": false,
+          "opacity": 1,
+          "scaleX": 1,
+          "scaleY": 1,
+          "uploadZone": false,
+          "filter": null,
+          "scaleMode": "fit",
+          "resizeToW": "0",
+          "resizeToH": "0",
+          "advancedEditing": false,
+          "uploadZoneMovable": false,
+          "uploadZoneRemovable": false,
+          "padding": 0,
+          "minScaleLimit": 0.01,
+          "customAdds": [],
+          "_isInitial": true,
+          "source": "/images/color_shirt/Shadow3.png",
+          "title": "Shadow",
+          "id": "1588100453287",
+          "cornerColor": "#f5f5f5",
+          "cornerIconColor": "#000000",
+          "selectable": false,
+          "lockRotation": true,
+          "hasRotatingPoint": false,
+          "lockScalingX": true,
+          "lockScalingY": true,
+          "lockMovementX": true,
+          "lockMovementY": true,
+          "hasControls": false,
+          "evented": false,
+          "lockScalingFlip": true,
+          "crossOrigin": ""
         },
-        "boundingBoxMode": "clipping",
+        "originX": "center",
+        "originY": "center",
+        "padding": 0,
+        "patterns": [],
+        "price": 0,
+        "removable": false,
+        "replace": "",
+        "replaceInAllViews": false,
+        "resizable": false,
+        "resizeToH": "0",
+        "resizeToW": "0",
+        "rotatable": false,
         "scaleMode": "fit",
-        "resizeToW": 200,
-        "resizeToH": 200,
-        "autoCenter": true
-      }
+        "scaleX": 1,
+        "scaleY": 1,
+        "showInColorSelection": false,
+        "sku": "",
+        "top": 300,
+        "topped": false,
+        "uniScalingUnlockable": false,
+        "uploadZone": false,
+        "uploadZoneMovable": false,
+        "uploadZoneRemovable": false,
+        "width": 717,
+        "z": -1,
+        "zChangeable": false,
+        "topLeftX": 41.5,
+        "topLeftY": -16.5
+      },
+      "type": "image"
     }, {
-      "type": "image",
-      "source": "images/color_shirt/yellow/front/body.png",
-      "title": "Hightlights",
+      "title": "Shirt",
+      "source": "/images/color_shirt/color/front/base.png",
       "parameters": {
-        "left": 447,
-        "top": 108,
-        "fill": false
-      }
-    }]
-  }, {
-    "title": "Shirt Back",
-    "thumbnail": "images/color_shirt/yellow/back/preview.png",
-    "elements": [{
-      "type": "image",
-      "source": "images/color_shirt/yellow/back/base.png",
-      "title": "Base",
-      "parameters": {
-        "autoCenter": true,
-        "colorLinkGroup": "Base",
-        "price": 20,
-        "fill": false
-      }
+        "advancedEditing": false,
+        "angle": 0,
+        "autoCenter": false,
+        "autoSelect": false,
+        "boundingBox": "",
+        "boundingBoxMode": "inside",
+        "colorLinkGroup": "base",
+        "colorPrices": {},
+        "colors": ["#b33939"],
+        "copyable": false,
+        "cornerSize": 24,
+        "draggable": false,
+        "evented": true,
+        "excludeFromExport": false,
+        "fill": $tcolor,
+        "filter": null,
+        "flipX": false,
+        "flipY": false,
+        "height": 539,
+        "isEditable": true,
+        "left": 400,
+        "lockUniScaling": true,
+        "locked": false,
+        "minScaleLimit": 0.01,
+        "objectCaching": false,
+        "opacity": 1,
+        "originParams": {
+          "objectCaching": false,
+          "z": 1,
+          "price": 10,
+          "colors": ["#b33939"],
+          "removable": false,
+          "draggable": false,
+          "rotatable": false,
+          "resizable": false,
+          "copyable": false,
+          "zChangeable": false,
+          "boundingBox": "",
+          "boundingBoxMode": "inside",
+          "autoCenter": false,
+          "replace": "",
+          "replaceInAllViews": false,
+          "autoSelect": false,
+          "topped": false,
+          "colorPrices": {},
+          "colorLinkGroup": "base",
+          "patterns": [],
+          "sku": "",
+          "excludeFromExport": false,
+          "showInColorSelection": false,
+          "locked": false,
+          "uniScalingUnlockable": false,
+          "originX": "center",
+          "originY": "center",
+          "cornerSize": 24,
+          "fill": false,
+          "lockUniScaling": true,
+          "pattern": false,
+          "top": 300,
+          "left": 400,
+          "angle": 0,
+          "flipX": false,
+          "flipY": false,
+          "opacity": 1,
+          "scaleX": 1,
+          "scaleY": 1,
+          "uploadZone": false,
+          "filter": null,
+          "scaleMode": "fit",
+          "resizeToW": "0",
+          "resizeToH": "0",
+          "advancedEditing": false,
+          "uploadZoneMovable": false,
+          "uploadZoneRemovable": false,
+          "padding": 0,
+          "minScaleLimit": 0.01,
+          "customAdds": [],
+          "_isInitial": true,
+          "source": "/images/color_shirt/color/front/base.png",
+          "title": "Shirt",
+          "id": "1588100453424",
+          "cornerColor": "#f5f5f5",
+          "cornerIconColor": "#000000",
+          "selectable": false,
+          "lockRotation": true,
+          "hasRotatingPoint": false,
+          "lockScalingX": true,
+          "lockScalingY": true,
+          "lockMovementX": true,
+          "lockMovementY": true,
+          "hasControls": false,
+          "evented": false,
+          "lockScalingFlip": true,
+          "crossOrigin": ""
+        },
+        "originX": "center",
+        "originY": "center",
+        "padding": 0,
+        "patterns": [],
+        "price": 10,
+        "removable": false,
+        "replace": "",
+        "replaceInAllViews": false,
+        "resizable": false,
+        "resizeToH": "0",
+        "resizeToW": "0",
+        "rotatable": false,
+        "scaleMode": "fit",
+        "scaleX": 1,
+        "scaleY": 1,
+        "showInColorSelection": false,
+        "sku": "",
+        "top": 300,
+        "topped": false,
+        "uniScalingUnlockable": false,
+        "uploadZone": false,
+        "uploadZoneMovable": false,
+        "uploadZoneRemovable": false,
+        "width": 597,
+        "z": -1,
+        "zChangeable": false,
+        "topLeftX": 101.5,
+        "topLeftY": 30.5
+      },
+      "type": "image"
     }, {
-      "type": "image",
-      "source": "images/color_shirt/yellow/back/body.png",
-      "title": "Hightlights",
+      "title": "Image Title",
+      "source": img,
       "parameters": {
-        "left": 467,
-        "top": 90,
-        "fill": false
-      }
+        "advancedEditing": true,
+        "angle": 0,
+        "autoCenter": false,
+        "autoSelect": false,
+        "boundingBox": false,
+        "boundingBoxMode": "inside",
+        "colorLinkGroup": "",
+        "colorPrices": {},
+        "colors": "",
+        "copyable": true,
+        "cornerSize": 24,
+        "draggable": true,
+        "evented": true,
+        "excludeFromExport": false,
+        "fill": false,
+        "filter": "none",
+        "flipX": false,
+        "flipY": false,
+        "height": 200,
+        "isCustom": true,
+        "isEditable": true,
+        "left": 400,
+        "lockUniScaling": true,
+        "locked": false,
+        "minScaleLimit": 0.01,
+        "objectCaching": false,
+        "opacity": 1,
+        "originParams": {
+          "objectCaching": false,
+          "z": 3,
+          "price": 4,
+          "colors": "",
+          "removable": true,
+          "draggable": true,
+          "rotatable": true,
+          "resizable": true,
+          "copyable": true,
+          "zChangeable": true,
+          "boundingBox": false,
+          "boundingBoxMode": "inside",
+          "autoCenter": true,
+          "replace": "",
+          "replaceInAllViews": false,
+          "autoSelect": false,
+          "topped": false,
+          "colorPrices": {},
+          "colorLinkGroup": "",
+          "patterns": [],
+          "sku": "",
+          "excludeFromExport": false,
+          "showInColorSelection": false,
+          "locked": false,
+          "uniScalingUnlockable": false,
+          "originX": "center",
+          "originY": "center",
+          "cornerSize": 24,
+          "fill": false,
+          "lockUniScaling": true,
+          "pattern": false,
+          "top": 0,
+          "left": 0,
+          "angle": 0,
+          "flipX": false,
+          "flipY": false,
+          "opacity": 1,
+          "scaleX": 1,
+          "scaleY": 1,
+          "uploadZone": false,
+          "filter": "none",
+          "scaleMode": "cover",
+          "resizeToW": "300",
+          "resizeToH": "300",
+          "advancedEditing": true,
+          "uploadZoneMovable": false,
+          "uploadZoneRemovable": false,
+          "padding": 0,
+          "minScaleLimit": 0.01,
+          "minW": 100,
+          "minH": 100,
+          "maxW": 10000,
+          "maxH": 10000,
+          "minDPI": 72,
+          "maxSize": 10,
+          "isCustom": true,
+          "_addToUZ": null,
+          "_isInitial": false,
+          "source": img,
+          "title": "1588180146.png",
+          "id": "1588180240318",
+          "cornerColor": "#f5f5f5",
+          "cornerIconColor": "#000000",
+          "selectable": false,
+          "lockRotation": true,
+          "hasRotatingPoint": false,
+          "lockScalingX": true,
+          "lockScalingY": true,
+          "lockMovementX": true,
+          "lockMovementY": true,
+          "hasControls": false,
+          "evented": false,
+          "lockScalingFlip": true,
+          "crossOrigin": ""
+        },
+        "originX": "center",
+        "originY": "center",
+        "padding": 0,
+        "patterns": [],
+        "price": 4,
+        "removable": true,
+        "replace": "",
+        "replaceInAllViews": false,
+        "resizable": true,
+        "resizeToH": "300",
+        "resizeToW": "300",
+        "rotatable": true,
+        "scaleMode": "cover",
+        "scaleX": 1.5,
+        "scaleY": 1.5,
+        "showInColorSelection": false,
+        "sku": "",
+        "top": 300,
+        "topped": false,
+        "uniScalingUnlockable": false,
+        "uploadZone": false,
+        "uploadZoneMovable": false,
+        "uploadZoneRemovable": false,
+        "width": 200,
+        "z": -1,
+        "zChangeable": true,
+        "topLeftX": 250,
+        "topLeftY": 150
+      },
+      "type": "image"
     }, {
-      "type": "image",
-      "source": "images/color_shirt/yellow/back/shadows.png",
       "title": "Shadow",
+      "source": "/images/color_shirt/Shadow4.png",
       "parameters": {
+        "advancedEditing": false,
+        "angle": 0,
+        "autoCenter": false,
+        "autoSelect": false,
+        "boundingBox": false,
+        "boundingBoxMode": "inside",
+        "colorLinkGroup": false,
+        "colorPrices": {},
+        "colors": "",
+        "copyable": false,
+        "cornerSize": 24,
+        "draggable": false,
+        "evented": false,
+        "excludeFromExport": false,
+        "fill": false,
+        "filter": null,
+        "flipX": false,
+        "flipY": false,
+        "height": 539,
+        "left": 400,
+        "lockUniScaling": true,
+        "locked": true,
+        "minScaleLimit": 0.01,
+        "objectCaching": false,
+        "opacity": 1,
+        "originParams": {
+          "objectCaching": false,
+          "z": 4,
+          "price": 0,
+          "colors": "",
+          "removable": false,
+          "draggable": false,
+          "rotatable": false,
+          "resizable": false,
+          "copyable": false,
+          "zChangeable": false,
+          "boundingBox": false,
+          "boundingBoxMode": "inside",
+          "autoCenter": false,
+          "replace": "",
+          "replaceInAllViews": false,
+          "autoSelect": false,
+          "topped": true,
+          "colorPrices": {},
+          "colorLinkGroup": false,
+          "patterns": [],
+          "sku": "",
+          "excludeFromExport": false,
+          "showInColorSelection": false,
+          "locked": true,
+          "uniScalingUnlockable": false,
+          "originX": "center",
+          "originY": "center",
+          "cornerSize": 24,
+          "fill": false,
+          "lockUniScaling": true,
+          "pattern": false,
+          "top": 300,
+          "left": 400,
+          "angle": 0,
+          "flipX": false,
+          "flipY": false,
+          "opacity": 1,
+          "scaleX": 1,
+          "scaleY": 1,
+          "uploadZone": false,
+          "filter": null,
+          "scaleMode": "fit",
+          "resizeToW": "0",
+          "resizeToH": "0",
+          "advancedEditing": false,
+          "uploadZoneMovable": false,
+          "uploadZoneRemovable": false,
+          "padding": 0,
+          "minScaleLimit": 0.01,
+          "customAdds": [],
+          "_isInitial": true,
+          "source": "/images/color_shirt/Shadow4.png",
+          "title": "Shadow",
+          "id": "1588100453491",
+          "cornerColor": "#f5f5f5",
+          "cornerIconColor": "#000000",
+          "selectable": false,
+          "lockRotation": true,
+          "hasRotatingPoint": false,
+          "lockScalingX": true,
+          "lockScalingY": true,
+          "lockMovementX": true,
+          "lockMovementY": true,
+          "hasControls": false,
+          "evented": false,
+          "lockScalingFlip": true,
+          "crossOrigin": ""
+        },
+        "originX": "center",
+        "originY": "center",
+        "padding": 0,
+        "patterns": [],
+        "price": 0,
+        "removable": false,
+        "replace": "",
+        "replaceInAllViews": false,
+        "resizable": false,
+        "resizeToH": "0",
+        "resizeToW": "0",
+        "rotatable": false,
+        "scaleMode": "fit",
+        "scaleX": 1,
+        "scaleY": 1,
+        "showInColorSelection": false,
+        "sku": "",
+        "top": 300,
+        "topped": true,
+        "uniScalingUnlockable": false,
+        "uploadZone": false,
+        "uploadZoneMovable": false,
+        "uploadZoneRemovable": false,
+        "width": 596,
+        "z": -1,
+        "zChangeable": false,
+        "topLeftX": 102,
+        "topLeftY": 30.5
+      },
+      "type": "image"
+    }],
+    "options": {
+      "stageWidth": 800,
+      "stageHeight": 600,
+      "customImageParameters": {
+        "minW": 100,
+        "minH": 100,
+        "maxW": 10000,
+        "maxH": 10000,
+        "minDPI": 72,
+        "maxSize": 10,
+        "left": 0,
+        "top": 0,
+        "z": -1,
+        "minScaleLimit": 0.01,
+        "price": 4,
+        "replaceInAllViews": false,
         "autoCenter": true,
-        "fill": false
-      }
-    }]
-  }]];
+        "draggable": true,
+        "rotatable": true,
+        "resizable": true,
+        "zChangeable": true,
+        "autoSelect": false,
+        "topped": false,
+        "uniScalingUnlockable": false,
+        "boundingBoxMode": "inside",
+        "scaleMode": "cover",
+        "removable": true,
+        "resizeToW": "300",
+        "resizeToH": "300",
+        "advancedEditing": true,
+        "filter": "none"
+      },
+      "maxPrice": -1,
+      "optionalView": false,
+      "designCategories": [],
+      "printingBox": {},
+      "layouts": []
+    }
+  };
+  var $back = {
+    "title": "Back",
+    "thumbnail": "/images/color_shirt/color/back/base.png",
+    "elements": [{
+      "title": "Back Shadow",
+      "source": "/images/color_shirt/shadows2.png",
+      "parameters": {
+        "advancedEditing": false,
+        "angle": 0,
+        "autoCenter": false,
+        "autoSelect": false,
+        "boundingBox": "0",
+        "boundingBoxMode": "inside",
+        "colorLinkGroup": false,
+        "colorPrices": {},
+        "colors": "",
+        "copyable": false,
+        "cornerSize": 24,
+        "draggable": false,
+        "evented": false,
+        "excludeFromExport": false,
+        "fill": false,
+        "filter": false,
+        "flipX": false,
+        "flipY": false,
+        "height": 668,
+        "left": 400,
+        "lockUniScaling": true,
+        "locked": false,
+        "minScaleLimit": 0.01,
+        "objectCaching": false,
+        "opacity": 1,
+        "originParams": {
+          "objectCaching": false,
+          "z": 0,
+          "price": 0,
+          "colors": "",
+          "removable": false,
+          "draggable": false,
+          "rotatable": false,
+          "resizable": false,
+          "copyable": false,
+          "zChangeable": false,
+          "boundingBox": "0",
+          "boundingBoxMode": "inside",
+          "autoCenter": false,
+          "replace": "",
+          "replaceInAllViews": false,
+          "autoSelect": false,
+          "topped": false,
+          "colorPrices": {},
+          "colorLinkGroup": false,
+          "patterns": [],
+          "sku": "",
+          "excludeFromExport": false,
+          "showInColorSelection": false,
+          "locked": false,
+          "uniScalingUnlockable": false,
+          "originX": "center",
+          "originY": "center",
+          "cornerSize": 24,
+          "fill": false,
+          "lockUniScaling": true,
+          "pattern": false,
+          "top": 316,
+          "left": 400,
+          "angle": 0,
+          "flipX": false,
+          "flipY": false,
+          "opacity": 1,
+          "scaleX": 1,
+          "scaleY": 1,
+          "uploadZone": false,
+          "filter": false,
+          "scaleMode": "fit",
+          "resizeToW": "0",
+          "resizeToH": "0",
+          "advancedEditing": false,
+          "uploadZoneMovable": false,
+          "uploadZoneRemovable": false,
+          "padding": 0,
+          "minScaleLimit": 0.01,
+          "customAdds": [],
+          "_isInitial": true,
+          "source": "/images/color_shirt/shadows2.png",
+          "title": "Back Shadow",
+          "id": "1588100453520",
+          "cornerColor": "#f5f5f5",
+          "cornerIconColor": "#000000",
+          "selectable": false,
+          "lockRotation": true,
+          "hasRotatingPoint": false,
+          "lockScalingX": true,
+          "lockScalingY": true,
+          "lockMovementX": true,
+          "lockMovementY": true,
+          "hasControls": false,
+          "evented": false,
+          "lockScalingFlip": true,
+          "crossOrigin": ""
+        },
+        "originX": "center",
+        "originY": "center",
+        "padding": 0,
+        "patterns": [],
+        "price": 0,
+        "removable": false,
+        "replace": "",
+        "replaceInAllViews": false,
+        "resizable": false,
+        "resizeToH": "0",
+        "resizeToW": "0",
+        "rotatable": false,
+        "scaleMode": "fit",
+        "scaleX": 1,
+        "scaleY": 1,
+        "showInColorSelection": false,
+        "sku": "",
+        "top": 316,
+        "topped": false,
+        "uniScalingUnlockable": false,
+        "uploadZone": false,
+        "uploadZoneMovable": false,
+        "uploadZoneRemovable": false,
+        "width": 731,
+        "z": -1,
+        "zChangeable": false,
+        "topLeftX": 34.5,
+        "topLeftY": -18
+      },
+      "type": "image"
+    }, {
+      "title": "Shirt",
+      "source": "/images/color_shirt/color/back/base.png",
+      "parameters": {
+        "advancedEditing": false,
+        "angle": 0,
+        "autoCenter": false,
+        "autoSelect": false,
+        "boundingBox": "0",
+        "boundingBoxMode": "inside",
+        "colorLinkGroup": "base",
+        "colorPrices": {},
+        "colors": "",
+        "copyable": false,
+        "cornerSize": 24,
+        "draggable": false,
+        "evented": true,
+        "excludeFromExport": false,
+        "fill": $tcolor,
+        "filter": false,
+        "flipX": false,
+        "flipY": false,
+        "height": 543,
+        "isEditable": true,
+        "left": 400,
+        "lockUniScaling": true,
+        "locked": false,
+        "minScaleLimit": 0.01,
+        "objectCaching": false,
+        "opacity": 1,
+        "originParams": {
+          "objectCaching": false,
+          "z": 1,
+          "price": 0,
+          "colors": "",
+          "removable": false,
+          "draggable": false,
+          "rotatable": false,
+          "resizable": false,
+          "copyable": false,
+          "zChangeable": false,
+          "boundingBox": "0",
+          "boundingBoxMode": "inside",
+          "autoCenter": false,
+          "replace": "",
+          "replaceInAllViews": false,
+          "autoSelect": false,
+          "topped": false,
+          "colorPrices": {},
+          "colorLinkGroup": "base",
+          "patterns": [],
+          "sku": "",
+          "excludeFromExport": false,
+          "showInColorSelection": false,
+          "locked": false,
+          "uniScalingUnlockable": false,
+          "originX": "center",
+          "originY": "center",
+          "cornerSize": 24,
+          "fill": false,
+          "lockUniScaling": true,
+          "pattern": false,
+          "top": 300,
+          "left": 400,
+          "angle": 0,
+          "flipX": false,
+          "flipY": false,
+          "opacity": 1,
+          "scaleX": 1,
+          "scaleY": 1,
+          "uploadZone": false,
+          "filter": false,
+          "scaleMode": "fit",
+          "resizeToW": "0",
+          "resizeToH": "0",
+          "advancedEditing": false,
+          "uploadZoneMovable": false,
+          "uploadZoneRemovable": false,
+          "padding": 0,
+          "minScaleLimit": 0.01,
+          "customAdds": [],
+          "_isInitial": true,
+          "source": "/images/color_shirt/color/back/base.png",
+          "title": "Shirt",
+          "id": "1588100453544",
+          "cornerColor": "#f5f5f5",
+          "cornerIconColor": "#000000",
+          "selectable": false,
+          "lockRotation": true,
+          "hasRotatingPoint": false,
+          "lockScalingX": true,
+          "lockScalingY": true,
+          "lockMovementX": true,
+          "lockMovementY": true,
+          "hasControls": false,
+          "evented": false,
+          "lockScalingFlip": true,
+          "crossOrigin": ""
+        },
+        "originX": "center",
+        "originY": "center",
+        "padding": 0,
+        "patterns": [],
+        "price": 0,
+        "removable": false,
+        "replace": "",
+        "replaceInAllViews": false,
+        "resizable": false,
+        "resizeToH": "0",
+        "resizeToW": "0",
+        "rotatable": false,
+        "scaleMode": "fit",
+        "scaleX": 1,
+        "scaleY": 1,
+        "showInColorSelection": false,
+        "sku": "",
+        "top": 300,
+        "topped": false,
+        "uniScalingUnlockable": false,
+        "uploadZone": false,
+        "uploadZoneMovable": false,
+        "uploadZoneRemovable": false,
+        "width": 602,
+        "z": -1,
+        "zChangeable": false,
+        "topLeftX": 99,
+        "topLeftY": 28.5
+      },
+      "type": "image"
+    }, {
+      "title": "Shadow",
+      "source": "/images/color_shirt/over_shadow1.png",
+      "parameters": {
+        "advancedEditing": false,
+        "angle": 0,
+        "autoCenter": false,
+        "autoSelect": false,
+        "boundingBox": "0",
+        "boundingBoxMode": "inside",
+        "colorLinkGroup": false,
+        "colorPrices": {},
+        "colors": "",
+        "copyable": false,
+        "cornerSize": 24,
+        "draggable": false,
+        "evented": false,
+        "excludeFromExport": false,
+        "fill": false,
+        "filter": false,
+        "flipX": false,
+        "flipY": false,
+        "height": 543,
+        "left": 400,
+        "lockUniScaling": true,
+        "locked": false,
+        "minScaleLimit": 0.01,
+        "objectCaching": false,
+        "opacity": 1,
+        "originParams": {
+          "objectCaching": false,
+          "z": 2,
+          "price": 0,
+          "colors": "",
+          "removable": false,
+          "draggable": false,
+          "rotatable": false,
+          "resizable": false,
+          "copyable": false,
+          "zChangeable": false,
+          "boundingBox": "0",
+          "boundingBoxMode": "inside",
+          "autoCenter": false,
+          "replace": "",
+          "replaceInAllViews": false,
+          "autoSelect": false,
+          "topped": true,
+          "colorPrices": {},
+          "colorLinkGroup": false,
+          "patterns": [],
+          "sku": "",
+          "excludeFromExport": false,
+          "showInColorSelection": false,
+          "locked": false,
+          "uniScalingUnlockable": false,
+          "originX": "center",
+          "originY": "center",
+          "cornerSize": 24,
+          "fill": false,
+          "lockUniScaling": true,
+          "pattern": false,
+          "top": 300,
+          "left": 400,
+          "angle": 0,
+          "flipX": false,
+          "flipY": false,
+          "opacity": 1,
+          "scaleX": 1,
+          "scaleY": 1,
+          "uploadZone": false,
+          "filter": false,
+          "scaleMode": "fit",
+          "resizeToW": "0",
+          "resizeToH": "0",
+          "advancedEditing": false,
+          "uploadZoneMovable": false,
+          "uploadZoneRemovable": false,
+          "padding": 0,
+          "minScaleLimit": 0.01,
+          "customAdds": [],
+          "_isInitial": true,
+          "source": "/images/color_shirt/over_shadow1.png",
+          "title": "Shadow",
+          "id": "1588100453556",
+          "cornerColor": "#f5f5f5",
+          "cornerIconColor": "#000000",
+          "selectable": false,
+          "lockRotation": true,
+          "hasRotatingPoint": false,
+          "lockScalingX": true,
+          "lockScalingY": true,
+          "lockMovementX": true,
+          "lockMovementY": true,
+          "hasControls": false,
+          "evented": false,
+          "lockScalingFlip": true,
+          "crossOrigin": ""
+        },
+        "originX": "center",
+        "originY": "center",
+        "padding": 0,
+        "patterns": [],
+        "price": 0,
+        "removable": false,
+        "replace": "",
+        "replaceInAllViews": false,
+        "resizable": false,
+        "resizeToH": "0",
+        "resizeToW": "0",
+        "rotatable": false,
+        "scaleMode": "fit",
+        "scaleX": 1,
+        "scaleY": 1,
+        "showInColorSelection": false,
+        "sku": "",
+        "top": 300,
+        "topped": true,
+        "uniScalingUnlockable": false,
+        "uploadZone": false,
+        "uploadZoneMovable": false,
+        "uploadZoneRemovable": false,
+        "width": 602,
+        "z": -1,
+        "zChangeable": false,
+        "topLeftX": 99,
+        "topLeftY": 28.5
+      },
+      "type": "image"
+    }],
+    "options": {
+      "stageWidth": 800,
+      "stageHeight": 600,
+      "customAdds": {
+        "designs": true,
+        "uploads": true,
+        "texts": true,
+        "drawing": true
+      },
+      "customImageParameters": {
+        "minW": 100,
+        "minH": 100,
+        "maxW": 10000,
+        "maxH": 10000,
+        "minDPI": 72,
+        "maxSize": 10,
+        "left": 0,
+        "top": 0,
+        "z": -1,
+        "minScaleLimit": 0.01,
+        "price": 4,
+        "replaceInAllViews": false,
+        "autoCenter": true,
+        "draggable": true,
+        "rotatable": true,
+        "resizable": true,
+        "zChangeable": true,
+        "autoSelect": false,
+        "topped": false,
+        "uniScalingUnlockable": false,
+        "boundingBoxMode": "inside",
+        "scaleMode": "cover",
+        "removable": true,
+        "resizeToW": "300",
+        "resizeToH": "300",
+        "advancedEditing": true,
+        "filter": "none"
+      },
+      "customTextParameters": {
+        "left": 0,
+        "top": 0,
+        "z": -1,
+        "colors": "#000",
+        "price": 2,
+        "autoCenter": true,
+        "draggable": true,
+        "rotatable": true,
+        "resizable": true,
+        "zChangeable": true,
+        "autoSelect": true,
+        "topped": false,
+        "uniScalingUnlockable": false,
+        "curvable": true,
+        "curveSpacing": 10,
+        "curveRadius": 80,
+        "curveReverse": false,
+        "boundingBoxMode": "inside",
+        "fontSize": 30,
+        "minFontSize": 1,
+        "maxFontSize": 1000,
+        "widthFontSize": 0,
+        "maxLength": 0,
+        "maxLines": 0,
+        "textAlign": "left",
+        "removable": true
+      },
+      "maxPrice": -1,
+      "optionalView": false,
+      "designCategories": [],
+      "printingBox": {},
+      "layouts": []
+    },
+    "names_numbers": null,
+    "mask": null,
+    "locked": false
+  };
+
+  if (false) { var $json; } else {
+    var $json = [[$front, $back]];
+  }
+
+  return $json;
 }
 
 /***/ }),
@@ -3338,6 +4307,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3348,7 +4343,7 @@ __webpack_require__.r(__webpack_exports__);
       printOptions: "front",
       frontprint: null,
       backprint: null,
-      tcolor: null,
+      tcolor: '',
       tsize: null,
       count: 1,
       tcolors: null,
@@ -3463,7 +4458,6 @@ __webpack_require__.r(__webpack_exports__);
     axios.get("api/v1/default-tcolor").then(function (response) {
       _this5.tcolor = response.data.id;
     });
-    this.products = ['dfas', 'fsad'];
     /*
         let vm = this;
         page_url = page_url || 'api/v1/design';
@@ -46724,7 +47718,7 @@ var render = function() {
             attrs: {
               id:
                 "img-" +
-                this.design.design.id +
+                this.design.id +
                 (_vm.type === "view" ? "-view" : _vm.type),
               src: ""
             }
@@ -46735,7 +47729,7 @@ var render = function() {
           attrs: {
             id:
               "img-" +
-              this.design.design.id +
+              this.design.id +
               (_vm.type === "view" ? "-view" : _vm.type),
             src: ""
           }
@@ -46746,7 +47740,7 @@ var render = function() {
         attrs: {
           id:
             "clothing-designer-" +
-            this.design.design.id +
+            this.design.id +
             (_vm.type === "view" ? "-view" : _vm.type)
         }
       }),
@@ -47192,855 +48186,6 @@ var render = function() {
         _c("h2", [_vm._v(_vm._s(_vm.$t("MostSells")))])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "most_sell_content" }, [
-        _c(
-          "div",
-          { staticClass: "row" },
-          _vm._l(_vm.mostSells, function(product) {
-            return _c(
-              "div",
-              {
-                key: product.design.id,
-                staticClass: "col-xl-3 col-lg-4 col-md-6"
-              },
-              [
-                _c("div", { staticClass: "t-shirt_data mb-2" }, [
-                  _c("span", [_vm._v("ID : " + _vm._s(product.random_name))]),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "t-shirt_image_div position-relative" },
-                    [
-                      _c("product-designer", {
-                        attrs: { design: product, type: "view-most" }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "ul",
-                        {
-                          staticClass:
-                            "cart_ul_btn list-icon list-unstyled product_btn_div d-flex align-items-center text-center mb-0"
-                        },
-                        [
-                          _c("li", [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "quickview_btn",
-                                attrs: {
-                                  href: "#",
-                                  "data-id": "hidden-denim-shirt",
-                                  title: "Product Details",
-                                  "data-toggle": "modal",
-                                  "data-target": "#d" + product.design.id
-                                }
-                              },
-                              [
-                                _c("img", {
-                                  attrs: { src: "/images/eye.png", alt: "" }
-                                })
-                              ]
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("li", [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "add-to-cart quickview_btn",
-                                attrs: { href: "#" },
-                                on: {
-                                  click: function($event) {
-                                    $event.preventDefault()
-                                    return _vm.addToCart(product)
-                                  }
-                                }
-                              },
-                              [
-                                _c("img", {
-                                  attrs: { src: "images/add-cart.png", alt: "" }
-                                })
-                              ]
-                            )
-                          ])
-                        ]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "t-shirt_inner_data d-flex justify-content-between align-items-center px-1 my-2"
-                    },
-                    [
-                      _c("span", { staticClass: "t-shirt_name" }, [
-                        _vm._v(_vm._s(product.name))
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "t-shirt_inner_price px-1 my-2" }, [
-                    product.discount !== 0
-                      ? _c(
-                          "span",
-                          { staticClass: "t-shirt_price_nosale d-none" },
-                          [_vm._v(_vm._s(_vm._f("currency")(product.price)))]
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    product.discount === 0
-                      ? _c("span", { staticClass: "t-shirt_price_sale mx-3" }, [
-                          _vm._v(
-                            _vm._s(
-                              _vm._f("currency")(
-                                _vm.priceDefault(
-                                  product.price,
-                                  product.discount
-                                )
-                              )
-                            )
-                          )
-                        ])
-                      : _c("span", { staticClass: "t-shirt_price_sale mx-3" }, [
-                          _vm._v(
-                            _vm._s(
-                              _vm._f("currency")(
-                                _vm.priceDefault(
-                                  product.price,
-                                  product.discount
-                                )
-                              )
-                            )
-                          )
-                        ])
-                  ]),
-                  _vm._v(" "),
-                  false
-                    ? undefined
-                    : _vm._e()
-                ])
-              ]
-            )
-          }),
-          0
-        )
-      ]),
-      _vm._v("\n    " + _vm._s(_vm.products) + "\n    "),
-      _vm._l(_vm.mostSells, function(protduct) {
-        return _c(
-          "div",
-          {
-            key: _vm.product.design.id,
-            staticClass: "modal fade",
-            attrs: {
-              id: "d" + _vm.product.design.id,
-              tabindex: "-1",
-              role: "dialog",
-              "aria-labelledby": "myExtraLargeModalLabel",
-              "aria-hidden": "true"
-            }
-          },
-          [
-            _c(
-              "div",
-              {
-                staticClass: "modal-dialog modal-dialog-centered modal-lg",
-                attrs: { role: "document" }
-              },
-              [
-                _c("div", { staticClass: "modal-content bg-white" }, [
-                  _vm._m(0, true),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "content" }, [
-                    _c("div", { staticClass: "row p-3" }, [
-                      _c("div", { staticClass: "col-md-6 h-100" }, [
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "product-img d-flex justify-content-center"
-                          },
-                          [
-                            _c("product-designer", {
-                              staticClass: "col-12",
-                              attrs: { design: _vm.product, type: "popup" }
-                            })
-                          ],
-                          1
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-md-6" }, [
-                        _c("h3", { staticClass: "productName" }, [
-                          _vm._v(_vm._s(_vm.product.name))
-                        ]),
-                        _vm._v(" "),
-                        _c("h5", [
-                          _vm._v("ID: "),
-                          _c("span", [_vm._v(_vm._s(_vm.product.design.id))])
-                        ]),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "productPrice" }, [
-                          _vm._v(
-                            _vm._s(
-                              _vm._f("currency")(
-                                _vm.priceDefault(
-                                  _vm.product.price,
-                                  _vm.product.discount
-                                )
-                              )
-                            )
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "ProductDetails pt-3" }, [
-                          _vm._v(
-                            "\n                                " +
-                              _vm._s(_vm.product.des) +
-                              "\n                            "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "form-action" }, [
-                          _c(
-                            "form",
-                            {
-                              staticClass: "form-group",
-                              attrs: { method: "post" },
-                              on: {
-                                submit: function($event) {
-                                  $event.preventDefault()
-                                  return _vm.addToCart(_vm.product)
-                                }
-                              }
-                            },
-                            [
-                              _c("div", { staticClass: "mb-2" }, [
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass:
-                                      "my-1 mr-2 font-weight-bold text-capitalize"
-                                  },
-                                  [
-                                    _vm._v(
-                                      _vm._s(_vm.$t("print_options")) + "* : "
-                                    )
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  { staticClass: "d-inline-block mx-2" },
-                                  [
-                                    _c("input", {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.printOptions,
-                                          expression: "printOptions"
-                                        }
-                                      ],
-                                      staticClass: "printOpt",
-                                      attrs: {
-                                        type: "radio",
-                                        id: "front" + _vm.product.design.id,
-                                        value: "front"
-                                      },
-                                      domProps: {
-                                        checked: _vm._q(
-                                          _vm.printOptions,
-                                          "front"
-                                        )
-                                      },
-                                      on: {
-                                        change: function($event) {
-                                          _vm.printOptions = "front"
-                                        }
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _c(
-                                      "label",
-                                      {
-                                        staticClass: "printOpt",
-                                        attrs: {
-                                          for: "front" + _vm.product.design.id
-                                        }
-                                      },
-                                      [_vm._v(_vm._s(_vm.$t("Front")))]
-                                    )
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  { staticClass: "d-inline-block mx-2" },
-                                  [
-                                    _c("input", {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.printOptions,
-                                          expression: "printOptions"
-                                        }
-                                      ],
-                                      staticClass: "printOpt",
-                                      attrs: {
-                                        type: "radio",
-                                        id: "back" + _vm.product.design.id,
-                                        value: "back"
-                                      },
-                                      domProps: {
-                                        checked: _vm._q(
-                                          _vm.printOptions,
-                                          "back"
-                                        )
-                                      },
-                                      on: {
-                                        change: function($event) {
-                                          _vm.printOptions = "back"
-                                        }
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _c(
-                                      "label",
-                                      {
-                                        staticClass: "printOpt",
-                                        attrs: {
-                                          for: "back" + _vm.product.design.id
-                                        }
-                                      },
-                                      [_vm._v(_vm._s(_vm.$t("Back")))]
-                                    )
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  { staticClass: "d-inline-block mx-2" },
-                                  [
-                                    _c("input", {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.printOptions,
-                                          expression: "printOptions"
-                                        }
-                                      ],
-                                      staticClass: "printOpt",
-                                      attrs: {
-                                        type: "radio",
-                                        id:
-                                          "front_back" + _vm.product.design.id,
-                                        value: "front_back"
-                                      },
-                                      domProps: {
-                                        checked: _vm._q(
-                                          _vm.printOptions,
-                                          "front_back"
-                                        )
-                                      },
-                                      on: {
-                                        change: function($event) {
-                                          _vm.printOptions = "front_back"
-                                        }
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _c(
-                                      "label",
-                                      {
-                                        staticClass: "printOpt",
-                                        attrs: {
-                                          for:
-                                            "front_back" + _vm.product.design.id
-                                        }
-                                      },
-                                      [_vm._v(_vm._s(_vm.$t("Front_and_Back")))]
-                                    )
-                                  ]
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "mb-2" }, [
-                                _vm.printOptions.includes("front")
-                                  ? _c("div", [
-                                      _c(
-                                        "label",
-                                        {
-                                          staticClass:
-                                            "my-1 mr-2 font-weight-bold text-capitalize",
-                                          attrs: {
-                                            for:
-                                              "frontSizeInputFiled" +
-                                              _vm.product.design.id
-                                          }
-                                        },
-                                        [
-                                          _vm._v(
-                                            _vm._s(_vm.$t("front_size")) + "*"
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "select",
-                                        {
-                                          directives: [
-                                            {
-                                              name: "model",
-                                              rawName: "v-model",
-                                              value: _vm.frontprint,
-                                              expression: "frontprint"
-                                            }
-                                          ],
-                                          staticClass:
-                                            "custom-select my-1 mr-sm-2",
-                                          attrs: {
-                                            id:
-                                              "frontSizeInputFiled" +
-                                              _vm.product.design.id
-                                          },
-                                          on: {
-                                            click: function($event) {
-                                              $event.preventDefault()
-                                              return _vm.frontprintPrice(
-                                                _vm.frontprint
-                                              )
-                                            },
-                                            change: function($event) {
-                                              var $$selectedVal = Array.prototype.filter
-                                                .call(
-                                                  $event.target.options,
-                                                  function(o) {
-                                                    return o.selected
-                                                  }
-                                                )
-                                                .map(function(o) {
-                                                  var val =
-                                                    "_value" in o
-                                                      ? o._value
-                                                      : o.value
-                                                  return val
-                                                })
-                                              _vm.frontprint = $event.target
-                                                .multiple
-                                                ? $$selectedVal
-                                                : $$selectedVal[0]
-                                            }
-                                          }
-                                        },
-                                        [
-                                          _c(
-                                            "option",
-                                            {
-                                              attrs: { selected: "" },
-                                              domProps: { value: null }
-                                            },
-                                            [
-                                              _vm._v(
-                                                "- " +
-                                                  _vm._s(
-                                                    _vm.$t("Please_Select")
-                                                  ) +
-                                                  " -"
-                                              )
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _vm._l(
-                                            _vm.product.design.dsizes,
-                                            function(dsize) {
-                                              return _c(
-                                                "option",
-                                                {
-                                                  key: dsize.id,
-                                                  domProps: { value: dsize.id }
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                                                    " +
-                                                      _vm._s(dsize.length)
-                                                  ),
-                                                  _c("span", [_vm._v(" X ")]),
-                                                  _vm._v(
-                                                    _vm._s(dsize.width) +
-                                                      "\n                                                "
-                                                  )
-                                                ]
-                                              )
-                                            }
-                                          )
-                                        ],
-                                        2
-                                      )
-                                    ])
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _vm.printOptions.includes("back")
-                                  ? _c("div", [
-                                      _c(
-                                        "label",
-                                        {
-                                          staticClass:
-                                            "my-1 mr-2 font-weight-bold text-capitalize",
-                                          attrs: {
-                                            for:
-                                              "backSizeInputFiled" +
-                                              _vm.product.design.id
-                                          }
-                                        },
-                                        [
-                                          _vm._v(
-                                            _vm._s(_vm.$t("back_size")) + "*"
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "select",
-                                        {
-                                          directives: [
-                                            {
-                                              name: "model",
-                                              rawName: "v-model",
-                                              value: _vm.backprint,
-                                              expression: "backprint"
-                                            }
-                                          ],
-                                          staticClass:
-                                            "custom-select my-1 mr-sm-2",
-                                          attrs: {
-                                            id:
-                                              "backSizeInputFiled" +
-                                              _vm.product.design.id
-                                          },
-                                          on: {
-                                            click: function($event) {
-                                              $event.preventDefault()
-                                              return _vm.backprintPrice(
-                                                _vm.backprint
-                                              )
-                                            },
-                                            change: function($event) {
-                                              var $$selectedVal = Array.prototype.filter
-                                                .call(
-                                                  $event.target.options,
-                                                  function(o) {
-                                                    return o.selected
-                                                  }
-                                                )
-                                                .map(function(o) {
-                                                  var val =
-                                                    "_value" in o
-                                                      ? o._value
-                                                      : o.value
-                                                  return val
-                                                })
-                                              _vm.backprint = $event.target
-                                                .multiple
-                                                ? $$selectedVal
-                                                : $$selectedVal[0]
-                                            }
-                                          }
-                                        },
-                                        [
-                                          _c(
-                                            "option",
-                                            {
-                                              attrs: { selected: "" },
-                                              domProps: { value: null }
-                                            },
-                                            [
-                                              _vm._v(
-                                                "- " +
-                                                  _vm._s(
-                                                    _vm.$t("Please_Select")
-                                                  ) +
-                                                  " -"
-                                              )
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _vm._l(
-                                            _vm.product.design.dsizes,
-                                            function(dsize) {
-                                              return _c(
-                                                "option",
-                                                {
-                                                  key: dsize.id,
-                                                  domProps: { value: dsize.id }
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                                                    " +
-                                                      _vm._s(dsize.length)
-                                                  ),
-                                                  _c("span", [_vm._v(" X ")]),
-                                                  _vm._v(
-                                                    _vm._s(dsize.width) +
-                                                      "\n                                                "
-                                                  )
-                                                ]
-                                              )
-                                            }
-                                          )
-                                        ],
-                                        2
-                                      )
-                                    ])
-                                  : _vm._e()
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "mb-2" }, [
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass: "my-1 mr-2 font-weight-bold",
-                                    attrs: {
-                                      for: "colorInput" + _vm.product.design.id
-                                    }
-                                  },
-                                  [_vm._v(_vm._s(_vm.$t("TShirt_Color")) + "*")]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "select",
-                                  {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.tcolor,
-                                        expression: "tcolor"
-                                      }
-                                    ],
-                                    staticClass: "custom-select my-1 mr-sm-2",
-                                    attrs: {
-                                      id: "colorInput" + _vm.product.design.id
-                                    },
-                                    on: {
-                                      change: function($event) {
-                                        var $$selectedVal = Array.prototype.filter
-                                          .call($event.target.options, function(
-                                            o
-                                          ) {
-                                            return o.selected
-                                          })
-                                          .map(function(o) {
-                                            var val =
-                                              "_value" in o ? o._value : o.value
-                                            return val
-                                          })
-                                        _vm.tcolor = $event.target.multiple
-                                          ? $$selectedVal
-                                          : $$selectedVal[0]
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _c(
-                                      "option",
-                                      {
-                                        attrs: { selected: "" },
-                                        domProps: { value: null }
-                                      },
-                                      [
-                                        _vm._v(
-                                          "- " +
-                                            _vm._s(_vm.$t("Please_Select")) +
-                                            " -"
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _vm._l(_vm.tcolors, function(color) {
-                                      return _c(
-                                        "option",
-                                        {
-                                          key: color.id,
-                                          domProps: { value: color.id }
-                                        },
-                                        [
-                                          _vm._v(
-                                            "\n                                                " +
-                                              _vm._s(color.name) +
-                                              "\n                                            "
-                                          )
-                                        ]
-                                      )
-                                    })
-                                  ],
-                                  2
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "mb-2" }, [
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass: "my-1 mr-2 font-weight-bold",
-                                    attrs: {
-                                      for: "sizeInput" + _vm.product.design.id
-                                    }
-                                  },
-                                  [_vm._v(_vm._s(_vm.$t("TShirt_Size")) + "*")]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "select",
-                                  {
-                                    staticClass: "custom-select my-1 mr-sm-2",
-                                    attrs: {
-                                      id: "sizeInput" + _vm.product.design.id
-                                    }
-                                  },
-                                  [
-                                    _c(
-                                      "option",
-                                      {
-                                        attrs: { selected: "" },
-                                        domProps: { value: null }
-                                      },
-                                      [
-                                        _vm._v(
-                                          "- " +
-                                            _vm._s(_vm.$t("Please_Select")) +
-                                            " -"
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _vm._l(_vm.tsizes, function(tsize) {
-                                      return _c(
-                                        "option",
-                                        {
-                                          key: tsize.id,
-                                          domProps: { value: tsize.id }
-                                        },
-                                        [
-                                          _vm._v(
-                                            "\n                                                " +
-                                              _vm._s(tsize.name) +
-                                              "\n                                            "
-                                          )
-                                        ]
-                                      )
-                                    })
-                                  ],
-                                  2
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "form-row" }, [
-                                _c("div", { staticClass: "col-3" }, [
-                                  _c("input", {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.count,
-                                        expression: "count"
-                                      }
-                                    ],
-                                    staticStyle: {
-                                      "background-color": "#ffffff",
-                                      "border-radius": "5px"
-                                    },
-                                    attrs: {
-                                      type: "number",
-                                      value: "1",
-                                      name: "mount",
-                                      min: "1"
-                                    },
-                                    domProps: { value: _vm.count },
-                                    on: {
-                                      input: function($event) {
-                                        if ($event.target.composing) {
-                                          return
-                                        }
-                                        _vm.count = $event.target.value
-                                      }
-                                    }
-                                  })
-                                ]),
-                                _vm._v(" "),
-                                _c("div", { staticClass: "col-6" }, [
-                                  _c(
-                                    "button",
-                                    {
-                                      staticClass: "btn btn-primary my-1",
-                                      staticStyle: { outline: "none" },
-                                      attrs: { type: "submit" }
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass: "fas fa-shopping-cart"
-                                      }),
-                                      _vm._v(
-                                        "\n                                                " +
-                                          _vm._s(_vm.$t("Add_to_cart")) +
-                                          "\n                                            "
-                                      )
-                                    ]
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c(
-                                  "h5",
-                                  {
-                                    staticClass: "productPrice",
-                                    staticStyle: { "margin-top": "10px" }
-                                  },
-                                  [
-                                    _vm._v(
-                                      _vm._s(_vm.$t("total")) +
-                                        " :\n                                            "
-                                    ),
-                                    _c(
-                                      "span",
-                                      { staticClass: "productPrice" },
-                                      [
-                                        _vm._v(
-                                          _vm._s(
-                                            _vm._f("currency")(
-                                              _vm.count *
-                                                (_vm.tsizes_price +
-                                                  _vm.frontprintprice +
-                                                  _vm.backprintprice +
-                                                  _vm.priceDis(
-                                                    _vm.product.price,
-                                                    _vm.product.discount
-                                                  ))
-                                            )
-                                          )
-                                        )
-                                      ]
-                                    )
-                                  ]
-                                )
-                              ])
-                            ]
-                          )
-                        ])
-                      ])
-                    ])
-                  ])
-                ])
-              ]
-            )
-          ]
-        )
-      }),
-      _vm._v(" "),
       _c("div", { staticClass: "most_sell_title text-center mb-4" }, [
         _c("h2", [_vm._v(_vm._s(_vm.$t("Designs")))])
       ]),
@@ -48225,7 +48370,7 @@ var render = function() {
         return _c(
           "div",
           {
-            key: product.design.id,
+            key: product.id,
             staticClass: "modal fade",
             attrs: {
               id: "d" + product.design.id,
@@ -48244,7 +48389,7 @@ var render = function() {
               },
               [
                 _c("div", { staticClass: "modal-content bg-white" }, [
-                  _vm._m(1, true),
+                  _vm._m(0, true),
                   _vm._v(" "),
                   _c("div", { staticClass: "content" }, [
                     _c("div", { staticClass: "row p-3" }, [
@@ -48257,8 +48402,13 @@ var render = function() {
                           },
                           [
                             _c("product-designer", {
+                              key: _vm.tcolor,
                               staticClass: "col-12",
-                              attrs: { design: product, type: "popup" }
+                              attrs: {
+                                design: product.design,
+                                type: "popup",
+                                ccolor: _vm.tcolor
+                              }
                             })
                           ],
                           1
@@ -48267,7 +48417,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-6" }, [
                         _c("h3", { staticClass: "productName" }, [
-                          _vm._v(_vm._s(product.name))
+                          _vm._v(_vm._s(product.design.name_ar))
                         ]),
                         _vm._v(" "),
                         _c("h5", [
@@ -48280,8 +48430,8 @@ var render = function() {
                             _vm._s(
                               _vm._f("currency")(
                                 _vm.priceDefault(
-                                  product.price,
-                                  product.discount
+                                  product.design.price,
+                                  product.design.discount
                                 )
                               )
                             )
@@ -48290,9 +48440,9 @@ var render = function() {
                         _vm._v(" "),
                         _c("p", { staticClass: "ProductDetails pt-3" }, [
                           _vm._v(
-                            "\n                                " +
-                              _vm._s(product.des) +
-                              "\n                            "
+                            "\n                                    " +
+                              _vm._s(product.description_en) +
+                              "\n                                "
                           )
                         ]),
                         _vm._v(" "),
@@ -48340,7 +48490,7 @@ var render = function() {
                                       staticClass: "printOpt",
                                       attrs: {
                                         type: "radio",
-                                        id: "front" + product.design.id,
+                                        id: "front" + product.id,
                                         value: "front"
                                       },
                                       domProps: {
@@ -48385,7 +48535,7 @@ var render = function() {
                                       staticClass: "printOpt",
                                       attrs: {
                                         type: "radio",
-                                        id: "back" + product.design.id,
+                                        id: "back" + product.id,
                                         value: "back"
                                       },
                                       domProps: {
@@ -48552,15 +48702,17 @@ var render = function() {
                                               return _c(
                                                 "option",
                                                 {
-                                                  key: dsize.id,
                                                   domProps: { value: dsize.id }
                                                 },
                                                 [
-                                                  _vm._v(_vm._s(dsize.length)),
+                                                  _vm._v(
+                                                    "\n                                                        " +
+                                                      _vm._s(dsize.length)
+                                                  ),
                                                   _c("span", [_vm._v(" X ")]),
                                                   _vm._v(
                                                     _vm._s(dsize.width) +
-                                                      "\n                                                "
+                                                      "\n                                                    "
                                                   )
                                                 ]
                                               )
@@ -48581,8 +48733,7 @@ var render = function() {
                                             "my-1 mr-2 font-weight-bold text-capitalize",
                                           attrs: {
                                             for:
-                                              "backSizeInputFiled" +
-                                              product.design.id
+                                              "backSizeInputFiled" + product.id
                                           }
                                         },
                                         [
@@ -48607,8 +48758,7 @@ var render = function() {
                                             "custom-select my-1 mr-sm-2",
                                           attrs: {
                                             id:
-                                              "backSizeInputFiled" +
-                                              product.design.id
+                                              "backSizeInputFiled" + product.id
                                           },
                                           on: {
                                             click: function($event) {
@@ -48663,18 +48813,17 @@ var render = function() {
                                               return _c(
                                                 "option",
                                                 {
-                                                  key: dsize.id,
                                                   domProps: { value: dsize.id }
                                                 },
                                                 [
                                                   _vm._v(
-                                                    "\n                                                    " +
+                                                    "\n                                                        " +
                                                       _vm._s(dsize.length)
                                                   ),
                                                   _c("span", [_vm._v(" X ")]),
                                                   _vm._v(
                                                     _vm._s(dsize.width) +
-                                                      "\n                                                "
+                                                      "\n                                                    "
                                                   )
                                                 ]
                                               )
@@ -48753,20 +48902,24 @@ var render = function() {
                                       return _c(
                                         "option",
                                         {
-                                          key: tshirt.color.id,
                                           domProps: { value: tshirt.color.id }
                                         },
                                         [
                                           _vm._v(
-                                            "\n                                                " +
+                                            "\n                                                    " +
                                               _vm._s(tshirt.color.name) +
-                                              "\n                                            "
+                                              "\n                                                "
                                           )
                                         ]
                                       )
                                     })
                                   ],
                                   2
+                                ),
+                                _vm._v(
+                                  "\n                                            " +
+                                    _vm._s(_vm.tcolor + "as") +
+                                    "\n                                        "
                                 )
                               ]),
                               _vm._v(" "),
@@ -48785,9 +48938,39 @@ var render = function() {
                                 _c(
                                   "select",
                                   {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.tsize,
+                                        expression: "tsize"
+                                      }
+                                    ],
                                     staticClass: "custom-select my-1 mr-sm-2",
                                     attrs: {
                                       id: "sizeInput" + product.design.id
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        return _vm.tsizePrice(_vm.tsize)
+                                      },
+                                      change: function($event) {
+                                        var $$selectedVal = Array.prototype.filter
+                                          .call($event.target.options, function(
+                                            o
+                                          ) {
+                                            return o.selected
+                                          })
+                                          .map(function(o) {
+                                            var val =
+                                              "_value" in o ? o._value : o.value
+                                            return val
+                                          })
+                                        _vm.tsize = $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      }
                                     }
                                   },
                                   [
@@ -48810,14 +48993,13 @@ var render = function() {
                                       return _c(
                                         "option",
                                         {
-                                          key: tshirt.tsize.id,
                                           domProps: { value: tshirt.tsize.id }
                                         },
                                         [
                                           _vm._v(
-                                            "\n                                                " +
+                                            "\n                                                    " +
                                               _vm._s(tshirt.tsize.name) +
-                                              "\n                                            "
+                                              "\n                                                "
                                           )
                                         ]
                                       )
@@ -48873,9 +49055,9 @@ var render = function() {
                                         staticClass: "fas fa-shopping-cart"
                                       }),
                                       _vm._v(
-                                        "\n                                                " +
+                                        "\n                                                    " +
                                           _vm._s(_vm.$t("Add_to_cart")) +
-                                          "\n                                            "
+                                          "\n                                                "
                                       )
                                     ]
                                   )
@@ -48890,7 +49072,7 @@ var render = function() {
                                   [
                                     _vm._v(
                                       _vm._s(_vm.$t("total")) +
-                                        " :\n                                            "
+                                        " :\n                                                "
                                     ),
                                     _c(
                                       "span",
@@ -48932,23 +49114,6 @@ var render = function() {
   )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "close",
-        attrs: {
-          type: "button",
-          "data-dismiss": "modal",
-          "aria-label": "Close"
-        }
-      },
-      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-    )
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -68217,13 +68382,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!*****************************************************!*\
   !*** ./resources/js/components/ProductDesigner.vue ***!
   \*****************************************************/
-/*! exports provided: getProductJson, default */
+/*! exports provided: _get_color, getProductJson, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ProductDesigner_vue_vue_type_template_id_56cb285f_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ProductDesigner.vue?vue&type=template&id=56cb285f&scoped=true& */ "./resources/js/components/ProductDesigner.vue?vue&type=template&id=56cb285f&scoped=true&");
 /* harmony import */ var _ProductDesigner_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ProductDesigner.vue?vue&type=script&lang=js& */ "./resources/js/components/ProductDesigner.vue?vue&type=script&lang=js&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "_get_color", function() { return _ProductDesigner_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["_get_color"]; });
+
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getProductJson", function() { return _ProductDesigner_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["getProductJson"]; });
 
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
@@ -68256,12 +68423,14 @@ component.options.__file = "resources/js/components/ProductDesigner.vue"
 /*!******************************************************************************!*\
   !*** ./resources/js/components/ProductDesigner.vue?vue&type=script&lang=js& ***!
   \******************************************************************************/
-/*! exports provided: default, getProductJson */
+/*! exports provided: default, _get_color, getProductJson */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ProductDesigner_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ProductDesigner.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ProductDesigner.vue?vue&type=script&lang=js&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "_get_color", function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ProductDesigner_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["_get_color"]; });
+
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getProductJson", function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ProductDesigner_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["getProductJson"]; });
 
  /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ProductDesigner_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 

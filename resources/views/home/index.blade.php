@@ -120,37 +120,40 @@
                                     {{$product->des}}
                                 </p>
                                 <div class="form-action">
-                                    <form method="post" class="form-group" @submit.prevent="addToCart(product)">
+                                    <form method="post" class="form-group" data-type="popup" data-id="{{ $product->design->id }}">
                                         <div class="mb-2">
                                             <label class="my-1 mr-2 font-weight-bold text-capitalize">{{__('print_options')}}* : </label>
                                             <div class="d-inline-block mx-2">
-                                                <input class="printOpt" type="radio" id="'front'+product.design.id" value="front" vv-model="printOptions">
-                                                <label class="printOpt" for="'front'+product.design.id">{{__('Front')}}</label>
+                                                <input class="printOpt opt" type="radio" id="{{'front'.$product->design->id}}" value="front"
+                                                       name="printOptions"
+                                                >
+                                                <label class="printOpt" for="{{'front'.$product->design->id}}">{{__('Front')}}</label>
                                             </div>
                                             <div class="d-inline-block mx-2">
-                                                <input class="printOpt" type="radio" id="'back'+product.design.id"
+                                                <input class="printOpt opt"  type="radio" id="{{'back'.$product->design->id}}"
                                                        value="back"
-                                                       vv-model="printOptions">
-                                                <label class="printOpt" for="'back'+product.design.id">{{__('Back')}}</label>
+                                                       name="printOptions"
+                                                       >
+                                                <label class="printOpt" for="{{'back'.$product->design->id}}">{{__('Back')}}</label>
                                             </div>
                                             <div class="d-inline-block mx-2">
-                                                <input class="printOpt" type="radio" id="'front_back'+product.design.id"
+                                                <input class="printOpt opt" type="radio" id="{{'front_back'.$product->design->id}}"
                                                        value="front_back"
-                                                       vv-model="printOptions">
-                                                <label class="printOpt" for="'front_back'+product.design.id">{{__('Front_and_Back')}}</label>
+                                                      name="printOptions"
+                                                >
+                                                <label class="printOpt" for="{{'front_back'.$product->design->id}}">{{__('Front_and_Back')}}</label>
                                             </div>
                                         </div>
                                         <div class="mb-2">
-                                            <div vv-if="printOptions.includes('front')">
+                                            <div>
                                                 <label
                                                     class="my-1 mr-2 font-weight-bold text-capitalize"
                                                     for="'frontSizeInputFiled'+product.design.id"
                                                 >{{__('front_size')}}*</label
                                                 >
                                                 <select
-                                                    @click.prevent="frontprintPrice(frontprint)"
-                                                    vv-model="frontprint"
                                                     class="custom-select my-1 mr-sm-2"
+                                                    name="dsize[front]"
                                                     id="{{'frontSizeInputFiled'.$product->design->id}}"
                                                 >
                                                     <option value="null" selected>- {{__('Please_Select')}} -</option>
@@ -159,15 +162,14 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <div vv-if="printOptions.includes('back')">
+                                            <div >
                                                 <label
                                                     class="my-1 mr-2 font-weight-bold text-capitalize"
                                                     for="{{'backSizeInputFiled'.$product->design->id}}"
                                                 >{{__('back_size')}}*</label
                                                 >
                                                 <select
-                                                    @click.prevent="backprintPrice(backprint)"
-                                                    vv-model="backprint"
+                                                    name="dsize[back]"
                                                     class="custom-select my-1 mr-sm-2"
                                                     id="{{'backSizeInputFiled'.$product->design->id}}"
                                                 >
@@ -184,8 +186,8 @@
                                                 for="{{'colorInput'.$product->design->id}}">{{__('TShirt_Color')}}*</label
                                             >
                                             <select
-
-                                                class="custom-select my-1 mr-sm-2"
+                                                name="color"
+                                                class="custom-select my-1 mr-sm-2 opt"
                                                 id="{{'colorInput'.$product->design->id}}"
                                             >
                                                 <option :value="null" selected>- {{__('Please_Select')}} -</option>
@@ -200,6 +202,7 @@
                                             <label class="my-1 mr-2 font-weight-bold" for="{{'sizeInput'.$product->design->id}}">{{__('TShirt_Size')}}*</label
                                             >
                                             <select
+                                                name="tsize"
                                                 class="custom-select my-1 mr-sm-2"
                                                 id="{{'sizeInput'.$product->design->id}}"
                                             >
@@ -214,7 +217,6 @@
                                         <div class="form-row">
                                             <div class="col-3">
                                                 <input
-                                                    vv-model="count"
                                                     type="number"
                                                     value="1"
                                                     name="mount"
@@ -257,8 +259,45 @@
 
 @section('scripts')
     <script>
+        var colorMap = {!! json_encode($colors) !!};
         var $Designes = $(".clothing-designer");
 
+            $('.opt').on('change',function () {
+                var $this  = $(this);
+                var $form  = $this.closest('form')
+                var designID = $form.attr('data-id');
+                var type = $form.attr('data-type');
+                var dataArray = $form.serializeArray(),
+                    dataObj = {};
+
+                $(dataArray).each(function(i, field){
+                    dataObj[field.name] = field.value;
+                });
+                var $yourDesigner = $("#clothing-designer-" + designID +'-' +type),
+                    pluginOpts = {
+                        mainBarModules: [],
+                        productsJSON: getProductJson($form.parent().parent().parent().find('img').attr('data-img'),type,colorMap[dataObj['color']]), //see JSON folder for products sorted in categories
+                        actions: {
+                            top: [],
+                            right: [],
+                            bottom: [],
+                            left: []
+                        }
+                    };
+                // $yourDesigner.html('')
+                $form.parent().parent().parent().find('img').attr('src','//media.giphy.com/media/3oEjI6SIIHBdRxXI40/200.gif')
+                let yourDesigner = new FancyProductDesigner(
+                    $yourDesigner,
+                    pluginOpts
+                );
+
+                $yourDesigner.on('productCreate', async function () {
+                    yourDesigner.getProductDataURL( function(dataURL){
+                        console.log($form.parent().parent().parent().find('img'))
+                        $form.parent().parent().parent().find('img').attr('src',dataURL)
+                    } );
+                });
+            });
             $Designes.each(function () {
                 var $this  = $(this);
                 var designID = $this.attr('data-id');
@@ -298,6 +337,7 @@
 
             $tcolor = color? color: _get_color();
 
+            console.log($tcolor)
 
             $front = {
                 "title": "Front",
