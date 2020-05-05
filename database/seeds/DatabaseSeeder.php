@@ -15,6 +15,9 @@ class DatabaseSeeder extends Seeder
          $this->call('RolesAndPermissionsSeeder');
          $this->call('UserTableSeeder');
          $this->call('UserRoleTableSeeder');
+         $this->call('AddTsizeSeeder');
+         $this->call('DsizeSeeder');
+         $this->call('ColorSeeder');
 
          artisan::call('translations:import');
          artisan::call('storage:link');
