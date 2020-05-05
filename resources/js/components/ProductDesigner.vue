@@ -2,8 +2,8 @@
     <div>
         <div v-if="type==='view'||type==='view-most'" class="w-100" style="height: 200px">
             <img :id="'img-'+this.design.id+(type==='view'?'-view':type)"
-                 class="position-absolute"
-                 style="clip: rect(0px, auto, 200px, 0px);width: 200%;margin-left: -50%;"
+                 class="position-absolute w-100"
+                 style="clip: rect(0px, auto, 200px, 0px);width: 200%;display: block;"
                  src="">
         </div>
 
@@ -32,7 +32,7 @@
             let $yourDesigner = $("#clothing-designer-" + design.id + (_this.type === 'view' ? '-view' : _this.type)),
                 pluginOpts = {
                     mainBarModules: [],
-                    productsJSON: getProductJson(design.img,colorMap[_this.ccolor]), //see JSON folder for products sorted in categories
+                    productsJSON: getProductJson(design.thump,colorMap[_this.ccolor]), //see JSON folder for products sorted in categories
                     customImageParameters: {
 
                     },
@@ -42,18 +42,18 @@
                         bottom: [],
                         left: []
                     }
-                },
-                yourDesigner = new FancyProductDesigner(
-                    $yourDesigner,
-                    pluginOpts
-                );
+                }
+                // yourDesigner = new FancyProductDesigner(
+                //     $yourDesigner,
+                //     pluginOpts
+                // );
             // console.log( "#clothing-designer-" + design.id + (_this.type === 'view' ? '-view' : _this.type))
             //you can listen to events
-            $yourDesigner.on('productCreate', async function () {
-                yourDesigner.getProductDataURL(function (dataURL) {
-                    $('#img-' + design.id + (_this.type === 'view' ? '-view' : _this.type)).attr('src', dataURL);
-                });
-            });
+            // $yourDesigner.on('productCreate', async function () {
+            //     yourDesigner.getProductDataURL(function (dataURL) {
+            //         $('#img-' + design.id + (_this.type === 'view' ? '-view' : _this.type)).attr('src', dataURL);
+            //     });
+            // });
         }
     };
 
@@ -64,10 +64,8 @@
     }
     export function getProductJson(img,viewType,color,backprint) {
 
-        console.log(color)
         var $tcolor = color? color: _get_color();
 
-        console.log($tcolor)
 
         var $front = {
             "title": "Front",

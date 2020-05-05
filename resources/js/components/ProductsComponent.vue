@@ -271,7 +271,7 @@
                     <div class="t-shirt_data mb-2">
                         <span>ID : {{product.design.id}}</span>
                         <div class="t-shirt_image_div position-relative">
-                            <product-designer v-bind:design="product" :type="'view'"></product-designer>
+                            <product-designer v-bind:design="product.design" :type="'view'"></product-designer>
                             <ul
                                 class="cart_ul_btn list-icon list-unstyled product_btn_div d-flex align-items-center text-center mb-0">
                                 <li>
@@ -388,12 +388,12 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <h3 class="productName">{{product.design.name_ar}}</h3>
+                                <h3 class="productName">{{product.design.name_en}}</h3>
                                 <h5>ID: <span>{{product.design.id}}</span></h5>
                                 <span
                                     class="productPrice">{{priceDefault(product.design.price,product.design.discount)|currency}}</span>
                                 <p class="ProductDetails pt-3">
-                                    {{product.description_en}}
+                                    {{product.desc_en }}
                                 </p>
                                 <div class="form-action">
                                     <form method="post" class="form-group" @submit.prevent="addToCart(product)">
@@ -436,8 +436,8 @@
                                                     class="custom-select my-1 mr-sm-2"
                                                     :id="'frontSizeInputFiled'+product.design.id"
                                                 >
-                                                    <option :value="null" selected>- {{$t('Please_Select')}} -</option>
-                                                    <option v-for="dsize in product.design.dsizes" :value="dsize.id">
+                                                    <option :value="0" selected>- {{$t('Please_Select')}} -</option>
+                                                    <option v-for="dsize in getUnique(product.design.dsizes,'id')" :value="dsize">
                                                         {{dsize.length}}<span> X </span>{{dsize.width}}
                                                     </option>
                                                 </select>
@@ -455,8 +455,8 @@
                                                     class="custom-select my-1 mr-sm-2"
                                                     :id="'backSizeInputFiled'+product.id"
                                                 >
-                                                    <option :value="null" selected>- {{$t('Please_Select')}} -</option>
-                                                    <option v-for="dsize in product.design.dsizes" :value="dsize.id">
+                                                    <option :value="0" selected>- {{$t('Please_Select')}} -</option>
+                                                    <option v-for="dsize in getUnique(product.design.dsizes,'id')" :value="dsize">
                                                         {{dsize.length}}<span> X </span>{{dsize.width}}
                                                     </option>
                                                 </select>
@@ -475,11 +475,11 @@
                                                 :id="'colorInput'+product.design.id"
                                             >
                                                 <option :value="null" selected>- {{$t('Please_Select')}} -</option>
-                                                <option v-for="tshirt in product.tshirts" :value="tshirt.color.id">
+
+                                                <option v-for="tshirt in getUniqueInObject(product.tshirts,'id','color')" :value="tshirt.color.id">
                                                     {{ tshirt.color.name}}
                                                 </option>
                                             </select>
-                                            {{tcolor + "as"}}
                                         </div>
                                         <div class="mb-2">
                                             <label
@@ -494,7 +494,7 @@
                                                 :id="'sizeInput'+product.design.id"
                                             >
                                                 <option :value="null" selected>- {{$t('Please_Select')}} -</option>
-                                                <option v-for="tshirt in product.tshirts"  :value="tshirt.tsize.id">
+                                                <option v-for="tshirt in getUniqueInObject(product.tshirts,'id','tsize')"  :value="tshirt">
                                                     {{tshirt.tsize.name}}
                                                 </option>
                                             </select>
@@ -524,7 +524,7 @@
 
                                             </div>
                                             <h5 class="productPrice" style="margin-top:10px">{{$t('total')}} :
-                                                <span class="productPrice">{{count*(tsizes_price+frontprintprice+backprintprice+priceDis(product.price,product.discount))|currency}}</span>
+                                                <span class="productPrice">{{count*(tsizes_price+frontprintprice+backprintprice)}}</span>
                                             </h5>
                                         </div>
                                     </form>
@@ -546,8 +546,8 @@
                 mostSells: [],
                 pagination: {},
                 printOptions: "front",
-                frontprint: null,
-                backprint: null,
+                frontprint: 0,
+                backprint: 0,
                 tcolor: '',
                 tsize: null,
                 count: 1,
@@ -588,19 +588,20 @@
                 });
                 console.log('Add To Cart');
             },
-            frontprintPrice: function (dsize_id) {
-                axios.get(`api/v1/dsize/${dsize_id}`).then(response => {
-                    this.printprice = response.data;
-                    this.frontprintprice = 0 | this.printprice.print_price
-                });
 
+            tsizePrice: function (tshirt) {
+                this.tsizes_price = tshirt.price | 0;
+                this.tsizeprice = tshirt.price;
+                console.log(this.tsizes_price);
             },
-            backprintPrice: function (dsize_id) {
-                axios.get(`api/v1/dsize/${dsize_id}`).then(response => {
-                    this.printprice = response.data;
-                    this.backprintprice = 0 | this.printprice.print_price
-                });
-
+            frontprintPrice: function (dsize) {
+                this.printprice = dsize;
+                console.log(dsize)
+                this.frontprintprice = 0 | this.printprice.print_price
+            },
+            backprintPrice: function (dsize) {
+                this.printprice = dsize;
+                this.frontprintprice = 0 | this.printprice.print_price
             },
             fetchProducts(page_url) {
                 let vm = this;
@@ -609,6 +610,7 @@
                     .then(res => res.json())
                     .then(res => {
                         this.products = this.products.concat(res.data);
+                        console.log(this.products)
                         vm.makePagination(res.next_page_url);
                     })
                     .catch(err => console.log(err));
@@ -632,7 +634,24 @@
             },
             priceDefault: function (price, discount) {
                 return price - (price * discount) + this.$root.default_tsize + this.$root.default_frontprint;
-            }
+            },
+            getUnique : function (arr, comp) {
+                const unique = arr
+                    .map(e => e[comp])
+
+                    // store the keys of the unique objects
+                    .map((e, i, final) => final.indexOf(e) === i && i)
+
+                    // eliminate the dead keys & store unique objects
+                    .filter(e => arr[e]).map(e => arr[e]);
+
+                return unique;
+            },
+            getUniqueInObject : function (arr, comp,objectName) {
+                return _.uniqBy(arr, function (p) {
+                    return p[objectName][comp];
+                });
+            },
         },
         created() {
 
