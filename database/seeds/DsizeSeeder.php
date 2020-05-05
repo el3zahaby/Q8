@@ -13,10 +13,16 @@ class DsizeSeeder extends Seeder
      */
     public function run()
     {
-        Dsize::make([
+        Dsize::create([
             'length' => '5',
             'width'  => '5',
             'print_price' => '10',
+        ]);
+
+        Dsize::create([
+            'length' => '15',
+            'width'  => '5',
+            'print_price' => '20',
         ]);
     }
 }
