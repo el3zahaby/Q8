@@ -16,12 +16,10 @@ class CreateOrdersTable extends Migration {
 		Schema::create('orders', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('user_id')->unsigned()->nullable();
-			$table->integer('orderstatuses_id')->unsigned()->nullable();
-            $table->integer('designs_collections_id')->unsigned()->nullable();
-            $table->longText('settings');
+			$table->longText('order_infos');
+			$table->integer('orderstatus_id');
+			$table->softDeletes();
 			$table->timestamps();
-			$table->longText('shipping_info');
 		});
 	}
 

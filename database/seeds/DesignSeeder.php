@@ -21,7 +21,7 @@ class DesignSeeder extends Seeder
             'user_id' => 278823,
             'img' => '/storage/uploads/designs/1588704202.jpg',
             'accepting' => 1,
-            'deleted_at' => now(),
+            'deleted_at' => null,
         ]);
     }
 }

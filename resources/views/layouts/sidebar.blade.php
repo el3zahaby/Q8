@@ -142,6 +142,13 @@
         </li>
         <li><hr></li>
 
+        <li class="nav-item {{ active_class(['admin/orders']) }}">
+            <a class="nav-link" href="{{ route('admin.orders.index') }}">
+                <i class="menu-icon mdi mdi-state-machine "></i>
+                <span class="menu-title">Orders</span>
+            </a>
+        </li>
+
         <li class="nav-item {{ active_class(['admin/orderstatus']) }}">
             <a class="nav-link" href="{{ route('admin.orderstatus.index') }}">
                 <i class="menu-icon mdi mdi-state-machine "></i>
