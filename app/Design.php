@@ -12,7 +12,7 @@ class Design extends Model
 
     protected $guarded = [];
     protected $with = ['dsizes'];
-    protected $appends = ['thump','designer_price'];
+    protected $appends = ['thump','name','desc','designer_price'];
     public function isAccepted($string = false){
         $cond = (boolean)$this->accepting;
 
@@ -23,9 +23,24 @@ class Design extends Model
         return $cond;
     }
 
+
     public function getThumpAttribute(){
         $img = pathinfo($this->attributes['img']);
        return $img['dirname'].'/thump/'.$img['basename'];
+    }
+    public function getNameAttribute(){
+        if($_COOKIE['locale'] == 'ar' or $_COOKIE['locale'] == 'AR'){
+            return$this->name_ar;
+        }else{
+            return$this->name_en;
+        }
+    }
+    public function getDescAttribute(){
+        if($_COOKIE['locale'] == 'ar' or $_COOKIE['locale'] == 'AR'){
+            return$this->desc_ar;
+        }else{
+            return$this->desc_en;
+        }
     }
 
     public function dsizes()

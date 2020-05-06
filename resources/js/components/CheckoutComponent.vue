@@ -91,7 +91,6 @@
                                         <p>Create an account by entering the information below. If you are a returning
                                             customer please login at the top of the page.</p>
                                         <label>Account password <span class="required">*</span></label>
-                                        <input type="password" v-model="clientInfo.pass"/>
                                     </div>
                                 </div>
                             </div>

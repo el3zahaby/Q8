@@ -17,10 +17,15 @@ class OrderController extends Controller
         $clientInfo = $request->get('clientInfo');
         $clientInfo = json_encode($clientInfo);
         $default_status = Orderstatus::first();
+        $order_infos=[
+            "user_id"=> auth()->id(),
+//            'count'=>
+        ];
+
         $order = Order::create([
             'user_id' => auth()->id(),
             'shipping_info' => $clientInfo,
-            'order_status' => $default_status->id ?? '',
+            'order_status' => $default_status->id ?? 1,
         ]);
         if (Cart::count() <= 0)
             return null;

@@ -14,9 +14,12 @@ class OrderSeeder extends Seeder
         $design = \App\Design::first()->toArray();
         \App\Order::create([
             'orderstatus_id' => 1,
+            'count' => 1,
+            'user_id' => \App\User::first()->id,
+            'design_id' => $design['id'],
             'order_infos' => '{
                 "user_id": "1",
-                "design_id": "1",
+                "design_id": '.$design['id'].',
                 "tsize_id": "1",
                 "tshirt_id": "1",
                 "print_price": "1",

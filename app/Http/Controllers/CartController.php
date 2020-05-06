@@ -26,28 +26,15 @@ class CartController extends Controller
 
     public function creat($productId, Request $request)
     {
-        $frontprint = $request->frontprint | $request->backprint ? $request->frontprint : self::getDefaultPrintPrice()->id;
-        $tcolor = $request->tcolor ? $request->tcolor : self::getDefaultColor()->id;
-        $tsize = $request->tsize ? $request->tsize : self::getDefaultTsizePrice()->id;
-        $count = $request->count ? $request->count : 1;
+        $count = $request->count ? (int)$request->count : 1;
 
         $collection = DesignsCollections::find($productId);
         $pro = $collection->design;
-        $pro_price = self::getProductPrice($request, $pro->price);
-        $pro_price -= $pro->discount*$pro->price;
-        Cart::add($productId, $pro->name_en, $count, $pro_price
+        $pro_price = self::getProductPrice($request);
+//        $pro_price = $pro_price-$pro->descount;
+        Cart::add($collection->design->id, $pro->name_en, $count, $pro_price
             , 0 //Weight
-            , [
-                'ID' => $pro->id,
-                'img' => $pro->img,
-                'frontprint' => $frontprint,
-                'backprint' => $request->backprint,
-                'tcolor' => $tcolor,
-                'tsize' => $tsize,
-                'count' => $count,
-
-            ]
-
+            , $request->all() // option
         );
         return $this->show();
     }
@@ -71,23 +58,34 @@ class CartController extends Controller
     public function total()
     {
         return [
-            "subtotal" => Cart::subtotal(),
+            "suptotal" => Cart::subtotal(),
             "tax" => Cart::tax(),
             "total" => Cart::total(),
         ];
     }
 
-    public function getProductPrice($request, $product_price)
+    public function getProductPrice($request)
     {
-        if ($request->frontprint | $request->backprint) {
-            $frontprice = self::getPrintPrice($request->frontprint);
-        } else {
-            $frontprice = self::getDefaultPrintPrice()->print_price;
-        }
-        $backprice = self::getPrintPrice($request->backprint);
-        $tsize = $request->tsize ? self::getTsizePrice($request->tsize) : self::getDefaultTsizePrice()->price;
-        return $product_price + $frontprice + $backprice + $tsize;
+        $design =Design::find($request->id);
+        $fp = 0;
+        $bp = 0;
+        $tshirtPrice = 0;
+        $discount = 0 ;
 
+        if ($request->frontprint){
+            $fp =$request->frontprint = Dsize::find($request->frontprint['dsize_id'])->print_price+$design->dsize_price($request->frontprint['dsize_id']);
+        }
+        if ($request->backprint){
+            $bp =$request->backprint = Dsize::find($request->backprint['dsize_id'])->print_price+
+                $design->dsize_price($request->backprint['dsize_id']);
+        }
+        if ($design->discount > 0){
+            $discount = $design->discount;
+        }
+
+        if ($request->tsize) $tshirtPrice = $request->tsize['price'];
+
+        return (($fp+$bp)-$discount)+$tshirtPrice;
     }
 
     public function getPrintPrice($id)

@@ -298,7 +298,7 @@
                         <div
                             class="t-shirt_inner_data d-flex justify-content-between align-items-center px-1 my-2"
                         >
-                            <span class="t-shirt_name">{{ product.name }}</span>
+                            <span class="t-shirt_name">{{ product.design.name }}</span>
                             <!-- <img
                                 @click="product.favourite = !product.favourite"
                                 v-if="product.favourite"
@@ -313,18 +313,8 @@
                                 /> -->
                         </div>
                         <div class="t-shirt_inner_price px-1 my-2">
-                            <span
-                                v-if="product.discount !== 0"
-                                class="t-shirt_price_nosale d-none"
-                            >{{ product.price | currency }}</span>
-                            <span
-                                v-if="product.discount === 0"
-                                class="t-shirt_price_sale mx-3"
-                            >{{priceDefault(product.price,product.discount) | currency }}</span
-                            >
-                            <span v-else class="t-shirt_price_sale mx-3"
-                            >{{ priceDefault(product.price,product.discount) | currency }}</span
-                            >
+                            <span class="t-shirt_price_nosale" v-if="product.design.discount !== 0">{{ (product.design.designer_price[0]? product.design.designer_price[0].total : 0) }}</span>
+                            <span class="t-shirt_price_sale">{{ priceDis((product.design.designer_price[0]? product.design.designer_price[0].total : 0),product.design.discount)}}</span>
                         </div>
                         <div v-if="false" class="t-shirt_inner_review px-1 my-2">
                             <span
@@ -373,8 +363,7 @@
                         type="button"
                         class="close"
                         data-dismiss="modal"
-                        aria-label="Close"
-                    >
+                        aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                     <div class="content">
@@ -383,17 +372,17 @@
                                 <div
                                     class="product-img d-flex justify-content-center"
                                 >
-                                    <product-designer :design="product.design" v-bind:key="tcolor" :type="'popup'" v-bind:ccolor="tcolor"
+                                    <product-designer :design="product.design" v-bind:key="tcolor.name" :type="'popup'" v-bind:ccolor="tcolor"
                                                       class="col-12"></product-designer>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <h3 class="productName">{{product.design.name_en}}</h3>
+                                <h3 class="productName">{{product.design.name}}</h3>
                                 <h5>ID: <span>{{product.design.id}}</span></h5>
                                 <span
-                                    class="productPrice">{{priceDefault(product.design.price,product.design.discount)|currency}}</span>
+                                    class="productPrice">{{ priceDis((product.design.designer_price[0]? product.design.designer_price[0].total : 0),product.design.discount) |currency }}</span>
                                 <p class="ProductDetails pt-3">
-                                    {{product.desc_en }}
+                                    {{product.design.desc }}
                                 </p>
                                 <div class="form-action">
                                     <form method="post" class="form-group" @submit.prevent="addToCart(product)">
@@ -405,6 +394,7 @@
                                             <div class="d-inline-block mx-2">
                                                 <input class="printOpt" type="radio" :id="'front'+product.id"
                                                        value="front"
+                                                       @click="printOpt(printOptions)"
                                                        v-model="printOptions">
                                                 <label class="printOpt"
                                                        :for="'front'+product.design.id">{{$t('Front')}}</label>
@@ -412,12 +402,14 @@
                                             <div class="d-inline-block mx-2">
                                                 <input class="printOpt" type="radio" :id="'back'+product.id"
                                                        value="back"
+                                                       @click="printOpt(printOptions)"
                                                        v-model="printOptions">
                                                 <label class="printOpt" :for="'back'+product.design.id">{{$t('Back')}}</label>
                                             </div>
                                             <div class="d-inline-block mx-2">
                                                 <input class="printOpt" type="radio" :id="'front_back'+product.design.id"
                                                        value="front_back"
+                                                       @click="printOpt(printOptions)"
                                                        v-model="printOptions">
                                                 <label class="printOpt" :for="'front_back'+product.design.id">{{$t('Front_and_Back')}}</label>
                                             </div>
@@ -437,8 +429,11 @@
                                                     :id="'frontSizeInputFiled'+product.design.id"
                                                 >
                                                     <option :value="0" selected>- {{$t('Please_Select')}} -</option>
-                                                    <option v-for="dsize in getUnique(product.design.dsizes,'id')" :value="dsize">
-                                                        {{dsize.length}}<span> X </span>{{dsize.width}}
+<!--                                                    <option v-for="dsize in getUnique(product.design.dsizes,'id')" :value="dsize">-->
+<!--                                                        {{dsize.length}}<span> X </span>{{dsize.width}}-->
+<!--                                                    </option>-->
+                                                    <option v-for="item in (product.design.designer_price)" :value="item">
+                                                        {{item.dsize.length}}<span> X </span>{{item.dsize.width}}
                                                     </option>
                                                 </select>
                                             </div>
@@ -456,8 +451,8 @@
                                                     :id="'backSizeInputFiled'+product.id"
                                                 >
                                                     <option :value="0" selected>- {{$t('Please_Select')}} -</option>
-                                                    <option v-for="dsize in getUnique(product.design.dsizes,'id')" :value="dsize">
-                                                        {{dsize.length}}<span> X </span>{{dsize.width}}
+                                                    <option v-for="item in (product.design.designer_price)" :value="item">
+                                                        {{item.dsize.length}}<span> X </span>{{item.dsize.width}}
                                                     </option>
                                                 </select>
                                             </div>
@@ -476,7 +471,7 @@
                                             >
                                                 <option :value="null" selected>- {{$t('Please_Select')}} -</option>
 
-                                                <option v-for="tshirt in getUniqueInObject(product.tshirts,'id','color')" :value="tshirt.color.id">
+                                                <option v-for="tshirt in getUniqueInObject(product.tshirts,'id','color')" :value="tshirt.color">
                                                     {{ tshirt.color.name}}
                                                 </option>
                                             </select>
@@ -493,7 +488,7 @@
                                                 class="custom-select my-1 mr-sm-2"
                                                 :id="'sizeInput'+product.design.id"
                                             >
-                                                <option :value="null" selected>- {{$t('Please_Select')}} -</option>
+                                                <option :value="0" selected>- {{$t('Please_Select')}} -</option>
                                                 <option v-for="tshirt in getUniqueInObject(product.tshirts,'id','tsize')"  :value="tshirt">
                                                     {{tshirt.tsize.name}}
                                                 </option>
@@ -523,8 +518,9 @@
                                                 </button>
 
                                             </div>
-                                            <h5 class="productPrice" style="margin-top:10px">{{$t('total')}} :
-                                                <span class="productPrice">{{count*(tsizes_price+frontprintprice+backprintprice)}}</span>
+                                            <h5 class="productPrice" style="margin-top:10px">
+                                                {{$t('total')}} :<span class="productPrice">{{(count* priceDis(tsizes_price+frontprintprice+backprintprice,product.design.discount) +'KWD')}}</span>
+                                                <small class="text-muted" v-if="product.design.discount > 0"><s>{{(count* (tsizes_price+frontprintprice+backprintprice) +'KWD')}}</s></small>
                                             </h5>
                                         </div>
                                     </form>
@@ -569,12 +565,11 @@
                 let _this = this;
                 axios.get('/api/v1/most-sells').then(function (response) {
                     _this.mostSells = response.data;
-                    console.log(response);
                 })
             },
             addToCart: function (product) {
                 let root = this.$root;
-                axios.post(`api/v1/add-to-cart/${product.design.id}`, {
+                axios.post(`api/v1/add-to-cart/${product.id}`, {
                     id: product.design.id,
                     frontprint: this.frontprint,
                     backprint: this.backprint,
@@ -583,25 +578,32 @@
                     count: this.count,
                 }).then(function (response) {
                     root.updateCart();
+                    $('.modal').modal('hide');
+
                 }).catch((error) => {
                     console.log(error);
                 });
                 console.log('Add To Cart');
             },
-
+            printOpt:function (opt) {
+                this.printOptions = opt;
+                this.frontprint = 0;
+                this.backprint = 0;
+                this.backprintprice = 0;
+                this.frontprintprice = 0;
+            },
             tsizePrice: function (tshirt) {
                 this.tsizes_price = tshirt.price | 0;
                 this.tsizeprice = tshirt.price;
-                console.log(this.tsizes_price);
+                // console.log(this.tsizes_price);
             },
             frontprintPrice: function (dsize) {
-                this.printprice = dsize;
-                console.log(dsize)
-                this.frontprintprice = 0 | this.printprice.print_price
+                this.frontprint = dsize;
+                this.frontprintprice = 0 | dsize.total
             },
             backprintPrice: function (dsize) {
-                this.printprice = dsize;
-                this.frontprintprice = 0 | this.printprice.print_price
+                this.backprint = dsize;
+                this.backprintprice = 0 | dsize.total
             },
             fetchProducts(page_url) {
                 let vm = this;
@@ -622,21 +624,15 @@
                 this.pagination = pagination;
             },
             priceDis: function (price, discount) {
-                if (this.frontprintprice && this.tsizes_price > 0) {
-                    return price - (price * discount)
-                } else if (this.frontprintprice > 0) {
-                    return price - (price * discount) + this.$root.default_tsize
-                } else if (this.tsizes_price > 0) {
-                    return price - (price * discount) + this.$root.default_frontprint
-                } else {
-                    return price - (price * discount) + this.$root.default_tsize + this.$root.default_frontprint;
-                }
+                if (price === 0 ) return 0;
+                if ((price - discount) < 0) return 0;
+                return price - discount;
             },
             priceDefault: function (price, discount) {
                 return price - (price * discount) + this.$root.default_tsize + this.$root.default_frontprint;
             },
             getUnique : function (arr, comp) {
-                const unique = arr
+                return arr
                     .map(e => e[comp])
 
                     // store the keys of the unique objects
@@ -644,8 +640,6 @@
 
                     // eliminate the dead keys & store unique objects
                     .filter(e => arr[e]).map(e => arr[e]);
-
-                return unique;
             },
             getUniqueInObject : function (arr, comp,objectName) {
                 return _.uniqBy(arr, function (p) {

@@ -42,18 +42,17 @@
                         bottom: [],
                         left: []
                     }
-                }
-                // yourDesigner = new FancyProductDesigner(
-                //     $yourDesigner,
-                //     pluginOpts
-                // );
-            // console.log( "#clothing-designer-" + design.id + (_this.type === 'view' ? '-view' : _this.type))
-            //you can listen to events
-            // $yourDesigner.on('productCreate', async function () {
-            //     yourDesigner.getProductDataURL(function (dataURL) {
-            //         $('#img-' + design.id + (_this.type === 'view' ? '-view' : _this.type)).attr('src', dataURL);
-            //     });
-            // });
+                },
+                yourDesigner = new FancyProductDesigner(
+                    $yourDesigner,
+                    pluginOpts
+                );
+            // you can listen to events
+            $yourDesigner.on('productCreate', async function () {
+                yourDesigner.getProductDataURL(function (dataURL) {
+                    $('#img-' + design.id + (_this.type === 'view' ? '-view' : _this.type)).attr('src', dataURL);
+                });
+            });
         }
     };
 

@@ -18,6 +18,9 @@ class CreateOrdersTable extends Migration {
 			$table->increments('id');
 			$table->longText('order_infos');
 			$table->integer('orderstatus_id');
+			$table->integer('user_id');
+			$table->integer('design_id');
+			$table->integer('count');
 			$table->softDeletes();
 			$table->timestamps();
 		});

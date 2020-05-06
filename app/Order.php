@@ -11,7 +11,7 @@ class Order extends Model
 
     public function status()
     {
-        return $this->belongsTo(Orderstatus::class)->withTrashed();
+        return $this->belongsTo(Orderstatus::class,'orderstatus_id')->withTrashed();
     }
 
     public function user()
@@ -22,5 +22,10 @@ class Order extends Model
     public function cartitems()
     {
         return $this->hasOne('App\Shoppingcart', 'identifier');
+    }
+
+    public function getOrderInfosAttribute()
+    {
+        return json_decode($this->attributes['order_infos']);
     }
 }

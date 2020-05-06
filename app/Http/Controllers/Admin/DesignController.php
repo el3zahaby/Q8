@@ -85,6 +85,7 @@ class DesignController extends Controller
         $store->desc_en = $request->desc_en;
         $store->desc_ar = $request->desc_ar;
         $store->user_id = $request->user_id;
+        $store->discount = $request->discount ?? 0 ;
         $store->accepting = $request->accepting;
         $store->img = $img;
 
@@ -185,6 +186,7 @@ class DesignController extends Controller
         $item->desc_en = $request->desc_en;
         $item->desc_ar = $request->desc_ar;
         $item->user_id = $request->user_id;
+        $item->discount = $request->discount ?? 0 ;
         $item->accepting = $request->accepting ?? 0 ;
         $item->img = $img;
 

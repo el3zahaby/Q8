@@ -25,34 +25,33 @@
                     </thead>
                     <tbody>
                         @foreach($items as $item)
-                        <?php
-                            $data = json_decode($item->order_infos);
-                        ?>
                             <tr>
                                 <th> {{ $item->id }} </th>
-                                <td> {{ $data->shipping_info->email }} </td>
-                                <td> <img src="{{ $data->design->img }}" alt=""> </td>
+                                <td> {{ $item->order_infos->shipping_info->email }} </td>
+                                <td> <img src="{{ $item->order_infos->design->img }}" alt=""> </td>
                                 <td>
+                                    <strong>TShirt</strong>
                                     <ul>
-                                        <li>{{ $data->tshirt->size }}</li>
-                                        <li>{{ $data->tshirt->color->name }}</li>
+                                        <li>ID: {{ $item->order_infos->tshirt->id }}</li>
+                                        <li>Size: {{ $item->order_infos->tshirt->size }}</li>
+                                        <li>Color: {{ $item->order_infos->tshirt->color->name }}</li>
                                     </ul>
                                 </td>
                                 <td>
                                     <strong>Front</strong>
                                     <ul>
-                                        <li>{{ $data->print->front->size }}</li>
-                                        <li>{{ $data->print->front->print_price }}</li>
+                                        <li>Size: {{ $item->order_infos->print->front->size }}</li>
+                                        <li>PrintPrice: {{ $item->order_infos->print->front->print_price }}</li>
                                     </ul>
 
                                     <strong>Back</strong>
                                     <ul>
-                                        <li>{{ $data->print->back->size }}</li>
-                                        <li>{{ $data->print->back->print_price }}</li>
+                                        <li>Size: {{ $item->order_infos->print->back->size }}</li>
+                                        <li>PrintPrice: {{ $item->order_infos->print->back->print_price }}</li>
                                     </ul>
                                 </td>
-                                <td>{{ $data->total }}</td>
-                                <td>pending</td>
+                                <td>{{ $item->order_infos->total }}</td>
+                                <td><span class="badge badge-bg" style="background: {{ ($item->status->color) }};zoom: 1.3;">{{ ($item->status->status) }}</span></td>
                             </tr>
                         @endforeach
                     </tbody>

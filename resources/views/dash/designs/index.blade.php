@@ -144,7 +144,7 @@
                                     <div class="col-3">{{ $size->width }} x {{ $size->length }}</div>
                                     <div class="col-3 print_{{ $size->id }} ">{{ $size->print_price }}</div>
                                     <div class="col-3 form-group">
-                                        <input type="text" data-id="{{ $size->id }}" readonly name="price[{{ $size->id }}]" class="form-control designerPrice price_{{ $size->id }}" >
+                                        <input type="number" data-id="{{ $size->id }}" readonly name="price[{{ $size->id }}]" class="form-control designerPrice price_{{ $size->id }}" >
                                     </div>
                                     <div class="col-2" id="total_{{ $size->id }}">{{ $size->print_price }}</div>
                                 </div>
@@ -243,7 +243,7 @@
                                         <div class="col-3">{{ $size->width }} x {{ $size->length }}</div>
                                         <div class="col-3 print_{{ $size->id }}{{ $item->id }}">{{ $size->print_price }}</div>
                                         <div class="col-3 form-group">
-                                            <input type="text" data-id="{{ $size->id }}{{ $item->id }}"  name="price[{{ $size->id }}]" class="form-control designerPrice price_{{ $size->id }}" value="{{ $item->has_dsize($size->id) ? $item->dsize_price($size->id) : 0 }}">
+                                            <input type="number" data-id="{{ $size->id }}{{ $item->id }}"  name="price[{{ $size->id }}]" class="form-control designerPrice price_{{ $size->id }}" value='{{ $item->has_dsize($size->id) ? $item->dsize_price($size->id) : 0 }}'>
                                         </div>
 
                                         <div class="col-2" id="total_{{ $size->id }}{{ $item->id }}">{{ $item->total($size) }}</div>
@@ -344,12 +344,12 @@
 
         $('.size_check').on('change', function () {
             if ($(this).is(':checked')) {
-                $(".price_" + $(this).attr('name')).attr('required', '');
-                $(".price_" + $(this).attr('name')).removeAttr('readonly');
+                $(this).parent().parent().find(".price_" + $(this).attr('name')).attr('required', '');
+                $(this).parent().parent().find(".price_" + $(this).attr('name')).removeAttr('readonly');
             } else {
-                $('.price_' + $(this).attr('name')).val('');
-                $(".price_" + $(this).attr('name')).removeAttr('required');
-                $(".price_" + $(this).attr('name')).attr('readonly','');
+                $(this).parent().parent().find('.price_' + $(this).attr('name')).val('');
+                $(this).parent().parent().find(".price_" + $(this).attr('name')).removeAttr('required');
+                $(this).parent().parent().find(".price_" + $(this).attr('name')).attr('readonly','');
 
             }
         }).trigger('change');
