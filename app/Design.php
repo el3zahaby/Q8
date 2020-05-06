@@ -26,30 +26,9 @@ class Design extends Model
 
     public function getThumpAttribute(){
         $img = pathinfo($this->attributes['img']);
-       return $img['dirname'].'/thump/'.$img['basename'];
+        return $img['dirname'].'/thump/'.$img['basename'];
     }
     public function getNameAttribute(){
-<<<<<<< HEAD
-        if(isset($_COOKIE['locale']))
-        {
-            if($_COOKIE['locale'] == 'ar' or $_COOKIE['locale'] == 'AR'){
-                return$this->name_ar;
-            }else{
-                return$this->name_en;
-            }
-        }
-    }
-    public function getDescAttribute(){
-        if(isset($_COOKIE['locale']))
-        {
-
-            
-            if($_COOKIE['locale'] == 'ar' or $_COOKIE['locale'] == 'AR'){
-                return$this->desc_ar;
-            }else{
-                return$this->desc_en;
-            }
-=======
         if(isset($_COOKIE['locale']) && $_COOKIE['locale'] == 'ar' or $_COOKIE['locale'] == 'AR'){
             return$this->name_ar;
         }else{
@@ -61,7 +40,6 @@ class Design extends Model
             return$this->desc_ar;
         }else{
             return$this->desc_en;
->>>>>>> 3fb0432376cac3effd5a8371b73afe8a6ce8bc78
         }
     }
 
