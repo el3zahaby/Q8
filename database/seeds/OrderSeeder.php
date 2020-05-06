@@ -19,11 +19,12 @@ class OrderSeeder extends Seeder
             'design_id' => $design['id'],
             'order_infos' => '{
                 "user_id": "1",
-                "design_id": '.$design['id'].',
+                "design_id": "1",
                 "tsize_id": "1",
                 "tshirt_id": "1",
                 "print_price": "1",
                 "designer_price": "1",
+                "status_id" : "1",
                 "total": "2",
                 "tshirt": {
                     "id": "1",
@@ -33,7 +34,18 @@ class OrderSeeder extends Seeder
                         "name": "red"
                     }
                 },
-                "design": '.json_encode($design,JSON_PRETTY_PRINT).',
+                "design": {
+                    "id": "1",
+                    "name_en": "flasdk",
+                    "name_ar": "fdasnkf",
+                    "desc_en": "fdlsafn",
+                    "desc_ar": "fsdkf",
+                    "image": "source",
+                    "size": {
+                        "name": "lg",
+                        "designer_price": "10"
+                    }
+                },
                 "print": {
                     "front": {
                         "size_id": "1",
@@ -48,6 +60,7 @@ class OrderSeeder extends Seeder
                 },
                 "shipping_info": {
                     "user_id": "1",
+                    "status" : "pending",
                     "email": "flsdaj@lfdj",
                     "name": "admin",
                     "address": "adressl fdsaf",

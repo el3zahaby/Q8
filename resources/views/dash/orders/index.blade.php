@@ -28,30 +28,28 @@
                             <tr>
                                 <th> {{ $item->id }} </th>
                                 <td> {{ $item->order_infos->shipping_info->email }} </td>
-                                <td> <img src="{{ $item->order_infos->design->img }}" alt=""> </td>
+                                <td> <img src="{{ $item->order_infos->design->image }}" alt=""> </td>
                                 <td>
-                                    <strong>TShirt</strong>
                                     <ul>
-                                        <li>ID: {{ $item->order_infos->tshirt->id }}</li>
-                                        <li>Size: {{ $item->order_infos->tshirt->size }}</li>
-                                        <li>Color: {{ $item->order_infos->tshirt->color->name }}</li>
+                                        <li>{{ $item->order_infos->tshirt->size }}</li>
+                                        <li>{{ $item->order_infos->tshirt->color->name }}</li>
                                     </ul>
                                 </td>
                                 <td>
                                     <strong>Front</strong>
                                     <ul>
-                                        <li>Size: {{ $item->order_infos->print->front->size }}</li>
-                                        <li>PrintPrice: {{ $item->order_infos->print->front->print_price }}</li>
+                                        <li>{{ $item->order_infos->print->front->size }}</li>
+                                        <li>{{ $item->order_infos->print->front->print_price }}</li>
                                     </ul>
 
                                     <strong>Back</strong>
                                     <ul>
-                                        <li>Size: {{ $item->order_infos->print->back->size }}</li>
-                                        <li>PrintPrice: {{ $item->order_infos->print->back->print_price }}</li>
+                                        <li>{{ $item->order_infos->print->back->size }}</li>
+                                        <li>{{ $item->order_infos->print->back->print_price }}</li>
                                     </ul>
                                 </td>
                                 <td>{{ $item->order_infos->total }}</td>
-                                <td><span class="badge badge-bg" style="background: {{ ($item->status->color) }};zoom: 1.3;">{{ ($item->status->status) }}</span></td>
+                                <td>{{ $item->order_infos->shipping_info->status }}</td>
                             </tr>
                         @endforeach
                     </tbody>

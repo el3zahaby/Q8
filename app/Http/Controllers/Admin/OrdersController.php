@@ -50,21 +50,32 @@ class OrdersController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'length' => 'required|max:255',
-            'width' => 'required|max:255',
-            'print_price' => 'required|max:60',
+            'design_id' => 'required',
+            'tsize_id' => 'required',
+            'tshirt_id' => 'required',
+            'dsize_id' => 'required',
         ]);
 
+        $order = new $this->model;
+        $order->orderstatus_id = 1;
 
-        $store = $this->model::create(
-            $request->all()
-        );
+        $user = auth()->user();
 
+        $design = \App\Design::find($request->design_id);
+
+        $tshirt = \App\Tshirt::find($request->tshirt_id);
+
+        $front_design_size = \App\DesignSize::where(['design_id' => $request->design_id , 'dsize_id' => $request->front])->get();
+        
+        $back_design_size = \App\DesignSize::where(['design_id' => $request->design_id , 'dsize_id' => $request->back])->get();
+
+
+/*
         if ($store) return response()->json([
             'status'=>'ok',
             'msg'=>'Added'.$store->id
         ],200);
-
+*/
     }
 
     /**

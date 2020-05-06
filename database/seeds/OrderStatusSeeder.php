@@ -13,7 +13,7 @@ class OrderStatusSeeder extends Seeder
     {
         \App\OrderStatus::create([
             'status' => 'pending',
-            'color' => 'red'
+            'color' => 'yellow'
         ]);
     }
 }

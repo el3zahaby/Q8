@@ -29,17 +29,25 @@ class Design extends Model
        return $img['dirname'].'/thump/'.$img['basename'];
     }
     public function getNameAttribute(){
-        if($_COOKIE['locale'] == 'ar' or $_COOKIE['locale'] == 'AR'){
-            return$this->name_ar;
-        }else{
-            return$this->name_en;
+        if(isset($_COOKIE['locale']))
+        {
+            if($_COOKIE['locale'] == 'ar' or $_COOKIE['locale'] == 'AR'){
+                return$this->name_ar;
+            }else{
+                return$this->name_en;
+            }
         }
     }
     public function getDescAttribute(){
-        if($_COOKIE['locale'] == 'ar' or $_COOKIE['locale'] == 'AR'){
-            return$this->desc_ar;
-        }else{
-            return$this->desc_en;
+        if(isset($_COOKIE['locale']))
+        {
+
+            
+            if($_COOKIE['locale'] == 'ar' or $_COOKIE['locale'] == 'AR'){
+                return$this->desc_ar;
+            }else{
+                return$this->desc_en;
+            }
         }
     }
 
