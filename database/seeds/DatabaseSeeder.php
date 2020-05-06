@@ -12,13 +12,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         $this->call('RolesAndPermissionsSeeder');
+
+        $this->call('RolesAndPermissionsSeeder');
          $this->call('UserTableSeeder');
          $this->call('UserRoleTableSeeder');
+
          $this->call('AddTsizeSeeder');
          $this->call('DsizeSeeder');
-         $this->call('DesignSeeder');
          $this->call('ColorSeeder');
+
+         $this->call('DesignSeeder');
+
          $this->call('DesignDsizeSeeder');
          $this->call('TshirtSeeder');
          $this->call('DesignCollectionSeeder');

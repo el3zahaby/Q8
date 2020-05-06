@@ -42,7 +42,7 @@
                                             target="_blank">{{ $item->user->full_name }}</a> </td>
                                     <td> {{ $item->desc_en }} </td>
                                     <td><img src="{{ $item->img }}" alt=""> </td>
-                                    <td> {{ $item->designer_price[0]? $item->designer_price[0]->total : '' }}
+                                    <td> {{ isset($item->designer_price[0])? $item->designer_price[0]->total : 'NOT SET' }}
                                     </td>
                                     <td> {{ $item->discount }} </td>
                                     <td> {{ $item->isAccepted(true) }} </td>

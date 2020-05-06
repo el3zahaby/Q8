@@ -31,7 +31,7 @@
                             <tr>
                                 <th> {{ $item->id }} </th>
                                 <td> {{ $data->shipping_info->email }} </td>
-                                <td> <img src="{{ $data->design->image }}" alt=""> </td>
+                                <td> <img src="{{ $data->design->img }}" alt=""> </td>
                                 <td>
                                     <ul>
                                         <li>{{ $data->tshirt->size }}</li>

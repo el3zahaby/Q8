@@ -51,7 +51,7 @@ class Design extends Model
     public function getDesignerPriceAttribute(){
         $arr = collect();
         $i= 0;
-        foreach (json_decode($this->attributes['designer_price']) as $key=>$item){
+        foreach ((json_decode($this->attributes['designer_price']) ?? []) as $key=>$item){
             $arr[$i]=json_decode($this->attributes['designer_price'])[$i];
 
             $arr[$i]->dsize= Dsize::find($item->dsize_id);

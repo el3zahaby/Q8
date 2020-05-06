@@ -11,6 +11,7 @@ class OrderSeeder extends Seeder
      */
     public function run()
     {
+        $design = \App\Design::first()->toArray();
         \App\Order::create([
             'orderstatus_id' => 1,
             'order_infos' => '{
@@ -29,18 +30,7 @@ class OrderSeeder extends Seeder
                         "name": "red"
                     }
                 },
-                "design": {
-                    "id": "1",
-                    "name_en": "flasdk",
-                    "name_ar": "fdasnkf",
-                    "desc_en": "fdlsafn",
-                    "desc_ar": "fsdkf",
-                    "image": "source",
-                    "size": {
-                        "name": "lg",
-                        "designer_price": "10"
-                    }
-                },
+                "design": '.json_encode($design,JSON_PRETTY_PRINT).',
                 "print": {
                     "front": {
                         "size_id": "1",

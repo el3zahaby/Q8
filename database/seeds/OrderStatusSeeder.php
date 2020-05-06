@@ -12,7 +12,7 @@ class OrderStatusSeeder extends Seeder
     public function run()
     {
         \App\OrderStatus::create([
-            'status' => 'pinding',
+            'status' => 'pending',
             'color' => 'red'
         ]);
     }
