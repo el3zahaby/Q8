@@ -17,39 +17,68 @@
                     <thead>
                         <th>Id</th>
                         <th>user</th>
-                        <th>design</th>
-                        <th>tshirt</th>
-                        <th>print</th>
+                        <th>orders</th>
                         <th>total price</th>
                         <th>order_status</th>
                     </thead>
                     <tbody>
                         @foreach($items as $item)
+{{--                            @dd(dd($item->items))--}}
                             <tr>
                                 <th> {{ $item->id }} </th>
-                                <td> {{ $item->order_infos->shipping_info->email }} </td>
-                                <td> <img src="{{ $item->order_infos->design->image }}" alt=""> </td>
+                                <td> {{ $item->shipping_info->fullName.', ID:'.$item->user_id }} </td>
                                 <td>
-                                    <ul>
-                                        <li>{{ $item->order_infos->tshirt->size }}</li>
-                                        <li>{{ $item->order_infos->tshirt->color->name }}</li>
-                                    </ul>
-                                </td>
-                                <td>
-                                    <strong>Front</strong>
-                                    <ul>
-                                        <li>{{ $item->order_infos->print->front->size }}</li>
-                                        <li>{{ $item->order_infos->print->front->print_price }}</li>
-                                    </ul>
+                                        <table class="mb-1  table-striped  table-bordered">
+                                            <thead>
+                                            <th>Design ID</th>
+                                            <th>design</th>
+                                            <th>tshirt</th>
+                                            <th>print</th>
+                                            <th>Count</th>
+                                            <th>total price</th>
+                                            </thead>
+                                            @foreach($item->items as $cart)
+                                            <tbody>
 
-                                    <strong>Back</strong>
-                                    <ul>
-                                        <li>{{ $item->order_infos->print->back->size }}</li>
-                                        <li>{{ $item->order_infos->print->back->print_price }}</li>
-                                    </ul>
+                                            <td>{{ $cart->id }}</td>
+                                            <td>{{ App\Design::find($cart->id)->name }} <img src="{{ App\Design::find($cart->id)->img }}" alt=""></td>
+                                            <td>
+                                                <ul>
+                                                    <li>Size: {!! ($cart->options->tsize['tsize']['name']) !!}</li>
+                                                    <li>Color: {!! ($cart->options->tcolor['name']) !!}</li>
+                                                    <li>Price: {!! ($cart->options->tsize['price']) !!}</li>
+                                                </ul>
+                                            </td>
+                                            <td>
+                                                @if($cart->options->frontprint)
+                                                    <strong>Front</strong>
+                                                    <ul>
+                                                        <li>Size: {!! ($cart->options->frontprint['dsize']['width'].'X'.$cart->options->frontprint['dsize']['length']) !!}</li>
+                                                        <li>Designer Price: {!! ($cart->options->frontprint['designer_price']) !!}</li>
+                                                        <li>Print Price: {!! ($cart->options->frontprint['dsize']['print_price']) !!}</li>
+                                                        <li>Total: {!! ($cart->options->frontprint['total']) !!}</li>
+                                                    </ul>
+                                                @endif
+                                                    @if($cart->options->backprint)
+                                                        <strong>Back</strong>
+                                                        <ul>
+                                                            <li>Size: {!! ($cart->options->backprint['dsize']['width'].'X'.$cart->options->backprint['dsize']['length']) !!}</li>
+                                                            <li>Designer Price: {!! ($cart->options->backprint['designer_price']) !!}</li>
+                                                            <li>Print Price: {!! ($cart->options->backprint['dsize']['print_price']) !!}</li>
+                                                            <li>Total: {!! ($cart->options->backprint['total']) !!}</li>
+                                                        </ul>
+                                                    @endif
+                                            </td>
+                                            <td>{{ ($cart->qty) }}</td>
+                                            <td>{{ ($cart->price*$cart->qty) }}</td>
+                                            </tbody>
+                                            @endforeach
+                                        </table>
+
                                 </td>
-                                <td>{{ $item->order_infos->total }}</td>
-                                <td>{{ $item->order_infos->shipping_info->status }}</td>
+                                <td>{{ $item->cart_total }}</td>
+                                <td><span class="badge badge-bg" style="background: {{ $item->status->color }}">{{ $item->status->status }}</span></td>
+
                             </tr>
                         @endforeach
                     </tbody>
