@@ -60,30 +60,30 @@
                                     <div class="col-md-12">
                                         <div class="checkout-form-list">
                                             <label>{{$t('Full_Name')}} <span class="required">*</span></label>
-                                            <input style="color:blue" type="text" v-model="clientInfo.fullName"/>
+                                            <input style="color:blue" type="text" required v-model="clientInfo.fullName"/>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="checkout-form-list">
                                             <label>{{$t('Address')}} <span class="required">*</span></label>
-                                            <input style="color:blue" type="text" v-model="clientInfo.address"/>
+                                            <input style="color:blue" type="text" required v-model="clientInfo.address"/>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="checkout-form-list">
                                             <label>{{$t('Email')}} <span class="required">*</span></label>
-                                            <input style="color:blue" type="email" v-model="clientInfo.email"/>
+                                            <input style="color:blue" type="email" required v-model="clientInfo.email"/>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="checkout-form-list">
                                             <label>{{$t('Phone_Number')}} <span class="required">*</span></label>
-                                            <input style="color:blue" type="text" v-model="clientInfo.phone"/>
+                                            <input style="color:blue" type="text" required v-model="clientInfo.phone"/>
                                         </div>
                                     </div>
                                     <div class="col-md-6 mt-md-5">
                                         <div class="checkout-form-list create-acc d-none">
-                                            <input id="cbox" type="checkbox" v-model="clientInfo.createAccount"/>
+                                            <input id="cbox" type="checkbox" required v-model="clientInfo.createAccount"/>
                                             <label>Create an account?</label>
                                         </div>
                                     </div>
@@ -169,8 +169,6 @@
                     email: this.$root.user.email,
                     phone: this.$root.user.phone,
                     address: this.$root.user.address,
-                    createAccount: false,
-                    pass: '',
                 },
                 discountCode: '',
                 orderTotal: 0,

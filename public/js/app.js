@@ -2092,9 +2092,7 @@ __webpack_require__.r(__webpack_exports__);
         fullName: this.$root.user.first_name + ' ' + this.$root.user.last_name,
         email: this.$root.user.email,
         phone: this.$root.user.phone,
-        address: this.$root.user.address,
-        createAccount: false,
-        pass: ''
+        address: this.$root.user.address
       },
       discountCode: '',
       orderTotal: 0
@@ -46658,7 +46656,7 @@ var render = function() {
                           }
                         ],
                         staticStyle: { color: "blue" },
-                        attrs: { type: "text" },
+                        attrs: { type: "text", required: "" },
                         domProps: { value: _vm.clientInfo.fullName },
                         on: {
                           input: function($event) {
@@ -46693,7 +46691,7 @@ var render = function() {
                           }
                         ],
                         staticStyle: { color: "blue" },
-                        attrs: { type: "text" },
+                        attrs: { type: "text", required: "" },
                         domProps: { value: _vm.clientInfo.address },
                         on: {
                           input: function($event) {
@@ -46728,7 +46726,7 @@ var render = function() {
                           }
                         ],
                         staticStyle: { color: "blue" },
-                        attrs: { type: "email" },
+                        attrs: { type: "email", required: "" },
                         domProps: { value: _vm.clientInfo.email },
                         on: {
                           input: function($event) {
@@ -46763,7 +46761,7 @@ var render = function() {
                           }
                         ],
                         staticStyle: { color: "blue" },
-                        attrs: { type: "text" },
+                        attrs: { type: "text", required: "" },
                         domProps: { value: _vm.clientInfo.phone },
                         on: {
                           input: function($event) {
@@ -46795,7 +46793,7 @@ var render = function() {
                               expression: "clientInfo.createAccount"
                             }
                           ],
-                          attrs: { id: "cbox", type: "checkbox" },
+                          attrs: { id: "cbox", type: "checkbox", required: "" },
                           domProps: {
                             checked: Array.isArray(_vm.clientInfo.createAccount)
                               ? _vm._i(_vm.clientInfo.createAccount, null) > -1
