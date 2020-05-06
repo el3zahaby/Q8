@@ -14,9 +14,8 @@ class DesignCollectionSeeder extends Seeder
     public function run()
     {
         DesignsCollections::create([
-            'tshirt_id' => '[1]',
+            'tshirt_id' => '["1"]',
             'design_id' => 278823,
-            'design_dsize' => 1
         ]);
     }
 }
