@@ -137,6 +137,7 @@ Route::group(['prefix' => 'admin','as'=>'admin.'], function () {
 
         //order
         Route::resource('orderstatus', 'Admin\OrderStatusController');
+        Route::resource('orders', 'Admin\OrdersController');
 
         //page
         Route::resource('pages', 'Admin\PageController');

@@ -19,6 +19,11 @@ class DatabaseSeeder extends Seeder
          $this->call('DsizeSeeder');
          $this->call('DesignSeeder');
          $this->call('ColorSeeder');
+         $this->call('DesignDsizeSeeder');
+         $this->call('TshirtSeeder');
+         $this->call('DesignCollectionSeeder');
+         $this->call('OrderStatusSeeder');
+         $this->call('OrderSeeder');
 
          artisan::call('translations:import');
          artisan::call('storage:link');
