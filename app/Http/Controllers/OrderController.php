@@ -17,7 +17,10 @@ class OrderController extends Controller
         $clientInfo = $request->get('clientInfo');
         $clientInfo = json_encode($clientInfo);
         $default_status = Orderstatus::first();
-
+        $order_infos=[
+            "user_id"=> auth()->id(),
+//            'count'=>
+        ];
 
         $order = Order::create([
             'user_id' => auth()->id(),
@@ -30,8 +33,8 @@ class OrderController extends Controller
         Cart::destroy();
 
         return $order;
-    }
 
+    }
     public static function getCartItemsByOrder($id)
     {
         $cartItems = [];
