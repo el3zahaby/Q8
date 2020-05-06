@@ -22,7 +22,7 @@ class OrderController extends Controller
         $order = Order::create([
             'user_id' => auth()->id(),
             'shipping_info' => $clientInfo,
-            'order_status' => $default_status->id ?? 1,
+            'orderstatus_id' => $default_status->id ?? 1,
         ]);
         if (Cart::count() <= 0)
             return null;
