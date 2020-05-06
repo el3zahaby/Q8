@@ -17,7 +17,8 @@
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "^5.8.0",
         "spatie/laravel-permission": "^3.11",
-        "unisharp/laravel-filemanager": "~1.8"
+        "unisharp/laravel-filemanager": "~1.8",
+        "ext-json": "*"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

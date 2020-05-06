@@ -106,12 +106,12 @@
                                     <th>total :</th>
                                 </thead>
                                 <tbody>
-                                    @foreach($item->design_sizes as $ds)
+                                    @foreach($item->designer_price as $ds)
                                         <tr>
                                             <td>{{ $ds->dsize->width }} x {{ $ds->dsize->length }}</td>
                                             <td>{{ $ds->dsize->print_price }}</td>
                                             <td>{{ $ds->designer_price }}</td>
-                                            <td> {{ $ds->designer_price + $ds->dsize->print_price }} </td>
+                                            <td> {{ $ds->total }} </td>
                                         </tr>
                                     @endforeach
                                 </tbody>

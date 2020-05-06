@@ -12,7 +12,7 @@ class Design extends Model
 
     protected $guarded = [];
     protected $with = ['dsizes'];
-    protected $appends = ['thump'];
+    protected $appends = ['thump','designer_price'];
     public function isAccepted($string = false){
         $cond = (boolean)$this->accepting;
 
@@ -48,18 +48,34 @@ class Design extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function design_sizes(){
-        return $this->hasMany(DesignSize::class );
+    public function getDesignerPriceAttribute(){
+        $arr = collect();
+        $i= 0;
+        foreach (json_decode($this->attributes['designer_price']) as $key=>$item){
+            $arr[$i]=json_decode($this->attributes['designer_price'])[$i];
+
+            $arr[$i]->dsize= Dsize::find($item->dsize_id);
+
+            $i++;
+        }
+        return $arr;
+
+    }
+
+    public function design(){
+        return $this->belongsTo(Design::class)->withTrashed();
     }
 
     public function has_dsize($dsize_id)
     {
         $result = false;
-        $dsizes = $this->design_sizes;
+        $dsizes = $this->designer_price->pluck('dsize');
+//        dd($dsizes);
 
         foreach($dsizes as $dsize)
         {
-            if($dsize->dsize->id == $dsize_id)
+
+            if($dsize->id == $dsize_id)
             {
                 $result = true;
                 break;
@@ -70,7 +86,7 @@ class Design extends Model
     public function dsize_price($dsize_id)
     {
         $result = false;
-        $dsizes = $this->design_sizes;
+        $dsizes = $this->designer_price->where('dsize_id',$dsize_id);
         foreach($dsizes as $dsize)
         {
             if($dsize->dsize->id == $dsize_id)

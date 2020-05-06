@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Design;
 use App\Tshirt;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;

@@ -17,7 +17,6 @@ class CreateDesignsCollectionsTable extends Migration
             $table->bigIncrements('id');
             $table->text('tshirt_id');
             $table->integer('design_id');
-            $table->text('design_dsize');
             $table->timestamps();
             $table->softDeletes();
         });

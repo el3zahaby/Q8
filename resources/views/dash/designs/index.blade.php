@@ -42,7 +42,7 @@
                                             target="_blank">{{ $item->user->full_name }}</a> </td>
                                     <td> {{ $item->desc_en }} </td>
                                     <td><img src="{{ $item->img }}" alt=""> </td>
-                                    <td> {{ $item->design_sizes[0]->dsize->print_price + $item->design_sizes[0]->designer_price }}
+                                    <td> {{ $item->designer_price[0]? $item->designer_price[0]->total : '' }}
                                     </td>
                                     <td> {{ $item->discount }} </td>
                                     <td> {{ $item->isAccepted(true) }} </td>
@@ -352,7 +352,7 @@
                 $(".price_" + $(this).attr('name')).attr('readonly','');
 
             }
-        });
+        }).trigger('change');
 
         $('.designerPrice').on('keyup',function () {
             var $id = $(this).data('id')

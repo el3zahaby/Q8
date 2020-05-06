@@ -88,23 +88,27 @@ class DesignController extends Controller
         $store->accepting = $request->accepting;
         $store->img = $img;
 
-        $store->save();
+
+        $dsignsize = [];
+        $i = -1;
         foreach($request->price as $key => $price)
         {
+            $i++;
             if($price != null and $price != 0 )
             {
-                $dsignsize = new DesignSize;
-                $dsignsize->design_id = $store->id;
-                $dsignsize->dsize_id = $key;
-                $dsignsize->designer_price = $price ;
-                $dsignsize->save();
+                $dsignsize[$i]['dsize_id'] = $key;
+                $dsignsize[$i]['designer_price'] = $price + 0;
+                $dsignsize[$i]['total'] = Dsize::find($key)->print_price+$dsignsize[$i]['designer_price'];
             }else{
-                $store->delete();
+               // $store->delete();
             }
+
         }
+        $store->designer_price = json_encode($dsignsize);
 
 
-        if ($dsignsize)  return response()->json([
+
+        if ($store->save())  return response()->json([
             'status'=>'ok',
             'msg'=>'Added'.$store->id
         ],200);
@@ -183,31 +187,31 @@ class DesignController extends Controller
         $item->user_id = $request->user_id;
         $item->accepting = $request->accepting ?? 0 ;
         $item->img = $img;
-        $item->save();
 
-        $oldsizes = $item->design_sizes;
-        foreach($oldsizes as $oldsize)
-        {
-            $oldsize->delete();
-        }
 
+
+
+        $dsignsize = [];
+        $i = -1;
         foreach($request->price as $key => $price)
         {
-            if($price != null and $price != 0)
+            $i++;
+            if($price != null and $price != 0 )
             {
-                $designsize = new DesignSize;
-                $designsize->design_id = $item->id;
-                $designsize->dsize_id = $key;
-                $designsize->designer_price = $price ;
-                $designsize->save();
+                $dsignsize[$i]['dsize_id'] = $key;
+                $dsignsize[$i]['designer_price'] = $price + 0;
+                $dsignsize[$i]['total'] = Dsize::find($key)->print_price+$dsignsize[$i]['designer_price'];
+            }else{
+                // $store->delete();
             }
+
         }
+        $item->designer_price = json_encode($dsignsize);
 
 
-        // $updated = $item->update($request->except(['img'])+ ['img'=>$img]);
 
 
-        if ($item && $designsize) return response()->json([
+        if ($item->save()) return response()->json([
             'status'=>'ok',
             'msg'=>'Updated'.$id
         ],200);
