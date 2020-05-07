@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Order;
-use App\Orderstatus;
+use App\OrderStatus;
 use Dompdf\Dompdf;
 use Exception;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -16,7 +16,7 @@ class OrderController extends Controller
     {
         $clientInfo = $request->get('clientInfo');
         $clientInfo = json_encode($clientInfo);
-        $default_status = Orderstatus::first();
+        $default_status = OrderStatus::first();
 
         $order = Order::create([
             'user_id' => auth()->id(),

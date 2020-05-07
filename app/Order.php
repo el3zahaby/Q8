@@ -13,7 +13,7 @@ class Order extends Model
     protected $appends = ['items'];
     public function status()
     {
-        return $this->belongsTo(Orderstatus::class,'orderstatus_id')->withTrashed();
+        return $this->belongsTo(OrderStatus::class,'orderstatus_id')->withTrashed();
     }
 
     public function user()
