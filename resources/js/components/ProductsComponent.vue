@@ -571,6 +571,7 @@
                 let root = this.$root;
                 axios.post(`api/v1/add-to-cart/${product.id}`, {
                     id: product.design.id,
+                    product: product,
                     frontprint: this.frontprint,
                     backprint: this.backprint,
                     tcolor: this.tcolor,

@@ -17,6 +17,7 @@ class User extends Authenticatable
 {
     use Notifiable,HasRoles;
 
+    protected $appends = ['is_designer'];
     /**
      * The attributes that are mass assignable.
      *
@@ -55,6 +56,11 @@ class User extends Authenticatable
         if ($string){
             $cond= ($cond) ?'YES':"NO";
         }
+
+        return $cond;
+    }
+    public function getIsDesignerAttribute($string = false){
+        $cond = $this->hasAnyRole(['designer']);
 
         return $cond;
     }

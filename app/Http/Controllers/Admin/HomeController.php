@@ -5,6 +5,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\StatisticController;
 use App\Visit;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -52,8 +53,20 @@ class HomeController extends Controller{
         $maxVisit = (max($newVisit) > max($usersVisit))? max($newVisit):max($usersVisit);
 
 
-        return view('dash.dashboard',compact('maxVisit','newVisit','usersVisit','sDays'));
+        // orders
+        $totalFromSeals = StatisticController::calcTotalOfCartItems(StatisticController::getCartSellingGeneral());
+        $totalFromSeals['sum'] = $totalFromSeals['count'] * $totalFromSeals['total'];
+
+        $siteProfit =  StatisticController::calcTotalOfCartItemsForSite(StatisticController::getCartSellingGeneral());
+        $siteProfit['sum'] =  $siteProfit['count'] * $siteProfit['total'];
+
+        $designersProfit =  StatisticController::calcTotalOfCartItemsForSite(StatisticController::getCartSellingGeneral());
+        $designersProfit['sum'] =  $designersProfit['count'] * $designersProfit['total'];
+
+//        dd($designersProfit);
+        return view('dash.dashboard',compact('maxVisit','newVisit','usersVisit','sDays','totalFromSeals','siteProfit','designersProfit'));
     }
+
 
     public function login(){
         if (Auth::check()) return redirect('/');

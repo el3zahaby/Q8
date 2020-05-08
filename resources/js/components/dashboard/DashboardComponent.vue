@@ -22,7 +22,7 @@
                     <div class="col-md-4">
                         <div class="box">
                             <h3> {{overviewContent[2]}}</h3>
-                            <h4>${{$t('Sales_Price')}}</h4>
+                            <h4>{{$t('Sales_Price')}}</h4>
                         </div>
                     </div>
                 </div>
@@ -38,38 +38,43 @@
                     <table class="text-center">
                         <thead>
                         <tr>
-                            <th class="product-name">{{$t('Design')}}</th>
-                            <th class="product-name">{{$t('Design_Name')}}</th>
-                            <th class="product-name">{{$t('Design_Rondom_ID')}}</th>
-                            <th class="product-name">{{$t('Design_Price')}}</th>
+                            <th class="product-name">{{ $t('Design') }}</th>
+                            <th class="product-name">{{ $t('Design_Name') }}</th>
+                            <th class="product-name">{{ $t('Design_Rondom_ID') }}</th>
+                            <th class="product-name">{{ $t('Design_Price') }}</th>
                             <!-- <th class="product-id">Design Id</th> -->
-                            <th class="product-subtotal">{{$t('delete')}}</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr v-for="design in  this.$root.latestDesigns" :key="design.id">
+                        <tr v-for="design in allDesigns" :key="design.id" :id="'row-'+design.id">
                             <td class="product-thumbnail">
-                                <a href="#"><img class="img-fluid" :src="design.img" alt="product thumbnail"></a>
+                                <a href="#"><img class="img-fluid" :src="design.img"
+                                                 alt="product thumbnail"></a>
                             </td>
                             <td class="product-name">
-                                <a href="#" class="text-decoration-none">{{design.name_en}}</a>
+                                <a href="#" class="text-decoration-none">{{ design.name_en }}</a>
                             </td>
                             <td class="product-name">
-                                <a href="#" class="text-decoration-none">{{design.id}}</a>
+                                <a href="#" class="text-decoration-none">{{ design.id }}</a>
                             </td>
                             <td class="product-price">
-                                <ul >
-                                        <li v-for="index in design.dsizes.length " >
-                                            {{ design.dsizes[index-1].width }} x {{ design.dsizes[index-1].length }} => {{ design.design_sizes[index-1].designer_price + design.dsizes[index-1].print_price }}
-                                        </li>
-                                    </ul>
-                            </td>
-                            <!-- <td class="product-id">
-                                {{design.id}}
-                            </td> -->
-                            <td class="product-cart-icon product-subtotal">
-                                <a href="#" @click.prevent="$root.deleteDesign(design.id)"><i
-                                    class="delete far fa-trash-alt"></i></a>
+                                <!-- <span class="amount">$</span> -->
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                    <th>{{$t('size')}}:</th>
+                                    <th>{{$t('print_price')}}:</th>
+                                    <th>{{$t('designer_price')}}:</th>
+                                    <th>{{$t('total')}}:</th>
+                                    </thead>
+                                    <tbody>
+                                    <tr v-for="ds in design.designer_price">
+                                        <td>{{ ds.dsize.width }} x {{ ds.dsize.length }}</td>
+                                        <td>{{ ds.dsize.print_price }}</td>
+                                        <td>{{ ds.designer_price }}</td>
+                                        <td>{{ ds.total }} </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </td>
                         </tr>
                         </tbody>
@@ -85,18 +90,30 @@
     export default {
         data() {
             return {
-
+                myallDesigns: {},
                 overviewContent: []
             };
         },
         props: [],
         mounted() {
-            axios.get("api/v1/designer-statistic").then(response => {
-                this.overviewContent = response.data;
+            axios.get("/api/v1/designer-designs").then(response => {
+                this.myallDesigns = response.data;
             }).catch(function (error) {
                 console.log(error);
             });
-        }
+            axios.get("api/v1/designer-statistic").then(response => {
+                this.overviewContent = response.data;
+                console.log(this.overviewContent)
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },computed: {
+
+            allDesigns:function () {
+                // this.myallDesigns = this.$root.updateDesigns()
+                return this.myallDesigns;
+            }
+        },
     };
 </script>
 

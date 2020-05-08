@@ -3,55 +3,43 @@
         <!-- checkout-area start -->
         <div class="checkout-area pt-130 pb-100">
             <div class="container">
-                <div class="row">
+
+                <div class="row" v-if="(this.$root.user).length == 0">
                     <div class="col-md-12">
-                        <div class="coupon-accordion d-none">
+                        <div class="coupon-accordion" >
                             <!-- ACCORDION START -->
-                            <h3>Returning customer? <span id="showlogin">Click here to login</span></h3>
-                            <div id="checkout-login" class="coupon-content">
-                                <div class="coupon-info">
-                                    <p class="coupon-text">Quisque gravida turpis sit amet nulla posuere lacinia. Cras
-                                        sed est sit amet ipsum luctus.</p>
-                                    <form action="#">
-                                        <p class="form-row-first">
-                                            <label>Username or email <span class="required">*</span></label>
-                                            <input type="text" v-model="user.username"/>
-                                        </p>
-                                        <p class="form-row-last">
-                                            <label>Password <span class="required">*</span></label>
-                                            <input type="text" v-model="user.password"/>
-                                        </p>
-                                        <p class="form-row">
-                                            <input type="submit" value="Login"/>
-                                            <label>
-                                                <input type="checkbox"/>
-                                                Remember me
-                                            </label>
-                                        </p>
-                                        <p class="lost-password">
-                                            <a href="#">Lost your password?</a>
-                                        </p>
-                                    </form>
-                                </div>
-                            </div>
-                            <!-- ACCORDION END -->
-                            <!-- ACCORDION START -->
-                            <h3>Have a coupon? <span id="showcoupon">Click here to enter your code</span></h3>
-                            <div id="checkout_coupon" class="coupon-checkout-content">
-                                <div class="coupon-info">
-                                    <form @submit.prevent="discount">
-                                        <p class="checkout-coupon">
-                                            <input type="text" placeholder="Coupon code"/>
-                                            <input type="submit" value="Apply Coupon"/>
-                                        </p>
-                                    </form>
-                                </div>
-                            </div>
+                            <h3 id="showlogin">Returning customer? <router-link to="login" id="">Click here to login</router-link></h3>
+<!--                            <div id="checkout-login" class="coupon-content">-->
+<!--                                <div class="coupon-info">-->
+<!--                                    <p class="coupon-text">Quisque gravida turpis sit amet nulla posuere lacinia. Cras-->
+<!--                                        sed est sit amet ipsum luctus.</p>-->
+<!--                                    <form action="#">-->
+<!--                                        <p class="form-row-first">-->
+<!--                                            <label>Username or email <span class="required">*</span></label>-->
+<!--                                            <input type="text" v-model="user.username"/>-->
+<!--                                        </p>-->
+<!--                                        <p class="form-row-last">-->
+<!--                                            <label>Password <span class="required">*</span></label>-->
+<!--                                            <input type="text" v-model="user.password"/>-->
+<!--                                        </p>-->
+<!--                                        <p class="form-row">-->
+<!--                                            <input type="submit" value="Login"/>-->
+<!--                                            <label>-->
+<!--                                                <input type="checkbox"/>-->
+<!--                                                Remember me-->
+<!--                                            </label>-->
+<!--                                        </p>-->
+<!--                                        <p class="lost-password">-->
+<!--                                            <a href="#">Lost your password?</a>-->
+<!--                                        </p>-->
+<!--                                    </form>-->
+<!--                                </div>-->
+<!--                            </div>-->
                             <!-- ACCORDION END -->
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" v-else>
                     <div class="col-lg-6 col-md-12 col-12">
                         <form action="#">
                             <div class="checkbox-form">

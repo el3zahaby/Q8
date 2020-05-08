@@ -35,7 +35,7 @@
                                 </div>
                             </div>
                             <div v-if="this.$root.login" class="account_div">
-                                <div v-if="this.$root.user.is_trader===1" class="account_div_inner">
+                                <div v-if="this.$root.user.is_designer===true" class="account_div_inner">
                                     <a href="/dashboard" class="nav-link">{{$t('Dashboard')}}</a>
                                 </div>
                                 <div class="account_div_inner">
@@ -160,6 +160,7 @@
             }
         },
         mounted() {
+
         }
     };
 </script>

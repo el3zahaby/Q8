@@ -20,11 +20,10 @@
                                 <th class="product-name">{{ $t('Design_Price') }}</th>
                                 <th class="product-name">{{ $t('Accepted') }}</th>
                                 <!-- <th class="product-id">Design Id</th> -->
-                                <th class="product-subtotal">{{ $t('delete') }}</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="design in allDesigns" :key="design.id">
+                            <tr v-for="design in allDesigns" :key="design.id" :id="'row-'+design.id">
                                 <td class="product-thumbnail">
                                     <a href="#"><img class="img-fluid" :src="design.img"
                                             alt="product thumbnail"></a>
@@ -37,24 +36,29 @@
                                 </td>
                                 <td class="product-price">
                                     <!-- <span class="amount">$</span> -->
-                                    <!-- {{ design }} -->
-                                    <ul >
-                                        <!-- <li v-for="size in design.dsizes" >{{ size.width }} x {{size.length}} => </li> -->
-                                        <li v-for="index in design.dsizes.length " :key="index" >
-                                            {{ design.dsizes[index-1].width }} x {{ design.dsizes[index-1].length }} => {{ design.design_sizes[index-1].designer_price + design.dsizes[index-1].print_price }}
-                                        </li>
-                                    </ul>
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                        <th>{{$t('size')}}:</th>
+                                        <th>{{$t('print_price')}}:</th>
+                                        <th>{{$t('designer_price')}}:</th>
+                                        <th>{{$t('total')}}:</th>
+                                        </thead>
+                                        <tbody>
+                                        <tr v-for="ds in design.designer_price">
+                                            <td>{{ ds.dsize.width }} x {{ ds.dsize.length }}</td>
+                                            <td>{{ ds.dsize.print_price }}</td>
+                                            <td>{{ ds.designer_price }}</td>
+                                            <td>{{ ds.total }} </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
                                     </td>
                                 <!-- <td class="product-id">
                                 {{ design.id }}
                             </td> -->
                             <td>
-                                {{ design.accepting}}
+                                {{ design.accepting ?"YES":'NO'}}
                             </td>
-                                <td class="product-cart-icon product-subtotal">
-                                    <a href="#" @click.prevent="$root.deleteDesign(design.id)"><i
-                                            class="delete far fa-trash-alt"></i></a>
-                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -75,38 +79,36 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" class="btn btn-secondary EN_btn">EN</button>
-                            <button type="button" class="btn btn-secondary AR_btn">AR</button>
+                        <div class="alert alert-danger error " v-if="Object.keys(getErr).length">
+                            <p v-for="(item,index) in getErr">{{index+": "+item}}</p>
                         </div>
-                        <div class="alert alert-danger error "></div>
                         <div class="modal-body">
+                            <div class="btn-group mb-2" role="group" aria-label="Basic example">
+                                <button type="button" class="btn btn-secondary EN_btn">EN</button>
+                                <button type="button" class="btn btn-secondary AR_btn">AR</button>
+                            </div>
                             <div class="custom-file">
-                                <div class="form-group">
-                                    <input style="background-color: transparent" type="text" name="designPrice"
-                                        :placeholder="$t('Design_Price')" v-model="designPrice" required />
-                                </div>
                                 <div class="form-group EN">
-                                    <input style="background-color: transparent" type="text" name="designName"
+                                    <input style="background-color: transparent" type="text" name="name_en"
                                         :placeholder="$t('Design_Name')" v-model="designName" required />
                                 </div>
 
 
                                 <div class="form-group AR">
-                                    <input style="background-color: transparent" class="name_ar" type="text" name="designNameAr"
-                                        :placeholder="$t('Design_Name_Ar')" v-model="designNameAr" required />
+                                    <input style="background-color: transparent" class="name_ar" type="text" name="name_ar"
+                                        :placeholder="$t('Design_Name_Ar')" v-model="designNameAr"  />
                                 </div>
 
-                                
+
 
                                 <div class="form-group EN">
-                                    <textarea style="background-color: transparent" name="designDesc"
+                                    <textarea style="background-color: transparent" name="desc_en"
                                         :placeholder="$t('Design_Description')" v-model="designDesc"></textarea>
                                 </div>
 
 
                                 <div class="form-group AR">
-                                    <textarea style="background-color: transparent" name="designDescAr"
+                                    <textarea style="background-color: transparent" name="desc_ar"
                                         :placeholder="$t('Design_Description_Ar')" v-model="designDescAr"></textarea>
                                 </div>
 
@@ -124,15 +126,14 @@
                                         </div>
                                         <div class="row" v-for="size in allSizes" :key="size.id" >
                                             <div class="col-2" >
-/*
-                                                <input type="checkbox" v-on:change="makeRequired(size.id)" />
+                                                <input type="checkbox" v-on:change="makeRequired(size.id)" class="size_check"/>
                                             </div>
                                             <div class="col-3" > {{ size.width }} x {{ size.length }} </div>
                                             <div class="col-2" > {{ size.print_price }}</div>
                                             <div class="col-3" >
-                                                <input type="text" class="form-control"  v-bind:class="'size_'+size.id" min="0" v-model="sizesPrice[size.id]" />
+                                                <input type="number" max="9999999" class="form-control"  readonly v-bind:class="'size_'+size.id" min="1" name="dsize[]" v-model="sizesPrice[size.id]" />
                                             </div>
-                                            <div class="col-2 text-center" v-bind:class=" 'total-'+size.id " >{{size.print_price}}</div>
+                                            <div class="col-2 text-center" v-bind:class=" 'total-'+size.id " >{{size.print_price + parseInt(sizesPrice[size.id] ? sizesPrice[size.id] :0)}}</div>
                                             <div class="col-12">
                                                 <hr>
                                             </div>
@@ -148,7 +149,7 @@
                                 </div>
                             </div>
                             <div class="img-prev pt-2">
-                                <img class="img-fluid" v-if="imgDesignURL" :src="imgDesignURL" alt="Design Img" />
+                                <img class="img-fluid" width="120" v-if="imgDesignURL" :src="imgDesignURL" alt="Design Img" />
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -170,7 +171,7 @@
     export default {
         data() {
             return {
-                allDesigns: [],
+                myallDesigns: [],
                 allSizes: [],
                 sizesPrice: [],
                 imgDesignURL: null,
@@ -182,10 +183,21 @@
                 test: null,
                 designNameAr: null,
                 designDescAr: null,
+                errors : {},
             };
         },
         props: [],
         methods: {
+            deleteDesign: function (id) {
+                let _this = this;
+                axios.get(`/api/v1/delete-design/${id}`).then(function (response) {
+                    _this.myallDesigns = response.data
+                    // console.log(_this.allDesigns)
+
+                    _this.$root.updateDesigns();
+                });
+            },
+
             submit() {
                 let _root = this.$root;
                 let _this = this;
@@ -218,14 +230,19 @@
                             _this.imagePath = null;
                             _root.updateDesigns();
 
+                            _this.myallDesigns = response.data
+                            console.log(_this.myallDesigns)
                             $('.modal').modal('toggle');
                         }).catch(err => {
                             console.log( JSON.stringify(err.response.data.errors));
-                            // $('.error').text();
-                            let errors = err.response.data.errors;
-                            // $('.error').text( JSON.stringify(err.response.data.errors) );
-                            errors.forEach(function(item) {
-                                document.getElementsByClassName("error").innerHTML += item + "<br>"; 
+                            _this.errors = err.response.data.errors;
+
+                            $.each(_this.errors,function(key,value) {
+                                // alert(key)
+                                $('[name="' + key + '"]').addClass('invalid error').parent().show();
+                                $('[name="' + key + '"]').after(
+                                    "<small class='helper-text text-danger'>" + value +
+                                    "</small>")
                             });
                         });
                     });
@@ -245,28 +262,29 @@
                     this.imgDesignURL = null;
                     this.designPrice = null;
                     this.designName = null;
-                    _this.updateDesigns();
+                    _root.updateDesigns();
                 })).catch((error) => {
                     console.log(error);
                 });
             },
             makeRequired(size_id) {
-                // console.log(".size_"+size_id);
-                // console.log($('.size_'+size_id).attr('required'));
 
-                if($('.size_'+size_id).attr('required') == 'required')
-                {
+                if ($('.size_'+size_id).attr('required') != 'required') {
+                    $('.size_'+size_id).attr('required', '');
+                    $('.size_'+size_id).removeAttr('readonly');
+                } else {
+                    $('.size_'+size_id).val('');
                     $('.size_'+size_id).removeAttr('required');
-                }else{
-                    $('.size_'+size_id).attr('required','required');
+                    $('.size_'+size_id).attr('readonly','');
+
                 }
             },
             validateForm() {
                 var x = $('.name_ar').val();
-                if (x == "" | x == null) {
-                    alert("Name must be filled out");
-                    return false;
-                }
+                // if (x == "" | x == null) {
+                //     alert("Name must be filled out");
+                //     return false;
+                // }
             },
 
 
@@ -290,25 +308,31 @@
                 $(".AR").css('display','block');
             })
 
-
         },
         created() {
             axios.get("/api/v1/designer-designs").then(response => {
-                this.allDesigns = response.data;
+                this.myallDesigns = response.data;
             }).catch(function (error) {
                 console.log(error);
             });
 
             axios.get("/api/v1/dsizes")
-            .then(res => {
-                // console.log("after allsizes => " + this.allSizes);
-                this.allSizes = res.data ;
-                // console.log("before allsizes => " + this.allSizes[0].length);
-            })
-            .catch(err => console.log(err));
+                .then(res => {
+                    // console.log("after allsizes => " + this.allSizes);
+                    this.allSizes = res.data ;
+                    // console.log("before allsizes => " + this.allSizes[0].length);
+                })
+                .catch(err => console.log(err));
 
-            
-        }
+        },computed: {
+            getErr: function() {
+                return this.errors;
+            },
+            allDesigns:function () {
+                // this.myallDesigns = this.$root.updateDesigns()
+                return this.myallDesigns;
+            }
+        },
     };
 
 </script>
@@ -328,5 +352,8 @@
     ul{
         list-style: none;
         padding: 0px;
+    }
+    .invalid.error {
+        border: 2px solid #ff003b !important;
     }
 </style>

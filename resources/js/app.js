@@ -203,7 +203,7 @@ const app = new Vue({
     el: "#app",
     data: {
         login: true,
-        user: {},
+        user: [],
         models: [],
         cart: {
             items: [],
@@ -225,7 +225,7 @@ const app = new Vue({
         updateUser: function () {
             let _this = this;
             axios.get("/api/user").then(function (response) {
-                _this.user = response.data ? response.data : null;
+                _this.user = response.data ? response.data : [];
             });
         },
         updateCart: function () {
@@ -281,7 +281,8 @@ const app = new Vue({
                 _this.allDesigns = response.data;
             });
 
-            console.log("Update Designs");
+            return _this.allDesigns;
+            console.log("Update Designs",_this.allDesigns);
         },
     },
     watch: {

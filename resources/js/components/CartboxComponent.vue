@@ -6,9 +6,7 @@
                 :key="product.id"
                 class="single_product_cart">
                 <div class="cart_img">
-
-                    <img style="height: 70px" :src="product.options.img" alt="product thumbnail"
-                    />
+                    <img style="height: 70px" :src="product.options.product.design.img" alt="product thumbnail"/>
                 </div>
                 <div class="cart_title">
                     <h5>
