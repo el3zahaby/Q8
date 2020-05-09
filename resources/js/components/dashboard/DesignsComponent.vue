@@ -20,6 +20,7 @@
                                 <th class="product-name">{{ $t('Design_Price') }}</th>
                                 <th class="product-name">{{ $t('Accepted') }}</th>
                                 <!-- <th class="product-id">Design Id</th> -->
+                                <th class="product-subtotal">{{ $t('delete') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -59,6 +60,10 @@
                             <td>
                                 {{ design.accepting ?"YES":'NO'}}
                             </td>
+                                <td class="product-cart-icon product-subtotal">
+                                    <a href="#" @click.prevent="deleteDesign(design.id)"><i
+                                            class="delete far fa-trash-alt"></i></a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

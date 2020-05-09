@@ -8,6 +8,7 @@ use App\Dsize;
 use App\Http\Controllers\Admin\DCollectionsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 
 class DesignController extends Controller
 {
@@ -104,9 +105,21 @@ class DesignController extends Controller
         request()->validate([
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-        $imageName = time() . '.' . request()->image->getClientOriginalExtension();
-        $directory = storage_path('app/public/uploads/designs');
-        $url = request()->image->move($directory, $imageName);
+
+        $file =  \request()->image;
+        $Image = Image::make($file);
+
+        $Image->resize(200, null, function ($constraint) {
+            $constraint->aspectRatio();
+        });
+
+        $imageName = time().'.'.$file->getClientOriginalExtension();
+        $directory = ('app/public/uploads/designs/');
+
+        $file->move(storage_path($directory), $imageName);
+        if (!is_dir(storage_path($directory.'/thump/'))) mkdir(storage_path($directory.'/thump/'));
+        $Image->save(storage_path($directory.'/thump/'.$imageName));
+
         return '/storage/uploads/designs/' . $imageName;
     }
 

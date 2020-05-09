@@ -42,8 +42,8 @@
     export default {
         data() {
             return {
-                logo_src: "/images/w_logo.png",
-                about_us: 'about_us_desc'
+                logo_src: _LOGO,
+                about_us: _about_us_desc
             }
         },
     }

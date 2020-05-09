@@ -2257,7 +2257,7 @@ __webpack_require__.r(__webpack_exports__);
   name: "locale-changer",
   data: function data() {
     return {
-      logo_src: "/images/w_logo.png",
+      logo_src: _LOGO,
       search_placeholder: "Search now",
       langs: ["AR", "EN"],
       selectedLang: this.$i18n.locale
@@ -5453,6 +5453,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -5885,8 +5890,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      logo_src: "/images/w_logo.png",
-      about_us: 'about_us_desc'
+      logo_src: _LOGO,
+      about_us: _about_us_desc
     };
   }
 });
@@ -50721,6 +50726,10 @@ var render = function() {
                 _vm._v(" "),
                 _c("th", { staticClass: "product-name" }, [
                   _vm._v(_vm._s(_vm.$t("Accepted")))
+                ]),
+                _vm._v(" "),
+                _c("th", { staticClass: "product-subtotal" }, [
+                  _vm._v(_vm._s(_vm.$t("delete")))
                 ])
               ])
             ]),
@@ -50815,7 +50824,27 @@ var render = function() {
                           _vm._s(design.accepting ? "YES" : "NO") +
                           "\n                        "
                       )
-                    ])
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      { staticClass: "product-cart-icon product-subtotal" },
+                      [
+                        _c(
+                          "a",
+                          {
+                            attrs: { href: "#" },
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.deleteDesign(design.id)
+                              }
+                            }
+                          },
+                          [_c("i", { staticClass: "delete far fa-trash-alt" })]
+                        )
+                      ]
+                    )
                   ]
                 )
               }),

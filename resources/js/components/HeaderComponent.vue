@@ -120,7 +120,7 @@
         name: "locale-changer",
         data() {
             return {
-                logo_src: "/images/w_logo.png",
+                logo_src: _LOGO,
                 search_placeholder: "Search now",
                 langs: ["AR", "EN"],
                 selectedLang: this.$i18n.locale,

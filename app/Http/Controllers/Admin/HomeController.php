@@ -55,15 +55,12 @@ class HomeController extends Controller{
 
         // orders
         $totalFromSeals = StatisticController::calcTotalOfCartItems(StatisticController::getCartSellingGeneral());
-        $totalFromSeals['sum'] = $totalFromSeals['count'] * $totalFromSeals['total'];
 
-        $siteProfit =  StatisticController::calcTotalOfCartItemsForSite(StatisticController::getCartSellingGeneral());
-        $siteProfit['sum'] =  $siteProfit['count'] * $siteProfit['total'];
+        $designersProfit =  StatisticController::calcTotalOfCartItemsForDesigners(StatisticController::getCartSellingGeneral());
 
-        $designersProfit =  StatisticController::calcTotalOfCartItemsForSite(StatisticController::getCartSellingGeneral());
-        $designersProfit['sum'] =  $designersProfit['count'] * $designersProfit['total'];
+        $siteProfit['total'] =  $totalFromSeals['total'] - $designersProfit['total'];
 
-//        dd($designersProfit);
+
         return view('dash.dashboard',compact('maxVisit','newVisit','usersVisit','sDays','totalFromSeals','siteProfit','designersProfit'));
     }
 

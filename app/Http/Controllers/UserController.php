@@ -25,7 +25,6 @@ class UserController extends Controller
         $user->phone = $request->phone;
         $user->address = $request->address;
         $user->age = $request->age;
-        $user->is_trader = 0 | $request->is_trader;
         $user->Bank_Name = $request->BankName;
         $user->IBAN_Bank = $request->BankIBAN;
         $user->name_on_BankCard = $request->name_on_BankCard;

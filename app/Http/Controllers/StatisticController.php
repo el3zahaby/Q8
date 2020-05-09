@@ -17,7 +17,7 @@ class StatisticController extends Controller
         $sells = $this->getCartSellingForDesigner($designer_id);
         $totalData = self::calcDesignerTotalOfCartItems($sells);
         $sales_num = $totalData['count'];
-        $sales_price = $totalData['total']*$totalData['count'];
+        $sales_price = $totalData['total'];
 
         // return response()->json([
         //     ['name' => 'Designs Number',
@@ -98,20 +98,20 @@ class StatisticController extends Controller
 
     public static function calcTotalOfCartItemsForDesigners($cartItems)
     {
-        $count = 0;
         $total = 0;
 
         foreach ($cartItems as $item) {
             foreach ($item as $cartItem){
-                foreach ($cartItem->options['product']['design']['designer_price'] as $price) {
-                    $total += ($price['designer_price']);
+                if($cartItem->options['frontprint']){
+                    $total += ($cartItem->options['frontprint']['designer_price']*$cartItem->qty);
                 }
-                $count += $cartItem->qty;
+                if ($cartItem->options['backprint']){
+                    $total += ($cartItem->options['backprint']['designer_price']*$cartItem->qty);
+                }
             }
         }
         return [
             'total' => $total,
-            'count' => $count,
         ];
     }
 
@@ -121,16 +121,25 @@ class StatisticController extends Controller
         $total = 0;
 
         foreach ($cartItems as $item) {
+            dd($item);
             foreach ($item as $cartItem){
-                foreach ($cartItem->options['product']['design']['designer_price'] as $price) {
-                    $total += ($price['total']);
-                }
-                $count += $cartItem->qty;
+                $total += ($cartItem->price)*$cartItem->qty;
             }
         }
         return [
             'total' => $total,
-            'count' => $count,
+        ];
+    }
+    public static function calcTotalOfCartItem($cartItems)
+    {
+        $count = 0;
+        $total = 0;
+
+        foreach ($cartItems as $cartItem) {
+            $total += ($cartItem->price)*$cartItem->qty;
+        }
+        return [
+            'total' => $total,
         ];
     }
     public static function calcDesignerTotalOfCartItems($cartItems)
@@ -139,11 +148,13 @@ class StatisticController extends Controller
         $total = 0;
 
         foreach ($cartItems as $cartItem) {
-            foreach ($cartItem->options['product']['design']['designer_price'] as $price){
-                $total +=($price['designer_price']);
+            if($cartItem->options['frontprint']){
+                $total += ($cartItem->options['frontprint']['designer_price']*$cartItem->qty);
             }
-//            ($total*$cartItem->qty);
-            $count += $cartItem->qty;
+            if ($cartItem->options['backprint']){
+                $total += ($cartItem->options['backprint']['designer_price']*$cartItem->qty);
+            }
+            $count +=$cartItem->qty;
         }
 
         return [
@@ -152,6 +163,24 @@ class StatisticController extends Controller
         ];
     }
 
+    public static function getSoldTshirt($id){
+        $cartItems = [];
+        $allOrdersCartItems = self::getCartSellingGeneral();
+        foreach ($allOrdersCartItems as $orderCartItems) {
+            foreach ($orderCartItems as $cartItem) {
+                $designCollections = DesignsCollections::findByDesign($cartItem->id);
+                if ($designCollections != null) {
+                    $tshirtId = $cartItem->options['product']['tshirts'][0]['id'];
+//                    dd($tshirtId,$id);
+                    if ($tshirtId == $id)
+                        $cartItems[] = $cartItem;
+
+                }
+            }
+        }
+
+        return $cartItems;
+    }
     public function getMostSells()
     {
         $cartItemsCollections = self::getCartSellingGeneral();
