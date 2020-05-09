@@ -10,6 +10,10 @@ use Illuminate\Http\Request;
 
 //----------Start Tests----------//
 
+
+Route::get('testmail','MailController@index');
+
+
 //----------End Tests----------//
 Route::group(['prefix' => '/api'], function () {
 
@@ -179,7 +183,7 @@ Route::get('/dashboard{any}', function () {
 
 
 Route::get('logout',  'Auth\LoginController@logout');
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@home')->middleware(['trackV']);
 

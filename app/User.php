@@ -13,7 +13,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @property mixed first_name
  * @property mixed last_name
  */
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable,HasRoles;
 

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Design;
-use App\DesignsCollections;
 use App\Order;
 use Exception;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -15,9 +14,9 @@ class StatisticController extends Controller
         $designer_id = auth()->id();
         $designs_num = Design::where('user_id', $designer_id)->where('accepting', 1)->count();
         $sells = $this->getCartSellingForDesigner($designer_id);
-        $totalData = self::calcDesignerTotalOfCartItems($sells);
+        $totalData = self::calcTotalOfCartItems($sells);
         $sales_num = $totalData['count'];
-        $sales_price = $totalData['total']*$totalData['count'];
+        $sales_price = $totalData['total'];
 
         // return response()->json([
         //     ['name' => 'Designs Number',
@@ -65,49 +64,24 @@ class StatisticController extends Controller
         foreach ($allOrdersCartItems as $orderCartItems) {
             foreach ($orderCartItems as $cartItem) {
                 $design = Design::find($cartItem->id);
-//                dd($cartItem->id);
                 if ($design != null) {
-                    $userId = $cartItem->options['product']['design']['user_id'];
+                    $userId = $design->designer_id;
                     if ($userId == $id)
                         $cartItems[] = $cartItem;
-
                 }
             }
         }
         return $cartItems;
     }
 
-    public static function calcTotalOfCartItemsForSite($cartItems)
+    public static function calcTotalOfCartItemsForAllUsers($cartItems)
     {
         $count = 0;
         $total = 0;
-
-        foreach ($cartItems as $item) {
-            foreach ($item as $cartItem){
-                foreach ($cartItem->options['product']['design']['designer_price'] as $price) {
-                    $total += ($price['dsize']['print_price']);
-                }
-                $count += $cartItem->qty;
-            }
-        }
-        return [
-            'total' => $total,
-            'count' => $count,
-        ];
-    }
-
-    public static function calcTotalOfCartItemsForDesigners($cartItems)
-    {
-        $count = 0;
-        $total = 0;
-
-        foreach ($cartItems as $item) {
-            foreach ($item as $cartItem){
-                foreach ($cartItem->options['product']['design']['designer_price'] as $price) {
-                    $total += ($price['designer_price']);
-                }
-                $count += $cartItem->qty;
-            }
+        foreach ($cartItems as $cartItem_collection) {
+            $cartItem_collection_data = self::calcTotalOfCartItems($cartItem_collection->all());
+            $count += $cartItem_collection_data['count'];
+            $total += $cartItem_collection_data['total'];
         }
         return [
             'total' => $total,
@@ -120,32 +94,10 @@ class StatisticController extends Controller
         $count = 0;
         $total = 0;
 
-        foreach ($cartItems as $item) {
-            foreach ($item as $cartItem){
-                foreach ($cartItem->options['product']['design']['designer_price'] as $price) {
-                    $total += ($price['total']);
-                }
-                $count += $cartItem->qty;
-            }
-        }
-        return [
-            'total' => $total,
-            'count' => $count,
-        ];
-    }
-    public static function calcDesignerTotalOfCartItems($cartItems)
-    {
-        $count = 0;
-        $total = 0;
-
         foreach ($cartItems as $cartItem) {
-            foreach ($cartItem->options['product']['design']['designer_price'] as $price){
-                $total +=($price['designer_price']);
-            }
-//            ($total*$cartItem->qty);
+            $total += $cartItem->subtotal + $cartItem->tax - $cartItem->discount;
             $count += $cartItem->qty;
         }
-
         return [
             'total' => $total,
             'count' => $count,

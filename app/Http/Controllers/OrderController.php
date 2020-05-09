@@ -9,6 +9,9 @@ use Exception;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ShippingMail;
+
 class OrderController extends Controller
 {
 
@@ -27,6 +30,8 @@ class OrderController extends Controller
             return null;
         Cart::store($order->id);
         Cart::destroy();
+
+        Mail::to(auth()->user()->email )->send(new ShippingMail);
 
         return $order;
 

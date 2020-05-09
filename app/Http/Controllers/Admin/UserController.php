@@ -10,6 +10,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\DesignerMail;
+
 class UserController extends Controller
 {
     protected $view  = 'dash.user-pages.';
@@ -148,6 +151,7 @@ class UserController extends Controller
 
         if (isset($request->is_designer)){
             $item->assignRole('designer');
+            Mail::to($item->email)->send(new DesignerMail);
         }else{
             $item->removeRole('designer');
         }
