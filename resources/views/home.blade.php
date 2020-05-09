@@ -1,6 +1,10 @@
 @extends('layouts.app')
 @section('title')
     <title>{{__('Home')}}</title>
+    <script>
+        let _LOGO = "{{ setting('app_logo') }}"
+        let _about_us_desc = "{{ setting('app_desc') }}"
+    </script>
 @endsection
 
 @section('content')
@@ -37,6 +41,5 @@
 @endsection
 
 @section('scripts')
-    <script>
-    </script>
+
 @endsection

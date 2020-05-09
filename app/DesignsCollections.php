@@ -26,4 +26,9 @@ class DesignsCollections extends Model
     public function design(){
         return $this->belongsTo(Design::class)->withTrashed();
     }
+    public static function findByDesign($id){
+        return parent::with(["design" => function($q)use($id){
+            $q->where('id', '=', $id);
+        }])->first();
+    }
 }

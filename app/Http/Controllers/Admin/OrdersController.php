@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\StatisticController;
 use App\Order;
+use Dompdf\Dompdf;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -66,7 +69,7 @@ class OrdersController extends Controller
         $tshirt = \App\Tshirt::find($request->tshirt_id);
 
         $front_design_size = \App\DesignSize::where(['design_id' => $request->design_id , 'dsize_id' => $request->front])->get();
-        
+
         $back_design_size = \App\DesignSize::where(['design_id' => $request->design_id , 'dsize_id' => $request->back])->get();
 
 
@@ -143,5 +146,47 @@ class OrdersController extends Controller
                 'status'=>'ok',
                 'msg'=>'deleted'.$id
             ],200);
+    }
+
+    public static function getCartItemsByOrder($id)
+    {
+        $cartItems = [];
+
+        $userCartIdentifier = 'USER-' . auth()->id();
+        //Save User Cart
+        try {
+            Cart::store($userCartIdentifier);
+        } catch (Exception $ex) {
+        } finally {
+            Cart::destroy();
+        }
+
+        Cart::restore($id);
+        $cartItems = Cart::content()->all();
+        Cart::store($id);
+        Cart::destroy();
+
+        //Restore User Cart
+        Cart::restore($userCartIdentifier);
+
+        return $cartItems;
+    }
+
+    public function getBill($id)
+    {
+        $order = Order::with('user')->find($id);
+        $cartItems = self::getCartItemsByOrder($id);
+        $total = StatisticController::calcTotalOfCartItem($cartItems);
+
+        $view = view('reports.bill', compact('id', 'order', 'cartItems', 'total'));
+
+        $pdf = new Dompdf(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
+        $pdf->setBasePath(public_path());
+        $pdf->loadHtml($view);
+//        $pdf->setPaper('A4', 'landscape');
+        $pdf->render();
+        $pdf->stream("main-report.pdf", array("Attachment" => false));
+
+        return $view;
     }
 }

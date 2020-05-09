@@ -23,6 +23,8 @@
                                 <th> size</th>
                                 <th> price</th>
                                 <th> quantity</th>
+                                <th> sold</th>
+                                <th> left</th>
                                 <th> Created at</th>
 
                                 <th> Action</th>
@@ -35,6 +37,8 @@
                                     <td> {{ $item->color->name }} </td>
                                     <td> {{ $item->tsize->name }} </td>
                                     <td> {{ $item->price }} </td>
+                                    <td> {{ $item->qty }} </td>
+                                    <td> {{ $item->ordered() }} </td>
                                     <td> {{ $item->qty }} </td>
 
                                     <td> {{ $item->created_at->diffForHumans() }} </td>

@@ -142,6 +142,7 @@ Route::group(['prefix' => 'admin','as'=>'admin.'], function () {
         //order
         Route::resource('orderstatus', 'Admin\OrderStatusController');
         Route::resource('orders', 'Admin\OrdersController');
+        Route::get('orders/getBill/{id}', 'Admin\OrdersController@getBill')->name('orders.getBill');
 
         //page
         Route::resource('pages', 'Admin\PageController');
