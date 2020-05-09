@@ -8,6 +8,9 @@ use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
+use \Illuminate\Support\Facades\Mail;
+use App\Mail\ConfirmMail;
+
 class UserController extends Controller
 {
     public function show()
@@ -30,6 +33,8 @@ class UserController extends Controller
         $user->IBAN_Bank = $request->BankIBAN;
         $user->name_on_BankCard = $request->name_on_BankCard;
         $user->save();
+
+        Mail::to($user->email)->send(new ConfirmMail);
 
         return "Ok";
 
