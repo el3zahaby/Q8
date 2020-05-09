@@ -3,7 +3,7 @@
         <div class="container">
             <div class="sitemap">
                 <div class="row">
-                    <div class="col-lg-5 mb-3 text-left">
+                    <div :class="'col-lg-5 mb-3 '+ $t('text-left')">
                         <router-link to="/" class="home_logo_div">
                             <img style="height: 80px" class="mb-3" :src="logo_src" alt="logo"/>
                         </router-link>

@@ -2251,6 +2251,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2260,7 +2264,8 @@ __webpack_require__.r(__webpack_exports__);
       logo_src: _LOGO,
       search_placeholder: "Search now",
       langs: ["AR", "EN"],
-      selectedLang: this.$i18n.locale
+      selectedLang: this.$i18n.locale,
+      qsearch: null
     };
   },
   methods: {
@@ -2269,6 +2274,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.post('/api/v1/logout').then(function (response) {
         _this.$root.user = null;
+        _this.$root.login = false;
       });
     },
     setLang: function setLang() {
@@ -2282,7 +2288,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     search: function search() {
-      var query = $('#search-component').val();
+      var query = this.qsearch;
 
       var _this = this;
 
@@ -2431,6 +2437,141 @@ __webpack_require__.r(__webpack_exports__);
   },
   props: [],
   mounted: function mounted() {}
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/MyOrderComponent.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/MyOrderComponent.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {},
+  created: function created() {
+    this.fetchOrders();
+  },
+  data: function data() {
+    return {
+      order: {}
+    };
+  },
+  props: [],
+  methods: {
+    fetchOrders: function fetchOrders(page_url) {
+      var _this = this;
+
+      page_url = page_url || 'api/v1/myOrder';
+      fetch(page_url).then(function (res) {
+        return res.json();
+      }).then(function (res) {
+        _this.order = res;
+        console.log(res);
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -4138,177 +4279,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4341,6 +4311,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('/api/v1/most-sells').then(function (response) {
         _this.mostSells = response.data;
+        console.log(_this.mostSells);
       });
     },
     addToCart: function addToCart(product) {
@@ -4689,7 +4660,10 @@ __webpack_require__.r(__webpack_exports__);
         _this.updateUser();
 
         _this.$router.push({
-          path: '/login'
+          path: '/login',
+          query: {
+            test: 'test'
+          }
         });
       })["catch"](function (error) {
         var response = error.response;
@@ -6116,7 +6090,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mixins: [_map__WEBPACK_IMPORTED_MODULE_0__["mapMixin"]],
-  mounted: function mounted() {},
+  mounted: function mounted() {// console.log(Object.keys(this.$root.user).length)
+  },
   data: function data() {
     return {
       firstname: this.$root.user.first_name,
@@ -46453,8 +46428,10 @@ var render = function() {
                         "$" +
                           _vm._s(
                             product.subtotal + product.tax - product.discount
-                          )
-                      )
+                          ) +
+                          " "
+                      ),
+                      _c("small", [_vm._v("KWD")])
                     ])
                   ]),
                   _vm._v(" "),
@@ -46483,7 +46460,10 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "cart_price" }, [
-                _c("h4", [_vm._v(_vm._s(this.$root.cart.total["total"]))])
+                _c("h4", [
+                  _vm._v(_vm._s(this.$root.cart.total["total"]) + " "),
+                  _c("small", [_vm._v("KWD")])
+                ])
               ])
             ]),
             _vm._v(" "),
@@ -47116,6 +47096,17 @@ var render = function() {
                           1
                         ),
                         _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "account_div_inner" },
+                          [
+                            _c("router-link", { attrs: { to: "/myOrder" } }, [
+                              _vm._v(_vm._s(_vm.$t("my_order")))
+                            ])
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
                         _c("div", { staticClass: "account_div_inner" }, [
                           _c(
                             "a",
@@ -47186,6 +47177,14 @@ var render = function() {
               { staticClass: "input-group input-group-lg  flex-nowrap" },
               [
                 _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.qsearch,
+                      expression: "qsearch"
+                    }
+                  ],
                   staticClass: "form-control text-uppercase",
                   attrs: {
                     id: "search-component",
@@ -47193,15 +47192,14 @@ var render = function() {
                     type: "search",
                     placeholder: _vm.$t("search")
                   },
+                  domProps: { value: _vm.qsearch },
                   on: {
-                    keyup: function($event) {
-                      if (
-                        !$event.type.indexOf("key") &&
-                        _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-                      ) {
-                        return null
+                    keypress: _vm.search,
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
                       }
-                      return _vm.search($event)
+                      _vm.qsearch = $event.target.value
                     }
                   }
                 }),
@@ -47495,6 +47493,354 @@ var render = function() {
   ])
 }
 var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/MyOrderComponent.vue?vue&type=template&id=65d39706&":
+/*!*******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/MyOrderComponent.vue?vue&type=template&id=65d39706& ***!
+  \*******************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "div",
+      {
+        staticClass: "login-register-area",
+        staticStyle: { padding: "130px 0" }
+      },
+      [
+        _c("div", { staticClass: "container" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-lg-12 ml-auto mr-auto" }, [
+              _c("div", { staticClass: "login-register-wrapper" }, [
+                _c("div", { staticClass: "login-register-tab-list nav" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass:
+                        "active text-decoration-none font-weight-bold",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                                " +
+                          _vm._s(_vm.$t("my_order")) +
+                          "\n                            "
+                      )
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "tab-content" }, [
+                  _c("div", { staticClass: "tab-pane active" }, [
+                    Object.keys(_vm.order).length
+                      ? _c(
+                          "table",
+                          {
+                            staticClass: "table table-striped table-bordered "
+                          },
+                          [
+                            _vm._m(0),
+                            _vm._v(" "),
+                            _c(
+                              "tbody",
+                              _vm._l(_vm.order, function($item) {
+                                return _c("tr", [
+                                  _c("th", [
+                                    _vm._v(" " + _vm._s($item.id) + " ")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _c(
+                                      "table",
+                                      {
+                                        staticClass:
+                                          "mb-1 table-striped  table-bordered"
+                                      },
+                                      [
+                                        _vm._m(1, true),
+                                        _vm._v(" "),
+                                        _vm._l($item.items, function($cart) {
+                                          return _c("tbody", [
+                                            _c("td", [
+                                              _vm._v(_vm._s($cart.id))
+                                            ]),
+                                            _vm._v(" "),
+                                            _c("td", [
+                                              _vm._v(
+                                                _vm._s(
+                                                  $cart.options.product.design
+                                                    .name
+                                                ) + " "
+                                              ),
+                                              _c("img", {
+                                                attrs: {
+                                                  src:
+                                                    $cart.options.product.design
+                                                      .img,
+                                                  alt:
+                                                    $cart.options.product.design
+                                                      .name
+                                                }
+                                              })
+                                            ]),
+                                            _vm._v(" "),
+                                            _c("td", [
+                                              _c("ul", [
+                                                _c("li", [
+                                                  _vm._v(
+                                                    "Size: " +
+                                                      _vm._s(
+                                                        $cart.options.tsize
+                                                          .tsize.name
+                                                      )
+                                                  )
+                                                ]),
+                                                _vm._v(" "),
+                                                _c("li", [
+                                                  _vm._v(
+                                                    "Color: " +
+                                                      _vm._s(
+                                                        $cart.options.tcolor
+                                                          .name
+                                                      )
+                                                  )
+                                                ]),
+                                                _vm._v(" "),
+                                                _c("li", [
+                                                  _vm._v(
+                                                    "Price: " +
+                                                      _vm._s(
+                                                        $cart.options.tsize
+                                                          .price
+                                                      )
+                                                  )
+                                                ])
+                                              ])
+                                            ]),
+                                            _vm._v(" "),
+                                            _c("td", [
+                                              $cart.options.frontprint
+                                                ? _c("div", [
+                                                    _c("strong", [
+                                                      _vm._v("Front")
+                                                    ]),
+                                                    _vm._v(" "),
+                                                    _c("ul", [
+                                                      _c("li", [
+                                                        _vm._v(
+                                                          "Size: " +
+                                                            _vm._s(
+                                                              $cart.options
+                                                                .frontprint
+                                                                .dsize.width +
+                                                                "X" +
+                                                                $cart.options
+                                                                  .frontprint
+                                                                  .dsize.length
+                                                            )
+                                                        )
+                                                      ]),
+                                                      _vm._v(" "),
+                                                      _c("li", [
+                                                        _vm._v(
+                                                          "Designer Price: " +
+                                                            _vm._s(
+                                                              $cart.options
+                                                                .frontprint
+                                                                .designer_price
+                                                            )
+                                                        )
+                                                      ]),
+                                                      _vm._v(" "),
+                                                      _c("li", [
+                                                        _vm._v(
+                                                          "Print Price: " +
+                                                            _vm._s(
+                                                              $cart.options
+                                                                .frontprint
+                                                                .dsize
+                                                                .print_price
+                                                            )
+                                                        )
+                                                      ]),
+                                                      _vm._v(" "),
+                                                      _c("li", [
+                                                        _vm._v(
+                                                          "Total: " +
+                                                            _vm._s(
+                                                              $cart.options
+                                                                .frontprint
+                                                                .total
+                                                            )
+                                                        )
+                                                      ])
+                                                    ])
+                                                  ])
+                                                : _vm._e(),
+                                              _vm._v(" "),
+                                              $cart.options.backprint
+                                                ? _c("div", [
+                                                    _c("strong", [
+                                                      _vm._v("Back")
+                                                    ]),
+                                                    _vm._v(" "),
+                                                    _c("ul", [
+                                                      _c("li", [
+                                                        _vm._v(
+                                                          "Size: " +
+                                                            _vm._s(
+                                                              $cart.options
+                                                                .backprint.dsize
+                                                                .width +
+                                                                "X" +
+                                                                $cart.options
+                                                                  .backprint
+                                                                  .dsize.length
+                                                            )
+                                                        )
+                                                      ]),
+                                                      _vm._v(" "),
+                                                      _c("li", [
+                                                        _vm._v(
+                                                          "Designer Price: " +
+                                                            _vm._s(
+                                                              $cart.options
+                                                                .backprint
+                                                                .designer_price
+                                                            )
+                                                        )
+                                                      ]),
+                                                      _vm._v(" "),
+                                                      _c("li", [
+                                                        _vm._v(
+                                                          "Print Price: " +
+                                                            _vm._s(
+                                                              $cart.options
+                                                                .backprint.dsize
+                                                                .print_price
+                                                            )
+                                                        )
+                                                      ]),
+                                                      _vm._v(" "),
+                                                      _c("li", [
+                                                        _vm._v(
+                                                          "Total: " +
+                                                            _vm._s(
+                                                              $cart.options
+                                                                .backprint.total
+                                                            )
+                                                        )
+                                                      ])
+                                                    ])
+                                                  ])
+                                                : _vm._e()
+                                            ]),
+                                            _vm._v(" "),
+                                            _c("td", [
+                                              _vm._v(_vm._s($cart.qty))
+                                            ]),
+                                            _vm._v(" "),
+                                            _c("td", [
+                                              _vm._v(
+                                                _vm._s($cart.price * $cart.qty)
+                                              )
+                                            ])
+                                          ])
+                                        })
+                                      ],
+                                      2
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", [_vm._v(_vm._s($item.cart_total))]),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _c(
+                                      "span",
+                                      {
+                                        staticClass: "badge badge-bg",
+                                        style:
+                                          "background:" + $item.status.color
+                                      },
+                                      [_vm._v(_vm._s($item.status.status))]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", [_vm._v(_vm._s($item.created_at))])
+                                ])
+                              }),
+                              0
+                            )
+                          ]
+                        )
+                      : _c("div", { staticClass: "alert alert-danger" }, [
+                          _c("h3", [_vm._v("No Orders Yet")])
+                        ])
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ])
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("th", [_vm._v("Id")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("orders")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("total price")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("order_status")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("date")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("th", [_vm._v("Design ID")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("design")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("tshirt")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("print")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Count")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("total price")])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -48061,6 +48407,134 @@ var render = function() {
         _c("h2", [_vm._v(_vm._s(_vm.$t("MostSells")))])
       ]),
       _vm._v(" "),
+      _c("div", { staticClass: "most_sell_content" }, [
+        _c(
+          "div",
+          { staticClass: "row" },
+          _vm._l(_vm.mostSells, function(product) {
+            return _c(
+              "div",
+              {
+                key: product.design.id,
+                staticClass: "col-xl-3 col-lg-4 col-md-6"
+              },
+              [
+                _c("div", { staticClass: "t-shirt_data mb-2" }, [
+                  _c("span", [_vm._v("ID : " + _vm._s(product.design.id))]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "t-shirt_image_div position-relative" },
+                    [
+                      _c("product-designer", {
+                        attrs: { design: product.design, type: "view" }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "ul",
+                        {
+                          staticClass:
+                            "cart_ul_btn list-icon list-unstyled product_btn_div d-flex align-items-center text-center mb-0"
+                        },
+                        [
+                          _c("li", [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "quickview_btn",
+                                attrs: {
+                                  href: "#",
+                                  "data-id": "hidden-denim-shirt",
+                                  title: "Product Details",
+                                  "data-toggle": "modal",
+                                  "data-target": "#d" + product.design.id
+                                }
+                              },
+                              [
+                                _c("img", {
+                                  attrs: { src: "/images/eye.png", alt: "" }
+                                })
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("li", [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "quickview_btn",
+                                attrs: {
+                                  href: "#",
+                                  "data-id": "hidden-denim-shirt",
+                                  title: "Product Details",
+                                  "data-toggle": "modal",
+                                  "data-target": "#d" + product.design.id
+                                }
+                              },
+                              [
+                                _c("img", {
+                                  attrs: { src: "images/add-cart.png", alt: "" }
+                                })
+                              ]
+                            )
+                          ])
+                        ]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "t-shirt_inner_data d-flex justify-content-between align-items-center px-1 my-2"
+                    },
+                    [
+                      _c("span", { staticClass: "t-shirt_name" }, [
+                        _vm._v(_vm._s(product.design.name))
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "t-shirt_inner_price px-1 my-2" }, [
+                    product.design.discount !== 0
+                      ? _c("span", { staticClass: "t-shirt_price_nosale" }, [
+                          _vm._v(
+                            _vm._s(
+                              product.design.designer_price[0]
+                                ? product.design.designer_price[0].total
+                                : 0
+                            )
+                          )
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "t-shirt_price_sale" }, [
+                      _vm._v(
+                        _vm._s(
+                          _vm.priceDis(
+                            product.design.designer_price[0]
+                              ? product.design.designer_price[0].total
+                              : 0,
+                            product.design.discount
+                          )
+                        )
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  false
+                    ? undefined
+                    : _vm._e()
+                ])
+              ]
+            )
+          }),
+          0
+        )
+      ]),
+      _vm._v(" "),
       _c("div", { staticClass: "most_sell_title text-center mb-4" }, [
         _c("h2", [_vm._v(_vm._s(_vm.$t("Designs")))])
       ]),
@@ -48120,13 +48594,13 @@ var render = function() {
                             _c(
                               "a",
                               {
-                                staticClass: "add-to-cart quickview_btn",
-                                attrs: { href: "#" },
-                                on: {
-                                  click: function($event) {
-                                    $event.preventDefault()
-                                    return _vm.addToCart(product)
-                                  }
+                                staticClass: "quickview_btn",
+                                attrs: {
+                                  href: "#",
+                                  "data-id": "hidden-denim-shirt",
+                                  title: "Product Details",
+                                  "data-toggle": "modal",
+                                  "data-target": "#d" + product.design.id
                                 }
                               },
                               [
@@ -48281,7 +48755,7 @@ var render = function() {
                         )
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "col-md-6" }, [
+                      _c("div", { class: "col-md-6 " + _vm.$t("text-left") }, [
                         _c("h3", { staticClass: "productName" }, [
                           _vm._v(_vm._s(product.design.name))
                         ]),
@@ -50008,8 +50482,11 @@ var render = function() {
         },
         _vm._l(_vm.slidesshow, function(slideshow) {
           return _c("div", { key: slideshow.id }, [
-            _c("a", { attrs: { href: slideshow.url, target: "_blank" } }, [
-              _c("img", { attrs: { "data-u": "image", src: slideshow.img } })
+            _c("a", { attrs: { href: slideshow.url } }, [
+              _c("img", {
+                staticStyle: { "max-width": "100%", "max-height": "100%" },
+                attrs: { "data-u": "image", src: slideshow.img }
+              })
             ])
           ])
         }),
@@ -51778,7 +52255,7 @@ var render = function() {
         _c("div", { staticClass: "row" }, [
           _c(
             "div",
-            { staticClass: "col-lg-5 mb-3 text-left" },
+            { class: "col-lg-5 mb-3 " + _vm.$t("text-left") },
             [
               _c(
                 "router-link",
@@ -52188,7 +52665,7 @@ var render = function() {
                               }
                             }),
                             _vm._v(" "),
-                            this.$root.user.is_trader == 1
+                            this.$root.user.is_designer == 1
                               ? _c("input", {
                                   directives: [
                                     {
@@ -52216,7 +52693,7 @@ var render = function() {
                                 })
                               : _vm._e(),
                             _vm._v(" "),
-                            this.$root.user.is_trader == 1
+                            this.$root.user.is_designer == 1
                               ? _c("input", {
                                   directives: [
                                     {
@@ -52244,7 +52721,7 @@ var render = function() {
                                 })
                               : _vm._e(),
                             _vm._v(" "),
-                            this.$root.user.is_trader == 1
+                            this.$root.user.is_designer == 1
                               ? _c("input", {
                                   directives: [
                                     {
@@ -67563,6 +68040,9 @@ var routes = [{
   path: "/profile",
   component: __webpack_require__(/*! ./components/profileComponent.vue */ "./resources/js/components/profileComponent.vue")["default"]
 }, {
+  path: "/myOrder",
+  component: __webpack_require__(/*! ./components/MyOrderComponent.vue */ "./resources/js/components/MyOrderComponent.vue")["default"]
+}, {
   path: "/dashboard",
   component: __webpack_require__(/*! ./components/dashboard/DashboardComponent.vue */ "./resources/js/components/dashboard/DashboardComponent.vue")["default"]
 }, {
@@ -67605,6 +68085,7 @@ Vue.component("product-designer", __webpack_require__(/*! ./components/ProductDe
 Vue.component("cart-component", __webpack_require__(/*! ./components/CartComponent.vue */ "./resources/js/components/CartComponent.vue")["default"]);
 Vue.component("checkout-component", __webpack_require__(/*! ./components/CheckoutComponent.vue */ "./resources/js/components/CheckoutComponent.vue")["default"]);
 Vue.component("profile-component", __webpack_require__(/*! ./components/profileComponent.vue */ "./resources/js/components/profileComponent.vue")["default"]);
+Vue.component("myorder-component", __webpack_require__(/*! ./components/MyOrderComponent.vue */ "./resources/js/components/MyOrderComponent.vue")["default"]);
 Vue.component("dashboard-component", __webpack_require__(/*! ./components/dashboard/DashboardComponent.vue */ "./resources/js/components/dashboard/DashboardComponent.vue")["default"]);
 Vue.component("dashboard-content", __webpack_require__(/*! ./components/dashboard/DashboardContent.vue */ "./resources/js/components/dashboard/DashboardContent.vue")["default"]);
 Vue.component("dashboard-designs", __webpack_require__(/*! ./components/dashboard/DesignsComponent.vue */ "./resources/js/components/dashboard/DesignsComponent.vue")["default"]);
@@ -68227,6 +68708,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LoginComponent_vue_vue_type_template_id_4d2414bf___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LoginComponent_vue_vue_type_template_id_4d2414bf___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/MyOrderComponent.vue":
+/*!******************************************************!*\
+  !*** ./resources/js/components/MyOrderComponent.vue ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _MyOrderComponent_vue_vue_type_template_id_65d39706___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MyOrderComponent.vue?vue&type=template&id=65d39706& */ "./resources/js/components/MyOrderComponent.vue?vue&type=template&id=65d39706&");
+/* harmony import */ var _MyOrderComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MyOrderComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/MyOrderComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _MyOrderComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _MyOrderComponent_vue_vue_type_template_id_65d39706___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _MyOrderComponent_vue_vue_type_template_id_65d39706___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/MyOrderComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/MyOrderComponent.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/MyOrderComponent.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MyOrderComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./MyOrderComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/MyOrderComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MyOrderComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/MyOrderComponent.vue?vue&type=template&id=65d39706&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/MyOrderComponent.vue?vue&type=template&id=65d39706& ***!
+  \*************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MyOrderComponent_vue_vue_type_template_id_65d39706___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./MyOrderComponent.vue?vue&type=template&id=65d39706& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/MyOrderComponent.vue?vue&type=template&id=65d39706&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MyOrderComponent_vue_vue_type_template_id_65d39706___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MyOrderComponent_vue_vue_type_template_id_65d39706___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -69466,6 +70016,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;function _type
 
   return {
     AR: {
+      'text-left': 'text-right',
+      my_order: 'طلباتي',
       Home: "الصفحة الرئسية",
       Login: "الدخول",
       Logout: "الخروج",
@@ -69553,6 +70105,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;function _type
       Accepted: "مقبولة"
     },
     EN: {
+      'text-left': 'text-left',
+      my_order: 'My Orders',
       print_price: 'Print Price',
       search: "search",
       // Cart

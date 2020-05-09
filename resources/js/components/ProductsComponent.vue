@@ -4,259 +4,85 @@
             <h2>{{ $t('MostSells')}}</h2>
         </div>
         <!-- Most Sells -->
-<!--        <div class="most_sell_content">-->
-<!--            <div class="row">-->
-<!--                <div-->
-<!--                    v-for="product in mostSells"-->
-<!--                    v-bind:key="product.design.id"-->
-<!--                    class="col-xl-3 col-lg-4 col-md-6">-->
-<!--                    <div class="t-shirt_data mb-2">-->
-<!--                        <span>ID : {{product.random_name}}</span>-->
-<!--                        <div class="t-shirt_image_div position-relative">-->
-<!--                            <product-designer :design="product" :type="'view-most'"></product-designer>-->
-<!--                            <ul-->
-<!--                                class="cart_ul_btn list-icon list-unstyled product_btn_div d-flex align-items-center text-center mb-0">-->
-<!--                                <li>-->
-<!--                                    <a-->
-<!--                                        href="#"-->
-<!--                                        data-id="hidden-denim-shirt"-->
-<!--                                        class="quickview_btn"-->
-<!--                                        title="Product Details"-->
-<!--                                        data-toggle="modal"-->
-<!--                                        :data-target="'#d'+product.design.id">-->
-<!--                                        <img src="/images/eye.png" alt=""/>-->
-<!--                                    </a>-->
-<!--                                </li>-->
-<!--                                <li>-->
-<!--                                    <a href="#" @click.prevent="addToCart(product)" class="add-to-cart quickview_btn">-->
-<!--                                        <img-->
-<!--                                            src="images/add-cart.png"-->
-<!--                                            alt=""-->
-<!--                                        />-->
-<!--                                    </a>-->
-<!--                                </li>-->
-<!--                            </ul>-->
-<!--                        </div>-->
-<!--                        <div-->
-<!--                            class="t-shirt_inner_data d-flex justify-content-between align-items-center px-1 my-2">-->
-<!--                            <span class="t-shirt_name">{{ product.name }}</span>-->
-<!--                            &lt;!&ndash; <img-->
-<!--                                @click="product.favourite = !product.favourite"-->
-<!--                                v-if="product.favourite"-->
-<!--                                src="/images/like.png"-->
-<!--                                alt=""-->
-<!--                                />-->
-<!--                                <img-->
-<!--                                @click="product.favourite = !product.favourite"-->
-<!--                                v-else-->
-<!--                                src="/images/like_solid.png"-->
-<!--                                alt=""-->
-<!--                                /> &ndash;&gt;-->
-<!--                        </div>-->
-<!--                        <div class="t-shirt_inner_price px-1 my-2">-->
-<!--                            <span-->
-<!--                                v-if="product.discount !== 0"-->
-<!--                                class="t-shirt_price_nosale d-none"-->
-<!--                            >{{ product.price | currency }}</span>-->
-<!--                            <span-->
-<!--                                v-if="product.discount === 0"-->
-<!--                                class="t-shirt_price_sale mx-3"-->
-<!--                            >{{priceDefault(product.price,product.discount) | currency }}</span-->
-<!--                            >-->
-<!--                            <span v-else class="t-shirt_price_sale mx-3"-->
-<!--                            >{{ priceDefault(product.price,product.discount) | currency }}</span-->
-<!--                            >-->
-<!--                        </div>-->
-<!--                        <div v-if="false" class="t-shirt_inner_review px-1 my-2">-->
-<!--                            <span-->
-<!--                                v-for="n in 5"-->
-<!--                                :key="n"-->
-<!--                                class="t-shirt_review_stars">-->
-<!--                            <i-->
-<!--                                v-if="product.review === true"-->
-<!--                                class="fas fa-star"-->
-<!--                            ></i>-->
-<!--                            <i v-else class="far fa-star"></i>-->
-<!--                            </span>-->
-<!--                            <span-->
-<!--                                v-if="product.review === false"-->
-<!--                                class="t-shirt_no_review_text my-5">No rating</span>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div-->
-<!--            v-for="protduct in mostSells"-->
-<!--            v-bind:key="product.design.id"-->
-<!--            class="modal fade"-->
-<!--            :id="'d'+product.design.id"-->
-<!--            tabindex="-1"-->
-<!--            role="dialog"-->
-<!--            aria-labelledby="myExtraLargeModalLabel"-->
-<!--            aria-hidden="true">-->
-<!--            <div-->
-<!--                class="modal-dialog modal-dialog-centered modal-lg" role="document">-->
-<!--                <div class="modal-content bg-white">-->
-<!--                    <button-->
-<!--                        type="button"-->
-<!--                        class="close"-->
-<!--                        data-dismiss="modal"-->
-<!--                        aria-label="Close">-->
-<!--                        <span aria-hidden="true">&times;</span>-->
-<!--                    </button>-->
-<!--                    <div class="content">-->
-<!--                        <div class="row p-3">-->
-<!--                            <div class="col-md-6 h-100">-->
-<!--                                <div-->
-<!--                                    class="product-img d-flex justify-content-center">-->
-<!--                                    <product-designer v-bind:design="product"  :type="'popup'"-->
-<!--                                                      class="col-12"></product-designer>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="col-md-6">-->
-<!--                                <h3 class="productName">{{product.name}}</h3>-->
-<!--                                <h5>ID: <span>{{product.design.id}}</span></h5>-->
-<!--                                <span-->
-<!--                                    class="productPrice">{{priceDefault(product.price,product.discount)|currency}}</span>-->
-<!--                                <p class="ProductDetails pt-3">-->
-<!--                                    {{product.des}}-->
-<!--                                </p>-->
-<!--                                <div class="form-action">-->
-<!--                                    <form method="post" class="form-group" @submit.prevent="addToCart(product)">-->
-<!--                                        <div class="mb-2">-->
-<!--                                            <label-->
-<!--                                                class="my-1 mr-2 font-weight-bold text-capitalize"-->
-<!--                                            >{{$t('print_options')}}* : </label-->
-<!--                                            >-->
-<!--                                            <div class="d-inline-block mx-2">-->
-<!--                                                <input class="printOpt" type="radio" :id="'front'+product.design.id"-->
-<!--                                                       value="front"-->
-<!--                                                       v-model="printOptions">-->
-<!--                                                <label class="printOpt"-->
-<!--                                                       :for="'front'+product.design.id">{{$t('Front')}}</label>-->
-<!--                                            </div>-->
-<!--                                            <div class="d-inline-block mx-2">-->
-<!--                                                <input class="printOpt" type="radio" :id="'back'+product.design.id"-->
-<!--                                                       value="back"-->
-<!--                                                       v-model="printOptions">-->
-<!--                                                <label class="printOpt" :for="'back'+product.design.id">{{$t('Back')}}</label>-->
-<!--                                            </div>-->
-<!--                                            <div class="d-inline-block mx-2">-->
-<!--                                                <input class="printOpt" type="radio" :id="'front_back'+product.design.id"-->
-<!--                                                       value="front_back"-->
-<!--                                                       v-model="printOptions">-->
-<!--                                                <label class="printOpt" :for="'front_back'+product.design.id">{{$t('Front_and_Back')}}</label>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                        <div class="mb-2">-->
-<!--                                            <div v-if="printOptions.includes('front')">-->
-<!--                                                <label-->
-<!--                                                    class="my-1 mr-2 font-weight-bold text-capitalize"-->
-<!--                                                    :for="'frontSizeInputFiled'+product.design.id"-->
-<!--                                                >{{$t('front_size')}}*</label-->
-<!--                                                >-->
-<!--                                                <select-->
-<!--                                                    @click.prevent="frontprintPrice(frontprint)"-->
-<!--                                                    v-model="frontprint"-->
-<!--                                                    class="custom-select my-1 mr-sm-2"-->
-<!--                                                    :id="'frontSizeInputFiled'+product.design.id"-->
-<!--                                                >-->
-<!--                                                    <option :value="null" selected>- {{$t('Please_Select')}} -</option>-->
-<!--                                                    <option v-for="dsize in product.design.dsizes"-->
-
-<!--                                                            :value="dsize.id">-->
-<!--                                                        {{dsize.length}}<span> X </span>{{dsize.width}}-->
-<!--                                                    </option>-->
-<!--                                                </select>-->
-<!--                                            </div>-->
-<!--                                            <div v-if="printOptions.includes('back')">-->
-<!--                                                <label-->
-<!--                                                    class="my-1 mr-2 font-weight-bold text-capitalize"-->
-<!--                                                    :for="'backSizeInputFiled'+product.design.id"-->
-<!--                                                >{{$t('back_size')}}*</label-->
-<!--                                                >-->
-<!--                                                <select-->
-<!--                                                    @click.prevent="backprintPrice(backprint)"-->
-<!--                                                    v-model="backprint"-->
-<!--                                                    class="custom-select my-1 mr-sm-2"-->
-<!--                                                    :id="'backSizeInputFiled'+product.design.id"-->
-<!--                                                >-->
-<!--                                                    <option :value="null" selected>- {{$t('Please_Select')}} -</option>-->
-<!--                                                    <option v-for="dsize in product.design.dsizes"-->
-<!--                                                            :value="dsize.id">-->
-<!--                                                        {{dsize.length}}<span> X </span>{{dsize.width}}-->
-<!--                                                    </option>-->
-<!--                                                </select>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                        <div class="mb-2">-->
-<!--                                            <label-->
-<!--                                                class="my-1 mr-2 font-weight-bold"-->
-<!--                                                :for="'colorInput'+product.design.id"-->
-<!--                                            >{{$t('TShirt_Color')}}*</label-->
-<!--                                            >-->
-<!--                                            <select-->
-<!--                                                v-model="tcolor"-->
-<!--                                                class="custom-select my-1 mr-sm-2"-->
-<!--                                                :id="'colorInput'+product.design.id">-->
-<!--                                                <option :value="null" selected>- {{$t('Please_Select')}} -</option>-->
-<!--                                                <option v-for="color in tcolors" :value="color.id">-->
-<!--                                                    {{color.name}}-->
-<!--                                                </option>-->
-<!--                                            </select>-->
-<!--                                        </div>-->
-<!--                                        <div class="mb-2">-->
-<!--                                            <label-->
-<!--                                                class="my-1 mr-2 font-weight-bold"-->
-<!--                                                :for="'sizeInput'+product.design.id"-->
-<!--                                            >{{$t('TShirt_Size')}}*</label-->
-<!--                                            >-->
-<!--                                            <select-->
-<!--                                                class="custom-select my-1 mr-sm-2"-->
-<!--                                                :id="'sizeInput'+product.design.id"-->
-<!--                                            >-->
-<!--                                                <option :value="null" selected>- {{$t('Please_Select')}} -</option>-->
-<!--                                                <option v-for="tsize in tsizes" :value="tsize.id">-->
-<!--                                                    {{tsize.name}}-->
-<!--                                                </option>-->
-<!--                                            </select>-->
-<!--                                        </div>-->
-<!--                                        <div class="form-row">-->
-<!--                                            <div class="col-3">-->
-<!--                                                <input-->
-<!--                                                    v-model="count"-->
-<!--                                                    type="number"-->
-<!--                                                    value="1"-->
-<!--                                                    name="mount"-->
-<!--                                                    min="1"-->
-<!--                                                    style="background-color:#ffffff; border-radius: 5px"-->
-<!--                                                />-->
-<!--                                            </div>-->
-<!--                                            <div class="col-6">-->
-<!--                                                <button-->
-<!--                                                    type="submit"-->
-<!--                                                    class="btn btn-primary my-1"-->
-<!--                                                    style="outline: none;"-->
-<!--                                                >-->
-<!--                                                    <i-->
-<!--                                                        class="fas fa-shopping-cart"-->
-<!--                                                    ></i>-->
-<!--                                                    {{$t('Add_to_cart')}}-->
-<!--                                                </button>-->
-<!--                                            </div>-->
-<!--                                            <h5 class="productPrice" style="margin-top:10px">{{$t('total')}} :-->
-<!--                                                <span class="productPrice">{{count*(tsizes_price+frontprintprice+backprintprice+priceDis(product.price,product.discount))|currency}}</span>-->
-<!--                                            </h5>-->
-<!--                                        </div>-->
-<!--                                    </form>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
+        <div class="most_sell_content">
+            <div class="row">
+                <div
+                    v-for="product in mostSells"
+                    v-bind:key="product.design.id"
+                    class="col-xl-3 col-lg-4 col-md-6"
+                >
+                    <div class="t-shirt_data mb-2">
+                        <span>ID : {{product.design.id}}</span>
+                        <div class="t-shirt_image_div position-relative">
+                            <product-designer v-bind:design="product.design" :type="'view'"></product-designer>
+                            <ul
+                                class="cart_ul_btn list-icon list-unstyled product_btn_div d-flex align-items-center text-center mb-0">
+                                <li>
+                                    <a
+                                        href="#"
+                                        data-id="hidden-denim-shirt"
+                                        class="quickview_btn"
+                                        title="Product Details"
+                                        data-toggle="modal"
+                                        :data-target="'#d'+product.design.id">
+                                        <img src="/images/eye.png" alt=""/>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a  href="#"
+                                        data-id="hidden-denim-shirt"
+                                        class="quickview_btn"
+                                        title="Product Details"
+                                        data-toggle="modal"
+                                        :data-target="'#d'+product.design.id">
+                                        <img
+                                            src="images/add-cart.png"
+                                            alt=""
+                                        />
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div
+                            class="t-shirt_inner_data d-flex justify-content-between align-items-center px-1 my-2"
+                        >
+                            <span class="t-shirt_name">{{ product.design.name }}</span>
+                            <!-- <img
+                                @click="product.favourite = !product.favourite"
+                                v-if="product.favourite"
+                                src="/images/like.png"
+                                alt=""
+                                />
+                                <img
+                                @click="product.favourite = !product.favourite"
+                                v-else
+                                src="/images/like_solid.png"
+                                alt=""
+                                /> -->
+                        </div>
+                        <div class="t-shirt_inner_price px-1 my-2">
+                            <span class="t-shirt_price_nosale" v-if="product.design.discount !== 0">{{ (product.design.designer_price[0]? product.design.designer_price[0].total : 0) }}</span>
+                            <span class="t-shirt_price_sale">{{ priceDis((product.design.designer_price[0]? product.design.designer_price[0].total : 0),product.design.discount)}}</span>
+                        </div>
+                        <div v-if="false" class="t-shirt_inner_review px-1 my-2">
+                            <span
+                                v-for="n in 5"
+                                :key="n"
+                                class="t-shirt_review_stars">
+                            <i
+                                v-if="product.review === true"
+                                class="fas fa-star"
+                            ></i>
+                            <i v-else class="far fa-star"></i>
+                            </span>
+                            <span
+                                v-if="product.review === false"
+                                class="t-shirt_no_review_text my-5">No rating</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="most_sell_title text-center mb-4">
             <h2>{{ $t('Designs')}}</h2>
         </div>
@@ -286,7 +112,12 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" @click.prevent="addToCart(product)" class="add-to-cart quickview_btn">
+                                    <a  href="#"
+                                        data-id="hidden-denim-shirt"
+                                        class="quickview_btn"
+                                        title="Product Details"
+                                        data-toggle="modal"
+                                        :data-target="'#d'+product.design.id">
                                         <img
                                             src="images/add-cart.png"
                                             alt=""
@@ -369,14 +200,12 @@
                     <div class="content">
                         <div class="row p-3">
                             <div class="col-md-6 h-100">
-                                <div
-                                    class="product-img d-flex justify-content-center"
-                                >
+                                <div class="product-img d-flex justify-content-center">
                                     <product-designer :design="product.design" v-bind:key="tcolor.name" :type="'popup'" v-bind:ccolor="tcolor"
                                                       class="col-12"></product-designer>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div :class="'col-md-6 '+ $t('text-left')">
                                 <h3 class="productName">{{product.design.name}}</h3>
                                 <h5>ID: <span>{{product.design.id}}</span></h5>
                                 <span
@@ -565,6 +394,7 @@
                 let _this = this;
                 axios.get('/api/v1/most-sells').then(function (response) {
                     _this.mostSells = response.data;
+                    console.log(_this.mostSells)
                 })
             },
             addToCart: function (product) {

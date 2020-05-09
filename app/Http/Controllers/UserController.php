@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Order;
 use App\User;
 use Auth;
 use Illuminate\Http\Request;
@@ -51,6 +52,11 @@ class UserController extends Controller
         return "Ok";
     }
 
+    public function myOrder($id = null){
+        $id = $id ?? auth()->id();
+        $orders = Order::where('user_id',$id)->get();
+        return $orders;
+    }
     public function getUsers()
     {
         $users = User::where('is_trader', false)->get();

@@ -33,7 +33,7 @@ Route::group(['prefix' => '/api'], function () {
     Route::get('/v1/dsizes', 'DesignController@designSizes');
     Route::get('/v1/design-bestSaller', 'DesignController@showBestSaller');
     Route::get('/v1/design/{id}', 'DesignController@showWithId');
-    Route::get('/v1/get-by-rand-id/{id}', 'DesignController@getByRandId');
+    Route::get('/v1/get-by-rand-id/{id?}', 'DesignController@getByRandId');
     //Design_Route in dashboard
     Route::get('/v1/designer-designs', 'DesignController@showByDesignerid');
     Route::get('/v1/designer-latest-designs', 'DesignController@latestDesignsByDesignerid');
@@ -75,6 +75,7 @@ Route::group(['prefix' => '/api'], function () {
 
     //User_Route
     Route::get('/v1/user', 'UserController@show');
+    Route::get('/v1/myOrder/{id?}', 'UserController@myOrder');
     Route::post('/v1/updateUser/{id}', 'UserController@update');
     Route::post('/v1/createUser', 'UserController@create');
 

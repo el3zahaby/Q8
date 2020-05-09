@@ -86,7 +86,7 @@
                                                 />
                                                 <input
                                                     style="color:blue"
-                                                    v-if="this.$root.user.is_trader==1"
+                                                    v-if="this.$root.user.is_designer==1"
                                                     type="text"
                                                     name="bank-name"
                                                     v-model="BankName"
@@ -94,7 +94,7 @@
                                                 />
                                                 <input
                                                     style="color:blue"
-                                                    v-if="this.$root.user.is_trader==1"
+                                                    v-if="this.$root.user.is_designer==1"
                                                     type="text"
                                                     name="bank-IBAN"
                                                     v-model="BankIBAN"
@@ -102,7 +102,7 @@
                                                 />
                                                 <input
                                                     style="color:blue"
-                                                    v-if="this.$root.user.is_trader==1"
+                                                    v-if="this.$root.user.is_designer==1"
                                                     type="text"
                                                     name="card-name"
                                                     v-model="name_on_BankCard"
@@ -167,6 +167,7 @@
     export default {
         mixins: [mapMixin],
         mounted() {
+            // console.log(Object.keys(this.$root.user).length)
         },
         data() {
             return {

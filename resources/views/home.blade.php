@@ -5,6 +5,11 @@
         let _LOGO = "{{ setting('app_logo') }}"
         let _about_us_desc = "{{ setting('app_desc') }}"
     </script>
+    <style>
+        option {
+            direction: ltr !important;
+        }
+    </style>
 @endsection
 
 @section('content')

@@ -45,10 +45,10 @@ class DesignController extends Controller
         return Design::where('user_id', $designer_id)->orderBy('created_at', 'desc')->take(4)->get();
     }
 
-    public function getByRandId($id)
+    public function getByRandId($id = null)
     {
-        if (empty($id)) return Design::get();
-        return Design::where('id','LIKE', '%'.$id.'%')->get();
+        if (empty($id)) return DesignsCollections::get();
+        return DesignsCollections::where('design_id','LIKE', '%'.$id.'%')->get();
     }
 
     public function creat(Request $request)

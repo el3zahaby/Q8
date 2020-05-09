@@ -11,6 +11,7 @@ class Order extends Model
     protected $guarded = [];
 
     protected $appends = ['items'];
+    protected $with = ['status'];
     public function status()
     {
         return $this->belongsTo(OrderStatus::class,'orderstatus_id')->withTrashed();

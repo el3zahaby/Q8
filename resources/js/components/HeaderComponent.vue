@@ -42,6 +42,9 @@
                                     <router-link to="/profile">{{$t('Profile')}}</router-link>
                                 </div>
                                 <div class="account_div_inner">
+                                    <router-link to="/myOrder">{{$t('my_order')}}</router-link>
+                                </div>
+                                <div class="account_div_inner">
                                     <a href="#" @click.prevent="logout()">
                                         {{$t('Logout')}}
                                     </a>
@@ -93,7 +96,8 @@
                             type="search"
                             class="form-control text-uppercase"
                             :placeholder="$t('search')"
-                            @keyup.enter="search"
+                            v-model="qsearch"
+                            @keypress="search"
                         />
                         <div class="input-group-append">
                             <span class="input-group-text" @click="search"
@@ -124,6 +128,7 @@
                 search_placeholder: "Search now",
                 langs: ["AR", "EN"],
                 selectedLang: this.$i18n.locale,
+                qsearch: null,
             };
         },
         methods: {
@@ -131,6 +136,7 @@
                 let _this = this;
                 axios.post('/api/v1/logout').then(function (response) {
                     _this.$root.user = null;
+                    _this.$root.login = false;
                 });
             },
             setLang: function ()
@@ -143,7 +149,7 @@
                 });
             },
             search: function () {
-                let query = $('#search-component').val();
+                let query = this.qsearch
                 let _this = this;
                 axios.get('/api/v1/get-by-rand-id/' + query).then(function (response) {
                     let x = _this.$root.$children.filter(child => {

@@ -121,7 +121,7 @@ class StatisticController extends Controller
         $total = 0;
 
         foreach ($cartItems as $item) {
-            dd($item);
+//            dd($item);
             foreach ($item as $cartItem){
                 $total += ($cartItem->price)*$cartItem->qty;
             }
@@ -184,18 +184,18 @@ class StatisticController extends Controller
     public function getMostSells()
     {
         $cartItemsCollections = self::getCartSellingGeneral();
-        $designs = Design::where('accepting', 1)->get();
+        $designs = DesignsCollections::get();
         foreach ($designs as $design) {
             $design['counter'] += $this->getDesignSelling($cartItemsCollections, $design);
         }
         return $designs->sortByDesc('counter')->slice(0,4)->all();
     }
 
-    private function getDesignSelling($cartItemsCollections, Design $design)
+    private function getDesignSelling($cartItemsCollections, DesignsCollections $designsCollections)
     {
         $counter = 0;
         foreach ($cartItemsCollections as $cartItemsCollection) {
-            $designInCollection = $cartItemsCollection->where('id', $design->id)->all();
+            $designInCollection = $cartItemsCollection->where('id', $designsCollections->design->id)->all();
             foreach ($designInCollection as $item) {
                 $counter += $item->qty;
             }

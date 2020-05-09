@@ -67,6 +67,10 @@ const routes = [
         component: require("./components/profileComponent.vue").default
     },
     {
+        path: "/myOrder",
+        component: require("./components/MyOrderComponent.vue").default
+    },
+    {
         path: "/dashboard",
         component: require("./components/dashboard/DashboardComponent.vue")
             .default
@@ -158,6 +162,10 @@ Vue.component(
 Vue.component(
     "profile-component",
     require("./components/profileComponent.vue").default
+);
+Vue.component(
+    "myorder-component",
+    require("./components/MyOrderComponent.vue").default
 );
 Vue.component(
     "dashboard-component",

@@ -204,7 +204,7 @@
                     is_trader: 1,
                 }).then((response => {
                     _this.updateUser();
-                    _this.$router.push({path: '/login'});
+                    _this.$router.push({path: '/login',query: { test: 'test' }});
                 })).catch(function (error) {
                     let response = error.response;
                     _this.error = response ? error.response.data.message : error;

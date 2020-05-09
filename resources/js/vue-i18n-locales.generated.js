@@ -8,6 +8,10 @@
     'use strict';
     return {
         AR: {
+            'text-left':'text-right',
+            my_order: 'طلباتي',
+
+
             Home: "الصفحة الرئسية",
             Login: "الدخول",
             Logout: "الخروج",
@@ -96,6 +100,8 @@
             Accepted:"مقبولة"
         },
         EN: {
+            'text-left':'text-left',
+            my_order: 'My Orders',
             print_price: 'Print Price',
 
             search: "search",

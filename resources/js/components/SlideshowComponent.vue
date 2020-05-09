@@ -8,8 +8,8 @@
             style="cursor:default;position:relative;top:0px;left:0px;width:980px;height:380px;overflow:hidden;"
         >
             <div v-for="slideshow in slidesshow" :key="slideshow.id">
-                <a :href="slideshow.url" target="_blank">
-                    <img data-u="image" :src="slideshow.img"/>
+                <a :href="slideshow.url">
+                    <img data-u="image" style="max-width: 100%;max-height: 100%" :src="slideshow.img"/>
                 </a>
             </div>
         </div>
