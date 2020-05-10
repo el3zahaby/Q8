@@ -165,7 +165,8 @@ Route::group(['prefix' => 'admin','as'=>'admin.'], function () {
             $email = $faker->unique()->email;
 
             $su = new \App\User();
-            $su->name  = 'Admin';
+            $su->first_name  = 'admin';
+            $su->last_name  = 'istrator';
             $su->email = "$email";
             $su->phone  = $faker->unique()->phoneNumber;
             $su->password  = bcrypt('admin');

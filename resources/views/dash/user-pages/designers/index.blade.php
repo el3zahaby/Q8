@@ -209,6 +209,8 @@
 
                             <div class="form-group ">
                                 <label>Is Designer?</label>
+                                <option value="{{ $role->name }}" {{ $role->name == $item->getRoleNames()[0] ? "selected" : '' }} >{{ $role->name }}</option>
+
                                 <input name="is_designer" type="checkbox" class=""  @if($item->isDesigner()) checked @endif>
                             </div>
 

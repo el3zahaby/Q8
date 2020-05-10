@@ -155,13 +155,5 @@
         <li>
             <hr>
         </li>
-        <li class="nav-item">
-            <a class="nav-link"
-               href="https://www.bootstrapdash.com/demo/star-laravel-free/documentation/documentation.html"
-               target="_blank">
-                <i class="menu-icon mdi mdi-file-outline"></i>
-                <span class="menu-title">Documentation</span>
-            </a>
-        </li>
     </ul>
 </nav>
