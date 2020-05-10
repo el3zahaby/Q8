@@ -86,6 +86,10 @@ const routes = [
             .default
     },
     {
+        path: "/success",
+        component: require("./components/MyOrderComponent.vue").default
+    },
+    {
         path: "/:slug",
         component: require("./components/pages.vue").default
     },
@@ -210,7 +214,7 @@ Vue.filter('currency', function (price) {
 const app = new Vue({
     el: "#app",
     data: {
-        login: true,
+        login: false,
         user: [],
         models: [],
         cart: {
@@ -224,6 +228,16 @@ const app = new Vue({
 
     },
     methods: {
+        logout: function () {
+            let _this = this;
+            axios.post('/api/v1/logout').then(function (response) {
+                _this.login = false;
+                if (_this.login) {
+                    _this.user = [];
+                }
+
+            });
+        },
         removeFromCart: function (id) {
             let _this = this; //
             axios.get(`/api/v1/delete-cart/${id}`).then(function (response) {
@@ -290,22 +304,33 @@ const app = new Vue({
             });
 
             return _this.allDesigns;
-            console.log("Update Designs",_this.allDesigns);
+//            console.log("Update Designs",_this.allDesigns);
         },
     },
     watch: {
+        $route (to, from){
+            $('.alert-pay').hide("slow", function(){ $(this).remove(); })
+        },
         login: function (val, oldVal) {
             if (oldVal) {
                 let _this = this;
                 axios.post("/logout").then(function (response) {
-                    _this.user = null;
+                    _this.user = null;100
                 });
                 console.log("User Logout");
+            }else {
+                this.login = true;
             }
             console.log("Login Changed");
         },
         user: function (val, oldVal) {
-            this.login = !!val;
+            console.log(val)
+            if(val !== null ){
+                if(Object.keys(val).length)
+                    this.login = true;
+            }else {
+                this.login = false;
+            }
             console.log("User Changed");
         }
     },

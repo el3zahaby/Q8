@@ -33,8 +33,14 @@ class UserController extends Controller
         $user->IBAN_Bank = $request->BankIBAN;
         $user->name_on_BankCard = $request->name_on_BankCard;
         $user->save();
+        if (!isset($request->BankName) && empty($request->BankName)) {
+            $user->assignRole('user');
+        }
 
-        Mail::to($user->email)->send(new ConfirmMail);
+        $user->sendEmailVerificationNotification();
+
+//        Mail::to($user->email)->send(new ConfirmMail);
+//        $this->notify(new \App\Notifications\CustomVerifyEmail);
 
         return "Ok";
 

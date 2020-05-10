@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Design;
+use App\DesignsCollections;
 use App\Order;
 use Exception;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -14,7 +15,7 @@ class StatisticController extends Controller
         $designer_id = auth()->id();
         $designs_num = Design::where('user_id', $designer_id)->where('accepting', 1)->count();
         $sells = $this->getCartSellingForDesigner($designer_id);
-        $totalData = self::calcTotalOfCartItems($sells);
+        $totalData = self::calcDesignerTotalOfCartItems($sells);
         $sales_num = $totalData['count'];
         $sales_price = $totalData['total'];
 

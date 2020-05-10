@@ -21,7 +21,7 @@ return [
                 'rules' => 'required', // validation rule of laravel
                 'label' => 'App Logo', // you know what label it is
                 'class' => 'logo', // any class for input
-//                'value' => asset('/images/w_logo.png') // default value if you want
+                'value' => '/images/w_logo.png' // default value if you want
 //                'value' => ('/uploads/logo/default-logo.png') // default value if you want
             ], [
                 'type' => 'text', // input fields type
@@ -30,7 +30,7 @@ return [
                 'rules' => 'required', // validation rule of laravel
                 'label' => 'App Description', // you know what label it is
                 'class' => 'form-control', // any class for input
-                'value' => 'The Laravel web applications for educations made by @egy.js ' // default value if you want
+                'value' => 'The Laravel web applications for Q8 made by @egy.js ' // default value if you want
             ], [
                 'type' => 'text', // input fields type
                 'data' => 'string', // data type, string, int, boolean

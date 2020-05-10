@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div >
         <div class="login-register-area" style="padding: 130px 0;">
             <div class="container">
                 <div class="row">
@@ -16,7 +16,7 @@
                             </div>
                             <div class="tab-content">
                                 <div class="tab-pane active">
-                                    <table v-if="Object.keys(order).length" class="table table-striped table-bordered ">
+                                    <table v-if="Object.keys(order).length" class="table table-striped table-bordered table-responsive">
                                         <thead>
                                         <th>Id</th>
                                         <th>orders</th>
@@ -82,7 +82,8 @@
                                         </tr>
                                         </tbody>
                                     </table>
-                                    <div class="alert alert-danger" v-else ><h3 >No Orders Yet</h3></div>
+                                    <div class="alert alert-danger" v-else-if="this.noOrderYet === true" ><h3 >No Orders Yet</h3></div>
+                                    <div class="alert alert-danger" v-else><h3 ><i class="fa fa-spinner fa-spin"></i></h3></div>
                                 </div>
                             </div>
                         </div>
@@ -104,6 +105,7 @@
         data() {
             return {
                 order: {},
+                noOrderYet:false
             };
         },
         props: [],
@@ -115,6 +117,9 @@
                     .then(res => res.json())
                     .then(res => {
                         _this.order = res;
+                        if (Object.keys(_this.order).length == 0){
+                         _this.noOrderYet = true;
+                        }
                         console.log(res)
                     })
                     .catch(err => console.log(err));

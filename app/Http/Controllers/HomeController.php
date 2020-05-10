@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Color;
 use App\DesignsCollections;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
@@ -30,6 +33,7 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
 
     public function home(){
         $products =  DesignsCollections::inRandomOrder()->paginate(8);

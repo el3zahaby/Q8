@@ -125,6 +125,7 @@ Route::group(['prefix' => 'admin','as'=>'admin.'], function () {
         Route::group(['prefix' => 'users','as'=>'users.'], function () {
             Route::get('designers', 'Admin\UserController@designers')->name('designers');
             Route::get('admins', 'Admin\UserController@admins')->name('admins');
+            Route::get('designersWait', 'Admin\UserController@designersWait')->name('designersWait');
         });
         Route::resource('users', 'Admin\UserController');
 
@@ -187,6 +188,9 @@ Route::get('/dashboard{any}', function () {
 Route::get('logout',  'Auth\LoginController@logout');
 Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@home')->middleware(['trackV']);
+Route::get('success', 'OrderController@successPay')->name('pay.success');
 
 Route::get('/{any}', 'HomeController@index')->middleware(['trackV'])->where('any', '.*')->name('home');
+
+Auth::routes(['verify' => true]);
+

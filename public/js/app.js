@@ -2092,11 +2092,15 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/api/v1/add-to-order', {
         clientInfo: _this.clientInfo
       }).then(function (response) {
-        _this.$router.push({
-          path: '/'
-        });
+        var res = response.data;
 
-        _this.$root.updateCart();
+        if (res.status === "success") {
+          window.location.href = res.paymentURL;
+        } else {
+          alert('error in pay!');
+        } // _this.$router.push({path: '/'});
+        // _this.$root.updateCart();
+
       });
     },
     discount: function discount() {
@@ -2253,8 +2257,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2269,14 +2271,6 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    logout: function logout() {
-      var _this = this;
-
-      axios.post('/api/v1/logout').then(function (response) {
-        _this.$root.user = null;
-        _this.$root.login = false;
-      });
-    },
     setLang: function setLang() {
       this.$i18n.locale = this.selectedLang;
       js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.set('locale', this.selectedLang, {
@@ -2546,6 +2540,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {},
   created: function created() {
@@ -2553,7 +2548,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      order: {}
+      order: {},
+      noOrderYet: false
     };
   },
   props: [],
@@ -2566,6 +2562,11 @@ __webpack_require__.r(__webpack_exports__);
         return res.json();
       }).then(function (res) {
         _this.order = res;
+
+        if (Object.keys(_this.order).length == 0) {
+          _this.noOrderYet = true;
+        }
+
         console.log(res);
       })["catch"](function (err) {
         return console.log(err);
@@ -47070,8 +47071,9 @@ var render = function() {
                       ])
                     : _vm._e(),
                   _vm._v(" "),
-                  this.$root.login
+                  this.$root.login !== false
                     ? _c("div", { staticClass: "account_div" }, [
+                        this.$root.user !== null &&
                         this.$root.user.is_designer === true
                           ? _c("div", { staticClass: "account_div_inner" }, [
                               _c(
@@ -47115,7 +47117,7 @@ var render = function() {
                               on: {
                                 click: function($event) {
                                   $event.preventDefault()
-                                  return _vm.logout()
+                                  return _vm.$root.logout()
                                 }
                               }
                             },
@@ -47555,7 +47557,8 @@ var render = function() {
                       ? _c(
                           "table",
                           {
-                            staticClass: "table table-striped table-bordered "
+                            staticClass:
+                              "table table-striped table-bordered table-responsive"
                           },
                           [
                             _vm._m(0),
@@ -47792,8 +47795,12 @@ var render = function() {
                             )
                           ]
                         )
-                      : _c("div", { staticClass: "alert alert-danger" }, [
+                      : this.noOrderYet === true
+                      ? _c("div", { staticClass: "alert alert-danger" }, [
                           _c("h3", [_vm._v("No Orders Yet")])
+                        ])
+                      : _c("div", { staticClass: "alert alert-danger" }, [
+                          _vm._m(2)
                         ])
                   ])
                 ])
@@ -47839,6 +47846,12 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("total price")])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h3", [_c("i", { staticClass: "fa fa-spinner fa-spin" })])
   }
 ]
 render._withStripped = true
@@ -50458,6 +50471,7 @@ var render = function() {
         top: "0",
         left: "0",
         width: "980px",
+        "max-width": "100%",
         height: "380px",
         overflow: "hidden",
         visibility: "hidden",
@@ -50475,6 +50489,7 @@ var render = function() {
             top: "0px",
             left: "0px",
             width: "980px",
+            "max-width": "100%",
             height: "380px",
             overflow: "hidden"
           },
@@ -51508,7 +51523,9 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "form-group" }, [
-                        _c("p", [_vm._v("Choose Sizes :")]),
+                        _c("p", [
+                          _vm._v(_vm._s(_vm.$t("choose_sizes")) + " :")
+                        ]),
                         _vm._v(" "),
                         _c("hr"),
                         _vm._v(" "),
@@ -51516,7 +51533,29 @@ var render = function() {
                           "div",
                           { staticClass: "container" },
                           [
-                            _vm._m(2),
+                            _c("div", { staticClass: "row" }, [
+                              _c("div", { staticClass: "col-2" }, [
+                                _vm._v(_vm._s(_vm.$t("check")) + " :")
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-3" }, [
+                                _vm._v(_vm._s(_vm.$t("size")) + " :")
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-2" }, [
+                                _vm._v(_vm._s(_vm.$t("print_price")) + " :")
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-3" }, [
+                                _vm._v(_vm._s(_vm.$t("price")) + " :")
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-2 text-center" }, [
+                                _vm._v(_vm._s(_vm.$t("total")) + " :")
+                              ]),
+                              _vm._v(" "),
+                              _vm._m(2)
+                            ]),
                             _vm._v(" "),
                             _vm._l(_vm.allSizes, function(size) {
                               return _c(
@@ -51740,19 +51779,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-2" }, [_vm._v("check :")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-3" }, [_vm._v("size :")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-2" }, [_vm._v("print price :")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-3" }, [_vm._v("price :")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-2 text-center" }, [_vm._v("total :")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-12" }, [_c("hr")])
-    ])
+    return _c("div", { staticClass: "col-12" }, [_c("hr")])
   },
   function() {
     var _vm = this
@@ -68052,6 +68079,9 @@ var routes = [{
   path: "/dashboard/profile",
   component: __webpack_require__(/*! ./components/dashboard/ProfileComponent.vue */ "./resources/js/components/dashboard/ProfileComponent.vue")["default"]
 }, {
+  path: "/success",
+  component: __webpack_require__(/*! ./components/MyOrderComponent.vue */ "./resources/js/components/MyOrderComponent.vue")["default"]
+}, {
   path: "/:slug",
   component: __webpack_require__(/*! ./components/pages.vue */ "./resources/js/components/pages.vue")["default"]
 }, {
@@ -68109,7 +68139,7 @@ Vue.filter('currency', function (price) {
 var app = new Vue({
   el: "#app",
   data: {
-    login: true,
+    login: false,
     user: [],
     models: [],
     cart: {
@@ -68122,6 +68152,17 @@ var app = new Vue({
     default_frontprint: null
   },
   methods: {
+    logout: function logout() {
+      var _this = this;
+
+      axios.post('/api/v1/logout').then(function (response) {
+        _this.login = false;
+
+        if (_this.login) {
+          _this.user = [];
+        }
+      });
+    },
     removeFromCart: function removeFromCart(id) {
       var _this = this; //
 
@@ -68189,25 +68230,39 @@ var app = new Vue({
       axios.get("/api/v1/designer-designs").then(function (response) {
         _this.allDesigns = response.data;
       });
-      return _this.allDesigns;
-      console.log("Update Designs", _this.allDesigns);
+      return _this.allDesigns; //            console.log("Update Designs",_this.allDesigns);
     }
   },
   watch: {
+    $route: function $route(to, from) {
+      $('.alert-pay').hide("slow", function () {
+        $(this).remove();
+      });
+    },
     login: function login(val, oldVal) {
       if (oldVal) {
         var _this = this;
 
         axios.post("/logout").then(function (response) {
           _this.user = null;
+          100;
         });
         console.log("User Logout");
+      } else {
+        this.login = true;
       }
 
       console.log("Login Changed");
     },
     user: function user(val, oldVal) {
-      this.login = !!val;
+      console.log(val);
+
+      if (val !== null) {
+        if (Object.keys(val).length) this.login = true;
+      } else {
+        this.login = false;
+      }
+
       console.log("User Changed");
     }
   },
@@ -70017,6 +70072,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;function _type
   return {
     AR: {
       'text-left': 'text-right',
+      'text-right': 'text-left',
       my_order: 'طلباتي',
       Home: "الصفحة الرئسية",
       Login: "الدخول",
@@ -70106,6 +70162,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;function _type
     },
     EN: {
       'text-left': 'text-left',
+      'text-right': 'text-right',
       my_order: 'My Orders',
       print_price: 'Print Price',
       search: "search",

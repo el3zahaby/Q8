@@ -169,8 +169,14 @@
                 axios.post('/api/v1/add-to-order', {
                     clientInfo: _this.clientInfo,
                 }).then(function (response) {
-                    _this.$router.push({path: '/'});
-                    _this.$root.updateCart();
+                    let res = response.data;
+                    if (res.status === "success"){
+                        window.location.href = res.paymentURL;
+                    }else{
+                        alert('error in pay!')
+                    }
+                    // _this.$router.push({path: '/'});
+                    // _this.$root.updateCart();
                 });
             },
             discount: function () {

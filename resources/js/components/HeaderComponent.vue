@@ -21,10 +21,8 @@
 
                         <div
                             class="header_icon d-inline-block position-relative"
-                            id="header_account_icon"
-                        >
+                            id="header_account_icon">
                             <img src="/images/user.png" alt="account icon"/>
-
                             <div v-if="!this.$root.login" class="account_div">
                                 <div class="account_div_inner">
                                     <router-link to="/login">{{$t("Login") }}</router-link>
@@ -34,8 +32,8 @@
                                     </router-link>
                                 </div>
                             </div>
-                            <div v-if="this.$root.login" class="account_div">
-                                <div v-if="this.$root.user.is_designer===true" class="account_div_inner">
+                            <div v-if="this.$root.login !== false" class="account_div">
+                                <div v-if="(this.$root.user) !== null && this.$root.user.is_designer===true" class="account_div_inner">
                                     <a href="/dashboard" class="nav-link">{{$t('Dashboard')}}</a>
                                 </div>
                                 <div class="account_div_inner">
@@ -45,7 +43,7 @@
                                     <router-link to="/myOrder">{{$t('my_order')}}</router-link>
                                 </div>
                                 <div class="account_div_inner">
-                                    <a href="#" @click.prevent="logout()">
+                                    <a href="#" @click.prevent="$root.logout()">
                                         {{$t('Logout')}}
                                     </a>
                                 </div>
@@ -132,13 +130,7 @@
             };
         },
         methods: {
-            logout: function () {
-                let _this = this;
-                axios.post('/api/v1/logout').then(function (response) {
-                    _this.$root.user = null;
-                    _this.$root.login = false;
-                });
-            },
+
             setLang: function ()
             {
                 this.$i18n.locale = this.selectedLang;

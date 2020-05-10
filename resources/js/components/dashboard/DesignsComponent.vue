@@ -118,15 +118,15 @@
                                 </div>
 
                                 <div class="form-group" >
-                                    <p>Choose Sizes :</p>
+                                    <p>{{$t('choose_sizes')}} :</p>
                                     <hr>
                                     <div class="container">
                                         <div class="row">
-                                            <div class="col-2">check :</div>
-                                            <div class="col-3">size :</div>
-                                            <div class="col-2">print price :</div>
-                                            <div class="col-3">price :</div>
-                                            <div class="col-2 text-center">total :</div>
+                                            <div class="col-2">{{$t('check')}} :</div>
+                                            <div class="col-3">{{$t('size')}} :</div>
+                                            <div class="col-2">{{$t('print_price')}} :</div>
+                                            <div class="col-3">{{$t('price')}} :</div>
+                                            <div class="col-2 text-center">{{$t('total')}} :</div>
                                             <div class="col-12"><hr></div>
                                         </div>
                                         <div class="row" v-for="size in allSizes" :key="size.id" >

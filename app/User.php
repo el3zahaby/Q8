@@ -7,7 +7,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
  * @property mixed first_name
@@ -16,6 +19,21 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable,HasRoles;
+    public function scopeNotHaveRole(Builder $query): Builder
+    {
+        $roles = Role::all();
+        $users = User::all();
+        $roledUsers = collect();
+        foreach ($roles as $role){
+            foreach ($role->users as $user) {
+                $roledUsers->push($user);
+            }
+        }
+
+        return $query->whereNotIn('id', $roledUsers->pluck('id'));
+    }
+
+
 
     protected $appends = ['is_designer'];
     /**

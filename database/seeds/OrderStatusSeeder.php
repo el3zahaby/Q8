@@ -12,8 +12,8 @@ class OrderStatusSeeder extends Seeder
     public function run()
     {
         \App\OrderStatus::create([
-            'status' => 'pending',
-            'color' => 'yellow'
+            'status' => 'completed',
+            'color' => '#00ff00'
         ]);
     }
 }

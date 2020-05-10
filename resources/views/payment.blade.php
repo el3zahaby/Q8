@@ -21,17 +21,14 @@
         <header-component></header-component>
         <!-- End Header Component -->
 
-        <div class="body_container" style="background-color: #FFFFFF; padding-bottom: 20px;">
 
-            <!-- SlideShow Component -->
-            <slideshow-component></slideshow-component>
-            <!-- End of SlideShow Component -->
+        <div class="body_container card">
+            <div class="card-body ">
+                <div class="alert-pay alert alert-{{$alert}}">{{ $status }}</div>
+                <slideshow-component></slideshow-component>
 
-            <!-- Router View -->
-            <router-view></router-view>
-            <!-- End Router View -->
-
-
+                <router-view></router-view>
+            </div>
         </div>
 
         <footer-component>

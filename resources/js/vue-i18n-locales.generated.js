@@ -9,6 +9,7 @@
     return {
         AR: {
             'text-left':'text-right',
+            'text-right':'text-left',
             my_order: 'طلباتي',
 
 
@@ -101,6 +102,7 @@
         },
         EN: {
             'text-left':'text-left',
+            'text-right':'text-right',
             my_order: 'My Orders',
             print_price: 'Print Price',
 

@@ -35,6 +35,11 @@ class UserController extends Controller
         return view($this->view.'designers.index',compact('items'));
     }
 
+    public function designersWait(){
+        $items = $this->model::notHaveRole()->whereNotNull('IBAN_Bank')->whereNotNull('Bank_Name')->orderBy('id','desc')->get();
+        return view($this->view.'designers.index',compact('items'));
+    }
+
     public function admins(){
         $items = $this->model::whereHas("roles", function($q){ $q->where("name", "admin"); })->orderBy('id','desc')->get();
         return view($this->view.'admins.index',compact('items'));

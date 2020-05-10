@@ -29,9 +29,9 @@ class OrderReceived extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.order')
-            ->from('noreplay@purecenterkw.com',setting('app_name'))
-            ->subject('تمت عملية الشراء رقم #'.$this->data['payment']->trans_id.' بنجاح')
+        return $this->markdown('email.order')
+//            ->from('noreplay@purecenterkw.com',setting('app_name'))
+            ->subject('تمت عملية الشراء رقم #'.$this->data['payment']->id.' بنجاح')
             ->with('data',$this->data);
     }
 }

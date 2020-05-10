@@ -11,8 +11,8 @@
     @yield('content')
 </div>
 <script>
-{{--    let about_us_desc = '{{setting('footer.about_us')}}';--}}
-{{--    let privacy_policy = `{!! setting('privacy-policy.privacy_policy') !!}`;--}}
+    {{--    let about_us_desc = '{{setting('footer.about_us')}}';--}}
+    {{--    let privacy_policy = `{!! setting('privacy-policy.privacy_policy') !!}`;--}}
 </script>
 @include('general.scripts')
 </body>
