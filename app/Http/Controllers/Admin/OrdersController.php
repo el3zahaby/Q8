@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\StatisticController;
 use App\Order;
+use App\OrderStatus;
 use Dompdf\Dompdf;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Contracts\View\Factory;
@@ -30,7 +31,8 @@ class OrdersController extends Controller
     public function index()
     {
         $items = $this->model::orderBy('id','desc')->get();
-        return view($this->view.'index',compact('items'));
+        $status = OrderStatus::all();
+        return view($this->view.'index',compact('items','status'));
     }
 
     /**
@@ -188,5 +190,12 @@ class OrdersController extends Controller
         $pdf->stream("main-report.pdf", array("Attachment" => false));
 
         return $view;
+    }
+
+    public function changeStatus($id,Request $request){
+        $order = Order::with('user')->find($id);
+        $order->orderstatus_id = $request->status;
+        $order->save();
+        return redirect()->back();
     }
 }

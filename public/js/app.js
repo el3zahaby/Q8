@@ -68280,7 +68280,7 @@ Vue.filter('currency', function (price) {
 var app = new Vue({
   el: "#app",
   data: {
-    login: false,
+    login: true,
     user: [],
     models: [],
     cart: {

@@ -132,7 +132,7 @@ class DesignController extends Controller
 
     public function update(Request $request)
     {
-        $id = 0;//Todo:Delete If No Need
+        $id = 0;
         $design = Design::find($id);
         $design->img = $request->img;
         $design->price = $request->price;

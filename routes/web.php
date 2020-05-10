@@ -145,6 +145,7 @@ Route::group(['prefix' => 'admin','as'=>'admin.'], function () {
         Route::resource('orderstatus', 'Admin\OrderStatusController');
         Route::resource('orders', 'Admin\OrdersController');
         Route::get('orders/getBill/{id}', 'Admin\OrdersController@getBill')->name('orders.getBill');
+        Route::post('orders/changeStatus/{id}', 'Admin\OrdersController@changeStatus')->name('orders.changeStatus');
 
         //page
         Route::resource('pages', 'Admin\PageController');
