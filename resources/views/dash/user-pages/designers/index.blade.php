@@ -55,10 +55,9 @@
                                     <td> {{ $item->created_at->diffForHumans() }} </td>
 
                                     <td>
-                                        
+
                                         <form action="{{ url('admin/updaterole',$item->id) }}" method="GET">
                                             <select name="role" class="ChangeStatus" >
-                                                <option value="0">select value</option>
                                                 @foreach($roles as $role)
                                                     <option value="{{ $role->name }}" {{ in_array($role->name , $item->getRoleNames()->toArray() ) ? "selected" : '' }} >{{ $role->name }}</option>
                                                 @endforeach
@@ -222,8 +221,6 @@
 
                             <div class="form-group ">
                                 <label>Is Designer?</label>
-                                <option value="{{ $role->name }}" {{ $role->name == $item->getRoleNames()[0] ? "selected" : '' }} >{{ $role->name }}</option>
-
                                 <input name="is_designer" type="checkbox" class=""  @if($item->isDesigner()) checked @endif>
                             </div>
 
@@ -296,3 +293,4 @@
 
     </script>
 @endpush
+
