@@ -195,7 +195,7 @@ Route::get('/{any}', 'HomeController@index')->middleware(['trackV'])->where('any
 
 // Registration Routes...
 //Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-//Route::post('register', 'Auth\RegisterController@register');
+Route::post('login', 'Auth\RegisterController@login')->name('login');
 
 // Password Reset Routes...
 Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
