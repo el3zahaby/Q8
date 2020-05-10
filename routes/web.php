@@ -129,6 +129,8 @@ Route::group(['prefix' => 'admin','as'=>'admin.'], function () {
         });
         Route::resource('users', 'Admin\UserController');
 
+        Route::get('updaterole/{id}','Admin\UserController@updateRole');
+
 
         // designs
         Route::resource('designs', 'Admin\DesignController');
