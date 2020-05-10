@@ -234,6 +234,7 @@ const app = new Vue({
                 _this.login = false;
                 if (_this.login) {
                     _this.user = [];
+                    _this.$router.push({path: '/'});
                 }
 
             });

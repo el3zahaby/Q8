@@ -214,6 +214,9 @@
 
         },
         mounted() {
+            if(Object.keys(this.$root.user).length != 0){
+                this.$router.push({path: '/'});
+            }
             $('#cbox').on('click', function () {
                 $('#cbox_info').slideToggle(900);
             });

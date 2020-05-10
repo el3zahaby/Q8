@@ -1,11 +1,11 @@
 <template>
     <div
         id="jssor_1"
-        style="position:relative;margin:0 auto;top:0;left:0;width:980px;max-width:100%;height:380px;overflow:hidden;visibility:hidden;background-color: #FFFFFF;"
+        style="position:relative;margin:0 auto;top:0;left:0;width:980px;height:380px;overflow:hidden;visibility:hidden;background-color: #FFFFFF;"
     >
         <div
             data-u="slides"
-            style="cursor:default;position:relative;top:0px;left:0px;width:980px;max-width:100%;height:380px;overflow:hidden;"
+            style="cursor:default;position:relative;top:0px;left:0px;width:980px;height:380px;overflow:hidden;"
         >
             <div v-for="slideshow in slidesshow" :key="slideshow.id">
                 <a :href="slideshow.url">

@@ -111,6 +111,23 @@
         },
         props: [],
         mounted() {
+            let  _this = this;
+            setTimeout(function(){
+                if(Object.keys(_this.$root.user).length != 0){
+                    _this.$router.push({path: '/'});
+                }
+            }, 1000);
+            setTimeout(function(){
+                if(Object.keys(_this.$root.user).length != 0){
+                    _this.$router.push({path: '/'});
+                }
+            }, 500);
+            setTimeout(function(){
+                if(Object.keys(_this.$root.user).length != 0){
+                    _this.$router.push({path: '/'});
+                }
+            }, 1500);
+
         }
     };
 </script>

@@ -109,6 +109,12 @@
             };
         },
         props: [],
+        beforeMount() {
+            if(Object.keys(this.$root.user).length == 0){
+                this.$router.replace('/');
+                this.$router.go();
+            }
+        },
         methods: {
             fetchOrders(page_url) {
                 let _this = this;

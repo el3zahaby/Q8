@@ -167,7 +167,7 @@
     export default {
         mixins: [mapMixin],
         mounted() {
-            // console.log(Object.keys(this.$root.user).length)
+
         },
         data() {
             return {

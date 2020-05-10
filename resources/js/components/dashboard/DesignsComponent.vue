@@ -314,6 +314,12 @@
             })
 
         },
+        beforeMount() {
+            if(Object.keys(this.$root.user).length == 0){
+                this.$router.replace('/');
+                this.$router.go();
+            }
+        },
         created() {
             axios.get("/api/v1/designer-designs").then(response => {
                 this.myallDesigns = response.data;

@@ -16,7 +16,7 @@ class CreateDesignsCollectionsTable extends Migration
         Schema::create('designs_collections', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->text('tshirt_id');
-            $table->integer('design_id');
+            $table->integer('design_id')->unique();
             $table->timestamps();
             $table->softDeletes();
         });

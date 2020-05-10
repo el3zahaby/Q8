@@ -2110,7 +2110,14 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
+    if (Object.keys(this.$root.user).length == 0) {
+      this.$router.push({
+        path: '/login'
+      });
+    }
     /*--- showLogin toggle function ----*/
+
+
     $('#showlogin').on('click', function () {
       $('#checkout-login').slideToggle(900);
     });
@@ -2430,7 +2437,31 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   props: [],
-  mounted: function mounted() {}
+  mounted: function mounted() {
+    var _this = this;
+
+    setTimeout(function () {
+      if (Object.keys(_this.$root.user).length != 0) {
+        _this.$router.push({
+          path: '/'
+        });
+      }
+    }, 1000);
+    setTimeout(function () {
+      if (Object.keys(_this.$root.user).length != 0) {
+        _this.$router.push({
+          path: '/'
+        });
+      }
+    }, 500);
+    setTimeout(function () {
+      if (Object.keys(_this.$root.user).length != 0) {
+        _this.$router.push({
+          path: '/'
+        });
+      }
+    }, 1500);
+  }
 });
 
 /***/ }),
@@ -2553,6 +2584,12 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   props: [],
+  beforeMount: function beforeMount() {
+    if (Object.keys(this.$root.user).length == 0) {
+      this.$router.replace('/');
+      this.$router.go();
+    }
+  },
   methods: {
     fetchOrders: function fetchOrders(page_url) {
       var _this = this;
@@ -4673,6 +4710,12 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
+    if (Object.keys(this.$root.user).length != 0) {
+      this.$router.push({
+        path: '/'
+      });
+    }
+
     $('#cbox').on('click', function () {
       $('#cbox_info').slideToggle(900);
     });
@@ -4850,6 +4893,13 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   props: [],
+  mounted: function mounted() {
+    if (Object.keys(this.$root.user).length != 0) {
+      this.$router.push({
+        path: '/'
+      });
+    }
+  },
   methods: {
     register: function register() {
       var _this = this.$root;
@@ -5238,7 +5288,12 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   props: [],
-  mounted: function mounted() {},
+  beforeMount: function beforeMount() {
+    if (Object.keys(this.$root.user).length == 0) {
+      this.$router.replace('/');
+      this.$router.go();
+    }
+  },
   methods: {
     logout: function logout() {
       this.$root.login = false;
@@ -5564,6 +5619,12 @@ __webpack_require__.r(__webpack_exports__);
       $(".AR").css('display', 'block');
     });
   },
+  beforeMount: function beforeMount() {
+    if (Object.keys(this.$root.user).length == 0) {
+      this.$router.replace('/');
+      this.$router.go();
+    }
+  },
   created: function created() {
     var _this4 = this;
 
@@ -5778,6 +5839,12 @@ __webpack_require__.r(__webpack_exports__);
   },
   props: [],
   mounted: function mounted() {},
+  beforeMount: function beforeMount() {
+    if (Object.keys(this.$root.user).length == 0) {
+      this.$router.replace('/');
+      this.$router.go();
+    }
+  },
   methods: {
     editProfile: function editProfile(id) {
       var _this = this.$root;
@@ -5894,10 +5961,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      page: {}
+      page: {},
+      err404: false
     };
   },
   props: [],
@@ -5909,6 +5997,8 @@ __webpack_require__.r(__webpack_exports__);
     }).then(function (res) {
       _this.page = res;
       console.log(res);
+    })["catch"](function (res) {
+      _this.err404 = true;
     });
   }
 });
@@ -6091,8 +6181,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mixins: [_map__WEBPACK_IMPORTED_MODULE_0__["mapMixin"]],
-  mounted: function mounted() {// console.log(Object.keys(this.$root.user).length)
-  },
+  mounted: function mounted() {},
   data: function data() {
     return {
       firstname: this.$root.user.first_name,
@@ -10933,7 +11022,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nimg[data-v-dec272ee]{\r\n    max-width: 100%;\n}\r\n", ""]);
+exports.push([module.i, "\nimg[data-v-dec272ee]{\n    max-width: 100%;\n}\n", ""]);
 
 // exports
 
@@ -50471,7 +50560,6 @@ var render = function() {
         top: "0",
         left: "0",
         width: "980px",
-        "max-width": "100%",
         height: "380px",
         overflow: "hidden",
         visibility: "hidden",
@@ -50489,7 +50577,6 @@ var render = function() {
             top: "0px",
             left: "0px",
             width: "980px",
-            "max-width": "100%",
             height: "380px",
             overflow: "hidden"
           },
@@ -52377,27 +52464,81 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: " m-3 card", attrs: { id: "pageBody" } }, [
-    _c("div", [
-      _c("h1", { staticClass: "card-header" }, [_vm._v(_vm._s(_vm.page.title))])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "card-body" }, [
-      _vm.page.image
-        ? _c("img", {
-            staticClass: "border p-1 card-body shadow-lg d-block w-50 m-auto",
-            attrs: {
-              src: _vm.page.image,
-              onerror: "this.src= '/images/no-image.png'"
-            }
-          })
-        : _vm._e(),
-      _vm._v(" "),
-      _c("div", { domProps: { innerHTML: _vm._s(_vm.page.body) } })
-    ])
-  ])
+  return Object.keys(_vm.page).length
+    ? _c("div", { staticClass: "m-3 card", attrs: { id: "pageBody" } }, [
+        _c("div", [
+          _c("h1", { staticClass: "card-header" }, [
+            _vm._v(_vm._s(_vm.page.title))
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _vm.page.image
+            ? _c("img", {
+                staticClass:
+                  "border p-1 card-body shadow-lg d-block w-50 m-auto",
+                attrs: {
+                  src: _vm.page.image,
+                  onerror: "this.src= '/images/no-image.png'"
+                }
+              })
+            : _vm._e(),
+          _vm._v(" "),
+          _c("div", { domProps: { innerHTML: _vm._s(_vm.page.body) } })
+        ])
+      ])
+    : _c("div", { class: "m-3 card " + _vm.$t("text-left") }, [
+        _vm.err404
+          ? _c("div", { staticClass: "error_section py-md-5 py-4" }, [
+              _c("div", { staticClass: "container" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-12" }, [
+                    _c(
+                      "div",
+                      { staticClass: "error_form" },
+                      [
+                        _c("h1", [_vm._v("404")]),
+                        _vm._v(" "),
+                        _c("h2", [_vm._v("Opps! PAGE NOT BE FOUND")]),
+                        _vm._v(" "),
+                        _vm._m(0),
+                        _vm._v(" "),
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "text-decoration-none",
+                            attrs: { to: "/" }
+                          },
+                          [_vm._v("Back to home page")]
+                        )
+                      ],
+                      1
+                    )
+                  ])
+                ])
+              ])
+            ])
+          : _c("h1", { staticClass: "text-center" }, [
+              _c("i", { staticClass: "fa fa-spinner fa-spin " })
+            ])
+      ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", [
+      _vm._v(
+        "Sorry but the page you are looking for does not exist, have been"
+      ),
+      _c("br"),
+      _vm._v(
+        " removed, name changed or\n                            is temporarity unavailable."
+      )
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -68160,6 +68301,10 @@ var app = new Vue({
 
         if (_this.login) {
           _this.user = [];
+
+          _this.$router.push({
+            path: '/'
+          });
         }
       });
     },

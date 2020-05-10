@@ -1,6 +1,11 @@
 @extends('layouts.dash')
 
 @push('plugin-styles')
+    <style>
+        .select2-container .select2-selection--single {
+            height: auto !important;
+        }
+    </style>
 @endpush
 
 @section('content')
@@ -88,9 +93,9 @@
                     </div>
                     <div class="form-group">
                         <label>Design</label>
-                        <select name="design_id" id="" class="form-control select2" style="color:#000 !important;">
+                        <select name="design_id" id="" class="form-control select2-design" style="color:#000 !important;">
                             @foreach($designs as $design)
-                                <option value="{{ $design->id }}">{{ $design->name_en }}</option>
+                                <option  data-img="{{ $design->img }}" value="{{ $design->id }}">{{ $design->name_en }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -130,9 +135,9 @@
                         </div>
                         <div class="form-group">
                             <label>Design</label>
-                            <select name="design_id" id="" class="form-control select2" style="color:#000 !important;">
+                            <select name="design_id" id="" class="form-control select2-design" style="color:#000 !important;">
                                 @foreach($designs as $design)
-                                    <option @if($item->design_id == $design->id) selected @endif value="{{ $design->id }}">{{ $design->name_en }}</option>
+                                    <option  data-img="{{ $design->img }}" @if($item->design_id == $design->id) selected @endif value="{{ $design->id }}">{{ $design->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -151,7 +156,22 @@
 @endsection
 
 @push('plugin-scripts')
+    <script>
+        function formatState (state) {
+            var baseUrl = $(state.element).data('img');
+            return $(
+                '<span><img style="max-width: 50px;padding: 3px;" src="'+ baseUrl +'" class="img-flag" /> ' + state.text + '</span>'
+            );
+        }
 
+        $(document).ready(function() {
+            $(".select2-design").select2({
+                templateResult: formatState,
+                templateSelection: formatState,
+            });
+        });
+
+    </script>
 @endpush
 
 @push('custom-scripts')

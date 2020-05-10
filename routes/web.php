@@ -186,11 +186,26 @@ Route::get('/dashboard{any}', function () {
 
 
 Route::get('logout',  'Auth\LoginController@logout');
-Auth::routes(['verify' => true]);
 
 Route::get('success', 'OrderController@successPay')->name('pay.success');
 
 Route::get('/{any}', 'HomeController@index')->middleware(['trackV'])->where('any', '.*')->name('home');
 
-Auth::routes(['verify' => true]);
+
+
+// Registration Routes...
+//Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+//Route::post('register', 'Auth\RegisterController@register');
+
+// Password Reset Routes...
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
+
+// Email Verification Routes...
+Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
+Route::get('email/verify/{id}/{hash}', 'Auth\VerificationController@verify')->name('verification.verify');
+Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
+//Auth::routes(['verify' => true]);
 

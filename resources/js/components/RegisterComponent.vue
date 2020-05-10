@@ -159,6 +159,11 @@
             };
         },
         props: [],
+        mounted() {
+            if(Object.keys(this.$root.user).length != 0){
+                this.$router.push({path: '/'});
+            }
+        },
         methods: {
             register: function () {
                 let _this = this.$root;

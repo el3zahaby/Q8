@@ -96,6 +96,7 @@
         },
         props: [],
         mounted() {
+
             axios.get("/api/v1/designer-designs").then(response => {
                 this.myallDesigns = response.data;
             }).catch(function (error) {

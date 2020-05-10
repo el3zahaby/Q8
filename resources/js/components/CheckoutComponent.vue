@@ -186,6 +186,9 @@
             }
         },
         mounted() {
+            if(Object.keys(this.$root.user).length == 0){
+                this.$router.push({path: '/login'});
+            }
             /*--- showLogin toggle function ----*/
             $('#showlogin').on('click', function () {
                 $('#checkout-login').slideToggle(900);
