@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
+use Spatie\Permission\Models\Role;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\DesignerMail;
@@ -31,13 +32,15 @@ class UserController extends Controller
     }
 
     public function designers(){
+        $roles = Role::all();
         $items = $this->model::whereHas("roles", function($q){ $q->where("name", "designer"); })->orderBy('id','desc')->get();
-        return view($this->view.'designers.index',compact('items'));
+        return view($this->view.'designers.index',compact('items','roles'));
     }
 
     public function designersWait(){
+        $roles = Role::all();
         $items = $this->model::notHaveRole()->whereNotNull('IBAN_Bank')->whereNotNull('Bank_Name')->orderBy('id','desc')->get();
-        return view($this->view.'designers.index',compact('items'));
+        return view($this->view.'designers.index',compact('items','roles'));
     }
 
     public function admins(){
@@ -190,5 +193,11 @@ class UserController extends Controller
             'status'=>'ok',
             'msg'=>'deleted'.$id
         ],200);
+    }
+    public function updateRole(Request $request , $id)
+    {
+        $user = $this->model::find($id);
+        $user->syncRoles($request->role);
+        return redirect()->back();
     }
 }

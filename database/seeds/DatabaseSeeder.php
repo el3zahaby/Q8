@@ -27,8 +27,6 @@ class DatabaseSeeder extends Seeder
          $this->call('TshirtSeeder');
          $this->call('DesignCollectionSeeder');
          $this->call('OrderStatusSeeder');
-         $this->call('OrderSeeder');
-         $this->call('CartSeeder');
 
          artisan::call('translations:import');
          artisan::call('storage:link');

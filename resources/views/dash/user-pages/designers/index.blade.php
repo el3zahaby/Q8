@@ -4,6 +4,7 @@
 @endpush
 
 @section('content')
+
     <div class="row">
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
@@ -30,6 +31,7 @@
                                 <th> IBAN Bank</th>
                                 <th> Name On Bank Card</th>
                                 <th> Created at</th>
+                                <th> Change Role</th>
 
                                 <th> Action</th>
                             </tr>
@@ -52,6 +54,17 @@
 
                                     <td> {{ $item->created_at->diffForHumans() }} </td>
 
+                                    <td>
+                                        
+                                        <form action="{{ url('admin/updaterole',$item->id) }}" method="GET">
+                                            <select name="role" class="ChangeStatus" >
+                                                <option value="0">select value</option>
+                                                @foreach($roles as $role)
+                                                    <option value="{{ $role->name }}" {{ in_array($role->name , $item->getRoleNames()->toArray() ) ? "selected" : '' }} >{{ $role->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </form>
+                                    </td>
 
                                     <td>
                                         <!-- delete -->
@@ -273,6 +286,11 @@
                 }
             });
         });
+
+        $('.ChangeStatus').on('change',function(){
+            $(this).parent().submit();
+        });
+
 
     </script>
 @endpush
