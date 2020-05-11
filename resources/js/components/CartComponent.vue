@@ -19,7 +19,7 @@
                                 <tbody>
                                 <tr v-for="product in this.$root.cart.items" :key="product.id">
                                     <td class="product-thumbnail">
-                                        <img class="img-fluid" :src="product.options.img"
+                                        <img class="img-fluid" :src="product.options.product.design.img"
                                              alt="product thumbnail">
                                     </td>
                                     <td class="product-name">

@@ -11,4 +11,8 @@ class OrderStatus extends Model{
 
     protected $table = 'orderstatuses';
 
+    public function orders()
+    {
+        return $this->hasMany(Order::class,'orderstatus_id');
+    }
 }

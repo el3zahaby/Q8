@@ -63,6 +63,10 @@
 
                                         <!-- view -->
                                         <a href="{{ route('admin.users.show',$item->id) }}" data-id="{{ $item->id }}"  title="VIEW" class="btn btn-info"><i class="mdi mdi-eye"></i></a>
+
+                                        @if (!$item->hasVerifiedEmail())
+                                            <a href="{{ route('admin.users.verify',$item->id) }}" data-id="{{ $item->id }}"  title="Verify" class="btn btn-primary"><i class="mdi mdi-hand-okay"></i></a>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

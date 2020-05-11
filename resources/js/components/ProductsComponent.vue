@@ -61,8 +61,8 @@
                                 /> -->
                         </div>
                         <div class="t-shirt_inner_price px-1 my-2">
-                            <span class="t-shirt_price_nosale" v-if="product.design.discount !== 0">{{ (product.design.designer_price[0]? product.design.designer_price[0].total : 0) }}</span>
-                            <span class="t-shirt_price_sale">{{ priceDis((product.design.designer_price[0]? product.design.designer_price[0].total : 0),product.design.discount)}}</span>
+                            <span class="t-shirt_price_nosale" v-if="product.design.discount !== 0">{{ (product.design.designer_price[0]? product.design.designer_price[0].total : 0) }} <SMALL>KWD</SMALL></span>
+                            <span class="t-shirt_price_sale">{{ priceDis((product.design.designer_price[0]? product.design.designer_price[0].total : 0),product.design.discount)}} <SMALL>KWD</SMALL></span>
                         </div>
                         <div v-if="false" class="t-shirt_inner_review px-1 my-2">
                             <span
@@ -144,8 +144,8 @@
                                 /> -->
                         </div>
                         <div class="t-shirt_inner_price px-1 my-2">
-                            <span class="t-shirt_price_nosale" v-if="product.design.discount !== 0">{{ (product.design.designer_price[0]? product.design.designer_price[0].total : 0) }}</span>
-                            <span class="t-shirt_price_sale">{{ priceDis((product.design.designer_price[0]? product.design.designer_price[0].total : 0),product.design.discount)}}</span>
+                            <span class="t-shirt_price_nosale" v-if="product.design.discount !== 0">{{ (product.design.designer_price[0]? product.design.designer_price[0].total : 0) }} <small>KWD</small></span>
+                            <span class="t-shirt_price_sale">{{ priceDis((product.design.designer_price[0]? product.design.designer_price[0].total : 0),product.design.discount)}} <small>KWD</small></span>
                         </div>
                         <div v-if="false" class="t-shirt_inner_review px-1 my-2">
                             <span
@@ -562,6 +562,8 @@
     .t-shirt_price_sale,
     .t-shirt_price_nosale {
         font-size: 18px;
+        display: inline-block;
+
     }
     .t-shirt_price_nosale {
         text-decoration: line-through;

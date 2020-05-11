@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration {
 			$table->string('IBAN_Bank')->nullable();
 			$table->string('Bank_Name')->nullable();
 			$table->string('name_on_BankCard')->nullable();
-//			$table->string('random_id')->nullable();
+
 			$table->string('phone')->nullable()->unique();
 
             $table->longText('settings')->nullable();

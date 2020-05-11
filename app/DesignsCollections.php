@@ -31,4 +31,8 @@ class DesignsCollections extends Model
             $q->where('id', '=', $id);
         }])->first();
     }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

@@ -76,18 +76,7 @@
                 </ul>
             </div>
         </li>
-{{--        <li class="nav-item {{ active_class(['admin/users*']) }}">--}}
-{{--            <a class="nav-link" href="{{ route('admin.users.index') }}">--}}
-{{--                <i class="menu-icon mdi mdi-account-group "></i>--}}
-{{--                <span class="menu-title">Users</span>--}}
-{{--            </a>--}}
-{{--        </li>--}}
-{{--        <li class="nav-item {{ active_class(['admin/designers']) }}">--}}
-{{--            <a class="nav-link" href="{{ route('admin.designers') }}">--}}
-{{--                <i class="menu-icon mdi mdi-account-group "></i>--}}
-{{--                <span class="menu-title">Designers</span>--}}
-{{--            </a>--}}
-{{--        </li>--}}
+
         <li><hr></li>
         <li class="nav-item {{ active_class(['admin/designs*']) }}">
             <a class="nav-link" href="{{ route('admin.designs.index') }}">
@@ -129,14 +118,25 @@
             </a>
         </li>
         <li><hr></li>
-
-        <li class="nav-item {{ active_class(['admin/orders']) }}">
-            <a class="nav-link" href="{{ route('admin.orders.index') }}">
-                <i class="menu-icon mdi mdi-state-machine "></i>
+        <li class="nav-item {{ active_class(['admin/orders*']) }}">
+            <a class="nav-link" data-toggle="collapse" href="#orders-pages" aria-expanded="false" aria-controls="user-pages">
+                <i class="menu-icon mdi mdi-account-group"></i>
                 <span class="menu-title">Orders</span>
+                <i class="menu-arrow"></i>
             </a>
+            <div class="collapse " id="orders-pages">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.orders.index') }}">All Orders</a>
+                    </li>
+                    @foreach(\App\OrderStatus::all() as $s)
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.orders.status.show',$s->id) }}">{{ \Illuminate\Support\Str::upper($s->status .' Orders') }}</a>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
         </li>
-
         <li class="nav-item {{ active_class(['admin/orderstatus']) }}">
             <a class="nav-link" href="{{ route('admin.orderstatus.index') }}">
                 <i class="menu-icon mdi mdi-state-machine "></i>

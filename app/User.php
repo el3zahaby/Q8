@@ -35,7 +35,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
 
 
-    protected $appends = ['is_designer'];
+    protected $appends = ['is_designer','settings'];
     /**
      * The attributes that are mass assignable.
      *
@@ -83,6 +83,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return $cond;
     }
 
+    public function getSettingsAttribute()
+    {
+        return json_decode($this->attributes['settings']);
+    }
     public function locations()
     {
         return $this->belongsTo('App\Location');

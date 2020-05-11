@@ -22,7 +22,7 @@ Route::group(['prefix' => '/api'], function () {
     });
 
 
-    Route::post('/v1/lang/{lang}', 'HomeController@setLang');
+    Route::any('/v1/lang/{lang}', 'HomeController@setLang');
 
 
     Route::post('/v1/login', 'Auth\LoginController@login');
@@ -80,7 +80,7 @@ Route::group(['prefix' => '/api'], function () {
     //User_Route
     Route::get('/v1/user', 'UserController@show');
     Route::get('/v1/myOrder/{id?}', 'UserController@myOrder');
-    Route::post('/v1/updateUser/{id}', 'UserController@update');
+    Route::post('/v1/updateUser/{id?}', 'UserController@update');
     Route::post('/v1/createUser', 'UserController@create');
 
 
@@ -128,6 +128,7 @@ Route::group(['prefix' => 'admin','as'=>'admin.'], function () {
             Route::get('designersWait', 'Admin\UserController@designersWait')->name('designersWait');
         });
         Route::resource('users', 'Admin\UserController');
+        Route::get('users/verify/{id}', 'Admin\UserController@verify')->name('users.verify');
 
         Route::get('updaterole/{id}','Admin\UserController@updateRole');
 
@@ -148,6 +149,7 @@ Route::group(['prefix' => 'admin','as'=>'admin.'], function () {
         Route::resource('orders', 'Admin\OrdersController');
         Route::get('orders/getBill/{id}', 'Admin\OrdersController@getBill')->name('orders.getBill');
         Route::post('orders/changeStatus/{id}', 'Admin\OrdersController@changeStatus')->name('orders.changeStatus');
+        Route::get('orders/status/{id}', 'Admin\OrdersController@showByStatus')->name('orders.status.show');
 
         //page
         Route::resource('pages', 'Admin\PageController');
@@ -189,12 +191,9 @@ Route::get('/dashboard{any}', function () {
 })->where('any', '.*');
 
 
-Route::get('logout',  'Auth\LoginController@logout');
+Route::any('logout',  'Auth\LoginController@logout');
 
 Route::get('success', 'OrderController@successPay')->name('pay.success');
-
-Route::get('/{any}', 'HomeController@index')->middleware(['trackV'])->where('any', '.*')->name('home');
-
 
 
 // Registration Routes...
@@ -212,4 +211,8 @@ Route::get('email/verify', 'Auth\VerificationController@show')->name('verificati
 Route::get('email/verify/{id}/{hash}', 'Auth\VerificationController@verify')->name('verification.verify');
 Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
 //Auth::routes(['verify' => true]);
+
+
+
+Route::get('/{any}', 'HomeController@index')->middleware(['trackV'])->where('any', '.*')->name('home');
 

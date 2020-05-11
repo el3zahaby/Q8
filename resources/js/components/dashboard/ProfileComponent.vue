@@ -2,14 +2,25 @@
     <div class="col-md-9">
         <!-- Website Overview -->
         <div class="overview">
-            <div class="overview-head main-color-bg">
+            <div :class="'overview-head main-color-bg '+ $t('text-left')">
                 <h3 class="text-capitalize">{{$t('Profile')}}</h3>
             </div>
             <div class="overview-body p-3 mx-auto">
                 <div class="tab-content">
-                    <div class="tab-pane active">
-                        <h3 class="mx-auto">{{$t('Personal_info')}}</h3>
-                        <div class="login-form-container">
+                    <div :class="'tab-pane active ' + $t('text-left')">
+                        <DIV>
+                            <input id="reqMoney" @change="reqM()" type="checkbox"  v-model="reqMoney" class="d-inline w-auto" >
+                            <label for="reqMoney">طلب الاموال</label>
+                            <div class="alert alert-info alert-dismissable" v-if="reqMoney">
+                                <a class="panel-close close" style="cursor: pointer" data-dismiss="alert">×</a>
+                                <i class="fa fa-coffee"></i>
+                                تم تلقي طلب سحب الموال الخاص بك .. نرجو الإنتظار
+                            </div>
+                        </DIV>
+
+                        <div>
+                            <h3 :class="'mx-auto '+ $t('text-left')">{{$t('Personal_info')}}</h3>
+                            <div class="login-form-container">
                             <div class="login-form">
                                 <!-- <div class="alert alert-info alert-dismissable">
                                     <a class="panel-close close" style="cursor: pointer" data-dismiss="alert">×</a>
@@ -124,6 +135,7 @@
                                 </form>
                             </div>
                         </div>
+                        </div>
                     </div>
                 </div>
 
@@ -161,6 +173,7 @@
         mixins: [mapMixin],
         data() {
             return {
+                reqMoney:this.$root.user.settings.reqMoney,
                 firstname: this.$root.user.first_name,
                 lastname: this.$root.user.last_name,
                 name: this.$root.user.name,
@@ -172,21 +185,32 @@
                 BankIBAN: this.$root.user.IBAN_Bank,
                 name_on_BankCard: this.$root.user.name_on_BankCard,
                 error: null
-
             };
         },
         props: [],
         mounted() {
-        },
-        beforeMount() {
-            if(Object.keys(this.$root.user).length == 0){
-                this.$router.replace('/');
-                this.$router.go();
-            }
+
         },
         methods: {
+            reqM:function(){
+                let _this = this.$root;
+                let __this = this;
+                axios.post(`/api/v1/updateUser/`, {
+                    reqMoney: __this.reqMoney,
+                    noUpdate: true,
+                }).then((response => {
+                    _this.updateUser();
+                    // __this.reqMoney =
+                    // _this.$router.push({path: '/dashboard'});
+                })).catch(function (error) {
+                    let response = error.response;
+                    __this.error = response ? error.response.data.message : error;
+                });
+            },
             editProfile: function (id) {
                 let _this = this.$root;
+                let __this = this;
+
                 axios.post(`/api/v1/updateUser/${id}`, {
                     firstname: this.firstname,
                     lastname: this.lastname,
@@ -202,12 +226,11 @@
                     BankIBAN: this.BankIBAN,
                     name_on_BankCard: this.name_on_BankCard,
                 }).then((response => {
-                    console.log(response);
                     _this.updateUser();
                     _this.$router.push({path: '/dashboard'});
                 })).catch(function (error) {
                     let response = error.response;
-                    _this.error = response ? error.response.data.message : error;
+                    __this.error = response ? error.response.data.message : error;
                 });
 
             },

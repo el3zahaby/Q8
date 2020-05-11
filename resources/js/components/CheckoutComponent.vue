@@ -127,7 +127,9 @@
                                             </h4>
                                         </div>
                                         <div class="panel-body">
-                                            <p class="text-capitalize font-weight-bold">{{$t('delivery')}}</p>
+                                            <input v-model="pay_method" type="radio" name="pay_method" id="delev" value="delivery" class="d-inline w-auto"><label for="delev" class="text-capitalize font-weight-bold">{{$t('delivery')}}</label>
+                                            <br>
+                                            <input v-model="pay_method" type="radio" name="pay_method" id="visac" value="visa" class="d-inline w-auto"><label for="visac" class="text-capitalize font-weight-bold">{{$t('visa_card')}}</label>
                                         </div>
                                     </div>
                                     <div class="order-button-payment">
@@ -148,9 +150,10 @@
     export default {
         data() {
             return {
+                pay_method:'visa',
                 user: {
                     username: '',
-                    password: ''
+                    password: '',
                 },
                 clientInfo: {
                     fullName: this.$root.user.first_name + ' ' + this.$root.user.last_name,
@@ -167,7 +170,7 @@
             addOrder: function () {
                 let _this = this;
                 axios.post('/api/v1/add-to-order', {
-                    clientInfo: _this.clientInfo,
+                    clientInfo: _this.clientInfo
                 }).then(function (response) {
                     let res = response.data;
                     if (res.status === "success"){
@@ -185,8 +188,14 @@
                 }
             }
         },
-        mounted() {
-            if(Object.keys(this.$root.user).length == 0){
+        watch: {
+          pay_method:function () {
+              this.clientInfo['pay_method']=this.pay_method
+              console.log(this.clientInfo)
+          },
+        },
+        async mounted() {
+            if(!this.$root.login){
                 this.$router.push({path: '/login'});
             }
             /*--- showLogin toggle function ----*/

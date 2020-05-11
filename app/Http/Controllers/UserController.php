@@ -20,6 +20,25 @@ class UserController extends Controller
 
     public function create(Request $request)
     {
+        if (!$request->is_trader) {
+            $this->validate($request, [
+                'firstname' => 'required|max:255',
+                'lastname' => 'required|max:255',
+                'age' => 'max:60',
+                'email' => 'required|email|unique:users,email',
+                'phone' => 'required|unique:users,phone',
+            ]);
+        }else{
+            $this->validate($request, [
+                'firstname' => 'required|max:255',
+                'lastname' => 'required|max:255',
+                'age' => 'max:60',
+                'BankName' => 'required',
+                'email' => 'required|email|unique:users,email',
+                'phone' => 'required|unique:users,phone',
+            ]);
+        }
+
 
         $user = new User();
         $user->first_name = $request->firstname;
@@ -33,7 +52,7 @@ class UserController extends Controller
         $user->IBAN_Bank = $request->BankIBAN;
         $user->name_on_BankCard = $request->name_on_BankCard;
         $user->save();
-        if (!isset($request->BankName) && empty($request->BankName)) {
+        if (!$request->is_trader) {
             $user->assignRole('user');
         }
 
@@ -46,19 +65,25 @@ class UserController extends Controller
 
     }
 
-    public function update($id, Request $request)
+    public function update(Request $request)
     {
-        $user = User::find($id);
-        $user->first_name = $request->firstname;
-        $user->last_name = $request->lastname;
-        $user->email = $request->email;
-        $user->password = $request->password ? Hash::make($request->password) : $user->password;
-        $user->phone = $request->phone;
-        $user->address = $request->address;
-        $user->age = $request->age;
-        $user->Bank_Name = $request->BankName;
-        $user->IBAN_Bank = $request->BankIBAN;
-        $user->name_on_BankCard = $request->name_on_BankCard;
+        $user = User::find(auth()->id());
+
+        if (isset($request->noUpdate)){
+            $reqMoney = $request->reqMoney;
+            $user->settings = json_encode(['reqMoney' =>$reqMoney,]);
+        }else{
+            $user->first_name = $request->firstname;
+            $user->last_name = $request->lastname;
+            $user->email = $request->email;
+            $user->password = $request->password ? Hash::make($request->password) : $user->password;
+            $user->phone = $request->phone;
+            $user->address = $request->address;
+            $user->age = $request->age;
+            $user->Bank_Name = $request->BankName;
+            $user->IBAN_Bank = $request->BankIBAN;
+            $user->name_on_BankCard = $request->name_on_BankCard;
+        }
         $user->save();
         return "Ok";
     }

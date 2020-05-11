@@ -48,7 +48,9 @@ class DesignController extends Controller
     public function getByRandId($id = null)
     {
         if (empty($id)) return DesignsCollections::get();
-        return DesignsCollections::where('design_id','LIKE', '%'.$id.'%')->get();
+        return DesignsCollections::whereHas('design.user', function ($query)use($id) {
+            $query->where('last_name', 'LIKE', '%'.$id.'%');
+        })->orWhere('design_id','LIKE', '%'.$id.'%')->get();
     }
 
     public function creat(Request $request)

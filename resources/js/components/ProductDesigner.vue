@@ -26,33 +26,33 @@
         props: ['type', 'design','ccolor'],
         methods: {},
         mounted() {
-            var  colorMap = {1:'red',2:"blue"}
-            let _this = this;
-            let design =_this.design;
-            let $yourDesigner = $("#clothing-designer-" + design.id + (_this.type === 'view' ? '-view' : _this.type)),
-                pluginOpts = {
-                    mainBarModules: [],
-                    productsJSON: getProductJson(design.thump,colorMap[_this.ccolor]), //see JSON folder for products sorted in categories
-                    customImageParameters: {
-
-                    },
-                    actions: {
-                        top: [],
-                        right: [],
-                        bottom: [],
-                        left: []
-                    }
-                },
-                yourDesigner = new FancyProductDesigner(
-                    $yourDesigner,
-                    pluginOpts
-                );
-            // you can listen to events
-            $yourDesigner.on('productCreate', async function () {
-                yourDesigner.getProductDataURL(function (dataURL) {
-                    $('#img-' + design.id + (_this.type === 'view' ? '-view' : _this.type)).attr('src', dataURL);
-                });
-            });
+            // var  colorMap = {1:'red',2:"blue"}
+            // let _this = this;
+            // let design =_this.design;
+            // let $yourDesigner = $("#clothing-designer-" + design.id + (_this.type === 'view' ? '-view' : _this.type)),
+            //     pluginOpts = {
+            //         mainBarModules: [],
+            //         productsJSON: getProductJson(design.thump,colorMap[_this.ccolor]), //see JSON folder for products sorted in categories
+            //         customImageParameters: {
+            //
+            //         },
+            //         actions: {
+            //             top: [],
+            //             right: [],
+            //             bottom: [],
+            //             left: []
+            //         }
+            //     },
+            //     yourDesigner = new FancyProductDesigner(
+            //         $yourDesigner,
+            //         pluginOpts
+            //     );
+            // // you can listen to events
+            // $yourDesigner.on('productCreate', async function () {
+            //     yourDesigner.getProductDataURL(function (dataURL) {
+            //         $('#img-' + design.id + (_this.type === 'view' ? '-view' : _this.type)).attr('src', dataURL);
+            //     });
+            // });
         }
     };
 

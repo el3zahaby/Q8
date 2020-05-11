@@ -93,6 +93,8 @@
 </template>
 
 <script>
+    import Cookies from 'js-cookie';
+
     export default {
         data() {
             return {
@@ -101,15 +103,17 @@
             };
         },
         props: [],
-        beforeMount() {
-            if(Object.keys(this.$root.user).length == 0){
-                this.$router.replace('/');
-                this.$router.go();
+        mounted() {
+            let _this = this;
+            if(!this.$root.login){
+                _this.$router.replace('/');
+                _this.$router.go();
             }
         },
         methods: {
             logout() {
                 this.$root.login = false;
+                Cookies.set('loggedIn', this.$root.login, { expires: 36521 });
                 this.$router.replace('/');
                 this.$router.go();
 
@@ -179,26 +183,9 @@
         outline: none;
     }
 
-    .locale-changer::before {
-        content: "\f13a";
-        font-family: FontAwesome;
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 35%;
-        height: 100%;
-        text-align: center;
-        font-size: 28px;
-        line-height: 45px;
-        color: rgba(255, 255, 255, 0.5);
-        background-color: rgba(255, 255, 255, 0.1);
-        pointer-events: none;
-    }
 
-    .locale-changer:hover::before {
-        color: rgba(255, 255, 255, 0.6);
-        background-color: rgba(255, 255, 255, 0.2);
-    }
+
+
 
     .locale-changer select option {
         padding: 30px;

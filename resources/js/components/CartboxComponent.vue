@@ -1,6 +1,6 @@
 <template>
     <div>
-        <ul v-if="Object.keys(this.$root.cart.items).length" class="mini_cart_box cart_div pb-2"
+        <ul v-if="Object.keys(this.$root.cart.items).length" :class="'mini_cart_box cart_div pb-2 '+ this.$root.selectedLang"
             style="overflow-y:auto; height:250px;">
             <li v-for="product in this.$root.cart.items"
                 :key="product.id"
@@ -197,5 +197,9 @@
 
     .single_product_cart .cart_img {
         width: 85px;
+    }
+    .mini_cart_box.cart_div.AR {
+        left: 0 !important;
+        right: unset !important;
     }
 </style>

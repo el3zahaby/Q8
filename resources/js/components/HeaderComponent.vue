@@ -10,7 +10,10 @@
                     <div class="header_icons_div">
                         <!-- Language_changer -->
                         <div class="locale-changer d-inline-block position-relative">
-                            <select v-model="selectedLang" v-on:change="setLang()">
+                            <button style='font-family: "titles_font", sans-serif;' class="btn btn-outline-light"  @click.prevent="setLang('AR')" v-if="this.$root.selectedLang == 'EN'">ع</button>
+                            <button class="btn btn-outline-light" @click.prevent="setLang('EN')" v-else="this.$root.selectedLang == 'AR'">EN</button>
+
+                            <select v-model="selectedLang" v-on:change="setLang()" style="display: none;">
                                 <option
                                     v-for="(lang, i) in langs"
                                     :key="`Lang${i}`"
@@ -125,19 +128,21 @@
                 logo_src: _LOGO,
                 search_placeholder: "Search now",
                 langs: ["AR", "EN"],
-                selectedLang: this.$i18n.locale,
+                selectedLang: this.$root.selectedLang,
                 qsearch: null,
             };
         },
         methods: {
 
-            setLang: function ()
+            setLang: function (L)
             {
-                this.$i18n.locale = this.selectedLang;
-                Cookies.set('locale', this.selectedLang, { expires: 3651 });
-                document.getElementsByTagName("html")[0].lang = this.selectedLang.toLowerCase();
-                axios.post('/api/v1/lang/' + this.selectedLang).then(function (response) {
-                    location.reload();
+                let lang =  L || this.$root.selectedLang;
+                this.$root.selectedLang = lang;
+                this.$i18n.locale = lang
+                Cookies.set('locale', lang, { expires: 36521 });
+                document.getElementsByTagName("html")[0].lang = lang.toLowerCase();
+                axios.post('/api/v1/lang/' + lang).then(function (response) {
+                    // location.reload();
                 });
             },
             search: function () {
@@ -184,26 +189,6 @@
             outline: none;
         }
 
-        .locale-changer::before {
-            content: "\f13a";
-            font-family: FontAwesome;
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 35%;
-            height: 100%;
-            text-align: center;
-            font-size: 28px;
-            line-height: 45px;
-            color: rgba(255, 255, 255, 0.5);
-            background-color: rgba(255, 255, 255, 0.1);
-            pointer-events: none;
-        }
-
-        .locale-changer:hover::before {
-            color: rgba(255, 255, 255, 0.6);
-            background-color: rgba(255, 255, 255, 0.2);
-        }
 
         .locale-changer select option {
             padding: 30px;
@@ -223,7 +208,8 @@
                 }
 
                 .account_div {
-                    width: 135px;
+                    height: auto !important;
+                    width: 160px;
                     position: absolute;
                     padding: 10px 30px;
                     top: 40px;

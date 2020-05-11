@@ -19,6 +19,8 @@
                         <th>user</th>
                         <th>orders</th>
                         <th>total price</th>
+                        <th>PAY Method</th>
+
                         <th>order_status</th>
                         <th>Change Status</th>
                         <th>Print Bill</th>
@@ -79,13 +81,15 @@
 
                                 </td>
                                 <td>{{ $item->cart_total }}</td>
+                                <td>{{ $item->shipping_info->pay_method ?? '!!' }}</td>
+
                                 <td><span class="badge badge-bg" style="background: {{ $item->status->color }}">{{ $item->status->status }}</span></td>
                                 <td>
                                     <form action="{{ route('admin.orders.changeStatus',$item->id) }}" method="post">
                                         @csrf
                                         <select name="status" class="ChangeStatus" data-order-id="">
                                             @foreach($status as $s)
-                                                <option value="{{ $s->id }}">{{ $s->status }}</option>
+                                                <option value="{{ $s->id }}" {{ $item->status->status == $s->status ? 'selected':'' }} >{{ $s->status }}</option>
                                             @endforeach
                                         </select>
                                     </form>

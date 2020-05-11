@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\OrderReceived;
+use App\MoneyRequest;
 use App\Order;
 use App\OrderStatus;
 use Dompdf\Dompdf;
@@ -23,11 +24,12 @@ class OrderController extends Controller
     {
         $clientInfo = $request->get('clientInfo');
 
+
         Session::put('clientInfo', $clientInfo);
 
         $price = Cart::total();
         $orderId = md5(uniqid());
-        if ($price > 0) {
+        if ($price > 0 && $clientInfo['pay_method'] == 'visa') {
             $body = array(
                 'merchant_id' => upayments('merchant_id'),
                 'username' => upayments('username'),
@@ -69,7 +71,7 @@ class OrderController extends Controller
         } else {
             return response()->json([
                 'status'=>'success',
-                'paymentURL' =>route('pay.success'). '?Result=CAPTURED&OrderID=free-'.substr(md5(uniqid(rand(1, 6))), 0, rand(15, 20))
+                'paymentURL' =>route('pay.success'). '?Result=CAPTURED&OrderID='.$clientInfo['pay_method'].'-'.substr(md5(uniqid(rand(1, 6))), 0, rand(15, 20))
             ],200);
         }
 
@@ -88,8 +90,11 @@ class OrderController extends Controller
 
     public function successPay(Request $request)
     {
+//        dd($request->all());
         if ($request->Result == 'CAPTURED') {
             $cart = Cart::content();
+
+            $designerAmount = StatisticController::calcDesignerTotalOfCartItems($cart);
 
 
             $clientInfo = Session::get('clientInfo');
@@ -109,7 +114,13 @@ class OrderController extends Controller
             Cart::store($order->id);
             Cart::destroy();
 
-            $order = Order::find(1);
+            $money =  MoneyRequest::create([
+                'user_id' => auth()->id(),
+                'amount' => $designerAmount['total'],
+                'order_id'=>$order->id,
+                'status' => 1,
+            ]);
+
             Mail::to(Auth::user()->email)->send(new OrderReceived([
                     'payment' => $order,
                     'items' => $order->items,

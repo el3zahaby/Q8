@@ -54,7 +54,7 @@
                                                         <label
                                                         >{{$t('Remember_me')}}</label
                                                         >
-                                                        <a href="#"
+                                                        <a href="password/reset"
                                                         >{{$t('Forgot_Password')}}</a
                                                         >
                                                     </div>
@@ -112,21 +112,9 @@
         props: [],
         mounted() {
             let  _this = this;
-            setTimeout(function(){
-                if(Object.keys(_this.$root.user).length != 0){
-                    _this.$router.push({path: '/'});
-                }
-            }, 1000);
-            setTimeout(function(){
-                if(Object.keys(_this.$root.user).length != 0){
-                    _this.$router.push({path: '/'});
-                }
-            }, 500);
-            setTimeout(function(){
-                if(Object.keys(_this.$root.user).length != 0){
-                    _this.$router.push({path: '/'});
-                }
-            }, 1500);
+            if(_this.$root.login){
+                _this.$router.push({path: '/'});
+            }
 
         }
     };

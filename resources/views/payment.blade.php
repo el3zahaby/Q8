@@ -25,8 +25,6 @@
         <div class="body_container card">
             <div class="card-body ">
                 <div class="alert-pay alert alert-{{$alert}}">{{ $status }}</div>
-                <slideshow-component></slideshow-component>
-
                 <router-view></router-view>
             </div>
         </div>

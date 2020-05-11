@@ -14,6 +14,7 @@ import VueI18n from 'vue-i18n';
 import Locale from './vue-i18n-locales.generated';
 import Cookies from 'js-cookie';
 
+
 Vue.use(VueRouter);
 
 Vue.use(VueInternationalization);
@@ -214,13 +215,14 @@ Vue.filter('currency', function (price) {
 const app = new Vue({
     el: "#app",
     data: {
-        login: true,
+        login: Cookies.get('loggedIn') || true,
         user: [],
         models: [],
         cart: {
             items: [],
             total: 0
         },
+        selectedLang: Cookies.get('locale') || 'AR',
         latestDesigns: [],
         allDesigns: [],
         default_tsize: null,
@@ -228,15 +230,15 @@ const app = new Vue({
 
     },
     methods: {
-        logout: function () {
+        logout: async function () {
             let _this = this;
-            axios.post('/api/v1/logout').then(function (response) {
+            await axios.post('/api/v1/logout').then(function (response) {
                 _this.login = false;
+                Cookies.set('loggedIn', _this.login, { expires: 36521 });
                 if (_this.login) {
                     _this.user = [];
                     _this.$router.push({path: '/'});
                 }
-
             });
         },
         removeFromCart: function (id) {
@@ -245,10 +247,12 @@ const app = new Vue({
                 _this.updateCart();
             });
         },
-        updateUser: function () {
+         updateUser: async function () {
             let _this = this;
-            axios.get("/api/user").then(function (response) {
-                _this.user = response.data ? response.data : [];
+            await axios.get("/api/user").then(async function (response) {
+                 _this.user = response.data ? response.data : [];
+                console.log(_this.user)
+                Cookies.set('loggedIn', true, { expires: 36521 });
             });
         },
         updateCart: function () {
@@ -315,27 +319,38 @@ const app = new Vue({
         login: function (val, oldVal) {
             if (oldVal) {
                 let _this = this;
-                axios.post("/logout").then(function (response) {
-                    _this.user = null;100
-                });
-                console.log("User Logout");
+                // // axios.post("/logout").then(function (response) {
+                // //     _this.user = [];
+                // //     Cookies.set('loggedIn', false, { expires: 36521 });
+                // // });
+                // console.log("User Logout",oldVal);
             }else {
                 this.login = true;
+                Cookies.set('loggedIn', true, { expires: 36521 });
             }
             console.log("Login Changed");
         },
         user: function (val, oldVal) {
-            console.log(val)
+            // console.log(val !== null)
             if(val !== null ){
-                if(Object.keys(val).length)
+                if(Object.keys(val).length !== 0) {
                     this.login = true;
+                    Cookies.set('loggedIn', true, { expires: 36521 });
+                }else {
+                    this.login = false;
+                    Cookies.set('loggedIn', false, { expires: 36521 });
+                }
             }else {
                 this.login = false;
+                Cookies.set('loggedIn', false, { expires: 36521 });
             }
             console.log("User Changed");
         }
     },
-    mounted() {
+    async mounted() {
+        let _res = await axios.get("/api/user");
+        this.user = _res.data ? _res.data : [];
+
         this.updateUser();
         this.updateCart();
         this.updateModels();

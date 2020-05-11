@@ -126,6 +126,7 @@
             enter: "enter",
             Payment_Methods: "Payment Methods",
             delivery: "Cash on delivery",
+            visa_card: "Pay with visa",
             Placeorder: "Place order",
             Your_order: "Your order",
 

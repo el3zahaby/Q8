@@ -1,92 +1,21 @@
 <template>
-    <div
-        id="jssor_1"
-        style="position:relative;margin:0 auto;top:0;left:0;width:980px;height:380px;overflow:hidden;visibility:hidden;background-color: #FFFFFF;"
-    >
-        <div
-            data-u="slides"
-            style="cursor:default;position:relative;top:0px;left:0px;width:980px;height:380px;overflow:hidden;"
-        >
-            <div v-for="slideshow in slidesshow" :key="slideshow.id">
-                <a :href="slideshow.url">
-                    <img data-u="image" style="max-width: 100%;max-height: 100%" :src="slideshow.img"/>
-                </a>
-            </div>
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" v-for="(slideshow,i) in slidesshow" :data-slide-to="i" :class="(i===0?'active':'')"></li>
+        </ol>
+        <div class="carousel-inner">
+            <a :href="slideshow.url" v-for="(slideshow,i) in slidesshow" :key="'slider'+slideshow.id" :class="'carousel-item '+ (i===0?'active':'')">
+                <img class="d-block w-100" :src="slideshow.img">
+            </a>
         </div>
-        <!-- Bullet Navigator -->
-        <div
-            data-u="navigator"
-            class="jssorb053"
-            style="position:absolute;bottom:12px;right:12px;"
-            data-autocenter="1"
-            data-scale="0.5"
-            data-scale-bottom="0.75"
-        >
-            <div data-u="prototype" class="i" style="width:16px;height:16px;">
-                <svg
-                    viewBox="0 0 16000 16000"
-                    style="position:absolute;top:0;left:0;width:100%;height:100%;"
-                >
-                    <path
-                        class="b"
-                        d="M11400,13800H4600c-1320,0-2400-1080-2400-2400V4600c0-1320,1080-2400,2400-2400h6800 c1320,0,2400,1080,2400,2400v6800C13800,12720,12720,13800,11400,13800z"
-                    ></path>
-                </svg>
-            </div>
-        </div>
-        <!-- Arrow Navigator -->
-        <div
-            data-u="arrowleft"
-            class="jssora093"
-            style="width:50px;height:50px;top:0px;left:30px;"
-            data-autocenter="2"
-            data-scale="0.75"
-            data-scale-left="0.75"
-        >
-            <svg
-                viewBox="0 0 16000 16000"
-                style="position:absolute;top:0;left:0;width:100%;height:100%;"
-            >
-                <circle class="c" cx="8000" cy="8000" r="5920"></circle>
-                <polyline
-                    class="a"
-                    points="7777.8,6080 5857.8,8000 7777.8,9920 "
-                ></polyline>
-                <line
-                    class="a"
-                    x1="10142.2"
-                    y1="8000"
-                    x2="5857.8"
-                    y2="8000"
-                ></line>
-            </svg>
-        </div>
-        <div
-            data-u="arrowright"
-            class="jssora093"
-            style="width:50px;height:50px;top:0px;right:30px;"
-            data-autocenter="2"
-            data-scale="0.75"
-            data-scale-right="0.75"
-        >
-            <svg
-                viewBox="0 0 16000 16000"
-                style="position:absolute;top:0;left:0;width:100%;height:100%;"
-            >
-                <circle class="c" cx="8000" cy="8000" r="5920"></circle>
-                <polyline
-                    class="a"
-                    points="8222.2,6080 10142.2,8000 8222.2,9920 "
-                ></polyline>
-                <line
-                    class="a"
-                    x1="5857.8"
-                    y1="8000"
-                    x2="10142.2"
-                    y2="8000"
-                ></line>
-            </svg>
-        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
     </div>
 </template>
 
@@ -101,7 +30,7 @@
             let _this = this;
             axios.get("api/v1/slider").then(response => {
                 _this.slidesshow = response.data;
-               // console.log(_this.slidesshow)
+               console.log(_this.slidesshow)
             });
         }
     };

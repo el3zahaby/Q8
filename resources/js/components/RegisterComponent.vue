@@ -32,6 +32,9 @@
                                 <div class="tab-pane active">
                                     <div class="login-form-container">
                                         <div class="login-form">
+                                            <div v-if="error"  class="alert alert-danger mt-2" role="alert">
+                                                <p v-for="err in error.errors">{{err}}</p>
+                                            </div>
                                             <form @submit.prevent="register" method="post">
                                                 <input style="color:blue"
                                                        required
@@ -104,11 +107,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div
-                            v-if="error"
-                            v-text="this.error"
-                            class="alert alert-danger mt-2"
-                            role="alert">
+                        <div v-if="error"  class="alert alert-danger mt-2" role="alert">
+                            <p v-for="err in error.errors">{{err}}</p>
                         </div>
                     </div>
                 </div>
@@ -155,18 +155,20 @@
                 phone: null,
                 age: null,
                 asDesigner:false,
-                error: null
+                error: null,
+                is_trader: 0,
             };
         },
         props: [],
         mounted() {
-            if(Object.keys(this.$root.user).length != 0){
+            if(this.$root.login){
                 this.$router.push({path: '/'});
             }
         },
         methods: {
             register: function () {
                 let _this = this.$root;
+                let __this = this;
                 axios.post('/api/v1/createUser', {
                     firstname: this.firstname,
                     lastname: this.lastname,
@@ -183,7 +185,7 @@
                     _this.$router.push({path: '/login'});
                 })).catch(function (error) {
                     let response = error.response;
-                    _this.error = response ? error.response.data.message : error;
+                    __this.error = response ? error.response.data : error;
                 });
 
             }

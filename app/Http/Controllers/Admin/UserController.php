@@ -114,6 +114,12 @@ class UserController extends Controller
         $item =  $this->model::findOrFail($id);
         return view($this->view.'users.show',compact('item'));
     }
+    public function verify($id){
+
+        $item =  $this->model::findOrFail($id);
+        $item->markEmailAsVerified();
+        return redirect()->back();
+    }
 
 //    /**
 //     * Show the form for editing the specified resource.

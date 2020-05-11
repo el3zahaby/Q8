@@ -5,6 +5,19 @@
     @include('general.fonts')
     @include('general.styles')
     <base href="{{url('/')}}">
+    <script>
+        let _LOGO = "{{ setting('app_logo') }}"
+        let _about_us_desc = "{{ setting('app_desc') }}"
+    </script>
+    <style>
+        option {
+            direction: ltr !important;
+        }
+        [type="radio"],[type="checkbox"]{
+            height: unset !important;
+        }
+    </style>
+
 </head>
 <body>
 <div id="app">

@@ -5,11 +5,12 @@
         .btn-group,option,td {
         direction: ltr !important;
         }
-
-    </style>
+        [type="radio"],[type="checkbox"]{
+            height: unset !important;
+        }    </style>
     <script>
-        let _LOGO = "{{ setting('app_logo') }}"
-        let _about_us_desc = "{{ setting('app_desc') }}"
+        {{--let _LOGO = "{{ setting('app_logo') }}"--}}
+        {{--let _about_us_desc = "{{ setting('app_desc') }}"--}}
     </script>
 @endsection
 

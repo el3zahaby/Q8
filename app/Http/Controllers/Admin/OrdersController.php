@@ -95,6 +95,13 @@ class OrdersController extends Controller
         return view($this->view.'show',compact('item'));
     }
 
+    public function showByStatus($id)
+    {
+        $items =  OrderStatus::findOrFail($id)->orders;
+        $status = OrderStatus::all();
+        return view($this->view.'index',compact('items','status'));
+    }
+
 //    /**
 //     * Show the form for editing the specified resource.
 //     *
