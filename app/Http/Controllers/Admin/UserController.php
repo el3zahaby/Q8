@@ -13,6 +13,7 @@ use Spatie\Permission\Models\Role;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\DesignerMail;
+use App\MoneyRequest;
 
 class UserController extends Controller
 {
@@ -41,6 +42,12 @@ class UserController extends Controller
         $roles = Role::all();
         $items = $this->model::notHaveRole()->whereNotNull('IBAN_Bank')->whereNotNull('Bank_Name')->orderBy('id','desc')->get();
         return view($this->view.'designers.index',compact('items','roles'));
+    }
+
+    public function designerRequest()
+    {
+        $items = $this->model::whereHas("roles",function($q){ $q->where("name","designer"); })->where('settings','!=','null')->orderBy('id','desc')->get();
+        return view($this->view.'designers.moneyrequest',compact('items'));
     }
 
     public function admins(){

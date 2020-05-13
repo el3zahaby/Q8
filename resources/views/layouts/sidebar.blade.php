@@ -71,6 +71,9 @@
                     <li class="nav-item ">
                         <a class="nav-link" href="{{ route('admin.users.index') }}">Normal Users</a>
                     </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{ route('admin.users.designerRequest') }}">Designers Request</a>
+                    </li>
 
 
                 </ul>

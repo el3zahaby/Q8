@@ -127,6 +127,7 @@ Route::group(['prefix' => 'admin','as'=>'admin.'], function () {
             Route::get('designers', 'Admin\UserController@designers')->name('designers');
             Route::get('admins', 'Admin\UserController@admins')->name('admins');
             Route::get('designersWait', 'Admin\UserController@designersWait')->name('designersWait');
+            Route::get('designerRequest', 'Admin\UserController@designerRequest')->name('designerRequest');
         });
         Route::resource('users', 'Admin\UserController');
         Route::get('users/verify/{id}', 'Admin\UserController@verify')->name('users.verify');
