@@ -19,6 +19,7 @@ class CreateMoneyRequestsTable extends Migration
             $table->integer('order_id');
             $table->string('amount');
             $table->boolean('status')->default(1); // if 1: the balance is in his account
+            $table->boolean('recieved')->default(1); // if 1: the designer still not recieved the money
             $table->timestamps();
         });
     }

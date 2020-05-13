@@ -92,6 +92,12 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo('App\Location');
     }
 
+    public function designerMoney($id)
+    {
+        $moneyReq = \App\MoneyRequest::where([ ['user_id' , $id] , ['recieved' , '1'] ])->sum('amount');
+        return $moneyReq;
+    }
+
     public function getFullNameAttribute(){
         return $this->first_name . ' ' . $this->last_name;
     }
@@ -99,6 +105,7 @@ class User extends Authenticatable implements MustVerifyEmail
 //        return $this->first_name . ' ' . $this->last_name;
         return $this->getRoleNames()[0] ?? null;
     }
+    
 
 
     public static function boot(){

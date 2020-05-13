@@ -54,6 +54,30 @@ class UserController extends Controller
         $items = $this->model::whereHas("roles", function($q){ $q->where("name", "admin"); })->orderBy('id','desc')->get();
         return view($this->view.'admins.index',compact('items'));
     }
+    public function moneyrequest($id)
+    {
+        
+        $designer = \App\User::find($id);
+        $designerRequest = new MoneyRequest;
+        $designerRequest->user_id = $id;
+        $designerRequest->order_id = 0;
+        $designerRequest->amount =  $designer->designerMoney($id) ;
+        $designerRequest->status = 0;
+        $designerRequest->recieved = 0;
+        $designerRequest->save();
+
+        $moneyRequests = MoneyRequest::where([['user_id',$id],['recieved',1]])->get();
+        foreach($moneyRequests as $mr)
+        {
+            $mr->recieved = 0;
+            $mr->save();
+        }
+
+        $designer->settings = null;
+        $designer->save();
+
+        return ;
+    }
 
     /**
      * Show the form for creating a new resource.

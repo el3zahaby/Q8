@@ -133,6 +133,7 @@ Route::group(['prefix' => 'admin','as'=>'admin.'], function () {
         Route::get('users/verify/{id}', 'Admin\UserController@verify')->name('users.verify');
 
         Route::get('updaterole/{id}','Admin\UserController@updateRole');
+        Route::put('moneyrequest/{id}','Admin\UserController@moneyRequest')->name('users.moneyrequest');
 
 
         // designs

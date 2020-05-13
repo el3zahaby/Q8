@@ -11,10 +11,8 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Designers</h4>
-                <p class="card-description">
-                    <button class="btn btn-success" data-toggle="modal" data-target="#store"><I CLASS="mdi mdi-plus-box"></I>Add new</button>
-                </p>
+                <h4 class="card-title">Designers Money Requests</h4>
+                
 
                 <div class="table-responsive">
                     <table class="table table-bordered">
@@ -33,7 +31,7 @@
                                 <td> {{ $item->id }} </td>
                                 <td> {{ $item->first_name . " " . $item->last_name }} </td>
                                 <td> {{ $item->email }} </td>
-                                <td>  </td>
+                                <td> {{ $item->designerMoney($item->id) }} </td>
 
                                 <td>
                                     <!-- delete -->
@@ -60,13 +58,88 @@
 </div>
 
 
-@endsection
+@foreach($items as $key=> $item)
+        <!-- Modal Item {{ $item->id }} -->
+        <div class="modal fade " id="edit-{{$item->id}}" tabindex="-1" role="dialog"  aria-hidden="true">
+            <div class="modal-dialog modal-lg p-5" role="document">
+                <form method="post" action="{{ route('admin.users.moneyrequest',$item->id) }}" id="form-edit-{{$item->id}}" class="modal-content form-edit" enctype="multipart/form-data">
+                    @method('PUT')
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel"><b>Edit:</b> {{ $item->full_name }}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <h1>Was the money transferred to this designer?</h1>
+                        </div>
 
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No , Close</button>
+                        <button type="submit"  class="btn btn-primary">Yes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    @endforeach
+@endsection
 
 @push('plugin-scripts')
 
 @endpush
 
 @push('custom-scripts')
+    <script >
+        $('.mdi-file-edit').parent().click(function (event) {
+            var _this = $(this);
+            event.preventDefault();
 
+            $('#edit-'+_this.data('id')).modal('show');
+        });
+
+        $('.form-edit,.form-store').submit(function (event) {
+            var _this = $(this);
+            event.preventDefault();
+            console.log(_this);
+
+            $.ajax({
+                type: "POST",
+                url: _this.attr('action'),
+                data: new FormData(this),
+                processData: false,
+                contentType: false,
+                success: function(data) {
+                    console.log(data);
+                    Swal.fire(
+                        'Done!',
+                        '',
+                        'success'
+                    ).then((result) => {
+                        // Reload the Page
+                        location.reload();
+                    });
+                },
+                error: function(data) {
+                    if(data.status = 422){
+                        var i = 0
+                        $.each( data.responseJSON.errors, function( key, value ) {
+                            i = i++;
+                            $('[name="' + key + '"]').addClass('invalid error');
+                            $('[name="' + key + '"]').after("<small class='helper-text text-danger'>"+value+"</small>")
+
+                        });
+                    }
+                }
+            });
+        });
+
+        $('.ChangeStatus').on('change',function(){
+            $(this).parent().submit();
+        });
+
+
+    </script>
 @endpush
+
