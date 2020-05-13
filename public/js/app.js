@@ -5219,6 +5219,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -5840,6 +5845,40 @@ __webpack_require__.r(__webpack_exports__);
         __this.error = response ? error.response.data.message : error;
       });
     }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/TransactionsComponent.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/TransactionsComponent.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {},
+  mounted: function mounted() {},
+  methods: {},
+  created: function created() {
+    console.log('test');
   }
 });
 
@@ -51034,6 +51073,22 @@ var render = function() {
                     )
                   ],
                   1
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  { staticClass: "nav-item" },
+                  [
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "nav-link hover",
+                        attrs: { to: "/dashboard/transactions" }
+                      },
+                      [_vm._v(_vm._s(_vm.$t("Transactions")))]
+                    )
+                  ],
+                  1
                 )
               ]),
               _vm._v(" "),
@@ -51194,6 +51249,22 @@ var render = function() {
                         _vm._v(
                           " " +
                             _vm._s(_vm.$t("Profile")) +
+                            "\n                        "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "text-decoration-none list-group-item",
+                        attrs: { to: "/dashboard/transactions" }
+                      },
+                      [
+                        _c("i", { staticClass: "fas fa-user-alt" }),
+                        _vm._v(
+                          " " +
+                            _vm._s(_vm.$t("Transactions")) +
                             "\n                        "
                         )
                       ]
@@ -52445,6 +52516,53 @@ var staticRenderFns = [
         staticStyle: { height: "360px", width: "100%" },
         attrs: { id: "map" }
       })
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/TransactionsComponent.vue?vue&type=template&id=8c47d45c&scoped=true&":
+/*!**********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/TransactionsComponent.vue?vue&type=template&id=8c47d45c&scoped=true& ***!
+  \**********************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "col-md-9" }, [
+    _c("div", { staticClass: "overview" }, [
+      _c(
+        "div",
+        { class: "overview-head main-color-bg " + _vm.$t("text-left") },
+        [
+          _c("h3", { staticClass: "text-capitalize" }, [
+            _vm._v(_vm._s(_vm.$t("Transactions")))
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _vm._m(0)
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "overview-body p-3 mx-auto" }, [
+      _c("div", { staticClass: "tab-content" })
     ])
   }
 ]
@@ -68334,6 +68452,9 @@ var routes = [{
   path: "/dashboard/profile",
   component: __webpack_require__(/*! ./components/dashboard/ProfileComponent.vue */ "./resources/js/components/dashboard/ProfileComponent.vue")["default"]
 }, {
+  path: "/dashboard/transactions",
+  component: __webpack_require__(/*! ./components/dashboard/TransactionsComponent */ "./resources/js/components/dashboard/TransactionsComponent.vue")["default"]
+}, {
   path: "/success",
   component: __webpack_require__(/*! ./components/MyOrderComponent.vue */ "./resources/js/components/MyOrderComponent.vue")["default"]
 }, {
@@ -70082,6 +70203,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/dashboard/TransactionsComponent.vue":
+/*!*********************************************************************!*\
+  !*** ./resources/js/components/dashboard/TransactionsComponent.vue ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _TransactionsComponent_vue_vue_type_template_id_8c47d45c_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TransactionsComponent.vue?vue&type=template&id=8c47d45c&scoped=true& */ "./resources/js/components/dashboard/TransactionsComponent.vue?vue&type=template&id=8c47d45c&scoped=true&");
+/* harmony import */ var _TransactionsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TransactionsComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/dashboard/TransactionsComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _TransactionsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _TransactionsComponent_vue_vue_type_template_id_8c47d45c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _TransactionsComponent_vue_vue_type_template_id_8c47d45c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "8c47d45c",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/dashboard/TransactionsComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/dashboard/TransactionsComponent.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/dashboard/TransactionsComponent.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TransactionsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./TransactionsComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/TransactionsComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TransactionsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/dashboard/TransactionsComponent.vue?vue&type=template&id=8c47d45c&scoped=true&":
+/*!****************************************************************************************************************!*\
+  !*** ./resources/js/components/dashboard/TransactionsComponent.vue?vue&type=template&id=8c47d45c&scoped=true& ***!
+  \****************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TransactionsComponent_vue_vue_type_template_id_8c47d45c_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./TransactionsComponent.vue?vue&type=template&id=8c47d45c&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/TransactionsComponent.vue?vue&type=template&id=8c47d45c&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TransactionsComponent_vue_vue_type_template_id_8c47d45c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TransactionsComponent_vue_vue_type_template_id_8c47d45c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/footerComponent.vue":
 /*!*****************************************************!*\
   !*** ./resources/js/components/footerComponent.vue ***!
@@ -70522,6 +70712,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;function _type
       Your_Name_on_Bank_Card: "اسمك علي بطاقة البنك",
       Save_Changes: "حفظ التغيرات",
       Cancel: "الغاء",
+      Transactions: "التحويلات النقديه",
       //==================================Footer=================
       Helpful_Links: "روابط مفيدة",
       Payment: "الدفع",
@@ -70766,8 +70957,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;function _type
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\laravel\Q8\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\laravel\Q8\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /var/www/html/work/Q8/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /var/www/html/work/Q8/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

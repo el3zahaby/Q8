@@ -94,6 +94,7 @@
             Your_Name_on_Bank_Card: "اسمك علي بطاقة البنك",
             Save_Changes: "حفظ التغيرات",
             Cancel: "الغاء",
+            Transactions: "التحويلات النقديه",
             //==================================Footer=================
             Helpful_Links: "روابط مفيدة",
             Payment: "الدفع",

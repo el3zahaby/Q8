@@ -20,7 +20,9 @@
                         <li class="nav-item">
                             <router-link to="/dashboard/profile" class="nav-link hover">{{$t('Profile')}}</router-link>
                         </li>
-
+                        <li class="nav-item">
+                            <router-link to="/dashboard/transactions" class="nav-link hover">{{$t('Transactions')}}</router-link>
+                        </li>
                     </ul>
                     <div class="header_icons_div">
                         <div class="locale-changer d-inline-block position-relative">
@@ -73,6 +75,9 @@
                             </router-link>
                             <router-link to="/dashboard/profile" class="text-decoration-none list-group-item">
                                 <i class="fas fa-user-alt"></i> {{$t('Profile')}}
+                            </router-link>
+                            <router-link to="/dashboard/transactions" class="text-decoration-none list-group-item">
+                                <i class="fas fa-user-alt"></i> {{$t('Transactions')}}
                             </router-link>
                         </div>
                     </div>

@@ -87,6 +87,11 @@ const routes = [
             .default
     },
     {
+        path: "/dashboard/transactions",
+        component: require("./components/dashboard/TransactionsComponent")
+            .default
+    },
+    {
         path: "/success",
         component: require("./components/MyOrderComponent.vue").default
     },
