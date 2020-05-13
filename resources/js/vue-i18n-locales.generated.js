@@ -95,6 +95,8 @@
             Save_Changes: "حفظ التغيرات",
             Cancel: "الغاء",
             Transactions: "التحويلات النقديه",
+            "You have recieved":"لقد استلمت مبلغ ",
+            "You have a new sell with":"لقد بعت بمبلغ",
             //==================================Footer=================
             Helpful_Links: "روابط مفيدة",
             Payment: "الدفع",

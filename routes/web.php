@@ -87,6 +87,7 @@ Route::group(['prefix' => '/api'], function () {
     //Designer_Route
     Route::get('/v1/designer', 'DesignerController@show');
     Route::post('/v1/add-to-designer', 'DesignerController@creat');
+    Route::get('/v1/designer-requests','DesignerController@designerRequests');
 
 
     //Cart_Route

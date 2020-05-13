@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\MoneyRequest;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -46,5 +47,10 @@ class DesignerController extends Controller
         $user->save();
 
         return "Ok";
+    }
+    public function designerRequests()
+    {
+        $requests = MoneyRequest::where('user_id',auth()->id())->get();
+        return $requests;
     }
 }
