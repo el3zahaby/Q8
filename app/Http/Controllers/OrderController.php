@@ -115,7 +115,7 @@ class OrderController extends Controller
             Cart::destroy();
 
             $money =  MoneyRequest::create([
-                'user_id' => auth()->id(),
+                'user_id' => $cart->options['product']['design']['user_id'],
                 'amount' => $designerAmount['total'],
                 'order_id'=>$order->id,
                 'status' => 1,
