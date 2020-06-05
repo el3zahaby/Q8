@@ -389,116 +389,113 @@
   </div>
 </template>
 <script>
-export default {
-  data() {
-    return {
-      productColours: ["Black", "White", "Orange", "Yellow"],
-      products: [],
-      mostSells: [],
-      pagination: {},
-      printOptions: "front",
-      frontprint: 0,
-      backprint: 0,
-      tcolor: "",
-      tsize: null,
-      count: 1,
-      tcolors: null,
-      dsizes: null,
-      tsizes: null,
-      printprice: null,
-      frontprintprice: 0,
-      backprintprice: 0,
-      tsizeprice: null,
-      tsizes_price: 0,
-      default_frontprint: null,
-      default_tsize: null
-    };
-  },
-  props: [],
-  methods: {
-    feachMostSells: function() {
-      let _this = this;
-      axios.get("/api/v1/most-sells").then(function(response) {
-        _this.mostSells = response.data;
-        console.log(_this.mostSells);
-      });
-    },
-    addToCart: function(product) {
-      let root = this.$root;
-      axios
-        .post(`api/v1/add-to-cart/${product.id}`, {
-          id: product.design.id,
-          product: product,
-          frontprint: this.frontprint,
-          backprint: this.backprint,
-          tcolor: this.tcolor,
-          tsize: this.tsize,
-          count: this.count
-        })
-        .then(function(response) {
-          root.updateCart();
-          $(".modal").modal("hide");
-        })
-        .catch(error => {
-          console.log(error);
-        });
-      console.log("Add To Cart");
-    },
-    printOpt: function(opt) {
-      this.printOptions = opt;
-      this.frontprint = 0;
-      this.backprint = 0;
-      this.backprintprice = 0;
-      this.frontprintprice = 0;
-    },
-    tsizePrice: function(tshirt) {
-      this.tsizes_price = tshirt.price | 0;
-      this.tsizeprice = tshirt.price;
-      // console.log(this.tsizes_price);
-    },
-    frontprintPrice: function(dsize) {
-      this.frontprint = dsize;
-      this.frontprintprice = 0 | dsize.total;
-    },
-    backprintPrice: function(dsize) {
-      this.backprint = dsize;
-      this.backprintprice = 0 | dsize.total;
-    },
-    fetchProducts(page_url) {
-      let vm = this;
-      page_url = page_url || "api/v1/design";
-      fetch(page_url)
-        .then(res => res.json())
-        .then(res => {
-          this.products = this.products.concat(res.data);
-          console.log(this.products);
-          vm.makePagination(res.next_page_url);
-        })
-        .catch(err => console.log(err));
-    },
-    makePagination(next_page_url) {
-      let pagination = {
-        next_page_url: next_page_url
-      };
-      this.pagination = pagination;
-    },
-    priceDis: function(price, discount) {
-      if (price === 0) return 0;
-      if (price - discount < 0) return 0;
-      return price - discount;
-    },
-    priceDefault: function(price, discount) {
-      return (
-        price -
-        price * discount +
-        this.$root.default_tsize +
-        this.$root.default_frontprint
-      );
-    },
-    getUnique: function(arr, comp) {
-      return (
-        arr
-          .map(e => e[comp])
+
+    export default {
+        data() {
+            return {
+                productColours: ['Black', 'White', 'Orange', 'Yellow'],
+                products: [],
+                mostSells: [],
+                pagination: {},
+                printOptions: "front",
+                frontprint: 0,
+                backprint: 0,
+                tcolor: '',
+                tsize: null,
+                count: 1,
+                tcolors: null,
+                dsizes: null,
+                tsizes: null,
+                printprice: null,
+                frontprintprice: 0,
+                backprintprice: 0,
+                tsizeprice: null,
+                tsizes_price: 0,
+                default_frontprint: null,
+                default_tsize: null
+            };
+        },
+        props: [],
+        methods: {
+            feachMostSells: function () {
+                let _this = this;
+                axios.get('/api/v1/most-sells').then(function (response) {
+                    _this.mostSells = response.data;
+                    console.log(_this.mostSells)
+                })
+            },
+            addToCart: function (product) {
+                let root = this.$root;
+                axios.post(`api/v1/add-to-cart/${product.id}`, {
+                    id: product.design.id,
+                    product: product,
+                    frontprint: this.frontprint,
+                    backprint: this.backprint,
+                    tcolor: this.tcolor,
+                    tsize: this.tsize,
+                    count: this.count,
+                }).then(function (response) {
+                    root.updateCart();
+                    $('.modal').modal('hide');
+
+                }).catch((error) => {
+                    console.log(error);
+                });
+                console.log('Add To Cart');
+            },
+            printOpt:function (opt) {
+                this.printOptions = opt;
+                this.frontprint = 0;
+                this.backprint = 0;
+                this.backprintprice = 0;
+                this.frontprintprice = 0;
+            },
+            tsizePrice: function (tshirt) {
+                console.log(tshirt)
+                this.tsizes_price = tshirt.price | 0;
+                this.tsizeprice = tshirt.price | 0;
+                // console.log(this.tsizes_price);
+            },
+            frontprintPrice: function (dsize) {
+                this.frontprint = dsize;
+                this.frontprintprice = 0 | dsize.total
+            },
+            backprintPrice: function (dsize) {
+                this.backprint = dsize;
+                this.backprintprice = 0 | dsize.total
+            },
+            fetchProducts(page_url) {
+                let vm = this;
+                page_url = page_url || 'api/v1/design';
+                fetch(page_url)
+                    .then(res => res.json())
+                    .then(res => {
+                        this.products = this.products.concat(res.data);
+                        console.log(this.products)
+                        vm.makePagination(res.next_page_url);
+                    })
+                    .catch(err => console.log(err));
+            },
+            makePagination(next_page_url) {
+                let pagination = {
+                    next_page_url: next_page_url,
+                };
+                this.pagination = pagination;
+            },
+            priceDis: function (price, discount) {
+                if (price === 0 ) return 0;
+                if ((price - discount) < 0) return 0;
+                return price - discount;
+            },
+            priceDefault: function (price, discount) {
+                return price - (price * discount) + this.$root.default_tsize + this.$root.default_frontprint;
+            },
+            getUnique : function (arr, comp) {
+                return arr
+                    .map(e => e[comp])
+
+                    // store the keys of the unique objects
+                    .map((e, i, final) => final.indexOf(e) === i && i)
 
           // store the keys of the unique objects
           .map((e, i, final) => final.indexOf(e) === i && i)
@@ -559,21 +556,113 @@ export default {
 };
 </script>
 <style lang="scss">
-.body_content_div {
-  padding: 25px 15px;
-}
-.most_sell_title {
-  color: #7a7a7a;
-  font-family: "titles_font", sans-serif;
-}
-.t-shirt_data {
-  border: 1px solid #eeeeee;
-  padding: 10px;
-  .t-shirt_image_div {
-    .product-img {
-      min-height: 250px;
-      max-height: 260px;
-      border-bottom: 1px solid #eeeeee;
+    .body_content_div {
+        padding: 25px 15px;
+    }
+    .most_sell_title {
+        color: #7a7a7a;
+        font-family: "titles_font", sans-serif;
+    }
+    .t-shirt_data {
+        border: 1px solid #eeeeee;
+        padding: 10px;
+        .t-shirt_image_div {
+            .product-img {
+                min-height: 250px;
+                max-height: 260px;
+                border-bottom: 1px solid #eeeeee;
+                margin-top: 13px;
+            }
+        }
+    }
+    .t-shirt_inner_data img {
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+    }
+    .t-shirt_name {
+        font-size: 22px;
+    }
+    .t-shirt_review_stars {
+        color: gold;
+        cursor: pointer;
+    }
+    .t-shirt_no_review_text {
+        font-size: 18px;
+        color: #999;
+    }
+    .t-shirt_price_sale,
+    .t-shirt_price_nosale {
+        font-size: 18px;
+        display: inline-block;
+
+    }
+    .t-shirt_price_nosale {
+        text-decoration: line-through;
+        color: #909090;
+    }
+    .product_btn_div {
+        padding: 0;
+        position: absolute;
+        transform: translate(-50%);
+        left: 50%;
+        bottom: -10%;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.5s ease;
+        background: #fff;
+        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.08);
+        border-radius: 15px;
+    }
+    .t-shirt_image_div:hover .product_btn_div {
+        opacity: 1;
+        visibility: visible;
+        bottom: 10px;
+    }
+    .product_btn_div li a,
+    .product_btn_div li button {
+        display: inline-block;
+        padding: 10px 15px;
+        width: 65px;
+        height: 50px;
+    }
+    .add_to_cart_btn img {
+        height: 23px;
+    }
+    .product_btn_div .add_to_cart_btn {
+        background-color: transparent;
+        border: 0;
+    }
+    .quickview_btn img {
+        height: 25px;
+    }
+    .cart_ul_btn li:first-child {
+        border-left: 1px solid #ccc;
+    }
+    /*    product modal*/
+    .modal {
+        .modal-content {
+            .close {
+                font-size: 2.4rem;
+                line-height: 1.2;
+                color: #122d65;
+                position: absolute;
+                top: -5px;
+                right: 15px;
+                z-index: 999999999 !important;
+            }
+
+            .productPrice {
+                color: #227dc7;
+                font-weight: bold;
+                font-size: 24px;
+            }
+        }
+    }
+    #main-container {
+        margin: 40px auto;
+        width: 1200px;
+        max-width: 100%;
     }
   }
 }

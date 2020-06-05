@@ -105,7 +105,8 @@ class DesignController extends Controller
             }
 
         }
-        $store->designer_price = json_encode($dsignsize);
+        $store->designer_price = json_encode(array_values($dsignsize));
+
 
 
 
@@ -208,7 +209,7 @@ class DesignController extends Controller
             }
 
         }
-        $item->designer_price = json_encode($dsignsize);
+        $item->designer_price = json_encode(array_values($dsignsize));
 
 
 

@@ -27,15 +27,18 @@
                                         {{ product.name }}
 
                                     </td>
-                                    <td class="product-price"><span class="amount">${{ product.price }}</span></td>
+                                    <td class="product-price"><span class="amount">KWD {{ product.price }}</span></td>
                                     <td class="product-quantity">
                                         <div class="quantity-range">
-                                            <input @change="updateQuantity(product)" class="input-text qty text"
-                                                   type="number" step="1" min="1" v-model="product.qty" title="Qty"
-                                                   size="4">
+                                            <select @change="updateQuantity(product)"  v-model="product.qty" title="Qty" class="input-text qty text">
+                                                <option v-for="index in 100" :value="index">{{index}}</option>
+                                            </select>
+<!--                                            <input  -->
+<!--                                                   type="number" -->
+<!--                                                   size="4">-->
                                         </div>
                                     </td>
-                                    <td class="product-subtotal">${{product.subtotal+product.tax-product.discount}}</td>
+                                    <td class="product-subtotal">KWD {{product.subtotal+product.tax-product.discount}}</td>
                                     <td @click="$root.removeFromCart(product.rowId)"
                                         class="product-cart-icon product-subtotal"><i
                                         class="delete far fa-trash-alt"></i></td>
@@ -119,10 +122,14 @@
         props: [],
         methods: {
             updateQuantity: function (product) {
+                $.LoadingOverlay("show");
+
                 //Todo:Implement Update
                 let root = this.$root;
                 axios.get(`api/v1/update-cart/${product.rowId}/${product.qty}`).then(function (response) {
                     root.updateCart();
+                    $.LoadingOverlay("hide");
+
                 });
             },
             deleteItem: function (product) {
