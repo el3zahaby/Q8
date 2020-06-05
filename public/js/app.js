@@ -1820,6 +1820,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1829,10 +1832,12 @@ __webpack_require__.r(__webpack_exports__);
   props: [],
   methods: {
     updateQuantity: function updateQuantity(product) {
-      //Todo:Implement Update
+      $.LoadingOverlay("show"); //Todo:Implement Update
+
       var root = this.$root;
       axios.get("api/v1/update-cart/".concat(product.rowId, "/").concat(product.qty)).then(function (response) {
         root.updateCart();
+        $.LoadingOverlay("hide");
       });
     },
     deleteItem: function deleteItem(product) {
@@ -2077,6 +2082,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2100,6 +2107,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     addOrder: function addOrder() {
       var _this = this;
 
+      $.LoadingOverlay("show");
       axios.post('/api/v1/add-to-order', {
         clientInfo: _this.clientInfo
       }).then(function (response) {
@@ -2109,9 +2117,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           window.location.href = res.paymentURL;
         } else {
           alert('error in pay!');
-        } // _this.$router.push({path: '/'});
-        // _this.$root.updateCart();
+        }
 
+        $.LoadingOverlay("hide"); // _this.$router.push({path: '/'});
+        // _this.$root.updateCart();
       });
     },
     discount: function discount() {
@@ -4377,8 +4386,9 @@ __webpack_require__.r(__webpack_exports__);
       this.frontprintprice = 0;
     },
     tsizePrice: function tsizePrice(tshirt) {
+      console.log(tshirt);
       this.tsizes_price = tshirt.price | 0;
-      this.tsizeprice = tshirt.price; // console.log(this.tsizes_price);
+      this.tsizeprice = tshirt.price | 0; // console.log(this.tsizes_price);
     },
     frontprintPrice: function frontprintPrice(dsize) {
       this.frontprint = dsize;
@@ -10910,7 +10920,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".body_content_div {\n  padding: 25px 15px;\n}\n.most_sell_title {\n  color: #7a7a7a;\n  font-family: \"titles_font\", sans-serif;\n}\n.t-shirt_data {\n  border: 1px solid #eeeeee;\n  padding: 10px;\n}\n.t-shirt_data .t-shirt_image_div .product-img {\n  min-height: 250px;\n  max-height: 260px;\n  border-bottom: 1px solid #eeeeee;\n}\n.t-shirt_inner_data img {\n  width: 16px;\n  height: 16px;\n  cursor: pointer;\n}\n.t-shirt_name {\n  font-size: 22px;\n}\n.t-shirt_review_stars {\n  color: gold;\n  cursor: pointer;\n}\n.t-shirt_no_review_text {\n  font-size: 18px;\n  color: #999;\n}\n.t-shirt_price_sale,\n.t-shirt_price_nosale {\n  font-size: 18px;\n  display: inline-block;\n}\n.t-shirt_price_nosale {\n  text-decoration: line-through;\n  color: #909090;\n}\n.product_btn_div {\n  padding: 0;\n  position: absolute;\n  transform: translate(-50%);\n  left: 50%;\n  bottom: -10%;\n  opacity: 0;\n  visibility: hidden;\n  transition: all 0.5s ease;\n  background: #fff;\n  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.08);\n  border-radius: 15px;\n}\n.t-shirt_image_div:hover .product_btn_div {\n  opacity: 1;\n  visibility: visible;\n  bottom: 10px;\n}\n.product_btn_div li a,\n.product_btn_div li button {\n  display: inline-block;\n  padding: 10px 15px;\n  width: 65px;\n  height: 50px;\n}\n.add_to_cart_btn img {\n  height: 23px;\n}\n.product_btn_div .add_to_cart_btn {\n  background-color: transparent;\n  border: 0;\n}\n.quickview_btn img {\n  height: 25px;\n}\n.cart_ul_btn li:first-child {\n  border-left: 1px solid #ccc;\n}\n\n/*    product modal*/\n.modal .modal-content .close {\n  font-size: 2.4rem;\n  line-height: 1.2;\n  color: #122d65;\n  position: absolute;\n  top: -5px;\n  right: 15px;\n}\n.modal .modal-content .productPrice {\n  color: #227dc7;\n  font-weight: bold;\n  font-size: 24px;\n}\n#main-container {\n  margin: 40px auto;\n  width: 1200px;\n  max-width: 100%;\n}\n.api-buttons > a {\n  margin: 0 5px 0 0 !important;\n  text-decoration: none !important;\n}\n.price {\n  font-size: 24px !important;\n  line-height: 26px !important;\n}", ""]);
+exports.push([module.i, ".body_content_div {\n  padding: 25px 15px;\n}\n.most_sell_title {\n  color: #7a7a7a;\n  font-family: \"titles_font\", sans-serif;\n}\n.t-shirt_data {\n  border: 1px solid #eeeeee;\n  padding: 10px;\n}\n.t-shirt_data .t-shirt_image_div .product-img {\n  min-height: 250px;\n  max-height: 260px;\n  border-bottom: 1px solid #eeeeee;\n  margin-top: 13px;\n}\n.t-shirt_inner_data img {\n  width: 16px;\n  height: 16px;\n  cursor: pointer;\n}\n.t-shirt_name {\n  font-size: 22px;\n}\n.t-shirt_review_stars {\n  color: gold;\n  cursor: pointer;\n}\n.t-shirt_no_review_text {\n  font-size: 18px;\n  color: #999;\n}\n.t-shirt_price_sale,\n.t-shirt_price_nosale {\n  font-size: 18px;\n  display: inline-block;\n}\n.t-shirt_price_nosale {\n  text-decoration: line-through;\n  color: #909090;\n}\n.product_btn_div {\n  padding: 0;\n  position: absolute;\n  transform: translate(-50%);\n  left: 50%;\n  bottom: -10%;\n  opacity: 0;\n  visibility: hidden;\n  transition: all 0.5s ease;\n  background: #fff;\n  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.08);\n  border-radius: 15px;\n}\n.t-shirt_image_div:hover .product_btn_div {\n  opacity: 1;\n  visibility: visible;\n  bottom: 10px;\n}\n.product_btn_div li a,\n.product_btn_div li button {\n  display: inline-block;\n  padding: 10px 15px;\n  width: 65px;\n  height: 50px;\n}\n.add_to_cart_btn img {\n  height: 23px;\n}\n.product_btn_div .add_to_cart_btn {\n  background-color: transparent;\n  border: 0;\n}\n.quickview_btn img {\n  height: 25px;\n}\n.cart_ul_btn li:first-child {\n  border-left: 1px solid #ccc;\n}\n\n/*    product modal*/\n.modal .modal-content .close {\n  font-size: 2.4rem;\n  line-height: 1.2;\n  color: #122d65;\n  position: absolute;\n  top: -5px;\n  right: 15px;\n  z-index: 999999999 !important;\n}\n.modal .modal-content .productPrice {\n  color: #227dc7;\n  font-weight: bold;\n  font-size: 24px;\n}\n#main-container {\n  margin: 40px auto;\n  width: 1200px;\n  max-width: 100%;\n}\n.api-buttons > a {\n  margin: 0 5px 0 0 !important;\n  text-decoration: none !important;\n}\n.price {\n  font-size: 24px !important;\n  line-height: 26px !important;\n}", ""]);
 
 // exports
 
@@ -11043,7 +11053,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.add[data-v-8c47d45c]{\n    background-color: #5c8;\n}\n.remove[data-v-8c47d45c]{\n    background-color: #f65;\n}\n\n", ""]);
+exports.push([module.i, "\n.add[data-v-8c47d45c]{\r\n    background-color: #5c8;\n}\n.remove[data-v-8c47d45c]{\r\n    background-color: #f65;\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -46297,56 +46307,76 @@ var render = function() {
                         _vm._v(" "),
                         _c("td", { staticClass: "product-name" }, [
                           _vm._v(
-                            "\n\n                                    " +
+                            "\n\n                                        " +
                               _vm._s(product.name) +
-                              "\n\n                                "
+                              "\n\n                                    "
                           )
                         ]),
                         _vm._v(" "),
                         _c("td", { staticClass: "product-price" }, [
                           _c("span", { staticClass: "amount" }, [
-                            _vm._v("$" + _vm._s(product.price))
+                            _vm._v("KWD " + _vm._s(product.price))
                           ])
                         ]),
                         _vm._v(" "),
                         _c("td", { staticClass: "product-quantity" }, [
                           _c("div", { staticClass: "quantity-range" }, [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: product.qty,
-                                  expression: "product.qty"
-                                }
-                              ],
-                              staticClass: "input-text qty text",
-                              attrs: {
-                                type: "number",
-                                step: "1",
-                                min: "1",
-                                title: "Qty",
-                                size: "4"
-                              },
-                              domProps: { value: product.qty },
-                              on: {
-                                change: function($event) {
-                                  return _vm.updateQuantity(product)
-                                },
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
+                            _c(
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: product.qty,
+                                    expression: "product.qty"
                                   }
-                                  _vm.$set(product, "qty", $event.target.value)
+                                ],
+                                staticClass: "input-text qty text",
+                                attrs: { title: "Qty" },
+                                on: {
+                                  change: [
+                                    function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.$set(
+                                        product,
+                                        "qty",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
+                                    },
+                                    function($event) {
+                                      return _vm.updateQuantity(product)
+                                    }
+                                  ]
                                 }
-                              }
-                            })
+                              },
+                              _vm._l(100, function(index) {
+                                return _c(
+                                  "option",
+                                  { domProps: { value: index } },
+                                  [_vm._v(_vm._s(index))]
+                                )
+                              }),
+                              0
+                            )
                           ])
                         ]),
                         _vm._v(" "),
                         _c("td", { staticClass: "product-subtotal" }, [
                           _vm._v(
-                            "$" +
+                            "KWD " +
                               _vm._s(
                                 product.subtotal +
                                   product.tax -
@@ -46473,9 +46503,9 @@ var render = function() {
               _c("ul", { staticClass: "list-unstyled" }, [
                 _c("li", [
                   _vm._v(
-                    "\n                                " +
+                    "\n                                    " +
                       _vm._s(_vm.$t("sub_total")) +
-                      "\n                                "
+                      "\n                                    "
                   ),
                   _c("span", [
                     _vm._v(_vm._s(this.$root.cart.total["subtotal"]))
@@ -46484,18 +46514,18 @@ var render = function() {
                 _vm._v(" "),
                 _c("li", [
                   _vm._v(
-                    "\n                                " +
+                    "\n                                    " +
                       _vm._s(_vm.$t("tax")) +
-                      "\n                                "
+                      "\n                                    "
                   ),
                   _c("span", [_vm._v(_vm._s(this.$root.cart.total["tax"]))])
                 ]),
                 _vm._v(" "),
                 _c("li", [
                   _vm._v(
-                    "\n                                " +
+                    "\n                                    " +
                       _vm._s(_vm.$t("order_total")) +
-                      "\n                                "
+                      "\n                                    "
                   ),
                   _c("span", [_vm._v(_vm._s(this.$root.cart.total["total"]))])
                 ])
@@ -46981,12 +47011,9 @@ var render = function() {
                                 _c("td", { staticClass: "product-total" }, [
                                   _c("span", { staticClass: "amount" }, [
                                     _vm._v(
-                                      "$" +
-                                        _vm._s(
-                                          item.subtotal +
-                                            item.tax -
-                                            item.discount
-                                        )
+                                      _vm._s(
+                                        item.subtotal + item.tax - item.discount
+                                      ) + " KWD"
                                     )
                                   ])
                                 ])
@@ -47003,8 +47030,8 @@ var render = function() {
                             _c("td", [
                               _c("span", { staticClass: "amount" }, [
                                 _vm._v(
-                                  "$" +
-                                    _vm._s(this.$root.cart.total["subtotal"])
+                                  _vm._s(this.$root.cart.total["total"]) +
+                                    " KWD"
                                 )
                               ])
                             ])
@@ -47017,7 +47044,8 @@ var render = function() {
                               _c("strong", [
                                 _c("span", { staticClass: "amount" }, [
                                   _vm._v(
-                                    "$" + _vm._s(this.$root.cart.total["total"])
+                                    _vm._s(this.$root.cart.total["total"]) +
+                                      " KWD"
                                   )
                                 ])
                               ])
@@ -71072,8 +71100,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;function _type
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/html/work/Q8/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /var/www/html/work/Q8/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\laravel\Q8\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\laravel\Q8\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

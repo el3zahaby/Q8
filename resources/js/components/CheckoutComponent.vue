@@ -101,19 +101,21 @@
                                             {{ item.name }} <strong class="product-quantity"> × {{ item.qty }}</strong>
                                         </td>
                                         <td class="product-total">
-                                            <span class="amount">${{item.subtotal+item.tax-item.discount}}</span>
+                                            <span class="amount">{{item.subtotal+item.tax-item.discount}} KWD</span>
                                         </td>
                                     </tr>
                                     </tbody>
                                     <tfoot>
                                     <tr class="cart-subtotal">
                                         <th>{{$t('sub_total')}}</th>
-                                        <td><span class="amount">${{this.$root.cart.total['subtotal']}}</span></td>
+                                        <td><span class="amount">{{this.$root.cart.total['total']}} KWD</span></td>
                                     </tr>
                                     <tr class="order-total">
                                         <th>{{$t('order_total')}}</th>
-                                        <td><strong><span
-                                            class="amount">${{this.$root.cart.total['total']}}</span></strong>
+                                        <td>
+                                            <strong>
+                                                <span class="amount">{{this.$root.cart.total['total']}} KWD</span>
+                                            </strong>
                                         </td>
                                     </tr>
                                     </tfoot>
@@ -169,6 +171,7 @@
         methods: {
             addOrder: function () {
                 let _this = this;
+                $.LoadingOverlay("show");
                 axios.post('/api/v1/add-to-order', {
                     clientInfo: _this.clientInfo
                 }).then(function (response) {
@@ -178,6 +181,7 @@
                     }else{
                         alert('error in pay!')
                     }
+                    $.LoadingOverlay("hide");
                     // _this.$router.push({path: '/'});
                     // _this.$root.updateCart();
                 });

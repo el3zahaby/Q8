@@ -114,6 +114,7 @@ class OrderController extends Controller
             Cart::store($order->id);
             Cart::destroy();
 
+            dd($cart->options['product']['design']);
             $money =  MoneyRequest::create([
                 'user_id' => $cart->options['product']['design']['user_id'],
                 'amount' => $designerAmount['total'],

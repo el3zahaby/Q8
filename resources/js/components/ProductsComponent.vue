@@ -424,8 +424,9 @@
                 this.frontprintprice = 0;
             },
             tsizePrice: function (tshirt) {
+                console.log(tshirt)
                 this.tsizes_price = tshirt.price | 0;
-                this.tsizeprice = tshirt.price;
+                this.tsizeprice = tshirt.price | 0;
                 // console.log(this.tsizes_price);
             },
             frontprintPrice: function (dsize) {
@@ -540,6 +541,7 @@
                 min-height: 250px;
                 max-height: 260px;
                 border-bottom: 1px solid #eeeeee;
+                margin-top: 13px;
             }
         }
     }
@@ -617,7 +619,9 @@
                 position: absolute;
                 top: -5px;
                 right: 15px;
+                z-index: 999999999 !important;
             }
+
             .productPrice {
                 color: #227dc7;
                 font-weight: bold;
