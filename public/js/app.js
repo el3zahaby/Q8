@@ -4316,17 +4316,43 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      productColours: ['Black', 'White', 'Orange', 'Yellow'],
+      productColours: ["Black", "White", "Orange", "Yellow"],
       products: [],
       mostSells: [],
       pagination: {},
       printOptions: "front",
       frontprint: 0,
       backprint: 0,
-      tcolor: '',
+      tcolor: "",
       tsize: null,
       count: 1,
       tcolors: null,
@@ -4346,7 +4372,7 @@ __webpack_require__.r(__webpack_exports__);
     feachMostSells: function feachMostSells() {
       var _this = this;
 
-      axios.get('/api/v1/most-sells').then(function (response) {
+      axios.get("/api/v1/most-sells").then(function (response) {
         _this.mostSells = response.data;
         console.log(_this.mostSells);
       });
@@ -4363,11 +4389,11 @@ __webpack_require__.r(__webpack_exports__);
         count: this.count
       }).then(function (response) {
         root.updateCart();
-        $('.modal').modal('hide');
+        $(".modal").modal("hide");
       })["catch"](function (error) {
         console.log(error);
       });
-      console.log('Add To Cart');
+      console.log("Add To Cart");
     },
     printOpt: function printOpt(opt) {
       this.printOptions = opt;
@@ -4392,7 +4418,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       var vm = this;
-      page_url = page_url || 'api/v1/design';
+      page_url = page_url || "api/v1/design";
       fetch(page_url).then(function (res) {
         return res.json();
       }).then(function (res) {
@@ -4443,13 +4469,13 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this3 = this;
 
-    axios.get('api/v1/color').then(function (response) {
+    axios.get("api/v1/color").then(function (response) {
       _this3.tcolors = response.data;
     }); // axios.get('api/v1/dsize').then(response => {
     //     this.dsizes = response.data;
     // });
 
-    axios.get('api/v1/tsize').then(function (response) {
+    axios.get("api/v1/tsize").then(function (response) {
       _this3.tsizes = response.data;
     });
     axios.get("api/v1/default-printprice").then(function (response) {
@@ -4460,16 +4486,16 @@ __webpack_require__.r(__webpack_exports__);
       _this3.tcolor = response.data.id;
     });
     /*
-        let vm = this;
-        page_url = page_url || 'api/v1/design';
-        fetch(page_url)
-            .then(res => res.json())
-            .then(res => {
-                this.products = this.products.concat(res.data);
-                vm.makePagination(res.next_page_url);
-            })
-            .catch(err => console.log(err));
-             */
+                let vm = this;
+                page_url = page_url || 'api/v1/design';
+                fetch(page_url)
+                    .then(res => res.json())
+                    .then(res => {
+                        this.products = this.products.concat(res.data);
+                        vm.makePagination(res.next_page_url);
+                    })
+                    .catch(err => console.log(err));
+                     */
   },
   computed: {
     getproducts: function getproducts() {
@@ -48770,11 +48796,13 @@ var render = function() {
                           { staticClass: "t-shirt_price_nosale" },
                           [
                             _vm._v(
-                              _vm._s(
-                                product.design.designer_price[0]
-                                  ? product.design.designer_price[0].total
-                                  : 0
-                              ) + " "
+                              "\n                " +
+                                _vm._s(
+                                  product.design.designer_price[0]
+                                    ? product.design.designer_price[0].total
+                                    : 0
+                                ) +
+                                "\n                "
                             ),
                             _c("SMALL", [_vm._v("KWD")])
                           ],
@@ -48787,14 +48815,16 @@ var render = function() {
                       { staticClass: "t-shirt_price_sale" },
                       [
                         _vm._v(
-                          _vm._s(
-                            _vm.priceDis(
-                              product.design.designer_price[0]
-                                ? product.design.designer_price[0].total
-                                : 0,
-                              product.design.discount
-                            )
-                          ) + " "
+                          "\n                " +
+                            _vm._s(
+                              _vm.priceDis(
+                                product.design.designer_price[0]
+                                  ? product.design.designer_price[0].total
+                                  : 0,
+                                product.design.discount
+                              )
+                            ) +
+                            "\n                "
                         ),
                         _c("SMALL", [_vm._v("KWD")])
                       ],
@@ -48911,11 +48941,13 @@ var render = function() {
                     product.design.discount !== 0
                       ? _c("span", { staticClass: "t-shirt_price_nosale" }, [
                           _vm._v(
-                            _vm._s(
-                              product.design.designer_price[0]
-                                ? product.design.designer_price[0].total
-                                : 0
-                            ) + " "
+                            "\n                " +
+                              _vm._s(
+                                product.design.designer_price[0]
+                                  ? product.design.designer_price[0].total
+                                  : 0
+                              ) +
+                              "\n                "
                           ),
                           _c("small", [_vm._v("KWD")])
                         ])
@@ -48923,14 +48955,16 @@ var render = function() {
                     _vm._v(" "),
                     _c("span", { staticClass: "t-shirt_price_sale" }, [
                       _vm._v(
-                        _vm._s(
-                          _vm.priceDis(
-                            product.design.designer_price[0]
-                              ? product.design.designer_price[0].total
-                              : 0,
-                            product.design.discount
-                          )
-                        ) + " "
+                        "\n                " +
+                          _vm._s(
+                            _vm.priceDis(
+                              product.design.designer_price[0]
+                                ? product.design.designer_price[0].total
+                                : 0,
+                              product.design.discount
+                            )
+                          ) +
+                          "\n                "
                       ),
                       _c("small", [_vm._v("KWD")])
                     ])
@@ -48964,7 +48998,7 @@ var render = function() {
                   }
                 },
                 [
-                  _vm._v("Load More "),
+                  _vm._v("\n        Load More\n        "),
                   _c("i", { staticClass: "fas fa-arrow-down" })
                 ]
               )
@@ -49035,723 +49069,757 @@ var render = function() {
                         )
                       ]),
                       _vm._v(" "),
-                      _c("div", { class: "col-md-6 " + _vm.$t("text-left") }, [
-                        _c("h3", { staticClass: "productName" }, [
-                          _vm._v(_vm._s(product.design.name))
-                        ]),
-                        _vm._v(" "),
-                        _c("h5", [
-                          _vm._v("ID: "),
-                          _c("span", [_vm._v(_vm._s(product.design.id))])
-                        ]),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "productPrice" }, [
-                          _vm._v(
-                            _vm._s(
-                              _vm._f("currency")(
-                                _vm.priceDis(
-                                  product.design.designer_price[0]
-                                    ? product.design.designer_price[0].total
-                                    : 0,
-                                  product.design.discount
-                                )
+                      _c(
+                        "div",
+                        {
+                          class: "col-md-6 " + _vm.$t("text-left"),
+                          staticStyle: { "z-index": "1" }
+                        },
+                        [
+                          _c("h3", { staticClass: "productName" }, [
+                            _vm._v(_vm._s(product.design.name))
+                          ]),
+                          _vm._v(" "),
+                          _c("h5", [
+                            _vm._v(
+                              "\n                  ID:\n                  "
+                            ),
+                            _c("span", [_vm._v(_vm._s(product.design.id))])
+                          ]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "productPrice" }, [
+                            _vm._v(
+                              _vm._s(
+                                _vm.count *
+                                  _vm.priceDis(
+                                    _vm.tsizes_price +
+                                      _vm.frontprintprice +
+                                      _vm.backprintprice,
+                                    product.design.discount
+                                  ) +
+                                  "KWD"
                               )
                             )
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "ProductDetails pt-3" }, [
-                          _vm._v(
-                            "\n                                    " +
-                              _vm._s(product.design.desc) +
-                              "\n                                "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "form-action" }, [
-                          _c(
-                            "form",
-                            {
-                              staticClass: "form-group",
-                              attrs: { method: "post" },
-                              on: {
-                                submit: function($event) {
-                                  $event.preventDefault()
-                                  return _vm.addToCart(product)
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "ProductDetails pt-3" }, [
+                            _vm._v(_vm._s(product.design.desc))
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-action" }, [
+                            _c(
+                              "form",
+                              {
+                                staticClass: "form-group",
+                                attrs: { method: "post" },
+                                on: {
+                                  submit: function($event) {
+                                    $event.preventDefault()
+                                    return _vm.addToCart(product)
+                                  }
                                 }
-                              }
-                            },
-                            [
-                              _c("div", { staticClass: "mb-2" }, [
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass:
-                                      "my-1 mr-2 font-weight-bold text-capitalize"
-                                  },
-                                  [
-                                    _vm._v(
-                                      _vm._s(_vm.$t("print_options")) + "* : "
-                                    )
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  { staticClass: "d-inline-block mx-2" },
-                                  [
-                                    _c("input", {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.printOptions,
-                                          expression: "printOptions"
-                                        }
-                                      ],
-                                      staticClass: "printOpt",
-                                      attrs: {
-                                        type: "radio",
-                                        id: "front" + product.id,
-                                        value: "front"
-                                      },
-                                      domProps: {
-                                        checked: _vm._q(
-                                          _vm.printOptions,
-                                          "front"
-                                        )
-                                      },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.printOpt(_vm.printOptions)
-                                        },
-                                        change: function($event) {
-                                          _vm.printOptions = "front"
-                                        }
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _c(
-                                      "label",
-                                      {
-                                        staticClass: "printOpt",
-                                        attrs: {
-                                          for: "front" + product.design.id
-                                        }
-                                      },
-                                      [_vm._v(_vm._s(_vm.$t("Front")))]
-                                    )
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  { staticClass: "d-inline-block mx-2" },
-                                  [
-                                    _c("input", {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.printOptions,
-                                          expression: "printOptions"
-                                        }
-                                      ],
-                                      staticClass: "printOpt",
-                                      attrs: {
-                                        type: "radio",
-                                        id: "back" + product.id,
-                                        value: "back"
-                                      },
-                                      domProps: {
-                                        checked: _vm._q(
-                                          _vm.printOptions,
-                                          "back"
-                                        )
-                                      },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.printOpt(_vm.printOptions)
-                                        },
-                                        change: function($event) {
-                                          _vm.printOptions = "back"
-                                        }
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _c(
-                                      "label",
-                                      {
-                                        staticClass: "printOpt",
-                                        attrs: {
-                                          for: "back" + product.design.id
-                                        }
-                                      },
-                                      [_vm._v(_vm._s(_vm.$t("Back")))]
-                                    )
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  { staticClass: "d-inline-block mx-2" },
-                                  [
-                                    _c("input", {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.printOptions,
-                                          expression: "printOptions"
-                                        }
-                                      ],
-                                      staticClass: "printOpt",
-                                      attrs: {
-                                        type: "radio",
-                                        id: "front_back" + product.design.id,
-                                        value: "front_back"
-                                      },
-                                      domProps: {
-                                        checked: _vm._q(
-                                          _vm.printOptions,
-                                          "front_back"
-                                        )
-                                      },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.printOpt(_vm.printOptions)
-                                        },
-                                        change: function($event) {
-                                          _vm.printOptions = "front_back"
-                                        }
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _c(
-                                      "label",
-                                      {
-                                        staticClass: "printOpt",
-                                        attrs: {
-                                          for: "front_back" + product.design.id
-                                        }
-                                      },
-                                      [_vm._v(_vm._s(_vm.$t("Front_and_Back")))]
-                                    )
-                                  ]
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "mb-2" }, [
-                                _vm.printOptions.includes("front")
-                                  ? _c("div", [
-                                      _c(
-                                        "label",
-                                        {
-                                          staticClass:
-                                            "my-1 mr-2 font-weight-bold text-capitalize",
-                                          attrs: {
-                                            for:
-                                              "frontSizeInputFiled" +
-                                              product.design.id
-                                          }
-                                        },
-                                        [
-                                          _vm._v(
-                                            _vm._s(_vm.$t("front_size")) + "*"
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "select",
-                                        {
-                                          directives: [
-                                            {
-                                              name: "model",
-                                              rawName: "v-model",
-                                              value: _vm.frontprint,
-                                              expression: "frontprint"
-                                            }
-                                          ],
-                                          staticClass:
-                                            "custom-select my-1 mr-sm-2",
-                                          attrs: {
-                                            id:
-                                              "frontSizeInputFiled" +
-                                              product.design.id
-                                          },
-                                          on: {
-                                            click: function($event) {
-                                              $event.preventDefault()
-                                              return _vm.frontprintPrice(
-                                                _vm.frontprint
-                                              )
-                                            },
-                                            change: function($event) {
-                                              var $$selectedVal = Array.prototype.filter
-                                                .call(
-                                                  $event.target.options,
-                                                  function(o) {
-                                                    return o.selected
-                                                  }
-                                                )
-                                                .map(function(o) {
-                                                  var val =
-                                                    "_value" in o
-                                                      ? o._value
-                                                      : o.value
-                                                  return val
-                                                })
-                                              _vm.frontprint = $event.target
-                                                .multiple
-                                                ? $$selectedVal
-                                                : $$selectedVal[0]
-                                            }
-                                          }
-                                        },
-                                        [
-                                          _c(
-                                            "option",
-                                            {
-                                              attrs: { selected: "" },
-                                              domProps: { value: 0 }
-                                            },
-                                            [
-                                              _vm._v(
-                                                "- " +
-                                                  _vm._s(
-                                                    _vm.$t("Please_Select")
-                                                  ) +
-                                                  " -"
-                                              )
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _vm._l(
-                                            product.design.designer_price,
-                                            function(item) {
-                                              return _c(
-                                                "option",
-                                                { domProps: { value: item } },
-                                                [
-                                                  _vm._v(
-                                                    "\n                                                        " +
-                                                      _vm._s(item.dsize.length)
-                                                  ),
-                                                  _c("span", [_vm._v(" X ")]),
-                                                  _vm._v(
-                                                    _vm._s(item.dsize.width) +
-                                                      "\n                                                    "
-                                                  )
-                                                ]
-                                              )
-                                            }
-                                          )
-                                        ],
-                                        2
-                                      )
-                                    ])
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _vm.printOptions.includes("back")
-                                  ? _c("div", [
-                                      _c(
-                                        "label",
-                                        {
-                                          staticClass:
-                                            "my-1 mr-2 font-weight-bold text-capitalize",
-                                          attrs: {
-                                            for:
-                                              "backSizeInputFiled" + product.id
-                                          }
-                                        },
-                                        [
-                                          _vm._v(
-                                            _vm._s(_vm.$t("back_size")) + "*"
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "select",
-                                        {
-                                          directives: [
-                                            {
-                                              name: "model",
-                                              rawName: "v-model",
-                                              value: _vm.backprint,
-                                              expression: "backprint"
-                                            }
-                                          ],
-                                          staticClass:
-                                            "custom-select my-1 mr-sm-2",
-                                          attrs: {
-                                            id:
-                                              "backSizeInputFiled" + product.id
-                                          },
-                                          on: {
-                                            click: function($event) {
-                                              $event.preventDefault()
-                                              return _vm.backprintPrice(
-                                                _vm.backprint
-                                              )
-                                            },
-                                            change: function($event) {
-                                              var $$selectedVal = Array.prototype.filter
-                                                .call(
-                                                  $event.target.options,
-                                                  function(o) {
-                                                    return o.selected
-                                                  }
-                                                )
-                                                .map(function(o) {
-                                                  var val =
-                                                    "_value" in o
-                                                      ? o._value
-                                                      : o.value
-                                                  return val
-                                                })
-                                              _vm.backprint = $event.target
-                                                .multiple
-                                                ? $$selectedVal
-                                                : $$selectedVal[0]
-                                            }
-                                          }
-                                        },
-                                        [
-                                          _c(
-                                            "option",
-                                            {
-                                              attrs: { selected: "" },
-                                              domProps: { value: 0 }
-                                            },
-                                            [
-                                              _vm._v(
-                                                "- " +
-                                                  _vm._s(
-                                                    _vm.$t("Please_Select")
-                                                  ) +
-                                                  " -"
-                                              )
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _vm._l(
-                                            product.design.designer_price,
-                                            function(item) {
-                                              return _c(
-                                                "option",
-                                                { domProps: { value: item } },
-                                                [
-                                                  _vm._v(
-                                                    "\n                                                        " +
-                                                      _vm._s(item.dsize.length)
-                                                  ),
-                                                  _c("span", [_vm._v(" X ")]),
-                                                  _vm._v(
-                                                    _vm._s(item.dsize.width) +
-                                                      "\n                                                    "
-                                                  )
-                                                ]
-                                              )
-                                            }
-                                          )
-                                        ],
-                                        2
-                                      )
-                                    ])
-                                  : _vm._e()
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "mb-2" }, [
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass: "my-1 mr-2 font-weight-bold",
-                                    attrs: {
-                                      for: "colorInput" + product.design.id
-                                    }
-                                  },
-                                  [_vm._v(_vm._s(_vm.$t("TShirt_Color")) + "*")]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "select",
-                                  {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.tcolor,
-                                        expression: "tcolor"
-                                      }
-                                    ],
-                                    staticClass: "custom-select my-1 mr-sm-2",
-                                    attrs: {
-                                      id: "colorInput" + product.design.id
-                                    },
-                                    on: {
-                                      change: function($event) {
-                                        var $$selectedVal = Array.prototype.filter
-                                          .call($event.target.options, function(
-                                            o
-                                          ) {
-                                            return o.selected
-                                          })
-                                          .map(function(o) {
-                                            var val =
-                                              "_value" in o ? o._value : o.value
-                                            return val
-                                          })
-                                        _vm.tcolor = $event.target.multiple
-                                          ? $$selectedVal
-                                          : $$selectedVal[0]
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _c(
-                                      "option",
-                                      {
-                                        attrs: { selected: "" },
-                                        domProps: { value: null }
-                                      },
-                                      [
-                                        _vm._v(
-                                          "- " +
-                                            _vm._s(_vm.$t("Please_Select")) +
-                                            " -"
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _vm._l(
-                                      _vm.getUniqueInObject(
-                                        product.tshirts,
-                                        "id",
-                                        "color"
-                                      ),
-                                      function(tshirt) {
-                                        return _c(
-                                          "option",
-                                          { domProps: { value: tshirt.color } },
-                                          [
-                                            _vm._v(
-                                              "\n                                                    " +
-                                                _vm._s(tshirt.color.name) +
-                                                "\n                                                "
-                                            )
-                                          ]
-                                        )
-                                      }
-                                    )
-                                  ],
-                                  2
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "mb-2" }, [
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass: "my-1 mr-2 font-weight-bold",
-                                    attrs: {
-                                      for: "sizeInput" + product.design.id
-                                    }
-                                  },
-                                  [_vm._v(_vm._s(_vm.$t("TShirt_Size")) + "*")]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "select",
-                                  {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.tsize,
-                                        expression: "tsize"
-                                      }
-                                    ],
-                                    staticClass: "custom-select my-1 mr-sm-2",
-                                    attrs: {
-                                      id: "sizeInput" + product.design.id
-                                    },
-                                    on: {
-                                      click: function($event) {
-                                        $event.preventDefault()
-                                        return _vm.tsizePrice(_vm.tsize)
-                                      },
-                                      change: function($event) {
-                                        var $$selectedVal = Array.prototype.filter
-                                          .call($event.target.options, function(
-                                            o
-                                          ) {
-                                            return o.selected
-                                          })
-                                          .map(function(o) {
-                                            var val =
-                                              "_value" in o ? o._value : o.value
-                                            return val
-                                          })
-                                        _vm.tsize = $event.target.multiple
-                                          ? $$selectedVal
-                                          : $$selectedVal[0]
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _c(
-                                      "option",
-                                      {
-                                        attrs: { selected: "" },
-                                        domProps: { value: 0 }
-                                      },
-                                      [
-                                        _vm._v(
-                                          "- " +
-                                            _vm._s(_vm.$t("Please_Select")) +
-                                            " -"
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _vm._l(
-                                      _vm.getUniqueInObject(
-                                        product.tshirts,
-                                        "id",
-                                        "tsize"
-                                      ),
-                                      function(tshirt) {
-                                        return _c(
-                                          "option",
-                                          { domProps: { value: tshirt } },
-                                          [
-                                            _vm._v(
-                                              "\n                                                    " +
-                                                _vm._s(tshirt.tsize.name) +
-                                                "\n                                                "
-                                            )
-                                          ]
-                                        )
-                                      }
-                                    )
-                                  ],
-                                  2
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "form-row" }, [
-                                _c("div", { staticClass: "col-3" }, [
-                                  _c("input", {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.count,
-                                        expression: "count"
-                                      }
-                                    ],
-                                    staticStyle: {
-                                      "background-color": "#ffffff",
-                                      "border-radius": "5px"
-                                    },
-                                    attrs: {
-                                      type: "number",
-                                      value: "1",
-                                      name: "mount",
-                                      min: "1"
-                                    },
-                                    domProps: { value: _vm.count },
-                                    on: {
-                                      input: function($event) {
-                                        if ($event.target.composing) {
-                                          return
-                                        }
-                                        _vm.count = $event.target.value
-                                      }
-                                    }
-                                  })
-                                ]),
-                                _vm._v(" "),
-                                _c("div", { staticClass: "col-6" }, [
+                              },
+                              [
+                                _c("div", { staticClass: "mb-2" }, [
                                   _c(
-                                    "button",
+                                    "label",
                                     {
-                                      staticClass: "btn btn-primary my-1",
-                                      staticStyle: { outline: "none" },
-                                      attrs: { type: "submit" }
+                                      staticClass:
+                                        "my-1 mr-2 font-weight-bold text-capitalize"
                                     },
                                     [
-                                      _c("i", {
-                                        staticClass: "fas fa-shopping-cart"
-                                      }),
                                       _vm._v(
-                                        "\n                                                    " +
-                                          _vm._s(_vm.$t("Add_to_cart")) +
-                                          "\n                                                "
+                                        _vm._s(_vm.$t("print_options")) + "* :"
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "d-inline-block mx-2" },
+                                    [
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.printOptions,
+                                            expression: "printOptions"
+                                          }
+                                        ],
+                                        staticClass: "printOpt",
+                                        attrs: {
+                                          type: "radio",
+                                          id: "front" + product.id,
+                                          value: "front"
+                                        },
+                                        domProps: {
+                                          checked: _vm._q(
+                                            _vm.printOptions,
+                                            "front"
+                                          )
+                                        },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.printOpt(
+                                              _vm.printOptions
+                                            )
+                                          },
+                                          change: function($event) {
+                                            _vm.printOptions = "front"
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass: "printOpt",
+                                          attrs: {
+                                            for: "front" + product.design.id
+                                          }
+                                        },
+                                        [_vm._v(_vm._s(_vm.$t("Front")))]
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "d-inline-block mx-2" },
+                                    [
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.printOptions,
+                                            expression: "printOptions"
+                                          }
+                                        ],
+                                        staticClass: "printOpt",
+                                        attrs: {
+                                          type: "radio",
+                                          id: "back" + product.id,
+                                          value: "back"
+                                        },
+                                        domProps: {
+                                          checked: _vm._q(
+                                            _vm.printOptions,
+                                            "back"
+                                          )
+                                        },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.printOpt(
+                                              _vm.printOptions
+                                            )
+                                          },
+                                          change: function($event) {
+                                            _vm.printOptions = "back"
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass: "printOpt",
+                                          attrs: {
+                                            for: "back" + product.design.id
+                                          }
+                                        },
+                                        [_vm._v(_vm._s(_vm.$t("Back")))]
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "d-inline-block mx-2" },
+                                    [
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.printOptions,
+                                            expression: "printOptions"
+                                          }
+                                        ],
+                                        staticClass: "printOpt",
+                                        attrs: {
+                                          type: "radio",
+                                          id: "front_back" + product.design.id,
+                                          value: "front_back"
+                                        },
+                                        domProps: {
+                                          checked: _vm._q(
+                                            _vm.printOptions,
+                                            "front_back"
+                                          )
+                                        },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.printOpt(
+                                              _vm.printOptions
+                                            )
+                                          },
+                                          change: function($event) {
+                                            _vm.printOptions = "front_back"
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass: "printOpt",
+                                          attrs: {
+                                            for:
+                                              "front_back" + product.design.id
+                                          }
+                                        },
+                                        [
+                                          _vm._v(
+                                            _vm._s(_vm.$t("Front_and_Back"))
+                                          )
+                                        ]
                                       )
                                     ]
                                   )
                                 ]),
                                 _vm._v(" "),
-                                _c(
-                                  "h5",
-                                  {
-                                    staticClass: "productPrice",
-                                    staticStyle: { "margin-top": "10px" }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                                                " +
-                                        _vm._s(_vm.$t("total")) +
-                                        " :"
-                                    ),
-                                    _c(
-                                      "span",
-                                      { staticClass: "productPrice" },
-                                      [
-                                        _vm._v(
-                                          _vm._s(
-                                            _vm.count *
-                                              _vm.priceDis(
-                                                _vm.tsizes_price +
-                                                  _vm.frontprintprice +
-                                                  _vm.backprintprice,
-                                                product.design.discount
-                                              ) +
-                                              "KWD"
+                                _c("div", { staticClass: "mb-2" }, [
+                                  _vm.printOptions.includes("front")
+                                    ? _c("div", [
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass:
+                                              "my-1 mr-2 font-weight-bold text-capitalize",
+                                            attrs: {
+                                              for:
+                                                "frontSizeInputFiled" +
+                                                product.design.id
+                                            }
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(_vm.$t("front_size")) + "*"
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "select",
+                                          {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.frontprint,
+                                                expression: "frontprint"
+                                              }
+                                            ],
+                                            staticClass:
+                                              "custom-select my-1 mr-sm-2",
+                                            attrs: {
+                                              id:
+                                                "frontSizeInputFiled" +
+                                                product.design.id
+                                            },
+                                            on: {
+                                              click: function($event) {
+                                                $event.preventDefault()
+                                                return _vm.frontprintPrice(
+                                                  _vm.frontprint
+                                                )
+                                              },
+                                              change: function($event) {
+                                                var $$selectedVal = Array.prototype.filter
+                                                  .call(
+                                                    $event.target.options,
+                                                    function(o) {
+                                                      return o.selected
+                                                    }
+                                                  )
+                                                  .map(function(o) {
+                                                    var val =
+                                                      "_value" in o
+                                                        ? o._value
+                                                        : o.value
+                                                    return val
+                                                  })
+                                                _vm.frontprint = $event.target
+                                                  .multiple
+                                                  ? $$selectedVal
+                                                  : $$selectedVal[0]
+                                              }
+                                            }
+                                          },
+                                          [
+                                            _c(
+                                              "option",
+                                              {
+                                                attrs: { selected: "" },
+                                                domProps: { value: 0 }
+                                              },
+                                              [
+                                                _vm._v(
+                                                  "- " +
+                                                    _vm._s(
+                                                      _vm.$t("Please_Select")
+                                                    ) +
+                                                    " -"
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _vm._l(
+                                              product.design.designer_price,
+                                              function(item) {
+                                                return _c(
+                                                  "option",
+                                                  { domProps: { value: item } },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                            " +
+                                                        _vm._s(
+                                                          item.dsize.length
+                                                        ) +
+                                                        "\n                            "
+                                                    ),
+                                                    _c("span", [_vm._v("X")]),
+                                                    _vm._v(
+                                                      "\n                            " +
+                                                        _vm._s(
+                                                          item.dsize.width
+                                                        ) +
+                                                        "\n                          "
+                                                    )
+                                                  ]
+                                                )
+                                              }
+                                            )
+                                          ],
+                                          2
+                                        )
+                                      ])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _vm.printOptions.includes("back")
+                                    ? _c("div", [
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass:
+                                              "my-1 mr-2 font-weight-bold text-capitalize",
+                                            attrs: {
+                                              for:
+                                                "backSizeInputFiled" +
+                                                product.id
+                                            }
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(_vm.$t("back_size")) + "*"
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "select",
+                                          {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.backprint,
+                                                expression: "backprint"
+                                              }
+                                            ],
+                                            staticClass:
+                                              "custom-select my-1 mr-sm-2",
+                                            attrs: {
+                                              id:
+                                                "backSizeInputFiled" +
+                                                product.id
+                                            },
+                                            on: {
+                                              click: function($event) {
+                                                $event.preventDefault()
+                                                return _vm.backprintPrice(
+                                                  _vm.backprint
+                                                )
+                                              },
+                                              change: function($event) {
+                                                var $$selectedVal = Array.prototype.filter
+                                                  .call(
+                                                    $event.target.options,
+                                                    function(o) {
+                                                      return o.selected
+                                                    }
+                                                  )
+                                                  .map(function(o) {
+                                                    var val =
+                                                      "_value" in o
+                                                        ? o._value
+                                                        : o.value
+                                                    return val
+                                                  })
+                                                _vm.backprint = $event.target
+                                                  .multiple
+                                                  ? $$selectedVal
+                                                  : $$selectedVal[0]
+                                              }
+                                            }
+                                          },
+                                          [
+                                            _c(
+                                              "option",
+                                              {
+                                                attrs: { selected: "" },
+                                                domProps: { value: 0 }
+                                              },
+                                              [
+                                                _vm._v(
+                                                  "- " +
+                                                    _vm._s(
+                                                      _vm.$t("Please_Select")
+                                                    ) +
+                                                    " -"
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _vm._l(
+                                              product.design.designer_price,
+                                              function(item) {
+                                                return _c(
+                                                  "option",
+                                                  { domProps: { value: item } },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                            " +
+                                                        _vm._s(
+                                                          item.dsize.length
+                                                        ) +
+                                                        "\n                            "
+                                                    ),
+                                                    _c("span", [_vm._v("X")]),
+                                                    _vm._v(
+                                                      "\n                            " +
+                                                        _vm._s(
+                                                          item.dsize.width
+                                                        ) +
+                                                        "\n                          "
+                                                    )
+                                                  ]
+                                                )
+                                              }
+                                            )
+                                          ],
+                                          2
+                                        )
+                                      ])
+                                    : _vm._e()
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "mb-2" }, [
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass: "my-1 mr-2 font-weight-bold",
+                                      attrs: {
+                                        for: "colorInput" + product.design.id
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        _vm._s(_vm.$t("TShirt_Color")) + "*"
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "select",
+                                    {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.tcolor,
+                                          expression: "tcolor"
+                                        }
+                                      ],
+                                      staticClass: "custom-select my-1 mr-sm-2",
+                                      attrs: {
+                                        id: "colorInput" + product.design.id
+                                      },
+                                      on: {
+                                        change: function($event) {
+                                          var $$selectedVal = Array.prototype.filter
+                                            .call(
+                                              $event.target.options,
+                                              function(o) {
+                                                return o.selected
+                                              }
+                                            )
+                                            .map(function(o) {
+                                              var val =
+                                                "_value" in o
+                                                  ? o._value
+                                                  : o.value
+                                              return val
+                                            })
+                                          _vm.tcolor = $event.target.multiple
+                                            ? $$selectedVal
+                                            : $$selectedVal[0]
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "option",
+                                        {
+                                          attrs: { selected: "" },
+                                          domProps: { value: null }
+                                        },
+                                        [
+                                          _vm._v(
+                                            "- " +
+                                              _vm._s(_vm.$t("Please_Select")) +
+                                              " -"
                                           )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _vm._l(
+                                        _vm.getUniqueInObject(
+                                          product.tshirts,
+                                          "id",
+                                          "color"
+                                        ),
+                                        function(tshirt) {
+                                          return _c(
+                                            "option",
+                                            {
+                                              domProps: { value: tshirt.color }
+                                            },
+                                            [_vm._v(_vm._s(tshirt.color.name))]
+                                          )
+                                        }
+                                      )
+                                    ],
+                                    2
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "mb-2" }, [
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass: "my-1 mr-2 font-weight-bold",
+                                      attrs: {
+                                        for: "sizeInput" + product.design.id
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        _vm._s(_vm.$t("TShirt_Size")) + "*"
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "select",
+                                    {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.tsize,
+                                          expression: "tsize"
+                                        }
+                                      ],
+                                      staticClass: "custom-select my-1 mr-sm-2",
+                                      attrs: {
+                                        id: "sizeInput" + product.design.id
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          $event.preventDefault()
+                                          return _vm.tsizePrice(_vm.tsize)
+                                        },
+                                        change: function($event) {
+                                          var $$selectedVal = Array.prototype.filter
+                                            .call(
+                                              $event.target.options,
+                                              function(o) {
+                                                return o.selected
+                                              }
+                                            )
+                                            .map(function(o) {
+                                              var val =
+                                                "_value" in o
+                                                  ? o._value
+                                                  : o.value
+                                              return val
+                                            })
+                                          _vm.tsize = $event.target.multiple
+                                            ? $$selectedVal
+                                            : $$selectedVal[0]
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "option",
+                                        {
+                                          attrs: { selected: "" },
+                                          domProps: { value: 0 }
+                                        },
+                                        [
+                                          _vm._v(
+                                            "- " +
+                                              _vm._s(_vm.$t("Please_Select")) +
+                                              " -"
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _vm._l(
+                                        _vm.getUniqueInObject(
+                                          product.tshirts,
+                                          "id",
+                                          "tsize"
+                                        ),
+                                        function(tshirt) {
+                                          return _c(
+                                            "option",
+                                            { domProps: { value: tshirt } },
+                                            [_vm._v(_vm._s(tshirt.tsize.name))]
+                                          )
+                                        }
+                                      )
+                                    ],
+                                    2
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "form-row" }, [
+                                  _c("div", { staticClass: "col-3" }, [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.count,
+                                          expression: "count"
+                                        }
+                                      ],
+                                      staticStyle: {
+                                        "background-color": "#ffffff",
+                                        "border-radius": "5px"
+                                      },
+                                      attrs: {
+                                        type: "number",
+                                        value: "1",
+                                        name: "mount",
+                                        min: "1"
+                                      },
+                                      domProps: { value: _vm.count },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.count = $event.target.value
+                                        }
+                                      }
+                                    })
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "col-6" }, [
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-primary my-1",
+                                        staticStyle: { outline: "none" },
+                                        attrs: { type: "submit" }
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass: "fas fa-shopping-cart"
+                                        }),
+                                        _vm._v(
+                                          "\n                          " +
+                                            _vm._s(_vm.$t("Add_to_cart")) +
+                                            "\n                        "
                                         )
                                       ]
-                                    ),
-                                    _vm._v(" "),
-                                    product.design.discount > 0
-                                      ? _c(
-                                          "small",
-                                          { staticClass: "text-muted" },
-                                          [
-                                            _c("s", [
-                                              _vm._v(
-                                                _vm._s(
-                                                  _vm.count *
-                                                    (_vm.tsizes_price +
-                                                      _vm.frontprintprice +
-                                                      _vm.backprintprice) +
-                                                    "KWD"
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "h5",
+                                    {
+                                      staticClass: "productPrice",
+                                      staticStyle: { "margin-top": "10px" }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                        " +
+                                          _vm._s(_vm.$t("total")) +
+                                          " :\n                        "
+                                      ),
+                                      _c(
+                                        "span",
+                                        { staticClass: "productPrice" },
+                                        [
+                                          _vm._v(
+                                            _vm._s(
+                                              _vm.count *
+                                                _vm.priceDis(
+                                                  _vm.tsizes_price +
+                                                    _vm.frontprintprice +
+                                                    _vm.backprintprice,
+                                                  product.design.discount
+                                                ) +
+                                                "KWD"
+                                            )
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      product.design.discount > 0
+                                        ? _c(
+                                            "small",
+                                            { staticClass: "text-muted" },
+                                            [
+                                              _c("s", [
+                                                _vm._v(
+                                                  _vm._s(
+                                                    _vm.count *
+                                                      (_vm.tsizes_price +
+                                                        _vm.frontprintprice +
+                                                        _vm.backprintprice) +
+                                                      "KWD"
+                                                  )
                                                 )
-                                              )
-                                            ])
-                                          ]
-                                        )
-                                      : _vm._e()
-                                  ]
-                                )
-                              ])
-                            ]
-                          )
-                        ])
-                      ])
+                                              ])
+                                            ]
+                                          )
+                                        : _vm._e()
+                                    ]
+                                  )
+                                ])
+                              ]
+                            )
+                          ])
+                        ]
+                      )
                     ])
                   ])
                 ])
@@ -49773,6 +49841,7 @@ var staticRenderFns = [
       "button",
       {
         staticClass: "close",
+        staticStyle: { "z-index": "2" },
         attrs: {
           type: "button",
           "data-dismiss": "modal",
