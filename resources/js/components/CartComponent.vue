@@ -85,11 +85,7 @@
                             <ul class="list-unstyled">
                                 <li>
                                     {{$t('sub_total')}}
-                                    <span>{{this.$root.cart.total['subtotal']}}</span>
-                                </li>
-                                <li>
-                                    {{$t('tax')}}
-                                    <span>{{this.$root.cart.total['tax']}}</span>
+                                    <span>{{this.$root.cart.total['total']}}</span>
                                 </li>
                                 <!--<li class="order-total">-->
                                 <!--    {{$t('shipping')}}-->

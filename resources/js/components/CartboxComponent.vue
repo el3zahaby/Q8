@@ -36,9 +36,9 @@
             </li>
         </ul>
 
-        <p v-if="!Object.keys(this.$root.cart.items).length" class="mini_cart_box cart_div pb-2">
-            Your cart is empty, Keep shopping
-        </p>
+        <div v-if="!Object.keys(this.$root.cart.items).length" class="mini_cart_box cart_div pb-2">
+            <p> {{ $t('Your_cart_is_empty_Keep_shopping') }} </p>
+        </div>
     </div>
 </template>
 
@@ -63,10 +63,11 @@
         box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
         padding: 15px 15px 45px;
         position: absolute;
-        right: 0;
+        // right: -150px;
+        min-width: 100px;
         -webkit-transition: all 0.3s ease 0s;
         transition: all 0.3s ease 0s;
-        width: 285px;
+        width: fit-content;
         z-index: 9999;
     }
 

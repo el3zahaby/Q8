@@ -223,10 +223,10 @@
                   ID:
                   <span>{{product.design.id}}</span>
                 </h5>
-                
-				<span
-                          class="productPrice"
-                        >{{(count* priceDis(tsizes_price+frontprintprice+backprintprice,product.design.discount) +'KWD')}}</span>
+
+                <span
+                  class="productPrice"
+                >{{(count* priceDis(tsizes_price+frontprintprice+backprintprice,product.design.discount) +'KWD')}}</span>
                 <p class="ProductDetails pt-3">{{product.design.desc }}</p>
                 <div class="form-action">
                   <form method="post" class="form-group" @submit.prevent="addToCart(product)">
@@ -389,113 +389,120 @@
   </div>
 </template>
 <script>
+export default {
+  data() {
+    return {
+      productColours: ["Black", "White", "Orange", "Yellow"],
+      products: [],
+      mostSells: [],
+      pagination: {},
+      printOptions: "front",
+      frontprint: 0,
+      backprint: 0,
+      tcolor: "",
+      tsize: null,
+      count: 1,
+      tcolors: null,
+      dsizes: null,
+      tsizes: null,
+      printprice: null,
+      frontprintprice: 0,
+      backprintprice: 0,
+      tsizeprice: null,
+      tsizes_price: 0,
+      default_frontprint: null,
+      default_tsize: null
+    };
+  },
+  props: [],
+  methods: {
+    feachMostSells: function() {
+      let _this = this;
+      axios.get("/api/v1/most-sells").then(function(response) {
+        _this.mostSells = response.data;
+        console.log(_this.mostSells);
+      });
+    },
+    addToCart: function(product) {
+      let root = this.$root;
+      axios
+        .post(`api/v1/add-to-cart/${product.id}`, {
+          id: product.design.id,
+          product: product,
+          frontprint: this.frontprint,
+          backprint: this.backprint,
+          tcolor: this.tcolor,
+          tsize: this.tsize,
+          count: this.count
+        })
+        .then(function(response) {
+          root.updateCart();
+          $(".modal").modal("hide");
+        })
+        .catch(error => {
+          console.log(error);
+        });
+      console.log("Add To Cart");
+    },
+    printOpt: function(opt) {
+      this.printOptions = opt;
+      this.frontprint = 0;
+      this.backprint = 0;
+      this.backprintprice = 0;
+      this.frontprintprice = 0;
+    },
+    tsizePrice: function(tshirt) {
+      console.log(tshirt);
+      this.tsizes_price = tshirt.price | 0;
+      this.tsizeprice = tshirt.price | 0;
+      // console.log(this.tsizes_price);
+    },
+    frontprintPrice: function(dsize) {
+      this.frontprint = dsize;
+      this.frontprintprice = 0 | dsize.total;
+    },
+    backprintPrice: function(dsize) {
+      this.backprint = dsize;
+      this.backprintprice = 0 | dsize.total;
+    },
+    fetchProducts(page_url) {
+      let vm = this;
+      page_url = page_url || "api/v1/design";
+      fetch(page_url)
+        .then(res => res.json())
+        .then(res => {
+          this.products = this.products.concat(res.data);
+          console.log(this.products);
+          vm.makePagination(res.next_page_url);
+        })
+        .catch(err => console.log(err));
+    },
+    makePagination(next_page_url) {
+      let pagination = {
+        next_page_url: next_page_url
+      };
+      this.pagination = pagination;
+    },
+    priceDis: function(price, discount) {
+      if (price === 0) return 0;
+      if (price - discount < 0) return 0;
+      return price - discount;
+    },
+    priceDefault: function(price, discount) {
+      return (
+        price -
+        price * discount +
+        this.$root.default_tsize +
+        this.$root.default_frontprint
+      );
+    },
+    getUnique: function(arr, comp) {
+      return (
+        arr
+          .map(e => e[comp])
 
-    export default {
-        data() {
-            return {
-                productColours: ['Black', 'White', 'Orange', 'Yellow'],
-                products: [],
-                mostSells: [],
-                pagination: {},
-                printOptions: "front",
-                frontprint: 0,
-                backprint: 0,
-                tcolor: '',
-                tsize: null,
-                count: 1,
-                tcolors: null,
-                dsizes: null,
-                tsizes: null,
-                printprice: null,
-                frontprintprice: 0,
-                backprintprice: 0,
-                tsizeprice: null,
-                tsizes_price: 0,
-                default_frontprint: null,
-                default_tsize: null
-            };
-        },
-        props: [],
-        methods: {
-            feachMostSells: function () {
-                let _this = this;
-                axios.get('/api/v1/most-sells').then(function (response) {
-                    _this.mostSells = response.data;
-                    console.log(_this.mostSells)
-                })
-            },
-            addToCart: function (product) {
-                let root = this.$root;
-                axios.post(`api/v1/add-to-cart/${product.id}`, {
-                    id: product.design.id,
-                    product: product,
-                    frontprint: this.frontprint,
-                    backprint: this.backprint,
-                    tcolor: this.tcolor,
-                    tsize: this.tsize,
-                    count: this.count,
-                }).then(function (response) {
-                    root.updateCart();
-                    $('.modal').modal('hide');
-
-                }).catch((error) => {
-                    console.log(error);
-                });
-                console.log('Add To Cart');
-            },
-            printOpt:function (opt) {
-                this.printOptions = opt;
-                this.frontprint = 0;
-                this.backprint = 0;
-                this.backprintprice = 0;
-                this.frontprintprice = 0;
-            },
-            tsizePrice: function (tshirt) {
-                console.log(tshirt)
-                this.tsizes_price = tshirt.price | 0;
-                this.tsizeprice = tshirt.price | 0;
-                // console.log(this.tsizes_price);
-            },
-            frontprintPrice: function (dsize) {
-                this.frontprint = dsize;
-                this.frontprintprice = 0 | dsize.total
-            },
-            backprintPrice: function (dsize) {
-                this.backprint = dsize;
-                this.backprintprice = 0 | dsize.total
-            },
-            fetchProducts(page_url) {
-                let vm = this;
-                page_url = page_url || 'api/v1/design';
-                fetch(page_url)
-                    .then(res => res.json())
-                    .then(res => {
-                        this.products = this.products.concat(res.data);
-                        console.log(this.products)
-                        vm.makePagination(res.next_page_url);
-                    })
-                    .catch(err => console.log(err));
-            },
-            makePagination(next_page_url) {
-                let pagination = {
-                    next_page_url: next_page_url,
-                };
-                this.pagination = pagination;
-            },
-            priceDis: function (price, discount) {
-                if (price === 0 ) return 0;
-                if ((price - discount) < 0) return 0;
-                return price - discount;
-            },
-            priceDefault: function (price, discount) {
-                return price - (price * discount) + this.$root.default_tsize + this.$root.default_frontprint;
-            },
-            getUnique : function (arr, comp) {
-                return arr
-                    .map(e => e[comp])
-
-                    // store the keys of the unique objects
-                    .map((e, i, final) => final.indexOf(e) === i && i)
+          // store the keys of the unique objects
+          .map((e, i, final) => final.indexOf(e) === i && i)
 
           // store the keys of the unique objects
           .map((e, i, final) => final.indexOf(e) === i && i)
@@ -664,8 +671,7 @@
         width: 1200px;
         max-width: 100%;
     }
-  }
-}
+    
 .t-shirt_inner_data img {
   width: 16px;
   height: 16px;

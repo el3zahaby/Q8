@@ -1819,10 +1819,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4459,6 +4455,9 @@ __webpack_require__.r(__webpack_exports__);
       }) // store the keys of the unique objects
       .map(function (e, i, _final) {
         return _final.indexOf(e) === i && i;
+      }) // store the keys of the unique objects
+      .map(function (e, i, _final2) {
+        return _final2.indexOf(e) === i && i;
       }) // eliminate the dead keys & store unique objects
       .filter(function (e) {
         return arr[e];
@@ -10851,7 +10850,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "/*----------- 14. Mini cart box css here --------*/\n.mini_cart_box[data-v-c5225006] {\n  display: none;\n  background: #fff none repeat scroll 0 0;\n  border-radius: 10px;\n  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);\n  padding: 15px 15px 45px;\n  position: absolute;\n  right: 0;\n  transition: all 0.3s ease 0s;\n  width: 285px;\n  z-index: 9999;\n}\n.single_product_cart[data-v-c5225006] {\n  border-bottom: 1px solid #f6f6f6;\n  display: flex;\n  margin-bottom: 20px;\n  padding-bottom: 20px;\n  align-items: center;\n}\n.single_product_cart[data-v-c5225006]:last-child {\n  border-bottom: 0px solid #f6f6f6;\n  margin-bottom: 0px;\n  padding-bottom: 0px;\n}\n.cart_delete[data-v-c5225006] {\n  display: flex;\n  flex-grow: 100;\n  justify-content: flex-end;\n}\n.cart_title[data-v-c5225006] {\n  padding-left: 20px;\n  text-align: left;\n}\n.cart_title h5[data-v-c5225006],\n.cart_title h6[data-v-c5225006],\n.cart_title span[data-v-c5225006] {\n  color: #070b21;\n  font-size: 14px;\n  font-weight: bold;\n  margin-bottom: 6px;\n  text-transform: capitalize;\n}\n.cart_title h5 a[data-v-c5225006],\n.cart_title h6 a[data-v-c5225006] {\n  color: #070b21;\n}\n.cart_delete > a[data-v-c5225006] {\n  color: #777777;\n  font-size: 18px;\n}\n.cart_delete > a[data-v-c5225006]:hover,\n.cart_title h5 a[data-v-c5225006]:hover,\n.cart_title h6 a[data-v-c5225006]:hover {\n  color: #3a5ea8;\n}\n.cart_title > span[data-v-c5225006] {\n  display: block;\n  margin: 9px 0 0;\n}\n.cart-space[data-v-c5225006] {\n  display: flex;\n  justify-content: space-between;\n  margin-bottom: 12px;\n}\n.cart_sub > h4[data-v-c5225006] {\n  color: #070b21;\n  font-size: 18px;\n  letter-spacing: 0.5px;\n  text-transform: capitalize;\n}\n.cart_price > h4[data-v-c5225006] {\n  color: #070b21;\n  font-size: 18px;\n  font-weight: bold;\n  letter-spacing: 0.5px;\n}\n.cart_btn_wrapper[data-v-c5225006] {\n  display: flex;\n  justify-content: space-between;\n}\n.mini_cart_box li.cart_space[data-v-c5225006] {\n  display: flex;\n  justify-content: space-between;\n  margin-bottom: 10px;\n}\n.cart_btn[data-v-c5225006] {\n  background: #151320 none repeat scroll 0 0;\n  border-radius: 27px;\n  color: #ffffff;\n  display: inline-block;\n  font-weight: bold;\n  line-height: 1;\n  padding: 13px 22px;\n  text-transform: uppercase;\n}\n.cart_btn[data-v-c5225006]:hover {\n  color: #fff;\n  background: #3a5ea8;\n}\n.single_product_cart .cart_img[data-v-c5225006] {\n  width: 85px;\n}\n.mini_cart_box.cart_div.AR[data-v-c5225006] {\n  left: 0 !important;\n  right: unset !important;\n}", ""]);
+exports.push([module.i, "/*----------- 14. Mini cart box css here --------*/\n.mini_cart_box[data-v-c5225006] {\n  display: none;\n  background: #fff none repeat scroll 0 0;\n  border-radius: 10px;\n  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);\n  padding: 15px 15px 45px;\n  position: absolute;\n  min-width: 100px;\n  transition: all 0.3s ease 0s;\n  width: -webkit-fit-content;\n  width: -moz-fit-content;\n  width: fit-content;\n  z-index: 9999;\n}\n.single_product_cart[data-v-c5225006] {\n  border-bottom: 1px solid #f6f6f6;\n  display: flex;\n  margin-bottom: 20px;\n  padding-bottom: 20px;\n  align-items: center;\n}\n.single_product_cart[data-v-c5225006]:last-child {\n  border-bottom: 0px solid #f6f6f6;\n  margin-bottom: 0px;\n  padding-bottom: 0px;\n}\n.cart_delete[data-v-c5225006] {\n  display: flex;\n  flex-grow: 100;\n  justify-content: flex-end;\n}\n.cart_title[data-v-c5225006] {\n  padding-left: 20px;\n  text-align: left;\n}\n.cart_title h5[data-v-c5225006],\n.cart_title h6[data-v-c5225006],\n.cart_title span[data-v-c5225006] {\n  color: #070b21;\n  font-size: 14px;\n  font-weight: bold;\n  margin-bottom: 6px;\n  text-transform: capitalize;\n}\n.cart_title h5 a[data-v-c5225006],\n.cart_title h6 a[data-v-c5225006] {\n  color: #070b21;\n}\n.cart_delete > a[data-v-c5225006] {\n  color: #777777;\n  font-size: 18px;\n}\n.cart_delete > a[data-v-c5225006]:hover,\n.cart_title h5 a[data-v-c5225006]:hover,\n.cart_title h6 a[data-v-c5225006]:hover {\n  color: #3a5ea8;\n}\n.cart_title > span[data-v-c5225006] {\n  display: block;\n  margin: 9px 0 0;\n}\n.cart-space[data-v-c5225006] {\n  display: flex;\n  justify-content: space-between;\n  margin-bottom: 12px;\n}\n.cart_sub > h4[data-v-c5225006] {\n  color: #070b21;\n  font-size: 18px;\n  letter-spacing: 0.5px;\n  text-transform: capitalize;\n}\n.cart_price > h4[data-v-c5225006] {\n  color: #070b21;\n  font-size: 18px;\n  font-weight: bold;\n  letter-spacing: 0.5px;\n}\n.cart_btn_wrapper[data-v-c5225006] {\n  display: flex;\n  justify-content: space-between;\n}\n.mini_cart_box li.cart_space[data-v-c5225006] {\n  display: flex;\n  justify-content: space-between;\n  margin-bottom: 10px;\n}\n.cart_btn[data-v-c5225006] {\n  background: #151320 none repeat scroll 0 0;\n  border-radius: 27px;\n  color: #ffffff;\n  display: inline-block;\n  font-weight: bold;\n  line-height: 1;\n  padding: 13px 22px;\n  text-transform: uppercase;\n}\n.cart_btn[data-v-c5225006]:hover {\n  color: #fff;\n  background: #3a5ea8;\n}\n.single_product_cart .cart_img[data-v-c5225006] {\n  width: 85px;\n}\n.mini_cart_box.cart_div.AR[data-v-c5225006] {\n  left: 0 !important;\n  right: unset !important;\n}", ""]);
 
 // exports
 
@@ -10946,7 +10945,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".body_content_div {\n  padding: 25px 15px;\n}\n.most_sell_title {\n  color: #7a7a7a;\n  font-family: \"titles_font\", sans-serif;\n}\n.t-shirt_data {\n  border: 1px solid #eeeeee;\n  padding: 10px;\n}\n.t-shirt_data .t-shirt_image_div .product-img {\n  min-height: 250px;\n  max-height: 260px;\n  border-bottom: 1px solid #eeeeee;\n  margin-top: 13px;\n}\n.t-shirt_inner_data img {\n  width: 16px;\n  height: 16px;\n  cursor: pointer;\n}\n.t-shirt_name {\n  font-size: 22px;\n}\n.t-shirt_review_stars {\n  color: gold;\n  cursor: pointer;\n}\n.t-shirt_no_review_text {\n  font-size: 18px;\n  color: #999;\n}\n.t-shirt_price_sale,\n.t-shirt_price_nosale {\n  font-size: 18px;\n  display: inline-block;\n}\n.t-shirt_price_nosale {\n  text-decoration: line-through;\n  color: #909090;\n}\n.product_btn_div {\n  padding: 0;\n  position: absolute;\n  transform: translate(-50%);\n  left: 50%;\n  bottom: -10%;\n  opacity: 0;\n  visibility: hidden;\n  transition: all 0.5s ease;\n  background: #fff;\n  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.08);\n  border-radius: 15px;\n}\n.t-shirt_image_div:hover .product_btn_div {\n  opacity: 1;\n  visibility: visible;\n  bottom: 10px;\n}\n.product_btn_div li a,\n.product_btn_div li button {\n  display: inline-block;\n  padding: 10px 15px;\n  width: 65px;\n  height: 50px;\n}\n.add_to_cart_btn img {\n  height: 23px;\n}\n.product_btn_div .add_to_cart_btn {\n  background-color: transparent;\n  border: 0;\n}\n.quickview_btn img {\n  height: 25px;\n}\n.cart_ul_btn li:first-child {\n  border-left: 1px solid #ccc;\n}\n\n/*    product modal*/\n.modal .modal-content .close {\n  font-size: 2.4rem;\n  line-height: 1.2;\n  color: #122d65;\n  position: absolute;\n  top: -5px;\n  right: 15px;\n  z-index: 999999999 !important;\n}\n.modal .modal-content .productPrice {\n  color: #227dc7;\n  font-weight: bold;\n  font-size: 24px;\n}\n#main-container {\n  margin: 40px auto;\n  width: 1200px;\n  max-width: 100%;\n}\n.api-buttons > a {\n  margin: 0 5px 0 0 !important;\n  text-decoration: none !important;\n}\n.price {\n  font-size: 24px !important;\n  line-height: 26px !important;\n}", ""]);
+exports.push([module.i, ".body_content_div {\n  padding: 25px 15px;\n}\n.most_sell_title {\n  color: #7a7a7a;\n  font-family: \"titles_font\", sans-serif;\n}\n.t-shirt_data {\n  border: 1px solid #eeeeee;\n  padding: 10px;\n}\n.t-shirt_data .t-shirt_image_div .product-img {\n  min-height: 250px;\n  max-height: 260px;\n  border-bottom: 1px solid #eeeeee;\n  margin-top: 13px;\n}\n.t-shirt_inner_data img {\n  width: 16px;\n  height: 16px;\n  cursor: pointer;\n}\n.t-shirt_name {\n  font-size: 22px;\n}\n.t-shirt_review_stars {\n  color: gold;\n  cursor: pointer;\n}\n.t-shirt_no_review_text {\n  font-size: 18px;\n  color: #999;\n}\n.t-shirt_price_sale,\n.t-shirt_price_nosale {\n  font-size: 18px;\n  display: inline-block;\n}\n.t-shirt_price_nosale {\n  text-decoration: line-through;\n  color: #909090;\n}\n.product_btn_div {\n  padding: 0;\n  position: absolute;\n  transform: translate(-50%);\n  left: 50%;\n  bottom: -10%;\n  opacity: 0;\n  visibility: hidden;\n  transition: all 0.5s ease;\n  background: #fff;\n  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.08);\n  border-radius: 15px;\n}\n.t-shirt_image_div:hover .product_btn_div {\n  opacity: 1;\n  visibility: visible;\n  bottom: 10px;\n}\n.product_btn_div li a,\n.product_btn_div li button {\n  display: inline-block;\n  padding: 10px 15px;\n  width: 65px;\n  height: 50px;\n}\n.add_to_cart_btn img {\n  height: 23px;\n}\n.product_btn_div .add_to_cart_btn {\n  background-color: transparent;\n  border: 0;\n}\n.quickview_btn img {\n  height: 25px;\n}\n.cart_ul_btn li:first-child {\n  border-left: 1px solid #ccc;\n}\n\n/*    product modal*/\n.modal .modal-content .close {\n  font-size: 2.4rem;\n  line-height: 1.2;\n  color: #122d65;\n  position: absolute;\n  top: -5px;\n  right: 15px;\n  z-index: 999999999 !important;\n}\n.modal .modal-content .productPrice {\n  color: #227dc7;\n  font-weight: bold;\n  font-size: 24px;\n}\n#main-container {\n  margin: 40px auto;\n  width: 1200px;\n  max-width: 100%;\n}\n.t-shirt_inner_data img {\n  width: 16px;\n  height: 16px;\n  cursor: pointer;\n}\n.t-shirt_name {\n  font-size: 22px;\n}\n.t-shirt_review_stars {\n  color: gold;\n  cursor: pointer;\n}\n.t-shirt_no_review_text {\n  font-size: 18px;\n  color: #999;\n}\n.t-shirt_price_sale,\n.t-shirt_price_nosale {\n  font-size: 18px;\n  display: inline-block;\n}\n.t-shirt_price_nosale {\n  text-decoration: line-through;\n  color: #909090;\n}\n.product_btn_div {\n  padding: 0;\n  position: absolute;\n  transform: translate(-50%);\n  left: 50%;\n  bottom: -10%;\n  opacity: 0;\n  visibility: hidden;\n  transition: all 0.5s ease;\n  background: #fff;\n  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.08);\n  border-radius: 15px;\n}\n.t-shirt_image_div:hover .product_btn_div {\n  opacity: 1;\n  visibility: visible;\n  bottom: 10px;\n}\n.product_btn_div li a,\n.product_btn_div li button {\n  display: inline-block;\n  padding: 10px 15px;\n  width: 65px;\n  height: 50px;\n}\n.add_to_cart_btn img {\n  height: 23px;\n}\n.product_btn_div .add_to_cart_btn {\n  background-color: transparent;\n  border: 0;\n}\n.quickview_btn img {\n  height: 25px;\n}\n.cart_ul_btn li:first-child {\n  border-left: 1px solid #ccc;\n}\n\n/*    product modal*/\n.modal .modal-content .close {\n  font-size: 2.4rem;\n  line-height: 1.2;\n  color: #122d65;\n  position: absolute;\n  top: -5px;\n  right: 15px;\n}\n.modal .modal-content .productPrice {\n  color: #227dc7;\n  font-weight: bold;\n  font-size: 24px;\n}\n#main-container {\n  margin: 40px auto;\n  width: 1200px;\n  max-width: 100%;\n}\n.api-buttons > a {\n  margin: 0 5px 0 0 !important;\n  text-decoration: none !important;\n}\n.price {\n  font-size: 24px !important;\n  line-height: 26px !important;\n}", ""]);
 
 // exports
 
@@ -11079,7 +11078,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.add[data-v-8c47d45c]{\r\n    background-color: #5c8;\n}\n.remove[data-v-8c47d45c]{\r\n    background-color: #f65;\n}\r\n\r\n", ""]);
+exports.push([module.i, "\n.add[data-v-8c47d45c]{\n    background-color: #5c8;\n}\n.remove[data-v-8c47d45c]{\n    background-color: #f65;\n}\n\n", ""]);
 
 // exports
 
@@ -46533,18 +46532,7 @@ var render = function() {
                       _vm._s(_vm.$t("sub_total")) +
                       "\n                                    "
                   ),
-                  _c("span", [
-                    _vm._v(_vm._s(this.$root.cart.total["subtotal"]))
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _vm._v(
-                    "\n                                    " +
-                      _vm._s(_vm.$t("tax")) +
-                      "\n                                    "
-                  ),
-                  _c("span", [_vm._v(_vm._s(this.$root.cart.total["tax"]))])
+                  _c("span", [_vm._v(_vm._s(this.$root.cart.total["total"]))])
                 ]),
                 _vm._v(" "),
                 _c("li", [
@@ -46713,8 +46701,12 @@ var render = function() {
       : _vm._e(),
     _vm._v(" "),
     !Object.keys(this.$root.cart.items).length
-      ? _c("p", { staticClass: "mini_cart_box cart_div pb-2" }, [
-          _vm._v("\n        Your cart is empty, Keep shopping\n    ")
+      ? _c("div", { staticClass: "mini_cart_box cart_div pb-2" }, [
+          _c("p", [
+            _vm._v(
+              " " + _vm._s(_vm.$t("Your_cart_is_empty_Keep_shopping")) + " "
+            )
+          ])
         ])
       : _vm._e()
   ])
@@ -48824,13 +48816,13 @@ var render = function() {
                           { staticClass: "t-shirt_price_nosale" },
                           [
                             _vm._v(
-                              "\n                " +
+                              "\n              " +
                                 _vm._s(
                                   product.design.designer_price[0]
                                     ? product.design.designer_price[0].total
                                     : 0
                                 ) +
-                                "\n                "
+                                "\n              "
                             ),
                             _c("SMALL", [_vm._v("KWD")])
                           ],
@@ -48843,7 +48835,7 @@ var render = function() {
                       { staticClass: "t-shirt_price_sale" },
                       [
                         _vm._v(
-                          "\n                " +
+                          "\n              " +
                             _vm._s(
                               _vm.priceDis(
                                 product.design.designer_price[0]
@@ -48852,7 +48844,7 @@ var render = function() {
                                 product.design.discount
                               )
                             ) +
-                            "\n                "
+                            "\n              "
                         ),
                         _c("SMALL", [_vm._v("KWD")])
                       ],
@@ -48969,13 +48961,13 @@ var render = function() {
                     product.design.discount !== 0
                       ? _c("span", { staticClass: "t-shirt_price_nosale" }, [
                           _vm._v(
-                            "\n                " +
+                            "\n              " +
                               _vm._s(
                                 product.design.designer_price[0]
                                   ? product.design.designer_price[0].total
                                   : 0
                               ) +
-                              "\n                "
+                              "\n              "
                           ),
                           _c("small", [_vm._v("KWD")])
                         ])
@@ -48983,7 +48975,7 @@ var render = function() {
                     _vm._v(" "),
                     _c("span", { staticClass: "t-shirt_price_sale" }, [
                       _vm._v(
-                        "\n                " +
+                        "\n              " +
                           _vm._s(
                             _vm.priceDis(
                               product.design.designer_price[0]
@@ -48992,7 +48984,7 @@ var render = function() {
                               product.design.discount
                             )
                           ) +
-                          "\n                "
+                          "\n              "
                       ),
                       _c("small", [_vm._v("KWD")])
                     ])
@@ -49026,7 +49018,7 @@ var render = function() {
                   }
                 },
                 [
-                  _vm._v("\n        Load More\n        "),
+                  _vm._v("\n      Load More\n      "),
                   _c("i", { staticClass: "fas fa-arrow-down" })
                 ]
               )
@@ -49109,9 +49101,7 @@ var render = function() {
                           ]),
                           _vm._v(" "),
                           _c("h5", [
-                            _vm._v(
-                              "\n                  ID:\n                  "
-                            ),
+                            _vm._v("\n                ID:\n                "),
                             _c("span", [_vm._v(_vm._s(product.design.id))])
                           ]),
                           _vm._v(" "),
@@ -49412,19 +49402,19 @@ var render = function() {
                                                   { domProps: { value: item } },
                                                   [
                                                     _vm._v(
-                                                      "\n                            " +
+                                                      "\n                          " +
                                                         _vm._s(
                                                           item.dsize.length
                                                         ) +
-                                                        "\n                            "
+                                                        "\n                          "
                                                     ),
                                                     _c("span", [_vm._v("X")]),
                                                     _vm._v(
-                                                      "\n                            " +
+                                                      "\n                          " +
                                                         _vm._s(
                                                           item.dsize.width
                                                         ) +
-                                                        "\n                          "
+                                                        "\n                        "
                                                     )
                                                   ]
                                                 )
@@ -49529,19 +49519,19 @@ var render = function() {
                                                   { domProps: { value: item } },
                                                   [
                                                     _vm._v(
-                                                      "\n                            " +
+                                                      "\n                          " +
                                                         _vm._s(
                                                           item.dsize.length
                                                         ) +
-                                                        "\n                            "
+                                                        "\n                          "
                                                     ),
                                                     _c("span", [_vm._v("X")]),
                                                     _vm._v(
-                                                      "\n                            " +
+                                                      "\n                          " +
                                                         _vm._s(
                                                           item.dsize.width
                                                         ) +
-                                                        "\n                          "
+                                                        "\n                        "
                                                     )
                                                   ]
                                                 )
@@ -49782,9 +49772,9 @@ var render = function() {
                                           staticClass: "fas fa-shopping-cart"
                                         }),
                                         _vm._v(
-                                          "\n                          " +
+                                          "\n                        " +
                                             _vm._s(_vm.$t("Add_to_cart")) +
-                                            "\n                        "
+                                            "\n                      "
                                         )
                                       ]
                                     )
@@ -49798,9 +49788,9 @@ var render = function() {
                                     },
                                     [
                                       _vm._v(
-                                        "\n                        " +
+                                        "\n                      " +
                                           _vm._s(_vm.$t("total")) +
-                                          " :\n                        "
+                                          " :\n                      "
                                       ),
                                       _c(
                                         "span",
@@ -70870,6 +70860,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;function _type
       delivery: "الدفع عند الإستلام",
       Placeorder: "مكان الطلب",
       Your_order: "طلبك",
+      Your_cart_is_empty_Keep_shopping: "لا يوجد منتجات فى الكارت , واصل التسوق",
       //Login & Register
       Full_Name: "الاسم كامل",
       Email: "البريد الالكتروني",
@@ -70959,6 +70950,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;function _type
       visa_card: "Pay with visa",
       Placeorder: "Place order",
       Your_order: "Your order",
+      Your_cart_is_empty_Keep_shopping: "Your cart is empty, keep shopping",
       //Login & Register
       Login: "Login",
       Logout: "Log Out",
@@ -71169,8 +71161,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;function _type
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\laravel\Q8\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\laravel\Q8\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /var/www/html/work/Q8/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /var/www/html/work/Q8/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

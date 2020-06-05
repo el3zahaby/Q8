@@ -42,6 +42,7 @@
             delivery: "الدفع عند الإستلام",
             Placeorder: "مكان الطلب",
             Your_order: "طلبك",
+            Your_cart_is_empty_Keep_shopping : "لا يوجد منتجات فى الكارت , واصل التسوق",
             //Login & Register
             Full_Name: "الاسم كامل",
             Email: "البريد الالكتروني",
@@ -132,6 +133,7 @@
             visa_card: "Pay with visa",
             Placeorder: "Place order",
             Your_order: "Your order",
+            Your_cart_is_empty_Keep_shopping: "Your cart is empty, keep shopping",
 
             //Login & Register
             Login: "Login",
