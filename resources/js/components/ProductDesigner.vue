@@ -4,10 +4,10 @@
             <img :id="'img-'+this.design.id+(type==='view'?'-view':type)"
                  class="position-absolute w-100"
                  style="clip: rect(0px, auto, 200px, 0px);width: 200%;display: block;"
-                 src="">
+                 :src="design.thump">
         </div>
 
-        <img v-else :id="'img-'+this.design.id+(type==='view'?'-view':type)" class="w-100 h-100" src="">
+        <img v-else :id="'img-'+this.design.id+(type==='view'?'-view':type)" class="w-100 h-100" :src="design.thump">
 
         <div id="main-container" class="px-3 d-none">
             <div :id="'clothing-designer-'+this.design.id+(type==='view'?'-view':type)"></div>

@@ -526,9 +526,7 @@ export default {
     axios.get("api/v1/color").then(response => {
       this.tcolors = response.data;
     });
-    // axios.get('api/v1/dsize').then(response => {
-    //     this.dsizes = response.data;
-    // });
+
     axios.get("api/v1/tsize").then(response => {
       this.tsizes = response.data;
     });
@@ -540,19 +538,6 @@ export default {
     axios.get("api/v1/default-tcolor").then(response => {
       this.tcolor = response.data.id;
     });
-
-    /*
-                let vm = this;
-                page_url = page_url || 'api/v1/design';
-                fetch(page_url)
-                    .then(res => res.json())
-                    .then(res => {
-                        this.products = this.products.concat(res.data);
-                        vm.makePagination(res.next_page_url);
-                    })
-                    .catch(err => console.log(err));
-
-                    */
   },
   computed: {
     getproducts: function() {
@@ -671,7 +656,7 @@ export default {
         width: 1200px;
         max-width: 100%;
     }
-    
+
 .t-shirt_inner_data img {
   width: 16px;
   height: 16px;

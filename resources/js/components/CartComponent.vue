@@ -85,7 +85,7 @@
                             <ul class="list-unstyled">
                                 <li>
                                     {{$t('sub_total')}}
-                                    <span>{{this.$root.cart.total['total']}}</span>
+                                    <span>{{this.$root.cart.total['total']}} KWD</span>
                                 </li>
                                 <!--<li class="order-total">-->
                                 <!--    {{$t('shipping')}}-->
@@ -93,7 +93,7 @@
                                 <!--</li>-->
                                 <li>
                                     {{$t('order_total')}}
-                                    <span>{{this.$root.cart.total['total']}}</span>
+                                    <span>{{this.$root.cart.total['total']}} KWD</span>
                                 </li>
                             </ul>
                         </div>

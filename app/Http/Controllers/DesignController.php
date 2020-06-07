@@ -49,7 +49,9 @@ class DesignController extends Controller
     {
         if (empty($id)) return DesignsCollections::get();
         return DesignsCollections::whereHas('design.user', function ($query)use($id) {
-            $query->where('last_name', 'LIKE', '%'.$id.'%');
+            $query->where('id', 'LIKE', '%'.$id.'%')
+                ->orWhere('last_name', 'LIKE', '%'.$id.'%')
+                ->orWhere('first_name', 'LIKE', '%'.$id.'%');
         })->orWhere('design_id','LIKE', '%'.$id.'%')->get();
     }
 

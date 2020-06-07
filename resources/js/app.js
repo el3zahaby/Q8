@@ -220,8 +220,8 @@ Vue.filter('currency', function (price) {
 const app = new Vue({
     el: "#app",
     data: {
-        login: Cookies.get('loggedIn') || true,
-        user: [],
+        login: (Cookies.get('loggedIn') ? JSON.parse(Cookies.get('loggedIn')):true),
+        user: JSON.parse(Cookies.get('user')) || [],
         models: [],
         cart: {
             items: [],
@@ -240,8 +240,9 @@ const app = new Vue({
             await axios.post('/api/v1/logout').then(function (response) {
                 _this.login = false;
                 Cookies.set('loggedIn', _this.login, { expires: 36521 });
-                if (_this.login) {
+                if (_this.login === false) {
                     _this.user = [];
+                    Cookies.set('user', _this.user, { expires: 36521 });
                     _this.$router.push({path: '/'});
                 }
             });
@@ -256,7 +257,7 @@ const app = new Vue({
             let _this = this;
             await axios.get("/api/user").then(async function (response) {
                  _this.user = response.data ? response.data : [];
-                console.log(_this.user)
+                Cookies.set('user', _this.user, { expires: 36521 });
                 Cookies.set('loggedIn', true, { expires: 36521 });
             });
         },
@@ -350,6 +351,7 @@ const app = new Vue({
                 Cookies.set('loggedIn', false, { expires: 36521 });
             }
             console.log("User Changed");
+            console.log("User cache: ",Cookies.set('get'));
         }
     },
     async mounted() {

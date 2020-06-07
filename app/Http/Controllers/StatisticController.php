@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Design;
 use App\DesignsCollections;
 use App\Order;
+use App\User;
 use Exception;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
@@ -64,12 +65,12 @@ class StatisticController extends Controller
         $allOrdersCartItems = self::getCartSellingGeneral();
         foreach ($allOrdersCartItems as $orderCartItems) {
             foreach ($orderCartItems as $cartItem) {
-                $design = Design::find($cartItem->id);
+                $design = Design::find($cartItem->id)->where('user_id',$id);
                 if ($design != null) {
-                    $userId = $design->designer_id;
-                    if ($userId == $id)
+//                    $userId = $design->designer_id;
                         $cartItems[] = $cartItem;
                 }
+
             }
         }
         return $cartItems;
@@ -185,7 +186,10 @@ class StatisticController extends Controller
         foreach ($designs as $design) {
             $design['counter'] += $this->getDesignSelling($cartItemsCollections, $design);
         }
-        return $designs->sortByDesc('counter')->slice(0,4)->all();
+        return $designs->sortByDesc('counter')
+            ->where('counter','>',5)
+            ->slice(0,4)
+            ->all();
     }
 
     private function getDesignSelling($cartItemsCollections, DesignsCollections $designsCollections)

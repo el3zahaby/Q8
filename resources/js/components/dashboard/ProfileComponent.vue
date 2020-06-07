@@ -8,15 +8,15 @@
             <div class="overview-body p-3 mx-auto">
                 <div class="tab-content">
                     <div :class="'tab-pane active ' + $t('text-left')">
-                        <DIV>
-                            <input id="reqMoney" @change="reqM()" type="checkbox"  v-model="reqMoney" class="d-inline w-auto" >
-                            <label for="reqMoney">طلب الاموال</label>
-                            <div class="alert alert-info alert-dismissable" v-if="reqMoney">
-                                <a class="panel-close close" style="cursor: pointer" data-dismiss="alert">×</a>
-                                <i class="fa fa-coffee"></i>
-                                تم تلقي طلب سحب الموال الخاص بك .. نرجو الإنتظار
-                            </div>
-                        </DIV>
+<!--                        <DIV>-->
+<!--                            <input id="reqMoney" @change="reqM()" type="checkbox"  v-model="reqMoney" class="d-inline w-auto" >-->
+<!--                            <label for="reqMoney">طلب الاموال</label>-->
+<!--                            <div class="alert alert-info alert-dismissable" v-if="reqMoney">-->
+<!--                                <a class="panel-close close" style="cursor: pointer" data-dismiss="alert">×</a>-->
+<!--                                <i class="fa fa-coffee"></i>-->
+<!--                                تم تلقي طلب سحب الموال الخاص بك .. نرجو الإنتظار-->
+<!--                            </div>-->
+<!--                        </DIV>-->
 
                         <div>
                             <h3 :class="'mx-auto '+ $t('text-left')">{{$t('Personal_info')}}</h3>

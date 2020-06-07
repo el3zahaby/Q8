@@ -167,7 +167,10 @@
     export default {
         mixins: [mapMixin],
         mounted() {
-
+            let  _this = this;
+            if(_this.$root.login === false){
+                _this.$router.push({path: '/'});
+            }
         },
         data() {
             return {

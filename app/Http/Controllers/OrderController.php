@@ -109,25 +109,43 @@ class OrderController extends Controller
                 'orderstatus_id' => $default_status->id ?? 1,
             ]);
 
+
+
             if (Cart::count() <= 0) return redirect(url('/'));
 
             Cart::store($order->id);
             Cart::destroy();
 
-            dd($cart->options['product']['design']);
-            $money =  MoneyRequest::create([
-                'user_id' => $cart->options['product']['design']['user_id'],
-                'amount' => $designerAmount['total'],
-                'order_id'=>$order->id,
-                'status' => 1,
-            ]);
+            $MoneyRequestItems = [];
+            $MoneyRequests = [];
 
+            foreach ($cart as $item) {
+                if (!isset($MoneyRequestItems[$item->options['product']['design']['user_id']])) {
+                    $MoneyRequestItems[$item->options['product']['design']['user_id']] = [];
+                }
+
+                $MoneyRequestItems[$item->options['product']['design']['user_id']][] = $item;
+            }
+            foreach ($MoneyRequestItems as $user_id =>$cart){
+                $MoneyRequests[] = [
+                    'user_id' => $user_id,
+                    'amount' => StatisticController::calcDesignerTotalOfCartItems($cart)['total'],
+                    'order_id' => $order->id,
+                    'status' => 1,
+                ];
+            }
+
+
+            $money = MoneyRequest::insert($MoneyRequests);
             Mail::to(Auth::user()->email)->send(new OrderReceived([
                     'payment' => $order,
                     'items' => $order->items,
                     'user' => Auth::user()
                 ]
             ));
+
+
+
             return view('payment', compact('order'))->with('status', "The purchase was made successfully")->with('alert', 'success');
 
         } else {

@@ -203,4 +203,8 @@
         left: 0 !important;
         right: unset !important;
     }
+    .mini_cart_box.cart_div.EN {
+        right: 0 !important;
+        left: unset !important;
+    }
 </style>
