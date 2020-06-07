@@ -221,7 +221,7 @@ const app = new Vue({
     el: "#app",
     data: {
         login: (Cookies.get('loggedIn') ? JSON.parse(Cookies.get('loggedIn')):true),
-        user: JSON.parse(Cookies.get('user')) || [],
+        user: (Cookies.get('user') ? JSON.parse(Cookies.get('user')) : []),
         models: [],
         cart: {
             items: [],
