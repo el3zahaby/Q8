@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,7 +14,9 @@ use Illuminate\Http\Request;
 
 Route::get('testmail','MailController@index');
 
-
+Route::get('clear',function (){
+    Artisan::call('config:clear');
+});
 //----------End Tests----------//
 Route::group(['prefix' => '/api'], function () {
 
