@@ -16,7 +16,7 @@ Route::get('testmail','MailController@index');
 
 Route::get('clear',function (){
     Artisan::call('config:clear');
-    Artisan::call('storage:link')
+    Artisan::call('storage:link');
 
 });
 //----------End Tests----------//
