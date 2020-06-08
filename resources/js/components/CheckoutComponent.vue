@@ -121,7 +121,7 @@
                                     </tfoot>
                                 </table>
                             </div>
-                            <div class="payment-method mt-40">
+                            <div :class="'payment-method mt-40 '+ $t('text-left')">
                                 <div class="payment-accordion">
                                     <div class="panel-group" id="faq">
                                         <div class="panel-heading">

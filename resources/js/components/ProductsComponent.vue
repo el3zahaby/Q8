@@ -242,6 +242,7 @@
                           value="front"
                           @click="printOpt(printOptions)"
                           v-model="printOptions"
+
                         />
                         <label class="printOpt" :for="'front'+product.design.id">{{$t('Front')}}</label>
                       </div>
@@ -301,6 +302,7 @@
                         <select
                           @click.prevent="backprintPrice(backprint)"
                           v-model="backprint"
+                          v-on:change="onChange"
                           class="custom-select my-1 mr-sm-2"
                           :id="'backSizeInputFiled'+product.id"
                         >
@@ -320,6 +322,7 @@
                       >{{$t('TShirt_Color')}}*</label>
                       <select
                         v-model="tcolor"
+                        v-on:change="onChange"
                         class="custom-select my-1 mr-sm-2"
                         :id="'colorInput'+product.design.id"
                       >
@@ -339,6 +342,7 @@
                       <select
                         @click.prevent="tsizePrice(tsize)"
                         v-model="tsize"
+                        v-on:change="onChange"
                         class="custom-select my-1 mr-sm-2"
                         :id="'sizeInput'+product.design.id"
                       >
@@ -353,6 +357,7 @@
                       <div class="col-3">
                         <input
                           v-model="count"
+                          v-on:change="onChange"
                           type="number"
                           value="1"
                           name="mount"
@@ -524,12 +529,6 @@ export default {
     this.feachMostSells();
   },
   mounted() {
-      $(document).ready(function () {
-          $('input,select').change(function () {
-              console.log('click')
-              $(this).click();
-          });
-      });
     axios.get("api/v1/color").then(response => {
       this.tcolors = response.data;
     });
