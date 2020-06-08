@@ -217,6 +217,7 @@ Vue.filter('currency', function (price) {
      return price+"KWD";
 });
 
+
 const app = new Vue({
     el: "#app",
     data: {

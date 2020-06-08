@@ -13,7 +13,7 @@
                         <a href="#" class="text-decoration-none">{{product.name}}</a>
                     </h5>
                     <span>qty {{product.qty}}</span>
-                    <span>${{product.subtotal+product.tax-product.discount}} <small>KWD</small></span>
+                    <span>KWD {{product.subtotal+product.tax-product.discount}} </span>
                 </div>
                 <div class="cart_delete">
                     <!--                    <a href="'api/v1/delete-cart/'+product.id"><i class="far fa-trash-alt"></i></a>-->

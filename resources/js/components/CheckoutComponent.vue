@@ -199,6 +199,7 @@
           },
         },
         async mounted() {
+            this.clientInfo['pay_method']=this.pay_method;
             if(!this.$root.login){
                 this.$router.push({path: '/login'});
             }

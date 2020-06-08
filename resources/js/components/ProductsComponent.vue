@@ -276,17 +276,15 @@
                         <label
                           class="my-1 mr-2 font-weight-bold text-capitalize"
                           :for="'frontSizeInputFiled'+product.design.id"
-                        >{{$t('front_size')}}*</label>
+                        >{{$t('front_size')}}x*</label>
                         <select
                           @click.prevent="frontprintPrice(frontprint)"
                           v-model="frontprint"
+                          v-on:change="onChange"
                           class="custom-select my-1 mr-sm-2"
                           :id="'frontSizeInputFiled'+product.design.id"
                         >
                           <option :value="0" selected>- {{$t('Please_Select')}} -</option>
-                          <!--                                                    <option v-for="dsize in getUnique(product.design.dsizes,'id')" :value="dsize">-->
-                          <!--                                                        {{dsize.length}}<span> X </span>{{dsize.width}}-->
-                          <!--                                                    </option>-->
                           <option v-for="item in (product.design.designer_price)" :value="item">
                             {{item.dsize.length}}
                             <span>X</span>
@@ -416,6 +414,9 @@ export default {
   },
   props: [],
   methods: {
+      onChange(event) {
+          console.log(event.target.click());
+      },
     feachMostSells: function() {
       let _this = this;
       axios.get("/api/v1/most-sells").then(function(response) {
@@ -523,6 +524,12 @@ export default {
     this.feachMostSells();
   },
   mounted() {
+      $(document).ready(function () {
+          $('input,select').change(function () {
+              console.log('click')
+              $(this).click();
+          });
+      });
     axios.get("api/v1/color").then(response => {
       this.tcolors = response.data;
     });
