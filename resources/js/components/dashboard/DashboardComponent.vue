@@ -2,7 +2,7 @@
     <div class="col-md-9">
         <!-- Website Overview -->
         <div class="overview">
-            <div class="overview-head main-color-bg">
+            <div :class="'overview-head main-color-bg ' + $t('text-left')">
                 <h3>{{$t('Overview')}}</h3>
             </div>
             <div class="overview-body">
@@ -29,7 +29,7 @@
             </div>
         </div>
 
-        <div class="overview">
+        <div :class="'overview '  + $t('text-left')">
             <div class="overview-head">
                 <h3 class="text-capitalize">{{$t('latest_Designs')}}</h3>
             </div>

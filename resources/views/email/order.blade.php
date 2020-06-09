@@ -2,8 +2,10 @@
     @php($i = 'التصميم')
 
 <style>
-    @if(isset($_COOKIE['locale']) && $_COOKIE['locale'] =='ar' or $_COOKIE['locale'] =='AR')
-    *:not(.text-left){text-align: right;direction: rtl}
+    @if(isset($_COOKIE['locale']))
+        @if($_COOKIE['locale'] =='ar' or $_COOKIE['locale'] =='AR')
+            *:not(.text-left){text-align: right;direction: rtl}
+        @endif
     @endif
 </style>
 <style>

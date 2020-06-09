@@ -16,6 +16,12 @@
         [type="radio"],[type="checkbox"]{
             height: unset !important;
         }
+        .ltr{
+            direction: ltr !important;
+        }
+        .rtl{
+            direction: rtl !important;
+        }
     </style>
 
 </head>

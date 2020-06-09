@@ -39,14 +39,6 @@
                                                 <input
                                                     style="color:blue"
                                                     required
-                                                    type="text"
-                                                    name="name"
-                                                    v-model="name"
-                                                    :placeholder="$t('Username')"
-                                                />
-                                                <input
-                                                    style="color:blue"
-                                                    required
                                                     type="email"
                                                     name="user-email"
                                                     v-model="email"

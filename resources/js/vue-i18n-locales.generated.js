@@ -10,6 +10,9 @@
         AR: {
             'text-left':'text-right',
             'text-right':'text-left',
+            'rtl':'ltr',
+            'ltr':'rtl',
+
             my_order: 'طلباتي',
 
 

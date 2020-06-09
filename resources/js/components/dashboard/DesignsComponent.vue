@@ -1,8 +1,8 @@
 <template>
     <div class="col-md-9">
         <!-- Website Overview -->
-        <div class="overview">
-            <div class="overview-head main-color-bg d-flex justify-content-between">
+        <div :class="'overview ' + $t('ltr')">
+            <div :class="'overview-head main-color-bg d-flex justify-content-between '  + $t('ltr') ">
                 <h3 class="text-capitalize">{{ $t('Designs') }}</h3>
                 <!-- Button trigger modal -->
                 <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal">

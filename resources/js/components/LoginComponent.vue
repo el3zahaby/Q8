@@ -72,7 +72,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div v-if="error" v-text="this.error" class="alert alert-danger mt-2" role="alert"></div>
+                        <div v-if="error"  class="alert alert-danger mt-2" role="alert">
+                            <h3 v-text="this.error.message"></h3>
+                            <p>
+                                <div v-for="err in this.error.errors">{{ (err[0]).toString().replace(/\[|\]/g, "*") }}</div>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -89,7 +94,8 @@
                     password: '',
                     rememberMe: false,
                 },
-                error: null
+                error: null,
+                errs : null,
             };
         },
         methods: {
@@ -105,7 +111,8 @@
                     _this.$router.push({path: '/'});
                 }).catch(function (error) {
                     let response = error.response;
-                    _this.error = response ? error.response.data.message : error;
+                    _this.error = response ? error.response.data : error;
+                    _this.errs = response ? error.response.data.errors : error;
                 });
             }
         },
