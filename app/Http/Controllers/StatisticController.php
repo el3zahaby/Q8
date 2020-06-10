@@ -61,14 +61,16 @@ class StatisticController extends Controller
 
     public function getCartSellingForDesigner($id)
     {
+//        dd($id);
         $cartItems = [];
         $allOrdersCartItems = self::getCartSellingGeneral();
         foreach ($allOrdersCartItems as $orderCartItems) {
             foreach ($orderCartItems as $cartItem) {
                 $design = Design::find($cartItem->id)->where('user_id',$id)->get();
-//                dd($design);
+
                 if ($design != null) {
-//                    $userId = $design->designer_id;
+                    $userId = $cartItem->options['product']['design']['user_id'];
+                    if ($userId == $id)
                         $cartItems[] = $cartItem;
                 }
 

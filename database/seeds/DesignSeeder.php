@@ -18,9 +18,10 @@ class DesignSeeder extends Seeder
             'desc_en' => 'description name',
             'name_ar' => 'اسم التصميم',
             'desc_ar' => 'وصف التصميم',
-            'user_id' => 278823,
+            'user_id' => 278824,
             'img' => '/images/designs/crown.png',
             'accepting' => 1,
+            'designer_price'=>'[{"dsize_id":1,"designer_price":32,"total":42}]',
             'deleted_at' => null,
         ]);
     }

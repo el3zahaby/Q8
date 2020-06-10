@@ -17,7 +17,7 @@
                             <div class="tab-content">
                                 <div class="tab-pane active">
                                     <div class="login-form-container">
-                                        <div class="login-form">
+                                        <div :class="'login-form ' +$t('text-left')">
                                             <div v-if="error" v-text="this.error" class="alert alert-danger mt-2"
                                                  role="alert"></div>
                                             <form @submit.prevent="editProfile($root.user.id)" method="post">
@@ -53,13 +53,13 @@
                                                     :placeholder="$t('Phone_Number')"
                                                 />
                                                 <input
-                                                    style="color:blue"
-
+                                                    class="mb-0"
                                                     type="password"
                                                     name="password"
                                                     v-model="password"
                                                     :placeholder="$t('Password')"
                                                 />
+                                                <small class="text-muted mb-3">اتركه فارغا اذا لم ترد تغيره</small>
                                                 <input
                                                     style="color:blue"
                                                     type="text"
