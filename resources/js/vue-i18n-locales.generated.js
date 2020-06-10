@@ -12,6 +12,7 @@
             'text-right':'text-left',
             'rtl':'ltr',
             'ltr':'rtl',
+            no_pays:'لا توجد مبيعات حتى الان',
 
             my_order: 'طلباتي',
 
@@ -112,6 +113,8 @@
             'text-right':'text-right',
             my_order: 'My Orders',
             print_price: 'Print Price',
+            no_pays:'there is no any payment yet',
+
 
             search: "search",
             // Cart
@@ -181,7 +184,7 @@
             Designs_Number: "Accepted Designs",
             Sales_Number: "Sales Number",
             Sales_Price: "Sales Price",
-            Add_New_Design: "Add_New_Design",
+            Add_New_Design: "Add New Design",
             New_Design: "New Design",
             Choose_Design_img: "Choose Design img",
             Close: "Close",

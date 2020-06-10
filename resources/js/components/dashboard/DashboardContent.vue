@@ -10,7 +10,7 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul :class="'navbar-nav mr-auto ' + $t('text-left')">
+                    <ul :class="'navbar-nav mr-auto ' + $t('text-left')+' '+ $t('ltr')">
                         <li class="nav-item">
                             <router-link to="/dashboard" class="nav-link hover">{{$t('Dashboard')}}</router-link>
                         </li>
@@ -64,7 +64,7 @@
             <div class="container">
                 <div class="row mx-auto">
                     <div class="col-md-3">
-                        <div :class="'list-group '+ $t('text-left')">
+                        <div :class="'list-group '+ $t('text-left') +' '+ $t('ltr')">
                             <router-link to="/dashboard"
                                          class="text-decoration-none list-group-item active main-color-bg">
                                 <i class="fas fa-cog"></i> {{$t('Dashboard')}}
