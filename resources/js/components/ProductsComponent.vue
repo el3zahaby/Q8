@@ -14,7 +14,7 @@
           <div class="t-shirt_data mb-2">
             <span>ID : {{product.design.id}}</span>
             <div class="t-shirt_image_div position-relative">
-              <product-designer v-bind:design="product.design" :type="'view'"></product-designer>
+              <product-designer v-bind:printOption="'front'" v-bind:design="product.design" :type="'view'"></product-designer>
               <ul
                 class="cart_ul_btn list-icon list-unstyled product_btn_div d-flex align-items-center text-center mb-0"
               >
@@ -96,7 +96,7 @@
           <div class="t-shirt_data mb-2">
             <span>ID : {{product.design.id}}</span>
             <div class="t-shirt_image_div position-relative">
-              <product-designer v-bind:design="product.design" :type="'view'"></product-designer>
+              <product-designer v-bind:printOption="'front'" v-bind:design="product.design" :type="'view'"></product-designer>
               <ul
                 class="cart_ul_btn list-icon list-unstyled product_btn_div d-flex align-items-center text-center mb-0"
               >
@@ -210,9 +210,10 @@
                 <div class="product-img d-flex justify-content-center">
                   <product-designer
                     :design="product.design"
-                    v-bind:key="tcolor.name"
+                    v-bind:key="tcolor.name + printOptions"
                     :type="'popup'"
                     v-bind:ccolor="tcolor"
+                    v-bind:printOption="printOptions"
                     class="col-12"
                   ></product-designer>
                 </div>
@@ -240,6 +241,7 @@
                           type="radio"
                           :id="'front'+product.id"
                           value="front"
+                          v-bind:key="'radio'+0"
                           @click="printOpt(printOptions)"
                           v-model="printOptions"
 
@@ -253,6 +255,7 @@
                           :id="'back'+product.id"
                           value="back"
                           @click="printOpt(printOptions)"
+                          v-bind:key="'radio'+1"
                           v-model="printOptions"
                         />
                         <label class="printOpt" :for="'back'+product.design.id">{{$t('Back')}}</label>
@@ -263,6 +266,8 @@
                           type="radio"
                           :id="'front_back'+product.design.id"
                           value="front_back"
+                          v-bind:key="'radio'+2"
+
                           @click="printOpt(printOptions)"
                           v-model="printOptions"
                         />

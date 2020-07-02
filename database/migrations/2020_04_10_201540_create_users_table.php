@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -27,7 +27,8 @@ class CreateUsersTable extends Migration {
 			$table->string('Bank_Name')->nullable();
 			$table->string('name_on_BankCard')->nullable();
 
-			$table->string('phone')->nullable()->unique();
+            $table->string('phone')->nullable()->unique();
+            $table->longText('bio')->nullable();
 
             $table->longText('settings')->nullable();
 

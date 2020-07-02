@@ -92,6 +92,13 @@
                                                     v-model="age"
                                                     :placeholder="$t('Age')"
                                                 />
+                                                <textarea
+                                                    style="color:blue"
+                                                    type="text"
+                                                    name="cv"
+                                                    v-model="cv"
+                                                    :placeholder="$t('CV')"
+                                                ></textarea>
                                                 <input
                                                     style="color:blue"
                                                     required
@@ -177,6 +184,7 @@
                 password: null,
                 phone: null,
                 age: null,
+                cv: null,
                 BankName: null,
                 BankIBAN: null,
                 name_on_BankCard: null,
@@ -199,6 +207,7 @@
                     latitude: this.latitude,
                     longitude: this.longitude,
                     age: this.age,
+                    cv: this.cv,
                     BankName: this.BankName,
                     BankIBAN: this.BankIBAN,
                     name_on_BankCard: this.name_on_BankCard,
