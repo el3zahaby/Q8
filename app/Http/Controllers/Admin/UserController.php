@@ -9,16 +9,12 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
-use Spatie\Permission\Models\Role;
 
-use Illuminate\Support\Facades\Mail;
-use App\Mail\DesignerMail;
-use App\MoneyRequest;
 
 class UserController extends Controller
 {
-    protected $view  = 'dash.user-pages.';
-    protected $model = 'App\User';
+    protected $view  = 'admin.post.';
+    protected $model = 'App\Post';
 
 
     /**
@@ -28,56 +24,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        $items = $this->model::whereHas("roles", function($q){ $q->where("name", '<>', "admin")->where('name','<>','designer'); })->orderBy('id','desc')->get();
+        $items = $this->model::all();
         return view($this->view.'users.index',compact('items'));
     }
 
-    public function designers(){
-        $roles = Role::all();
-        $items = $this->model::whereHas("roles", function($q){ $q->where("name", "designer"); })->orderBy('id','desc')->get();
-        return view($this->view.'designers.index',compact('items','roles'));
-    }
-
-    public function designersWait(){
-        $roles = Role::all();
-        $items = $this->model::notHaveRole()->whereNotNull('IBAN_Bank')->whereNotNull('Bank_Name')->orderBy('id','desc')->get();
-        return view($this->view.'designers.index',compact('items','roles'));
-    }
-
-    public function designerRequest()
-    {
-        $items = $this->model::whereHas("roles",function($q){ $q->where("name","designer"); })->where('settings','!=','null')->orderBy('id','desc')->get();
-        return view($this->view.'designers.moneyrequest',compact('items'));
-    }
-
-    public function admins(){
-        $items = $this->model::whereHas("roles", function($q){ $q->where("name", "admin"); })->orderBy('id','desc')->get();
-        return view($this->view.'admins.index',compact('items'));
-    }
-    public function moneyrequest($id)
-    {
-        
-        $designer = \App\User::find($id);
-        $designerRequest = new MoneyRequest;
-        $designerRequest->user_id = $id;
-        $designerRequest->order_id = 0;
-        $designerRequest->amount =  $designer->designerMoney($id) ;
-        $designerRequest->status = 0;
-        $designerRequest->recieved = 0;
-        $designerRequest->save();
-
-        $moneyRequests = MoneyRequest::where([['user_id',$id],['recieved',1]])->get();
-        foreach($moneyRequests as $mr)
-        {
-            $mr->recieved = 0;
-            $mr->save();
-        }
-
-        $designer->settings = null;
-        $designer->save();
-
-        return ;
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -119,18 +69,15 @@ class UserController extends Controller
         }
 
         $store = $this->model::create(
-            $request->except(['is_designer','avatar'])+ ['password'=> bcrypt('password'),'avatar'=>$avatar]
+            $request->except(['avatar'])+ ['avatar'=>$avatar]
         );
-        if (isset($request->is_designer)){
-            $store->assignRole('designer');
-        }else{
-            $store->assignRole('user');
-        }
 
-        if ($store) return response()->json([
-            'status'=>'ok',
-            'msg'=>'Added'.$store->id
-        ],200);
+        if ($store) {
+            return response()->json([
+                'status' => 'ok',
+                'msg' => 'Added' . $store->id
+            ], 200);
+        }
 
     }
 
@@ -142,26 +89,21 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $item =  $this->model::findOrFail($id);
-        return view($this->view.'users.show',compact('item'));
-    }
-    public function verify($id){
+        $item = $this->model::findOrFail($id);
+        return view($this->view . 'users.show', compact('item'));
 
-        $item =  $this->model::findOrFail($id);
-        $item->markEmailAsVerified();
-        return redirect()->back();
     }
-
-//    /**
-//     * Show the form for editing the specified resource.
-//     *
-//     * @param int $id
-//     * @return void
-//     */
-//    public function edit($id)
-//    {
-//        //
-//    }
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param int $id
+     * @return void
+     */
+    public function edit($id)
+    {
+        $item = $this->model::findOrFail($id);
+        return view($this->view . 'users.show', compact('item'));
+    }
 
     /**
      * Update the specified resource in storage.
@@ -192,14 +134,9 @@ class UserController extends Controller
             $file->move($directory, $filename);
             $avatar = '/storage/uploads/users/'.$filename;
         }
-        $updated = $item->update($request->except(['is_designer','avatar'])+ ['avatar'=>$avatar]);
+        $updated = $item->update($request->except(['avatar'])+ ['avatar'=>$avatar]);
 
-        if (isset($request->is_designer)){
-            $item->assignRole('designer');
-            Mail::to($item->email)->send(new DesignerMail);
-        }else{
-            $item->removeRole('designer');
-        }
+
 
 
         if ($updated) return response()->json([
@@ -218,23 +155,11 @@ class UserController extends Controller
     public function destroy($id)
     {
         $item = $this->model::findOrFail($id);
-        if ($item->isAdmin()) {
-            return response()->json([
-                'status'=>'no',
-                'msg'=>'Not Deleted'.$id
-            ],400);
-        }
 
         $item->delete();
         return response()->json([
             'status'=>'ok',
             'msg'=>'deleted'.$id
         ],200);
-    }
-    public function updateRole(Request $request , $id)
-    {
-        $user = $this->model::find($id);
-        $user->syncRoles($request->role);
-        return redirect()->back();
     }
 }

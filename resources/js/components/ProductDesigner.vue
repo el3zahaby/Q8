@@ -113,7 +113,7 @@
                             ctx.fillRect(0, 0, canvas.width, canvas.height);
                             ctx.drawImage(img, myOptions.x, myOptions.y, canvas.width, canvas.height / 2);
                         }else {
-                            ctx.drawImage(img, myOptions.x, canvas.height / 2, canvas.width, canvas.height / 2);
+php                             ctx.drawImage(img, myOptions.x, canvas.height / 2, canvas.width, canvas.height / 2);
                         }
 
                     }
